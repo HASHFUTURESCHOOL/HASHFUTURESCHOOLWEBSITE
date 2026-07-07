@@ -10,8 +10,11 @@
     <meta name="keywords"
         content="online school, alternative education, self-directed learning, future skills, financial independence, homeschooling, online learning, entrepreneurship for kids">
     <meta name="author" content="Hash Future School">
+    <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1">
+    <meta name="googlebot" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1">
     <meta name="theme-color" content="#FF4B4B">
     <link rel="canonical" href="https://www.hashfuture.school/">
+    <link rel="alternate" type="text/markdown" title="LLMs" href="https://www.hashfuture.school/llms.txt">
     <link rel="icon" type="image/png" href="favicon.png">
     <link rel="manifest" href="manifest.json">
 
@@ -51,17 +54,17 @@
       "@context": "https://schema.org",
       "@graph": [
         {
-          "@type": "Organization",
+          "@type": "EducationalOrganization",
           "name": "Hash Future School",
           "url": "https://www.hashfuture.school",
-          "logo": "https://www.hashfuture.school/assets/images/logo.png",
+          "logo": "https://www.hashfuture.school/favicon.png",
           "sameAs": [
             "https://www.youtube.com/@hashfutureschool",
             "https://www.instagram.com/hashfutureschool/"
           ],
           "contactPoint": {
             "@type": "ContactPoint",
-            "telephone": "+91-9876543210",
+            "telephone": "+91-9497120591",
             "contactType": "customer service"
           }
         },
@@ -1045,12 +1048,25 @@
             </div>
 
             <div class="facilitators-grid">
-                <div class="facilitator-card">
+                <div class="facilitator-card facilitator-profile-card" role="button" tabindex="0"
+                    aria-label="View profile details for Shihabudheen P.K"
+                    onclick="openAwardsModal('facilitator-detail-shihab','Shihabudheen P.K - Founder Profile')"
+                    onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openAwardsModal('facilitator-detail-shihab','Shihabudheen P.K - Founder Profile');}">
                     <div class="facilitator-image">
                         <img loading="lazy" src="images/shihab.png" alt="Shihabudheen P.K">
                     </div>
                     <h4>Shihabudheen P.K</h4>
                     <p>CEO & Founder</p>
+                    <a href="https://www.linkedin.com/in/shihabudheenpk/" class="facilitator-linkedin"
+                        target="_blank" rel="noopener noreferrer" aria-label="Shihabudheen P.K LinkedIn profile"
+                        onclick="event.stopPropagation();" onkeydown="event.stopPropagation();">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+                            fill="currentColor" aria-hidden="true">
+                            <path
+                                d="M19 3A2 2 0 0 1 21 5V19A2 2 0 0 1 19 21H5A2 2 0 0 1 3 19V5A2 2 0 0 1 5 3H19M8.34 17V9.5H5.84V17H8.34M7.09 8.39A1.45 1.45 0 1 0 7.09 5.5A1.45 1.45 0 1 0 7.09 8.39M18.16 17V12.9C18.16 10.7 16.99 9.38 15.11 9.38C13.6 9.38 12.92 10.2 12.54 10.79V9.5H10.04V17H12.54V12.92C12.54 12.7 12.56 12.48 12.62 12.32C12.8 11.88 13.2 11.42 13.88 11.42C14.77 11.42 15.13 12.1 15.13 13.09V17H18.16Z" />
+                        </svg>
+                        <span>LinkedIn</span>
+                    </a>
                 </div>
                 <div class="facilitator-card">
                     <div class="facilitator-image">
@@ -1076,13 +1092,26 @@
                     <h4>Resmi Salil</h4>
                     <p>Facilitator</p>
                 </div>
-                <div class="facilitator-card">
+                <div class="facilitator-card facilitator-profile-card" role="button" tabindex="0"
+                    aria-label="View profile details for Vaishnavi Ajeesh"
+                    onclick="openAwardsModal('facilitator-detail-vaishnavi','Vaishnavi Ajeesh - Facilitator Profile')"
+                    onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openAwardsModal('facilitator-detail-vaishnavi','Vaishnavi Ajeesh - Facilitator Profile');}">
                     <div class="facilitator-image">
                         <img loading="lazy" src="https://www.hashfuture.school/assets/images/teachers/vaishnavi.jpg"
                             alt="Vaishnavi Ajeesh">
                     </div>
                     <h4>Vaishnavi Ajeesh</h4>
-                    <p>Facilitator</p>
+                    <p>Head of Curriculum and Assessments</p>
+                    <a href="https://www.linkedin.com/in/vaishnavi-ajeesh-9b5996198/" class="facilitator-linkedin"
+                        target="_blank" rel="noopener noreferrer" aria-label="Vaishnavi Ajeesh LinkedIn profile"
+                        onclick="event.stopPropagation();" onkeydown="event.stopPropagation();">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+                            fill="currentColor" aria-hidden="true">
+                            <path
+                                d="M19 3A2 2 0 0 1 21 5V19A2 2 0 0 1 19 21H5A2 2 0 0 1 3 19V5A2 2 0 0 1 5 3H19M8.34 17V9.5H5.84V17H8.34M7.09 8.39A1.45 1.45 0 1 0 7.09 5.5A1.45 1.45 0 1 0 7.09 8.39M18.16 17V12.9C18.16 10.7 16.99 9.38 15.11 9.38C13.6 9.38 12.92 10.2 12.54 10.79V9.5H10.04V17H12.54V12.92C12.54 12.7 12.56 12.48 12.62 12.32C12.8 11.88 13.2 11.42 13.88 11.42C14.77 11.42 15.13 12.1 15.13 13.09V17H18.16Z" />
+                        </svg>
+                        <span>LinkedIn</span>
+                    </a>
                 </div>
                 <div class="facilitator-card">
                     <div class="facilitator-image">
@@ -1092,6 +1121,48 @@
                     <h4>Minha Shainoj</h4>
                     <p>Facilitator</p>
                 </div>
+                <div class="facilitator-card facilitator-profile-card" role="button" tabindex="0"
+                    aria-label="View profile details for Nishana Nazim"
+                    onclick="openAwardsModal('facilitator-detail-nishana','Nishana Nazim - Head of Operations')"
+                    onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openAwardsModal('facilitator-detail-nishana','Nishana Nazim - Head of Operations');}">
+                    <div class="facilitator-image">
+                        <img loading="lazy" src="images/nishana.jpeg"
+                            onerror="this.onerror=null;this.src='images/hero-group.jpg';" alt="Nishana Nazim">
+                    </div>
+                    <h4>Nishana Nazim</h4>
+                    <p>Head of Operations</p>
+                    <a href="https://www.linkedin.com/in/nishana-nazim/" class="facilitator-linkedin" target="_blank"
+                        rel="noopener noreferrer" aria-label="Nishana Nazim LinkedIn profile"
+                        onclick="event.stopPropagation();" onkeydown="event.stopPropagation();">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+                            fill="currentColor" aria-hidden="true">
+                            <path
+                                d="M19 3A2 2 0 0 1 21 5V19A2 2 0 0 1 19 21H5A2 2 0 0 1 3 19V5A2 2 0 0 1 5 3H19M8.34 17V9.5H5.84V17H8.34M7.09 8.39A1.45 1.45 0 1 0 7.09 5.5A1.45 1.45 0 1 0 7.09 8.39M18.16 17V12.9C18.16 10.7 16.99 9.38 15.11 9.38C13.6 9.38 12.92 10.2 12.54 10.79V9.5H10.04V17H12.54V12.92C12.54 12.7 12.56 12.48 12.62 12.32C12.8 11.88 13.2 11.42 13.88 11.42C14.77 11.42 15.13 12.1 15.13 13.09V17H18.16Z" />
+                        </svg>
+                        <span>LinkedIn</span>
+                    </a>
+                </div>
+                <div class="facilitator-card facilitator-profile-card" role="button" tabindex="0"
+                    aria-label="View profile details for Febina Fasal"
+                    onclick="openAwardsModal('facilitator-detail-febina','Febina Fasal - Facilitator Profile')"
+                    onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openAwardsModal('facilitator-detail-febina','Febina Fasal - Facilitator Profile');}">
+                    <div class="facilitator-image">
+                        <img loading="lazy" src="images/febina.png"
+                            onerror="this.onerror=null;this.src='images/hero-group.jpg';" alt="Febina Fasal">
+                    </div>
+                    <h4>Febina Fasal</h4>
+                    <p>Facilitator</p>
+                    <a href="https://www.linkedin.com/in/febina-fasal-236963206/" class="facilitator-linkedin"
+                        target="_blank" rel="noopener noreferrer" aria-label="Febina Fasal LinkedIn profile"
+                        onclick="event.stopPropagation();" onkeydown="event.stopPropagation();">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+                            fill="currentColor" aria-hidden="true">
+                            <path
+                                d="M19 3A2 2 0 0 1 21 5V19A2 2 0 0 1 19 21H5A2 2 0 0 1 3 19V5A2 2 0 0 1 5 3H19M8.34 17V9.5H5.84V17H8.34M7.09 8.39A1.45 1.45 0 1 0 7.09 5.5A1.45 1.45 0 1 0 7.09 8.39M18.16 17V12.9C18.16 10.7 16.99 9.38 15.11 9.38C13.6 9.38 12.92 10.2 12.54 10.79V9.5H10.04V17H12.54V12.92C12.54 12.7 12.56 12.48 12.62 12.32C12.8 11.88 13.2 11.42 13.88 11.42C14.77 11.42 15.13 12.1 15.13 13.09V17H18.16Z" />
+                        </svg>
+                        <span>LinkedIn</span>
+                    </a>
+                </div>
                 <div class="facilitator-card">
                     <div class="facilitator-image">
                         <img loading="lazy" src="https://www.hashfuture.school/assets/images/teachers/nidina.jpg"
@@ -1100,6 +1171,80 @@
                     <h4>Nidina</h4>
                     <p>Facilitator</p>
                 </div>
+            </div>
+
+            <div id="facilitator-detail-shihab" class="award-detail-source" hidden>
+                <p>Shihabudheen Pathanayath is a visionary education innovator and the Founder & CEO of Hash Future
+                    School, known for redefining how young learners engage with knowledge and technology.</p>
+                <p>With a diverse background spanning programming, strategy, and educational design, he has built Hash
+                    Future School into one of India's foremost AI-first learning ecosystems, emphasizing personalized
+                    learning, real-world skill development, and student-driven outcomes rather than rote
+                    memorization.</p>
+                <p>He has 17+ years of experience working in MNCs such as Wipro and Toshiba across India, Japan, and
+                    Australia.</p>
+                <p>Shihabudheen regularly shares thought leadership on education innovation, generative AI in
+                    learning, and future-ready mindsets with over 4,000 followers on LinkedIn, where he publishes
+                    articles and insights on transforming traditional education paradigms.</p>
+                <p>Under his leadership, the school has launched pioneering initiatives such as student startup seed
+                    funding and community-focused learning experiences that empower learners as creators,
+                    problem-solvers, and entrepreneurs from a young age.</p>
+                <p class="award-highlight">His exposure includes presenting at global forums, engaging with
+                    international educators, and driving conversations on how AI and human-centered pedagogy can
+                    intersect to prepare students for a rapidly changing world.</p>
+            </div>
+
+            <div id="facilitator-detail-vaishnavi" class="award-detail-source" hidden>
+                <p>Vaishnavi Ajeesh is a global educator and Head of Curriculum and Assessments at Hash Future
+                    School, contributing significantly to the institution's AI-first and student-centric learning
+                    ecosystem.</p>
+                <p>She is committed to designing engaging, experiential learning environments that nurture critical
+                    thinking, creativity, and emotional intelligence among students.</p>
+                <p>With a strong foundation in contemporary pedagogy, she integrates technology meaningfully into the
+                    classroom, ensuring that learning is both relevant and future-oriented.</p>
+                <p>Her professional development includes earning the Google Certified Educator - Level 1 and Level 2
+                    credentials, reflecting her proficiency in leveraging digital tools to enhance teaching and
+                    learning outcomes.</p>
+                <p>Vaishnavi has further strengthened her expertise through globally recognized programs such as
+                    Intel(R) Skills for Innovation (SFI) - Level 2: Leader of Learning Experiences, equipping her to
+                    design innovative, technology-enhanced learning experiences aligned with 21st-century
+                    competencies.</p>
+                <p class="award-highlight">She actively embraces continuous professional growth and collaborative
+                    learning, contributing to initiatives that empower students as creators, communicators, and
+                    confident learners, with a balanced integration of academic rigor, technological fluency, and
+                    personalized mentorship.</p>
+            </div>
+
+            <div id="facilitator-detail-nishana" class="award-detail-source" hidden>
+                <p>Nishana Nazim serves as the Head of Operations at Hash Future School, where she leads strategic
+                    operational planning, institutional systems development, and cross-functional execution to support
+                    the school's mission of transforming education.</p>
+                <p>With a strong foundation in educational administration and process optimisation, she ensures
+                    operational excellence across programs, people, and student experiences.</p>
+                <p>Her role encompasses designing scalable systems, strengthening stakeholder engagement, and fostering
+                    a culture of efficiency and accountability that underpins the school's growth and impact.</p>
+                <p>Nishana combines analytical rigor with a collaborative leadership style, navigating complex
+                    organisational challenges while maintaining a learner-centric focus.</p>
+                <p>Her expertise in operations management is complemented by her ability to streamline workflows,
+                    implement performance frameworks, and empower teams to deliver seamless educational experiences.</p>
+                <p class="award-highlight">Driven by a commitment to quality and continuous improvement, she plays a
+                    pivotal role in enabling Hash Future School's strategic initiatives and long-term vision.</p>
+            </div>
+
+            <div id="facilitator-detail-febina" class="award-detail-source" hidden>
+                <p>Febina Fasal is an educator and learning facilitator at Hash Future School, where she supports the
+                    delivery of holistic, learner-centred education designed to foster critical thinking and real-world
+                    engagement.</p>
+                <p>With a strong commitment to creating inclusive and supportive learning environments, she works
+                    closely with students to facilitate meaningful learning experiences that extend beyond traditional
+                    classroom boundaries.</p>
+                <p>Febina's approach emphasises personalised guidance, active participation, and the integration of
+                    technology to enhance both academic and socio-emotional growth.</p>
+                <p>Her professional development reflects a dedication to continuous improvement and pedagogical
+                    adaptability. Febina has engaged in initiatives that strengthen her instructional skills and deepen
+                    her understanding of contemporary educational practices.</p>
+                <p class="award-highlight">By aligning her practice with the school's mission of nurturing confident,
+                    curious, and future-ready learners, she contributes to a culture of innovation and excellence in
+                    education.</p>
             </div>
         </div>
     </section>
@@ -1221,6 +1366,96 @@
                         </svg>
                     </a>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Awards & Recognitions Section -->
+    <section class="awards-section" id="awards">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">Awards & Recognitions</span>
+                <h2>Recognized For <span class="highlight">Educational Impact</span></h2>
+                <p class="section-subtitle">Celebrating milestones that reflect our AI-first vision and measurable
+                    outcomes in meaningful education.</p>
+            </div>
+
+            <div class="awards-grid">
+                <article class="award-card">
+                    <div class="award-media">
+                        <img loading="lazy" src="images/VBA_business_awards.jpg"
+                            onerror="this.onerror=null;this.src='images/hero-group.jpg';"
+                            alt="Hash Future School receiving recognition at VBA Business Summit in Kochi">
+                    </div>
+                    <div class="award-body">
+                        <h3>VBA Business Awards - Distinguished Recognition</h3>
+                        <p class="award-news-snippet">In 2023, Hash Future School was
+                            honored at the VBA Business Summit. The award was received by Shihabudheen P K,
+                            Co-Founder and CEO, from Mr. Kochouseph Chittilappilly at Chittilappilly Square, Kochi.
+                        </p>
+                        <button type="button" class="award-read-more" data-award-title="VBA Business Awards"
+                            data-award-detail-id="award-detail-vba"
+                            onclick="openAwardsModal('award-detail-vba','VBA Business Awards')">
+                            Read More
+                        </button>
+                    </div>
+                </article>
+
+                <article class="award-card">
+                    <div class="award-media">
+                        <img loading="lazy" src="images/WSS.jpg"
+                            onerror="this.onerror=null;this.src='images/hero-group.jpg';"
+                            alt="Hash Future School receiving Best Innovative School Award at World School Summit 2024 in Dubai">
+                    </div>
+                    <div class="award-body">
+                        <h3>World School Summit 2024 - Best Innovative School Award</h3>
+                        <p class="award-news-snippet">Hash Future School won the Best
+                            Innovative School Award at the 20th World School Summit 2024 in Dubai, with the award
+                            presented by Chetan Bhagat.</p>
+                        <button type="button" class="award-read-more" data-award-title="World School Summit 2024"
+                            data-award-detail-id="award-detail-wss"
+                            onclick="openAwardsModal('award-detail-wss','World School Summit 2024')">
+                            Read More
+                        </button>
+                    </div>
+                </article>
+            </div>
+
+            <div id="award-detail-vba" class="award-detail-source" hidden>
+                <p>The VBA Business Awards are presented as part of the VBA Business Summit, organized by the Vijayee
+                    Bhava Alumni Association (VBA) in Kerala. The recognition celebrates outstanding entrepreneurs,
+                    visionary leaders, and high-performing businesses that demonstrate innovation, resilience, and
+                    measurable growth.</p>
+                <p>Beyond recognition, the summit functions as a powerful networking and knowledge-sharing forum,
+                    connecting founders, mentors, investors, and industry experts under one roof to strengthen
+                    collaboration and sustainable enterprise development.</p>
+                <p>In 2023, Hash Future School was honored with this distinguished award. Shihabudheen P K,
+                    Co-Founder and CEO, received the recognition from Mr. Kochouseph Chittilappilly, Founder of
+                    V-Guard Industries, during the VBA Summit 2025 held at Chittilappilly Square, Kochi.</p>
+                <p>The award was presented in the esteemed presence of Susanth Kurunthil (CEO, Infopark), Chef Pillai
+                    (the driving force behind Chef Pillai and Meen by Chef Pillai), V. Sathyanarayanan, FCA (Joint
+                    Managing Partner at Varma & Varma), along with VBA office bearers.</p>
+                <p class="award-highlight">This milestone affirms Hash Future School's innovative AI-first approach
+                    and its growing impact in transforming meaningful education.</p>
+            </div>
+
+            <div id="award-detail-wss" class="award-detail-source" hidden>
+                <p>Hash Future School was awarded the Best Innovative School Award at the 20th edition of the World
+                    School Summit 2024 held in Dubai, marking a significant international milestone for the
+                    Kerala-based institution.</p>
+                <p>The award was presented by renowned Indian author Chetan Bhagat, recognising the school's
+                    pioneering AI-first educational model and its commitment to redefining learning beyond rote
+                    memorisation.</p>
+                <p>Competing among institutions from 23 countries, Hash Future School stood out for its future-ready
+                    curriculum, personalised learning pathways, and strong emphasis on meaningful,
+                    technology-integrated education.</p>
+                <p>The recognition reaffirmed Hash Future School's mission to make education more relevant, accessible,
+                    and innovation-driven.</p>
+                <p>By integrating artificial intelligence into pedagogy and focusing on real-world skills, critical
+                    thinking, and student-centric engagement, the school has positioned itself as a transformative
+                    force in modern education.</p>
+                <p class="award-highlight">This award elevated the institution's global presence and validated its
+                    vision of nurturing adaptable, confident learners prepared for the demands of the 21st century.</p>
             </div>
         </div>
     </section>
@@ -1698,6 +1933,15 @@
                     <button type="submit" class="btn-primary btn-full">Book Free Demo</button>
                 </form>
             </div>
+        </div>
+    </div>
+
+    <!-- Awards Read More Modal -->
+    <div id="awardsModal" class="awards-modal" aria-hidden="true" role="dialog" aria-labelledby="awardsModalTitle">
+        <div class="awards-modal-content">
+            <button type="button" class="awards-close-modal" aria-label="Close details">&times;</button>
+            <h3 id="awardsModalTitle">Award Details</h3>
+            <div id="awardsModalBody" class="awards-modal-body"></div>
         </div>
     </div>
 

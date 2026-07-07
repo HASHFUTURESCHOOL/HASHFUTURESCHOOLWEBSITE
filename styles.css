@@ -748,7 +748,7 @@ ul {
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 100%;
+    height: 520px;
 }
 
 .problem-card:hover {
@@ -773,6 +773,25 @@ ul {
     font-size: 0.95rem;
     color: var(--text-medium);
     line-height: 1.6;
+    flex: 1;
+    overflow-y: auto;
+    width: 100%;
+    padding-right: 6px;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 0, 0, 0.25) transparent;
+}
+
+.problem-card p::-webkit-scrollbar {
+    width: 6px;
+}
+
+.problem-card p::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.25);
+    border-radius: 999px;
+}
+
+.problem-card p::-webkit-scrollbar-track {
+    background: transparent;
 }
 
 .solution-intro {
@@ -1460,6 +1479,45 @@ ul {
     color: var(--text-light);
 }
 
+.facilitator-profile-card {
+    cursor: pointer;
+}
+
+.facilitator-profile-card:focus-visible {
+    outline: 3px solid rgba(255, 75, 75, 0.35);
+    outline-offset: 3px;
+}
+
+.facilitator-profile-card::after {
+    content: "Tap for details";
+    display: inline-block;
+    margin-top: 10px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--primary);
+}
+
+.facilitator-linkedin {
+    margin-top: 8px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 10px;
+    border-radius: var(--radius-full);
+    background: #e8f3ff;
+    color: #0a66c2;
+    font-size: 0.78rem;
+    font-weight: 600;
+    text-decoration: none;
+    border: 1px solid rgba(10, 102, 194, 0.25);
+    transition: var(--transition-normal);
+}
+
+.facilitator-linkedin:hover {
+    background: #dbeeff;
+    transform: translateY(-1px);
+}
+
 /* ============================================
    Hall of Fame Section
    ============================================ */
@@ -1607,6 +1665,147 @@ ul {
 
 .news-card:hover .news-logo {
     filter: grayscale(0%);
+}
+
+/* ============================================
+   Awards & Recognitions Section
+   ============================================ */
+.awards-section {
+    padding: var(--section-padding) 0;
+    background: var(--bg-white);
+}
+
+.awards-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 32px;
+}
+
+.award-card {
+    width: min(100%, 1080px);
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+    gap: 0;
+    background: var(--bg-light);
+    border-radius: var(--radius-xl);
+    border-top: 4px solid var(--primary);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+}
+
+.award-media {
+    min-height: 340px;
+}
+
+.award-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.award-body {
+    padding: 30px;
+}
+
+.award-body h3 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    line-height: 1.2;
+    margin-bottom: 16px;
+}
+
+.award-news-snippet {
+    font-size: 0.95rem;
+    color: var(--text-medium);
+    line-height: 1.8;
+    margin-bottom: 20px;
+}
+
+.award-read-more {
+    border: 0;
+    background: transparent;
+    color: var(--primary);
+    font-size: 0.95rem;
+    font-weight: 700;
+    cursor: pointer;
+    padding: 0;
+    transition: var(--transition-normal);
+}
+
+.award-read-more:hover {
+    color: var(--text-dark);
+}
+
+.award-detail-source {
+    display: none;
+}
+
+.award-highlight {
+    color: var(--text-dark);
+    font-weight: 600;
+}
+
+.awards-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 30000;
+    padding: 20px;
+}
+
+.awards-modal.show {
+    display: flex;
+}
+
+.awards-modal-content {
+    position: relative;
+    width: min(800px, 100%);
+    max-height: 85vh;
+    overflow-y: auto;
+    background: var(--bg-white);
+    border-radius: var(--radius-xl);
+    padding: 30px;
+    box-shadow: var(--shadow-xl);
+}
+
+.awards-close-modal {
+    position: absolute;
+    top: 12px;
+    right: 14px;
+    border: 0;
+    background: transparent;
+    color: var(--text-light);
+    font-size: 2rem;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.awards-close-modal:hover {
+    color: var(--primary);
+}
+
+.awards-modal-content h3 {
+    font-size: 1.6rem;
+    color: var(--text-dark);
+    margin-bottom: 14px;
+    padding-right: 24px;
+}
+
+.awards-modal-body p {
+    font-size: 1rem;
+    color: var(--text-medium);
+    line-height: 1.8;
+    margin-bottom: 12px;
+}
+
+.awards-modal-body p:last-child {
+    margin-bottom: 0;
 }
 
 /* ============================================
@@ -2013,6 +2212,10 @@ ul {
     .footer-links {
         grid-template-columns: repeat(3, 1fr);
     }
+
+    .award-card {
+        grid-template-columns: 1fr;
+    }
 }
 
 @media (max-width: 768px) {
@@ -2044,6 +2247,10 @@ ul {
 
     .problem-grid {
         gap: 16px;
+    }
+
+    .problem-card {
+        height: 500px;
     }
 
     .curriculum-grid {
@@ -2081,6 +2288,22 @@ ul {
 
     .reels-container {
         gap: 16px;
+    }
+
+    .award-media {
+        min-height: 260px;
+    }
+
+    .award-body {
+        padding: 24px;
+    }
+
+    .award-body h3 {
+        font-size: 1.55rem;
+    }
+
+    .awards-modal-content {
+        padding: 24px 20px;
     }
 }
 
@@ -2137,6 +2360,12 @@ ul {
 
     .faq-question {
         font-size: 1rem;
+    }
+
+    .problem-card {
+        width: 100%;
+        max-width: 360px;
+        height: 460px;
     }
 }
 

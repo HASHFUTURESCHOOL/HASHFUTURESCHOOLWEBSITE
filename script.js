@@ -3,16 +3,27 @@
 // ============================================
 
 document.addEventListener('DOMContentLoaded', function () {
-    // Initialize all components
-    initNavbar();
-    initMobileMenu();
-    initFAQ();
-    initStickyBar();
-    initAnimateOnScroll();
-    initCounterAnimation();
-    initSmoothScroll();
-    initAdmissionModal();
-    initGoogleReviewsPopup();
+    // Initialize all components safely so one failure doesn't block others
+    const initializers = [
+        initNavbar,
+        initMobileMenu,
+        initFAQ,
+        initStickyBar,
+        initAnimateOnScroll,
+        initCounterAnimation,
+        initSmoothScroll,
+        initAdmissionModal,
+        initGoogleReviewsPopup,
+        initAwardsModal
+    ];
+
+    initializers.forEach(initFn => {
+        try {
+            initFn();
+        } catch (error) {
+            console.error(`Init failed: ${initFn.name}`, error);
+        }
+    });
 });
 
 // ============================================
@@ -110,7 +121,7 @@ function initStickyBar() {
 // ============================================
 function initAnimateOnScroll() {
     const animatedElements = document.querySelectorAll(
-        '.problem-card, .outcome-card, .who-card, .curriculum-card, .video-card, .testimonial-card, .facilitator-card'
+        '.problem-card, .outcome-card, .who-card, .curriculum-card, .video-card, .testimonial-card, .facilitator-card, .award-card'
     );
 
     const observerOptions = {
@@ -554,6 +565,63 @@ function initGoogleReviewsPopup() {
         if (e.key === 'Enter' || e.key === ' ') {
             e.preventDefault();
             openPopup();
+        }
+    });
+}
+
+// ============================================
+// Awards Read More Modal
+// ============================================
+function initAwardsModal() {
+    const modal = document.getElementById('awardsModal');
+    const modalTitle = document.getElementById('awardsModalTitle');
+    const modalBody = document.getElementById('awardsModalBody');
+    const closeBtn = document.querySelector('.awards-close-modal');
+    const triggerButtons = document.querySelectorAll('.award-read-more');
+
+    if (!modal || !modalTitle || !modalBody || !closeBtn) return;
+
+    const openModal = (title, detailId) => {
+        const source = document.getElementById(detailId);
+        if (!source) return;
+
+        modalTitle.textContent = title;
+        modalBody.innerHTML = source.innerHTML;
+        modal.classList.add('show');
+        modal.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+    };
+
+    const closeModal = () => {
+        modal.classList.remove('show');
+        modal.setAttribute('aria-hidden', 'true');
+        modalBody.innerHTML = '';
+        document.body.style.overflow = '';
+    };
+
+    // Global fallback for inline onclick, independent from other initializers.
+    window.openAwardsModal = (detailId, title = 'Award Details') => {
+        openModal(title, detailId);
+    };
+
+    triggerButtons.forEach(button => {
+        button.addEventListener('click', (e) => {
+            e.preventDefault();
+            const title = button.getAttribute('data-award-title') || 'Award Details';
+            const detailId = button.getAttribute('data-award-detail-id');
+            openModal(title, detailId);
+        });
+    });
+
+    closeBtn.addEventListener('click', closeModal);
+
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeModal();
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.classList.contains('show')) {
+            closeModal();
         }
     });
 }

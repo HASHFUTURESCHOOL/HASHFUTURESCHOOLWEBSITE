@@ -1,0 +1,35 @@
+# Hash Future School
+
+> Hash Future School is an AI-first online learning community focused on future-ready skills, self-directed learning, entrepreneurship, and meaningful education for children.
+
+## Primary URL
+- https://www.hashfuture.school/
+
+## Key Pages
+- Home: https://www.hashfuture.school/
+- About: https://www.hashfuture.school/about.html
+- Super Kids (student spotlights): https://www.hashfuture.school/super-kids.html
+- Blog: https://www.hashfuture.school/blog.html
+
+## Awards & Recognition
+- VBA Business Awards recognition (Kerala)
+- Best Innovative School Award at World School Summit 2024 (Dubai)
+
+## Programs and Focus Areas
+- AI-first learning approach
+- Entrepreneurship and financial literacy
+- Communication and confidence building
+- Self-directed, real-world project-based learning
+
+## Contact
+- Email: learn@hashfuture.school
+- Website: https://www.hashfuture.school/
+
+## Policies
+- Privacy Policy: https://www.hashfuture.school/privacy.html
+- Terms: https://www.hashfuture.school/terms.html
+- Refund Policy: https://www.hashfuture.school/refund-policy.html
+
+## Crawl Guidance
+- Preferred source for latest public content: https://www.hashfuture.school/
+- Canonical page list: https://www.hashfuture.school/sitemap.xml
