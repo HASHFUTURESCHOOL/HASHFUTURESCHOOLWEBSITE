@@ -25,6 +25,24 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://www.hashfuture.school/future-talks.html</loc>
+    <lastmod>2026-08-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.hashfuture.school/future-talks-apply.html</loc>
+    <lastmod>2026-08-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.hashfuture.school/ijec.html</loc>
+    <lastmod>2026-08-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://www.hashfuture.school/privacy.html</loc>
     <lastmod>2026-02-11</lastmod>
     <changefreq>yearly</changefreq>

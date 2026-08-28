@@ -269,6 +269,25 @@ ul {
     box-shadow: 0 6px 16px rgba(255, 75, 75, 0.45);
 }
 
+.nav-links a.olympiad-highlight {
+    background: linear-gradient(135deg, #6366F1 0%, #8B5CF6 100%);
+    color: white !important;
+    padding: 6px 14px;
+    border-radius: var(--radius-full);
+    font-weight: 700;
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.35);
+    transition: var(--transition-normal);
+}
+
+.nav-links a.olympiad-highlight::after {
+    display: none;
+}
+
+.nav-links a.olympiad-highlight:hover {
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 6px 16px rgba(99, 102, 241, 0.45);
+}
+
 .nav-cta {
     padding: 10px 24px;
     background: var(--primary);

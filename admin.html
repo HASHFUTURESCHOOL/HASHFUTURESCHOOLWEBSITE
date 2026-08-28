@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin · Hash Future School</title>
+  <meta name="robots" content="noindex,nofollow" />
+  <link rel="icon" href="favicon.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="admin.css" />
+</head>
+<body>
+  <!-- Login -->
+  <div id="login-view" class="login-wrap hidden">
+    <form id="login-form" class="login-card">
+      <div class="brand">#<span>Future School</span></div>
+      <p class="sub">Admin CMS — sign in to manage content.</p>
+      <div class="field">
+        <label for="login-email">Email</label>
+        <input id="login-email" type="email" autocomplete="username" required />
+      </div>
+      <div class="field">
+        <label for="login-password">Password</label>
+        <input id="login-password" type="password" autocomplete="current-password" required />
+      </div>
+      <button class="btn btn-primary btn-block" type="submit">Sign In</button>
+      <p id="login-error" class="form-error"></p>
+    </form>
+  </div>
+
+  <!-- App -->
+  <div id="app-view" class="hidden">
+    <div class="topbar">
+      <div class="brand">#<span>Future School</span> · Admin</div>
+      <div class="actions">
+        <span class="who" id="who"></span>
+        <a class="btn btn-ghost" href="index.html" target="_blank" rel="noopener">View Site</a>
+        <button class="btn btn-ghost" id="logout-btn" type="button">Log out</button>
+      </div>
+    </div>
+
+    <div class="shell">
+      <aside class="sidebar">
+        <div class="tabs">
+          <button class="tab active" data-view="posts" type="button">📝 Posts <span class="count" id="count-posts">0</span></button>
+          <button class="tab" data-view="subscribers" type="button">✉️ Subscribers <span class="count" id="count-subs">0</span></button>
+          <button class="tab" data-view="content" type="button">🧩 Site Content</button>
+        </div>
+      </aside>
+
+      <main class="main">
+        <section class="view active" id="view-posts">
+          <div class="view-header">
+            <div>
+              <h2>Blog Posts</h2>
+              <p>Create and manage articles shown on the blog.</p>
+            </div>
+            <button class="btn btn-primary" id="new-post-btn" type="button">＋ New Post</button>
+          </div>
+          <div id="posts-list"></div>
+        </section>
+
+        <section class="view" id="view-subscribers">
+          <div class="view-header">
+            <div>
+              <h2>Newsletter Subscribers</h2>
+              <p>Everyone who has signed up for updates.</p>
+            </div>
+          </div>
+          <div id="subs-list"></div>
+        </section>
+
+        <section class="view" id="view-content">
+          <div class="view-header">
+            <div>
+              <h2>Site Content</h2>
+              <p>Edit editable text snippets from the homepage.</p>
+            </div>
+            <button class="btn btn-primary" id="save-content-btn" type="button">Save Changes</button>
+          </div>
+          <div id="content-list"></div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <!-- Post editor modal -->
+  <div id="post-modal" class="modal-backdrop hidden">
+    <div class="modal">
+      <div class="modal-head">
+        <h3 id="post-modal-title">New Post</h3>
+        <button id="post-modal-close" type="button" aria-label="Close">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="grid-2">
+          <div class="field">
+            <label>Title</label>
+            <input id="p-title" type="text" />
+          </div>
+          <div class="field">
+            <label>Slug</label>
+            <input id="p-slug" type="text" placeholder="auto-generated from title" />
+          </div>
+        </div>
+        <div class="grid-3">
+          <div class="field">
+            <label>Category</label>
+            <input id="p-category" type="text" />
+          </div>
+          <div class="field">
+            <label>Cover image URL</label>
+            <input id="p-cover" type="text" />
+          </div>
+          <div class="field">
+            <label>Author</label>
+            <input id="p-author" type="text" />
+          </div>
+        </div>
+        <div class="field">
+          <label>Excerpt</label>
+          <input id="p-excerpt" type="text" />
+        </div>
+        <div class="field">
+          <label>Body (markdown supported)</label>
+          <textarea id="p-body"></textarea>
+        </div>
+        <label class="checkbox">
+          <input id="p-published" type="checkbox" /> Published
+        </label>
+      </div>
+      <div class="modal-foot">
+        <button class="btn btn-ghost" id="post-modal-cancel" type="button">Cancel</button>
+        <button class="btn btn-primary" id="post-modal-save" type="button">Save Post</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="flash" class="flash hidden"></div>
+
+  <script src="admin.js"></script>
+</body>
+</html>

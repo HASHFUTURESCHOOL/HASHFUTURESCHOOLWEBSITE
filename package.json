@@ -1,0 +1,15 @@
+{
+  "name": "hash-future-school",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Hash Future School website with Vercel Postgres backend + Admin CMS",
+  "scripts": {
+    "hash-password": "node scripts/hash-password.js",
+    "db:migrate": "node scripts/migrate.js"
+  },
+  "dependencies": {
+    "@neondatabase/serverless": "^0.10.4",
+    "jose": "^5.9.6"
+  }
+}

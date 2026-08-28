@@ -2,3 +2,10 @@
 *.zip
 hashfuture-school-deployment/
 websitetest/
+hashfuture_website_deployment/
+
+# Node / env
+node_modules/
+.env
+.vercel/
+npm-debug.log*
