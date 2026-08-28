@@ -455,10 +455,9 @@ function initAdmissionModal() {
             };
 
             try {
-                // 1. Try the PHP Proxy (Standard for shared hosting/cPanel)
-                // This bypasses CORS by making the request Server-to-Server
+                // 1. Try the Vercel edge proxy (server-to-server, bypasses CORS)
                 let response;
-                const proxyUrl = 'admissions-proxy.php';
+                const proxyUrl = '/api/proxy/admissions/demo';
                 const directUrl = 'https://futureassist.hashfuture.school/api/admissions/demo';
 
                 try {

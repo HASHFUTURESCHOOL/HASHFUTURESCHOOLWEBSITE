@@ -1,0 +1,11 @@
+# Legacy cPanel/shared-hosting proxy — not a Vercel function
+admissions-proxy.php
+
+# Stale / unneeded deploy snapshots
+hashfuture-school-deployment/
+websitetest/
+hashfuture_website_deployment/
+
+# Node & build artifacts
+node_modules/
+.vercel/
