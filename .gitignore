@@ -4,6 +4,9 @@ hashfuture-school-deployment/
 websitetest/
 hashfuture_website_deployment/
 
+# Legacy cPanel/shared-hosting proxy — keep on disk, out of git/Vercel
+admissions-proxy.php
+
 # Node / env
 node_modules/
 .env
