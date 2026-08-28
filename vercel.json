@@ -2,12 +2,6 @@
     "cleanUrls": true,
     "trailingSlash": false,
     "framework": null,
-    "functions": {
-        "api/**/*.js": {
-            "runtime": "nodejs24.x",
-            "maxDuration": 10
-        }
-    },
     "rewrites": [
         {
             "source": "/api/proxy/admissions/demo",
