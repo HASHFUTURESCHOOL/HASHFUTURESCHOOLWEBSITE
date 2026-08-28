@@ -2,6 +2,16 @@
     "cleanUrls": true,
     "trailingSlash": false,
     "framework": null,
+    "crons": [
+        {
+            "path": "/api/cron/generate-blog",
+            "schedule": "0 1 * * 1"
+        },
+        {
+            "path": "/api/cron/send-newsletter",
+            "schedule": "0 2 * * 1"
+        }
+    ],
     "rewrites": [
         {
             "source": "/api/proxy/admissions/demo",

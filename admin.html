@@ -44,6 +44,7 @@
         <div class="tabs">
           <button class="tab active" data-view="posts" type="button">📝 Posts <span class="count" id="count-posts">0</span></button>
           <button class="tab" data-view="subscribers" type="button">✉️ Subscribers <span class="count" id="count-subs">0</span></button>
+          <button class="tab" data-view="newsletter" type="button">📬 Newsletter</button>
           <button class="tab" data-view="content" type="button">🧩 Site Content</button>
         </div>
       </aside>
@@ -53,9 +54,12 @@
           <div class="view-header">
             <div>
               <h2>Blog Posts</h2>
-              <p>Create and manage articles shown on the blog.</p>
+              <p>Create and manage articles shown on the blog. Weekly AI drafts arrive here for review.</p>
             </div>
-            <button class="btn btn-primary" id="new-post-btn" type="button">＋ New Post</button>
+            <div class="view-actions">
+              <button class="btn btn-ghost" id="generate-post-btn" type="button">✨ AI Generate</button>
+              <button class="btn btn-primary" id="new-post-btn" type="button">＋ New Post</button>
+            </div>
           </div>
           <div id="posts-list"></div>
         </section>
@@ -68,6 +72,43 @@
             </div>
           </div>
           <div id="subs-list"></div>
+        </section>
+
+        <section class="view" id="view-newsletter">
+          <div class="view-header">
+            <div>
+              <h2>Newsletter</h2>
+              <p>Edit the weekly email content and send it to your active subscribers.</p>
+            </div>
+            <div class="view-actions">
+              <span class="pill" id="nl-status">—</span>
+              <button class="btn btn-ghost" id="save-newsletter-btn" type="button">Save Content</button>
+              <button class="btn btn-primary" id="send-newsletter-btn" type="button">📨 Send Now</button>
+            </div>
+          </div>
+
+          <div class="grid-2" style="margin-bottom:4px;">
+            <div class="field">
+              <label for="nl-subject">Subject</label>
+              <input id="nl-subject" type="text" placeholder="Your Weekly Hash Future School Newsletter" />
+            </div>
+            <div class="field">
+              <label for="nl-active-count">Active subscribers</label>
+              <input id="nl-active-count" type="text" disabled value="0" />
+            </div>
+          </div>
+          <div class="field">
+            <label for="nl-body">Body (markdown supported)</label>
+            <textarea id="nl-body"></textarea>
+          </div>
+
+          <div class="view-header" style="margin-top:8px;">
+            <div>
+              <h3>Send History</h3>
+              <p>Past newsletter runs and their results.</p>
+            </div>
+          </div>
+          <div id="nl-campaigns"></div>
         </section>
 
         <section class="view" id="view-content">

@@ -12,7 +12,7 @@ export default async function handler(req, res) {
   if (req.method === 'GET') {
     try {
       const rows = await sql`
-        SELECT id, title, slug, excerpt, category, cover_image, author, published, published_at, updated_at
+        SELECT id, title, slug, excerpt, category, cover_image, author, published, source, published_at, updated_at
         FROM posts
         ORDER BY updated_at DESC
       `;

@@ -11,8 +11,7 @@ try {
 }
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const sqlPath = join(__dirname, '..', 'db', 'migrations', '001_init.sql');
-const sqlText = readFileSync(sqlPath, 'utf8');
+const migrationsDir = join(__dirname, '..', 'db', 'migrations');
 
 const DATABASE_URL = process.env.DATABASE_URL;
 
@@ -23,6 +22,21 @@ if (!DATABASE_URL) {
 
 const sql = neon(DATABASE_URL);
 
-console.log('Applying migration 001_init.sql...');
-await sql.unsafe(sqlText);
-console.log('Migration applied successfully.');
+// Apply every migration in filename order (e.g. 001_init.sql, 002_*.sql, ...).
+const { readdir } = await import('node:fs/promises');
+const migrationFiles = (await readdir(migrationsDir))
+  .filter((f) => f.endsWith('.sql'))
+  .sort();
+
+if (!migrationFiles.length) {
+  console.error('No migration files found.');
+  process.exit(1);
+}
+
+for (const file of migrationFiles) {
+  console.log(`Applying ${file}...`);
+  const sqlText = readFileSync(join(migrationsDir, file), 'utf8');
+  await sql.unsafe(sqlText);
+}
+
+console.log('Migrations applied successfully.');
