@@ -6,7 +6,8 @@
   "description": "Hash Future School website with Vercel Postgres backend + Admin CMS",
   "scripts": {
     "hash-password": "node scripts/hash-password.js",
-    "db:migrate": "node scripts/migrate.js"
+    "db:migrate": "node scripts/migrate.js",
+    "dev": "node --env-file=.env scripts/dev-server.js"
   },
   "dependencies": {
     "@neondatabase/serverless": "^0.10.4",
