@@ -1,5 +1,5 @@
 import { ok } from '../lib/http.js';
-import { getSql } from '../lib/db.js';
+import { getSql, databaseUrl, configuredDatabaseVars } from '../lib/db.js';
 
 /**
  * Liveness plus a coarse database check, so a deploy can be verified without
@@ -7,9 +7,13 @@ import { getSql } from '../lib/db.js';
  * strings or raw database error text, since this endpoint is public.
  */
 export default async function handler(req, res) {
-  const health = { ok: true, time: new Date().toISOString(), db: { configured: false, connected: false } };
+  const health = {
+    ok: true,
+    time: new Date().toISOString(),
+    db: { configured: false, connected: false, varsPresent: configuredDatabaseVars() },
+  };
 
-  if (process.env.DATABASE_URL) {
+  if (databaseUrl()) {
     health.db.configured = true;
     try {
       const sql = getSql();

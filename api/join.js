@@ -11,7 +11,7 @@
  * the sync outcome is recorded on the row itself.
  */
 
-import { getSql } from '../lib/db.js';
+import { getSql, databaseUrl } from '../lib/db.js';
 import { readBody, ok, bad, send, serverError } from '../lib/http.js';
 import { sendEmail } from '../lib/email.js';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
@@ -370,7 +370,7 @@ export default async function handler(req, res) {
     return bad(res, problems[0]);
   }
 
-  const hasDatabase = Boolean(process.env.DATABASE_URL);
+  const hasDatabase = Boolean(databaseUrl());
 
   // A production deploy without a database would silently drop applications, so
   // fail loudly there. Locally we fall back to a file (below) instead.
