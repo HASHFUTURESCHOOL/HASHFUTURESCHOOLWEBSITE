@@ -13,15 +13,23 @@ try {
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const migrationsDir = join(__dirname, '..', 'db', 'migrations');
 
-const DATABASE_URL = process.env.DATABASE_URL;
+// Uses the same client as the API routes, so a local postgres:// URL and a
+// Neon URL both work here (see lib/db.js).
+//
+// Migrating a *deployed* database from a development machine: set
+// PROD_DATABASE_URL in .env and it takes precedence over the local DATABASE_URL,
+// so `npm run db:migrate` can target production without editing anything else.
+if (process.env.PROD_DATABASE_URL) {
+  process.env.DATABASE_URL = process.env.PROD_DATABASE_URL;
+  const host = (process.env.PROD_DATABASE_URL.match(/@([^/:?]+)/) || [, 'unknown'])[1];
+  console.log(`Targeting PROD_DATABASE_URL (host: ${host}) — not the local database.`);
+}
 
-if (!DATABASE_URL) {
-  console.error('DATABASE_URL is not set. Add it to .env (see .env.example).');
+if (!process.env.DATABASE_URL) {
+  console.error('No database URL is set. Add DATABASE_URL (local) or PROD_DATABASE_URL to .env.');
   process.exit(1);
 }
 
-// Uses the same client as the API routes, so a local postgres:// URL and a
-// Neon URL both work here (see lib/db.js).
 const sql = getSql();
 
 // Apply every migration in filename order (e.g. 001_init.sql, 002_*.sql, ...).
