@@ -100,6 +100,11 @@ async function handleApi(req, res, url) {
       query = buildQuery(url);
       break;
     }
+    case 'join': {
+      modulePath = path.join(ROOT, 'api/join.js');
+      query = buildQuery(url);
+      break;
+    }
     case 'unsubscribe': {
       modulePath = path.join(ROOT, 'api/unsubscribe.js');
       query = buildQuery(url);

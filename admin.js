@@ -3,6 +3,8 @@ const $$ = (sel) => Array.from(document.querySelectorAll(sel));
 
 const state = {
   posts: [],
+  applications: [],
+  selectedApplicationId: null,
   subscribers: [],
   content: [],
   newsletter: { content: null, campaigns: [], stats: {}, hasProvider: false },
@@ -71,7 +73,7 @@ async function bootstrap() {
     $('#who').textContent = me.email;
     $('#login-view').classList.add('hidden');
     $('#app-view').classList.remove('hidden');
-    await Promise.all([loadPosts(), loadSubscribers(), loadContent(), loadNewsletter()]);
+    await Promise.all([loadPosts(), loadApplications(), loadSubscribers(), loadContent(), loadNewsletter()]);
   } catch {
     $('#app-view').classList.add('hidden');
     $('#login-view').classList.remove('hidden');
@@ -421,6 +423,220 @@ $('#send-newsletter-btn').addEventListener('click', async () => {
   } finally {
     btn.disabled = false;
     btn.textContent = old;
+  }
+});
+
+// ---------- Team Applications ----------
+const APP_STATUS_LABELS = {
+  new: 'New',
+  shortlisted: 'Shortlisted',
+  'in-conversation': 'In conversation',
+  invited: 'Invited',
+  hired: 'Hired',
+  archived: 'Archived',
+};
+
+function appStatusBadge(status) {
+  const known = ['new', 'shortlisted', 'in-conversation', 'invited', 'hired', 'archived'];
+  const cls = known.includes(status) ? status : 'new';
+  return `<span class="badge status-${cls}">${escapeHtml(APP_STATUS_LABELS[status] || status || 'New')}</span>`;
+}
+
+async function loadApplications() {
+  const { applications } = await api('/api/admin/applications');
+  state.applications = applications;
+  $('#count-apps').textContent = applications.length;
+  renderApplications();
+}
+
+function renderApplications() {
+  const list = $('#apps-list');
+  const filter = $('#apps-filter').value;
+  const rows = filter ? state.applications.filter((a) => a.status === filter) : state.applications;
+
+  if (!rows.length) {
+    list.innerHTML = state.applications.length
+      ? '<div class="empty">No applications with this status.</div>'
+      : '<div class="empty">No applications yet. They arrive here the moment someone applies at /join.</div>';
+    return;
+  }
+
+  list.innerHTML = rows
+    .map((a) => {
+      const skills = Array.isArray(a.skills) ? a.skills.slice(0, 4) : [];
+      return `
+        <div class="card app-card">
+          <div class="meta" style="flex:1;">
+            <div class="title">${escapeHtml(a.full_name)} ${appStatusBadge(a.status)}</div>
+            <div class="sub">
+              ${escapeHtml(a.ref || '—')} · ${escapeHtml(a.email)} · ${escapeHtml(a.location || 'Location not given')}
+              ${a.role_interest ? ` · ${escapeHtml(a.role_interest)}` : ''}
+            </div>
+            <div class="sub" style="margin-top:6px;">
+              ${a.achievement_count || 0} achievement${a.achievement_count === 1 ? '' : 's'}
+              ${a.commitment ? ` · ${escapeHtml(a.commitment)}` : ''}
+              ${a.future_assist_state && a.future_assist_state !== 'synced'
+                ? ` · <span style="color:#b45309;">Future Assist: ${escapeHtml(a.future_assist_state)}</span>`
+                : ''}
+            </div>
+            ${skills.length ? `<div class="chip-row">${skills.map((s) => `<span class="chip">${escapeHtml(s)}</span>`).join('')}</div>` : ''}
+          </div>
+          <div class="sub" style="white-space:nowrap;color:var(--muted);font-size:0.82rem;">${formatDate(a.created_at)}</div>
+          <div class="row-actions">
+            <button class="btn btn-ghost btn-sm" data-app-open="${a.id}" type="button">Read →</button>
+          </div>
+        </div>`;
+    })
+    .join('');
+
+  $$('#apps-list [data-app-open]').forEach((btn) =>
+    btn.addEventListener('click', () => openApplication(Number(btn.dataset.appOpen)))
+  );
+}
+
+async function openApplication(id) {
+  const { application } = await api(`/api/admin/applications/${id}`);
+  state.selectedApplicationId = id;
+
+  const achievements = Array.isArray(application.achievements) ? application.achievements : [];
+  const skills = Array.isArray(application.skills) ? application.skills : [];
+
+  const block = (label, value) =>
+    value
+      ? `<div class="app-block"><div class="app-label">${escapeHtml(label)}</div><div class="app-value">${escapeHtml(value)}</div></div>`
+      : '';
+
+  // Applicants can list several links, stored one per line.
+  const linksBlock = (value) => {
+    const list = String(value || '')
+      .split(/[\n,]+/)
+      .map((l) => l.trim())
+      .filter(Boolean);
+    if (!list.length) return '';
+    const anchors = list
+      .map((l) => {
+        const href = /^https?:\/\//i.test(l) ? l : `https://${l}`;
+        return `<a href="${escapeHtml(href)}" target="_blank" rel="noopener noreferrer">${escapeHtml(l)}</a>`;
+      })
+      .join('<br>');
+    return `<div class="app-block"><div class="app-label">Links</div><div class="app-value">${anchors}</div></div>`;
+  };
+
+  const videoBlock = (app) => {
+    const value = app.video_url;
+    if (!value) return '';
+    const href = /^https?:\/\//i.test(value) ? value : `https://${value}`;
+    const confirmed = app.video_language_confirmed
+      ? '<span class="video-flag ok">Confirmed: spoken in English</span>'
+      : '<span class="video-flag warn">English not confirmed</span>';
+    return `<div class="video-block">
+      <div class="app-label">🎥 Intro video (3–5 min)</div>
+      <a href="${escapeHtml(href)}" target="_blank" rel="noopener noreferrer">${escapeHtml(value)}</a>
+      ${confirmed}
+      <span class="video-note">Watch before the conversation.</span>
+    </div>`;
+  };
+
+  $('#app-modal-title').innerHTML = `${escapeHtml(application.full_name)} <span class="pill">${escapeHtml(application.ref || '')}</span>`;
+  $('#app-modal-body').innerHTML = `
+    <div class="app-grid">
+      ${block('Email', application.email)}
+      ${block('Phone / WhatsApp', application.phone)}
+      ${block('City, Country', application.location)}
+      ${block('Age', application.age)}
+      ${block('Education (optional)', application.education)}
+      ${linksBlock(application.links)}
+    </div>
+
+    <h4 class="app-section">What they have actually done</h4>
+    ${videoBlock(application)}
+    ${
+      achievements.length
+        ? achievements
+            .map(
+              (x) => `
+      <div class="achievement">
+        <div class="achievement-head">${escapeHtml(x.title || 'Untitled')}${
+          x.when ? ` <span class="sub">· ${escapeHtml(x.when)}</span>` : ''
+        }</div>
+        ${x.what ? `<div class="app-value">${escapeHtml(x.what)}</div>` : ''}
+        ${x.link ? `<div class="sub"><a href="${escapeHtml(x.link)}" target="_blank" rel="noopener">${escapeHtml(x.link)}</a></div>` : ''}
+      </div>`
+            )
+            .join('')
+        : '<div class="empty" style="padding:12px 0;">No achievements listed.</div>'
+    }
+    ${skills.length ? `<div class="chip-row">${skills.map((s) => `<span class="chip">${escapeHtml(s)}</span>`).join('')}</div>` : ''}
+    ${block('Proof no certificate can show', application.proof_of_work)}
+
+    <h4 class="app-section">What they want to change &amp; contribute</h4>
+    ${block('What they want to change in the world', application.world_change)}
+    ${block('What they would contribute to this ecosystem', application.contribution)}
+    ${block('Wants to work on', application.role_interest)}
+    ${block('Commitment', application.commitment)}
+    ${block('Available from', application.availability)}
+    ${block('Heard about us via', application.hearsay)}
+    ${block('Anything else', application.extra)}
+
+    <div class="app-grid app-meta-grid">
+      ${block('Applied', formatDate(application.created_at))}
+      ${block('Future Assist', application.future_assist_state)}
+      ${application.future_assist_error ? block('Sync error', application.future_assist_error) : ''}
+    </div>`;
+
+  $('#app-status').value = application.status || 'new';
+  $('#app-score').value = application.score ?? '';
+  $('#app-notes').value = application.reviewer_notes ?? '';
+
+  $('#app-modal').classList.remove('hidden');
+}
+
+function closeApplicationModal() {
+  $('#app-modal').classList.add('hidden');
+  state.selectedApplicationId = null;
+}
+
+$('#app-modal-close').addEventListener('click', closeApplicationModal);
+$('#app-modal-close-2').addEventListener('click', closeApplicationModal);
+
+$('#app-modal').addEventListener('click', (e) => {
+  if (e.target === $('#app-modal')) closeApplicationModal();
+});
+
+$('#app-save-btn').addEventListener('click', async () => {
+  const id = state.selectedApplicationId;
+  if (!id) return;
+  const btn = $('#app-save-btn');
+  btn.disabled = true;
+  const old = btn.textContent;
+  btn.textContent = 'Saving…';
+  try {
+    const body = {
+      status: $('#app-status').value,
+      reviewer_notes: $('#app-notes').value,
+    };
+    const score = $('#app-score').value;
+    if (score !== '') body.score = Number(score);
+
+    await api(`/api/admin/applications/${id}`, { method: 'PATCH', body });
+    flash('Application updated');
+    await loadApplications();
+    closeApplicationModal();
+  } catch (err) {
+    flash(err.message, 'error');
+  } finally {
+    btn.disabled = false;
+    btn.textContent = old;
+  }
+});
+
+$('#apps-filter').addEventListener('change', renderApplications);
+$('#apps-refresh-btn').addEventListener('click', async () => {
+  try {
+    await loadApplications();
+    flash('Applications refreshed');
+  } catch (err) {
+    flash(err.message, 'error');
   }
 });
 

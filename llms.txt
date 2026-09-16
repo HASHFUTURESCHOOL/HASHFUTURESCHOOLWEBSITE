@@ -12,7 +12,14 @@
 - Future Talks (youth entrepreneurship summit): https://www.hashfuture.school/future-talks.html
 - Future Talks - Apply to Speak: https://www.hashfuture.school/future-talks-apply.html
 - International Junior Entrepreneurship Challenge (IJEC): https://www.hashfuture.school/ijec.html
+- Join Our Team (open invitation to innovative minds): https://www.hashfuture.school/join
 - Blog: https://www.hashfuture.school/blog.html
+
+## Join Our Team
+- Hash Future School invites people with an innovative mindset to apply through https://www.hashfuture.school/join
+- The application asks for real achievements and proof of work rather than degrees or certificates
+- Applicants are asked what they would like to change in the world and what they would contribute to this ecosystem
+- Applications are stored in our database, emailed to the review team, and read by a human
 
 ## Awards & Recognition
 - VBA Business Awards recognition (Kerala)

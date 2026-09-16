@@ -270,6 +270,27 @@ ul {
     box-shadow: 0 6px 16px rgba(255, 75, 75, 0.45);
 }
 
+.nav-links a.join-highlight {
+    background: rgba(255, 75, 75, 0.12);
+    border: 1px solid rgba(255, 75, 75, 0.4);
+    color: var(--primary) !important;
+    padding: 6px 16px;
+    border-radius: var(--radius-full);
+    font-weight: 700;
+    transition: var(--transition-normal);
+}
+
+.nav-links a.join-highlight::after {
+    display: none;
+}
+
+.nav-links a.join-highlight:hover {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: #fff !important;
+    transform: translateY(-2px);
+}
+
 .nav-links a.olympiad-highlight {
     background: linear-gradient(135deg, #6366F1 0%, #8B5CF6 100%);
     color: white !important;

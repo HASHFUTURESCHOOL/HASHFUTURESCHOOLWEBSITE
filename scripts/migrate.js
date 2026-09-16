@@ -1,7 +1,7 @@
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
-import { neon } from '@neondatabase/serverless';
+import { getSql, runSql } from '../lib/db.js';
 
 // Load .env for local development (Node 20.12+/22)
 try {
@@ -20,7 +20,9 @@ if (!DATABASE_URL) {
   process.exit(1);
 }
 
-const sql = neon(DATABASE_URL);
+// Uses the same client as the API routes, so a local postgres:// URL and a
+// Neon URL both work here (see lib/db.js).
+const sql = getSql();
 
 // Apply every migration in filename order (e.g. 001_init.sql, 002_*.sql, ...).
 const { readdir } = await import('node:fs/promises');
@@ -36,7 +38,13 @@ if (!migrationFiles.length) {
 for (const file of migrationFiles) {
   console.log(`Applying ${file}...`);
   const sqlText = readFileSync(join(migrationsDir, file), 'utf8');
-  await sql.unsafe(sqlText);
+  await runSql(sqlText);
 }
 
 console.log('Migrations applied successfully.');
+
+// A socket-based client (local development) keeps the event loop alive until it
+// is closed; Neon's HTTP client has no pool and no end().
+if (typeof sql.end === 'function') {
+  await sql.end();
+}

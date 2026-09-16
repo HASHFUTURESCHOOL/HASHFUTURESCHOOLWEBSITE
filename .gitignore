@@ -4,8 +4,12 @@ hashfuture-school-deployment/
 websitetest/
 hashfuture_website_deployment/
 
-# Legacy cPanel/shared-hosting proxy — keep on disk, out of git/Vercel
+# Legacy cPanel/shared-hosting proxies — keep on disk, out of git/Vercel
 admissions-proxy.php
+join-proxy.php
+
+# Local-only store for /api/join when DATABASE_URL is not configured
+.local/
 
 # Node / env
 node_modules/

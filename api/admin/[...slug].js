@@ -27,6 +27,8 @@ export default async function handler(req, res) {
     if (seg0 === 'posts') return postItem(req, res, sql, seg1);
     if (seg0 === 'subscribers' && !seg1) return subscribersCollection(req, res, sql);
     if (seg0 === 'subscribers') return subscriberItem(req, res, sql, seg1);
+    if (seg0 === 'applications' && !seg1) return applicationsCollection(req, res, sql);
+    if (seg0 === 'applications') return applicationItem(req, res, sql, seg1);
     if (seg0 === 'content' && !seg1) return contentRoute(req, res, sql);
     if (seg0 === 'generate' && !seg1) return generateRoute(req, res, sql);
     if (seg0 === 'newsletter' && seg1 === 'send') return newsletterSend(req, res, sql);
@@ -202,6 +204,99 @@ async function subscriberItem(req, res, sql, idRaw) {
     try {
       const rows = await sql`DELETE FROM newsletter_subscribers WHERE id = ${id} RETURNING id`;
       if (!rows.length) return notFound(res, 'Subscriber not found');
+      return ok(res, { deleted: true });
+    } catch (err) {
+      return serverError(res, err);
+    }
+  }
+
+  return bad(res, 'Method not allowed', 405);
+}
+
+// ---------- Team applications (from /join) ----------
+
+const APPLICATION_STATUSES = [
+  'new',
+  'shortlisted',
+  'in-conversation',
+  'invited',
+  'hired',
+  'archived',
+];
+
+async function applicationsCollection(req, res, sql) {
+  if (req.method === 'GET') {
+    try {
+      const rows = await sql`
+        SELECT
+          id, ref, full_name, email, phone, location, age, links,
+          skills, role_interest, commitment, availability,
+          status, score, created_at,
+          jsonb_array_length(achievements) AS achievement_count,
+          future_assist_state
+        FROM team_applications
+        ORDER BY created_at DESC
+      `;
+      return ok(res, { applications: rows });
+    } catch (err) {
+      return serverError(res, err);
+    }
+  }
+
+  return bad(res, 'Method not allowed', 405);
+}
+
+async function applicationItem(req, res, sql, idRaw) {
+  const id = Number(idRaw);
+  if (!Number.isInteger(id) || id <= 0) {
+    return bad(res, 'Invalid application id');
+  }
+
+  if (req.method === 'GET') {
+    try {
+      const rows = await sql`SELECT * FROM team_applications WHERE id = ${id} LIMIT 1`;
+      if (!rows.length) return notFound(res, 'Application not found');
+      return ok(res, { application: rows[0] });
+    } catch (err) {
+      return serverError(res, err);
+    }
+  }
+
+  if (req.method === 'PATCH') {
+    const body = await readBody(req);
+    const status = String(body.status || '').trim();
+    if (status && !APPLICATION_STATUSES.includes(status)) {
+      return bad(res, `Status must be one of: ${APPLICATION_STATUSES.join(', ')}`);
+    }
+
+    const notes = body.reviewer_notes === undefined ? null : String(body.reviewer_notes || '');
+    const hasScore = body.score !== undefined && body.score !== null && body.score !== '';
+    const score = hasScore ? Number(body.score) : null;
+    if (hasScore && (!Number.isInteger(score) || score < 0 || score > 10)) {
+      return bad(res, 'Score must be a whole number from 0 to 10');
+    }
+
+    try {
+      const rows = await sql`
+        UPDATE team_applications
+        SET status = COALESCE(${status || null}, status),
+            reviewer_notes = COALESCE(${notes}, reviewer_notes),
+            score = COALESCE(${score}, score),
+            updated_at = now()
+        WHERE id = ${id}
+        RETURNING id, ref, status, score, reviewer_notes, updated_at
+      `;
+      if (!rows.length) return notFound(res, 'Application not found');
+      return ok(res, { application: rows[0], updated: true });
+    } catch (err) {
+      return serverError(res, err);
+    }
+  }
+
+  if (req.method === 'DELETE') {
+    try {
+      const rows = await sql`DELETE FROM team_applications WHERE id = ${id} RETURNING id`;
+      if (!rows.length) return notFound(res, 'Application not found');
       return ok(res, { deleted: true });
     } catch (err) {
       return serverError(res, err);

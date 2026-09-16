@@ -98,6 +98,49 @@ Set these as Vercel environment variables (and in `.env` for local dev):
 - Full stack with API: `vercel dev` — requires the Vercel CLI and the `DATABASE_URL`
   + auth env vars above. Sign in to Vercel, then run the migration once.
 
+#### Running the full stack without Vercel (local Postgres)
+
+`npm run dev` serves the site and the `/api` routes on http://localhost:3000.
+It needs a database, which can be a local Postgres instead of Neon:
+
+```bash
+brew install postgresql@16
+brew services start postgresql@16      # starts at login; stop with `brew services stop postgresql@16`
+createdb hashfuture_dev
+```
+
+Then in `.env`:
+
+```bash
+DATABASE_URL=postgres://YOUR_MAC_USERNAME@localhost:5432/hashfuture_dev
+FUTURE_ASSIST_JOIN_URL=off      # see below
+```
+
+```bash
+npm install
+npm run db:migrate              # applies every file in db/migrations in order
+npm run dev
+```
+
+Two notes on how the drivers differ, because both are supported:
+
+- **`lib/db.js` picks the client from the URL.** Neon's serverless driver speaks
+  Neon's HTTP proxy protocol and cannot reach a plain Postgres, so a `localhost`
+  URL uses the `postgres` package over a socket instead (`postgres` is a
+  devDependency and is never loaded in production). `runSql()` in the same file
+  hides the API difference: the socket client has `.unsafe()` for raw SQL, Neon's
+  HTTP client takes the SQL string as its first argument.
+- **jsonb parameters are cast as `::text::jsonb`, not a bare `::jsonb`.** The
+  socket client JSON-encodes any value cast straight to jsonb, which would
+  double-encode an already-stringified array. Going through `::text` first is
+  correct on both drivers.
+
+**Future Assist is optional.** Applications are always stored in this site's own
+database and shown in the Admin CMS under **🎯 Applications**. The copy sent to
+Future Assist is a mirror; set `FUTURE_ASSIST_JOIN_URL=off` to skip it entirely
+(rows are then marked `disabled` instead of failing against an endpoint that
+isn't live). Remove that line — or set the real URL — to switch the mirror on.
+
 ### 4. Automated weekly blog (DeepSeek + Cron)
 
 The site can auto-generate a draft blog post every week using the DeepSeek API.
@@ -168,3 +211,70 @@ workflow. Then open:
 
 - **Admin CMS:** `https://your-domain.com/admin.html`
 - **Blog:** `https://your-domain.com/blog.html`
+
+### 7. Team applications — the `/join` page
+
+[`join.html`](join.html) (served at `/join`) invites people with an innovative
+mindset to join the team. It deliberately does not ask for a CV: applicants show
+what they have **actually done** (a repeater of achievements, each with a year
+and optional link), what they want to **change in the world**, and what they
+would **contribute to this ecosystem**.
+
+The page is a three-step form with a live "signal strength" meter, draft saving
+in the applicant's own browser, and a reference number on success. Repeaters let
+an applicant add as many links (portfolio, GitHub, YouTube, a video) and as many
+achievements as they need — both start with a single row and grow with their own
+"Add another" buttons, up to 8 links and 8 achievements.
+
+Step 3 also requires a **3–5 minute video** of the applicant speaking about
+conventional education and the change they want to see. It is required (not
+optional): it has to be uploaded to YouTube as Public or Unlisted — a Private
+link cannot be opened by us — and the page blocks an empty field or a
+non-YouTube link with an explanation of exactly what to do. The same two checks
+run in `POST /api/join` and in the Future Assist endpoint, so a client that skips
+the browser validation cannot create an application without a usable video. The
+link is stored in `team_applications.video_url`, shown as a highlighted link in
+the team email and in both admin review views, and adds to the applicant's
+signal score.
+
+The video must also be **spoken in English** — the language the review team works
+in. A YouTube link cannot tell us what language is spoken, so the applicant ticks
+a confirmation next to the video field; that consent is stored in
+`video_language_confirmed`, required by `POST /api/join` and by the Future Assist
+endpoint, and surfaced as a green "Confirmed: spoken in English" (or amber
+"English not confirmed") flag in both admin views. The video itself is watched by
+a person, so a false confirmation is caught at review.
+
+Submission does three things, in this order:
+
+1. **Stores** the application in `team_applications` (see
+   `db/migrations/004_team_applications.sql`) and assigns a reference such as
+   `HFS-JOIN-2026-0007`.
+2. **Emails** the review team a formatted copy with `Reply-To` set to the
+   applicant, and sends the applicant a confirmation with their reference.
+   Recipients come from `TEAM_APPLICATIONS_TO` (comma-separated), falling back
+   to `ADMIN_EMAIL` and then `learn@hashfuture.school`.
+3. **Mirrors** the application into Future Assist at `FUTURE_ASSIST_JOIN_URL`
+   (default `https://futureassist.hashfuture.school/api/join`), so applications
+   also live in that database with an in-app notification for the team. The sync
+   outcome is recorded on the row (`future_assist_state`), and a sync failure
+   never loses the application.
+
+**Reviewing applications:** open the Admin CMS and use the **🎯 Applications**
+tab. Each card opens the full application — achievements, vision, contribution —
+with a status (new → shortlisted → in conversation → invited → hired → archived),
+a 0–10 score and reviewer notes.
+
+**API surface:**
+
+- `POST /api/join` — public; validates, stores, emails and syncs.
+- `GET /api/admin/applications` — list (admin cookie).
+- `GET|PATCH|DELETE /api/admin/applications/:id` — read, review, remove.
+
+`links` may be sent either as a list (`["https://…", "https://…"]`) or as one
+comma/newline-separated string; it is stored one link per line so both the admin
+CMS and Future Assist render each link separately.
+
+On non-Vercel hosts (plain PHP/static), `/api/join` does not exist. The page then
+falls back to [`join-proxy.php`](join-proxy.php), which forwards the application
+to Future Assist directly so nothing is lost. On Vercel the proxy is unused.

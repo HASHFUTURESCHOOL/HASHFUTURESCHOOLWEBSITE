@@ -43,6 +43,7 @@
       <aside class="sidebar">
         <div class="tabs">
           <button class="tab active" data-view="posts" type="button">📝 Posts <span class="count" id="count-posts">0</span></button>
+          <button class="tab" data-view="applications" type="button">🎯 Applications <span class="count" id="count-apps">0</span></button>
           <button class="tab" data-view="subscribers" type="button">✉️ Subscribers <span class="count" id="count-subs">0</span></button>
           <button class="tab" data-view="newsletter" type="button">📬 Newsletter</button>
           <button class="tab" data-view="content" type="button">🧩 Site Content</button>
@@ -62,6 +63,29 @@
             </div>
           </div>
           <div id="posts-list"></div>
+        </section>
+
+        <section class="view" id="view-applications">
+          <div class="view-header">
+            <div>
+              <h2>Team Applications</h2>
+              <p>People who applied through the <strong>/join</strong> page — what they have actually done, what they
+                want to change, and what they would contribute.</p>
+            </div>
+            <div class="view-actions">
+              <select id="apps-filter" class="filter-select">
+                <option value="">All statuses</option>
+                <option value="new">New</option>
+                <option value="shortlisted">Shortlisted</option>
+                <option value="in-conversation">In conversation</option>
+                <option value="invited">Invited</option>
+                <option value="hired">Hired</option>
+                <option value="archived">Archived</option>
+              </select>
+              <button class="btn btn-ghost" id="apps-refresh-btn" type="button">↻ Refresh</button>
+            </div>
+          </div>
+          <div id="apps-list"></div>
         </section>
 
         <section class="view" id="view-subscribers">
@@ -177,6 +201,44 @@
   </div>
 
   <div id="flash" class="flash hidden"></div>
+
+  <!-- Application detail modal -->
+  <div id="app-modal" class="modal-backdrop hidden">
+    <div class="modal modal-wide">
+      <div class="modal-head">
+        <h3 id="app-modal-title">Application</h3>
+        <button id="app-modal-close" type="button" aria-label="Close">✕</button>
+      </div>
+      <div class="modal-body" id="app-modal-body"></div>
+      <div class="modal-foot">
+        <div class="app-review">
+          <div class="field">
+            <label for="app-status">Status</label>
+            <select id="app-status">
+              <option value="new">New</option>
+              <option value="shortlisted">Shortlisted</option>
+              <option value="in-conversation">In conversation</option>
+              <option value="invited">Invited</option>
+              <option value="hired">Hired</option>
+              <option value="archived">Archived</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="app-score">Score (0–10)</label>
+            <input id="app-score" type="number" min="0" max="10" step="1" />
+          </div>
+        </div>
+        <div class="field">
+          <label for="app-notes">Reviewer notes</label>
+          <textarea id="app-notes" rows="3"></textarea>
+        </div>
+        <div class="modal-foot-actions">
+          <button class="btn btn-ghost" id="app-modal-close-2" type="button">Close</button>
+          <button class="btn btn-primary" id="app-save-btn" type="button">Save Review</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <script src="admin.js"></script>
 </body>
