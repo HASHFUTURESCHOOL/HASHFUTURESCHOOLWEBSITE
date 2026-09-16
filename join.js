@@ -647,7 +647,12 @@
         try {
             return await postJson('/api/join', payload);
         } catch (err) {
-            if (err.status && err.status >= 400 && err.status < 500 && err.status !== 404) throw err;
+            // 4xx other than 404 means our own API answered and the message is for
+            // the applicant; 503 means the same (e.g. the database is still being
+            // set up), so show it rather than falling through to the proxy.
+            const answeredByOurApi =
+                err.status && ((err.status >= 400 && err.status < 500 && err.status !== 404) || err.status === 503);
+            if (answeredByOurApi) throw err;
         }
 
         // 2. Static/PHP hosting fallback, which forwards to Future Assist.

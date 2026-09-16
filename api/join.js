@@ -12,7 +12,7 @@
  */
 
 import { getSql } from '../lib/db.js';
-import { readBody, ok, bad, serverError } from '../lib/http.js';
+import { readBody, ok, bad, send, serverError } from '../lib/http.js';
 import { sendEmail } from '../lib/email.js';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
@@ -503,6 +503,16 @@ export default async function handler(req, res) {
       stored: hasDatabase ? 'database' : 'local-file',
     });
   } catch (err) {
+    // 42P01 = undefined_table: the migrations have not been run against this
+    // database yet. Say so plainly instead of returning a bare 500, and do not
+    // pretend the application was received.
+    if (err?.code === '42P01') {
+      console.error('[join] team_applications is missing — run `npm run db:migrate`');
+      return send(res, 503, {
+        error:
+          'Our application system is being set up right now, so we could not save your answers. Please try again in a few minutes.',
+      });
+    }
     return serverError(res, err);
   }
 }
