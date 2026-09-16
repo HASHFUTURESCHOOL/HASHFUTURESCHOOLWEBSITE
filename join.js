@@ -661,9 +661,10 @@
             return await postJson('/api/join', payload);
         } catch (err) {
             // Our own API is the only source whose message is written for the
-            // applicant — a validation error, or a "we're still being set up"
-            // answer. Everything else falls through to the next option.
-            if (err.explained) throw err;
+            // applicant: a 4xx validation answer, or the 503 "we're still being
+            // set up" message. A 5xx is our problem, not theirs, so it falls
+            // through and becomes the generic message instead.
+            if (err.explained && (err.status < 500 || err.status === 503)) throw err;
         }
 
         // 2. Static/PHP hosting fallback, which forwards to Future Assist.

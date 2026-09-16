@@ -30,6 +30,11 @@ const FA_JOIN_URL =
 // failing against an endpoint that is not live yet.
 const FA_DISABLED = /^(off|disabled|false|none)$/i.test(String(process.env.FUTURE_ASSIST_JOIN_URL || '').trim());
 
+// Shown when the applications table is unreachable — either because no database
+// is configured for this deployment or because the migrations have not run yet.
+const SETUP_MESSAGE =
+  'Our application system is being set up right now, so we could not save your answers. Please try again in a few minutes.';
+
 // Local development store, used only when DATABASE_URL is absent (a local
 // deploy without Postgres). Production always has DATABASE_URL, so applications
 // there go to the database and this file is never touched.
@@ -372,10 +377,12 @@ export default async function handler(req, res) {
 
   const hasDatabase = Boolean(databaseUrl());
 
-  // A production deploy without a database would silently drop applications, so
-  // fail loudly there. Locally we fall back to a file (below) instead.
+  // A production deploy with no database URL configured cannot store anything.
+  // Log it loudly for us, but tell the applicant something they can act on.
+  // Locally we fall back to a file (below) instead.
   if (!hasDatabase && process.env.NODE_ENV === 'production') {
-    return serverError(res, new Error('DATABASE_URL is not set'));
+    console.error('[join] no database URL is configured for this deployment');
+    return send(res, 503, { error: SETUP_MESSAGE });
   }
 
   try {
@@ -516,10 +523,7 @@ export default async function handler(req, res) {
 
     if (undefinedTable) {
       console.error('[join] team_applications is missing — run `npm run db:migrate`');
-      return send(res, 503, {
-        error:
-          'Our application system is being set up right now, so we could not save your answers. Please try again in a few minutes.',
-      });
+      return send(res, 503, { error: SETUP_MESSAGE });
     }
     return serverError(res, err);
   }
