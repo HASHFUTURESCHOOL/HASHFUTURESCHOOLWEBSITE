@@ -22,7 +22,15 @@ export default async function handler(req, res) {
           to_regclass('public.posts') is not null             as posts,
           to_regclass('public.newsletter_subscribers') is not null as subscribers,
           to_regclass('public.site_content') is not null      as site_content,
-          to_regclass('public.team_applications') is not null as team_applications
+          to_regclass('public.team_applications') is not null as team_applications,
+          -- Column-level detail for the table that changes most often, so a
+          -- half-applied migration is visible rather than guessed at.
+          (select count(*) from information_schema.columns
+            where table_schema = 'public' and table_name = 'team_applications'
+              and column_name = 'video_url') > 0                as team_applications_video_url,
+          (select count(*) from information_schema.columns
+            where table_schema = 'public' and table_name = 'team_applications'
+              and column_name = 'video_language_confirmed') > 0 as team_applications_video_language_confirmed
       `;
       health.db.connected = true;
       health.db.tables = rows[0];
