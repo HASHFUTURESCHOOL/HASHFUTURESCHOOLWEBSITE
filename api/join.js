@@ -503,10 +503,18 @@ export default async function handler(req, res) {
       stored: hasDatabase ? 'database' : 'local-file',
     });
   } catch (err) {
-    // 42P01 = undefined_table: the migrations have not been run against this
-    // database yet. Say so plainly instead of returning a bare 500, and do not
-    // pretend the application was received.
-    if (err?.code === '42P01') {
+    // Undefined table: the migrations have not been run against this database
+    // yet. Say so plainly instead of returning a bare 500, and do not pretend
+    // the application was received.
+    //
+    // The check looks at both the SQLSTATE (42P01) and the message text, because
+    // the two drivers surface this differently — the socket client sets `.code`,
+    // while Neon's HTTP client has been observed returning a plain Error whose
+    // message reads `relation "..." does not exist`.
+    const undefinedTable =
+      err?.code === '42P01' || /relation .* does not exist/i.test(String(err?.message || ''));
+
+    if (undefinedTable) {
       console.error('[join] team_applications is missing — run `npm run db:migrate`');
       return send(res, 503, {
         error:

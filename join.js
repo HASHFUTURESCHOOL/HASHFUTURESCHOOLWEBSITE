@@ -633,13 +633,26 @@
             headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
             body: JSON.stringify(payload),
         });
+        const data = await res.json().catch(() => ({}));
         if (!res.ok) {
-            const data = await res.json().catch(() => ({}));
-            const err = new Error(data.error || `Request failed (${res.status})`);
+            // `error` is usually our own message string, but hosting platforms
+            // return an object ({"error":{"code":403,"message":"Forbidden"}}).
+            // Never let an object reach the applicant as "[object Object]".
+            const raw = data && data.error;
+            const explained =
+                typeof raw === 'string' && raw
+                    ? raw
+                    : raw && typeof raw.message === 'string'
+                      ? raw.message
+                      : null;
+
+            const err = new Error(explained || `Request failed (${res.status})`);
             err.status = res.status;
+            // True only when something answered with a message meant for a human.
+            err.explained = Boolean(explained);
             throw err;
         }
-        return res.json();
+        return data;
     }
 
     async function submitApplication(payload) {
@@ -647,23 +660,29 @@
         try {
             return await postJson('/api/join', payload);
         } catch (err) {
-            // 4xx other than 404 means our own API answered and the message is for
-            // the applicant; 503 means the same (e.g. the database is still being
-            // set up), so show it rather than falling through to the proxy.
-            const answeredByOurApi =
-                err.status && ((err.status >= 400 && err.status < 500 && err.status !== 404) || err.status === 503);
-            if (answeredByOurApi) throw err;
+            // Our own API is the only source whose message is written for the
+            // applicant — a validation error, or a "we're still being set up"
+            // answer. Everything else falls through to the next option.
+            if (err.explained) throw err;
         }
 
         // 2. Static/PHP hosting fallback, which forwards to Future Assist.
         try {
             return await postJson('join-proxy.php', payload);
-        } catch (err) {
-            if (err.status && err.status >= 400 && err.status < 500 && err.status !== 404) throw err;
+        } catch {
+            /* keep going */
         }
 
         // 3. Last resort: straight to Future Assist (works if CORS allows it).
-        return postJson('https://futureassist.hashfuture.school/api/join', payload);
+        //    Its errors are never shown: that endpoint is a mirror, not the
+        //    application of record.
+        try {
+            return await postJson('https://futureassist.hashfuture.school/api/join', payload);
+        } catch {
+            throw new Error(
+                'We could not reach our servers just now. Please check your connection and try again — or email learn@hashfuture.school and we will take it from there.'
+            );
+        }
     }
 
     form.addEventListener('submit', async (e) => {
@@ -700,10 +719,18 @@
 
             successPanel.scrollIntoView({ behavior: 'smooth', block: 'center' });
         } catch (err) {
-            formError.textContent =
-                err.message && err.message !== 'Failed to fetch'
-                    ? err.message
-                    : 'We could not reach our servers just now. Please check your connection and try again — or email learn@hashfuture.school and we will take it from there.';
+            // Only ever render a real string. Anything else (a network TypeError,
+            // a platform error object) becomes the generic message rather than
+            // "[object Object]".
+            const usableMessage =
+                typeof err?.message === 'string' &&
+                err.message &&
+                err.message !== 'Failed to fetch' &&
+                err.message !== '[object Object]';
+
+            formError.textContent = usableMessage
+                ? err.message
+                : 'We could not reach our servers just now. Please check your connection and try again — or email learn@hashfuture.school and we will take it from there.';
             formError.classList.add('show');
             formError.scrollIntoView({ behavior: 'smooth', block: 'center' });
             submitBtn.disabled = false;
