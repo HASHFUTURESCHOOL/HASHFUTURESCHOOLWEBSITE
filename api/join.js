@@ -377,10 +377,14 @@ export default async function handler(req, res) {
 
   const hasDatabase = Boolean(databaseUrl());
 
-  // A production deploy with no database URL configured cannot store anything.
-  // Log it loudly for us, but tell the applicant something they can act on.
-  // Locally we fall back to a file (below) instead.
-  if (!hasDatabase && process.env.NODE_ENV === 'production') {
+  // A deployed instance with no database URL cannot store anything: there is no
+  // writable filesystem to fall back to, and no second chance to capture the
+  // answers. Log it loudly for us, but tell the applicant something useful.
+  //
+  // This keys off Vercel's own variables rather than NODE_ENV, because NODE_ENV
+  // can be set to anything in the project's environment settings.
+  const isDeployed = Boolean(process.env.VERCEL || process.env.VERCEL_ENV);
+  if (!hasDatabase && isDeployed) {
     console.error('[join] no database URL is configured for this deployment');
     return send(res, 503, { error: SETUP_MESSAGE });
   }
@@ -435,12 +439,20 @@ export default async function handler(req, res) {
 
       await sql`UPDATE team_applications SET ref = ${ref} WHERE id = ${id}`;
     } else {
-      const saved = await saveLocally(application);
-      id = saved.id;
-      ref = saved.ref;
-      console.warn(
-        `[join] DATABASE_URL is not set — saved ${ref} to .local/team-applications.json (${saved.total} total). Development only.`
-      );
+      // Local development convenience: keep applications on disk so the whole
+      // flow can be exercised without a database. If even that fails, say we are
+      // still being set up rather than showing a bare 500.
+      try {
+        const saved = await saveLocally(application);
+        id = saved.id;
+        ref = saved.ref;
+        console.warn(
+          `[join] DATABASE_URL is not set — saved ${ref} to .local/team-applications.json (${saved.total} total). Development only.`
+        );
+      } catch (err) {
+        console.error('[join] could not store the application locally:', err);
+        return send(res, 503, { error: SETUP_MESSAGE });
+      }
     }
 
     const stored = { ...application, id, ref };
