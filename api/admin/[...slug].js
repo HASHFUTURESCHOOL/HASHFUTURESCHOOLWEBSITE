@@ -9,6 +9,7 @@ import {
   listNewsletterCampaigns,
   sendWeeklyNewsletter,
 } from '../../lib/newsletter.js';
+import { emailConfigured } from '../../lib/email.js';
 
 // One consolidated serverless function for all /api/admin/* routes.
 export const config = { maxDuration: 60 };
@@ -386,7 +387,7 @@ async function newsletterRoute(req, res, sql) {
         content,
         campaigns,
         stats: { activeSubscribers: active[0].count },
-        hasProvider: Boolean(process.env.RESEND_API_KEY),
+        hasProvider: emailConfigured(),
       });
     } catch (err) {
       return serverError(res, err);
@@ -417,8 +418,8 @@ async function newsletterSend(req, res, sql) {
     return bad(res, 'Method not allowed', 405);
   }
 
-  if (!process.env.RESEND_API_KEY) {
-    return bad(res, 'Email provider is not configured. Set RESEND_API_KEY before sending.', 503);
+  if (!emailConfigured()) {
+    return bad(res, 'Email provider is not configured. Set MAILGUN_API_KEY before sending.', 503);
   }
 
   try {

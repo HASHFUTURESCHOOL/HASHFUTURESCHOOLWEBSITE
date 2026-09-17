@@ -166,7 +166,7 @@ You can also trigger a draft on demand:
 Generated posts get `source = 'ai'` and appear with an **AI** badge. Approve them by
 clicking **Approve & Publish** (or edit and tick **Published**).
 
-### 5. Weekly newsletter (Resend + Cron)
+### 5. Weekly newsletter (Mailgun + Cron)
 
 The newsletter is fully wired up: visitors register through the subscribe forms
 (`/api/subscribe`) and active subscribers receive the weekly email automatically.
@@ -175,13 +175,26 @@ without touching code.
 
 Set these Vercel environment variables (and in `.env` for local dev):
 
-- `RESEND_API_KEY` — your Resend API key (from https://resend.com/api-keys).
-- `NEWSLETTER_FROM` — the From address, e.g. `Hash Future School <newsletter@hashfuture.school>`.
-  The domain must be verified in Resend.
+- `MAILGUN_API_KEY` — the Mailgun key (Mailgun dashboard → Settings → API keys).
+  This is the same account the Future Assist platform sends its own mail with,
+  so the demo-request emails and these share one verified sender.
+- `MAILGUN_DOMAIN` — *optional*; defaults to `support.hashfuture.school`, the
+  verified domain on that account. The root `hashfuture.school` is **not** on
+  it, so a From address there will be rejected.
+- `MAILGUN_REGION` — *optional*; `us` (default) or `eu`, matching the domain's
+  region in Mailgun.
+- `MAILGUN_FROM` — *optional*; defaults to
+  `Hash Future School <noreply@support.hashfuture.school>`.
 - `NEWSLETTER_BASE_URL` — the canonical site URL used for unsubscribe links
   (defaults to `https://www.hashfuture.school`).
 - `NEWSLETTER_REPLY_TO` — *optional*; where replies land (must be verified).
 - `CRON_SECRET` — *optional*; the weekly cron also respects this bearer token.
+
+Everything outbound — the newsletter, and both /join emails — goes through the
+same `sendEmail` in [`lib/email.js`](lib/email.js). When `MAILGUN_API_KEY` is
+missing, sends throw with that variable named rather than failing silently; the
+admin Newsletter tab shows a provider warning, and `/api/join` answers with
+`emailed: false`.
 
 The weekly schedule lives in [`vercel.json`](vercel.json) (currently `0 2 * * 1`,
 Monday 02:00 UTC). Every run creates a new campaign and sends only to subscribers
@@ -194,7 +207,7 @@ engine runs from the Admin CMS, so you can trigger it on demand:
 - **Email unsubscribe links** land on `/api/unsubscribe?email=...`, which shows a
   friendly confirmation page. The in-page form still uses `POST /api/unsubscribe`.
 
-If you want a different email provider (SendGrid, Mailgun, Postmark, SES), edit
+If you want a different email provider (Resend, SendGrid, Postmark, SES), edit
 only the send logic in [`lib/email.js`](lib/email.js) — nothing else changes.
 
 ### 6. Deploy

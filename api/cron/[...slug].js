@@ -2,6 +2,7 @@ import { getSql } from '../../lib/db.js';
 import { send, bad, serverError } from '../../lib/http.js';
 import { generateAndSaveDraft, weeklyTopicIndex } from '../../lib/blog-generator.js';
 import { sendWeeklyNewsletter } from '../../lib/newsletter.js';
+import { emailConfigured } from '../../lib/email.js';
 
 // One consolidated serverless function for all /api/cron/* routes.
 export const config = { maxDuration: 60 };
@@ -45,8 +46,8 @@ export default async function handler(req, res) {
   }
 
   if (action === 'send-newsletter') {
-    if (!process.env.RESEND_API_KEY) {
-      return bad(res, 'Email provider is not configured. Set RESEND_API_KEY before the cron can deliver.', 503);
+    if (!emailConfigured()) {
+      return bad(res, 'Email provider is not configured. Set MAILGUN_API_KEY before the cron can deliver.', 503);
     }
 
     try {

@@ -362,7 +362,7 @@ function renderNewsletter() {
   if (statusEl) {
     statusEl.textContent = state.newsletter.hasProvider
       ? '✅ Provider ready'
-      : '⚠️ RESEND_API_KEY not set';
+      : '⚠️ MAILGUN_API_KEY not set';
     statusEl.className = 'pill ' + (state.newsletter.hasProvider ? 'ok' : 'warn');
   }
 
