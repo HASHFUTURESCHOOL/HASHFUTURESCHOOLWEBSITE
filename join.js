@@ -1,5 +1,5 @@
 /* ============================================
-   Join Us — application page behaviour
+   Join Our Team — application page behaviour
    Steps, achievement repeater, draft saving,
    signal meter and submission.
    ============================================ */
