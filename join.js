@@ -431,6 +431,16 @@
         nextBtn.hidden = step === 3;
         submitBtn.hidden = step !== 3;
         formError.classList.remove('show');
+
+        // Below 1080px the rail is a horizontal scroller. Follow the active step
+        // so "3 of 3" never sits off the edge after tapping Continue, and scroll
+        // only the rail itself — never the page.
+        const rail = $('#jnStepList');
+        const activeItem = stepItems.find((item) => Number(item.dataset.goto) === step);
+        if (rail && activeItem && rail.scrollWidth > rail.clientWidth + 1) {
+            const offset = activeItem.getBoundingClientRect().left - rail.getBoundingClientRect().left;
+            rail.scrollTo({ left: rail.scrollLeft + offset - 8, behavior: 'smooth' });
+        }
     }
 
     function markField(el, bad) {

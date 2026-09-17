@@ -1087,6 +1087,44 @@ ul {
 }
 
 /* Video callout (before the form) */
+
+/* ---------- Phone-width header ----------
+   The header row is logo + CTA + menu button with a 22px gap, which measures
+   about 414px. Below roughly 460px that pushed the menu button past the right
+   edge of the screen, where nothing can reach it — the page cannot scroll
+   sideways. The header CTA is the same link as the last item in the mobile
+   menu, so it stands down on phones and the button takes the right-hand side.
+
+   These rules live at the end of the file on purpose: they come after the
+   earlier responsive block, so they win without needing !important. */
+@media (max-width: 520px) {
+    .jn-nav-cta {
+        display: none;
+    }
+
+    .jn-nav-inner {
+        gap: 12px;
+    }
+
+    .jn-burger {
+        margin-left: auto;
+    }
+
+    .jn-logo {
+        font-size: 1rem;
+    }
+
+    .jn-logo-hash {
+        font-size: 1.15rem;
+    }
+}
+
+/* On the narrowest phones even the brand badge costs more than it is worth. */
+@media (max-width: 360px) {
+    .jn-logo small {
+        display: none;
+    }
+}
 .jn-video-callout {
     display: flex;
     gap: 18px;
@@ -1744,7 +1782,17 @@ ul {
     }
 
     .jn-apply-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    /* A grid or flex child defaults to min-width: auto, so the three step cards
+       (240px each) stretched this column to 751px on every viewport narrower
+       than 1080px. The section clips what sticks out, so the rail was cut off
+       at the edge instead of scrolling inside its own box. */
+    .jn-apply-grid > *,
+    .jn-apply-side,
+    .jn-steplist {
+        min-width: 0;
     }
 
     .jn-apply-side {
@@ -1755,10 +1803,16 @@ ul {
         flex-direction: row;
         overflow-x: auto;
         padding-bottom: 4px;
+        scroll-snap-type: x proximity;
+        -webkit-overflow-scrolling: touch;
+        overscroll-behavior-x: contain;
     }
 
     .jn-steplist-item {
-        min-width: 240px;
+        /* Narrower than 240px on the smallest phones, so the next step peeks in
+           and the row reads as something you can swipe. */
+        min-width: min(240px, 74vw);
+        scroll-snap-align: start;
     }
 
     .jn-principles,
