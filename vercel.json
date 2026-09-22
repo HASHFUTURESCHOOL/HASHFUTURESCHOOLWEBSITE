@@ -17,5 +17,12 @@
             "source": "/api/proxy/admissions/demo",
             "destination": "https://futureassist.hashfuture.school/api/admissions/demo"
         }
+    ],
+    "redirects": [
+        {
+            "source": "/impactreports",
+            "destination": "/impact-reports",
+            "permanent": true
+        }
     ]
 }

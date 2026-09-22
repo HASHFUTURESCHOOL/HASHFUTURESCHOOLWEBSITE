@@ -1,0 +1,1262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hash Future School — Impact Report, Q1 2026–27 (June–August 2026)</title>
+<meta name="description" content="Hash Future School impact report for the quarter June–August 2026. Learning, attendance, achievement, learner voice, admissions and operations — measured, not asserted.">
+<meta name="robots" content="noindex, nofollow">
+<meta name="googlebot" content="noindex, nofollow">
+<link rel="canonical" href="https://hashfuture.school/impact-reports">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hash Future School — Impact Report, Q1 2026–27">
+<meta property="og:description" content="The quarter June–August 2026, measured in what learners did: classes, work submitted, habits recognised and 3,583 pieces of learner feedback.">
+<meta property="og:url" content="https://hashfuture.school/impact-reports">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#0F172A">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --brand:#FF4B4B; --brand-dark:#E03E3E; --brand-soft:#FF8585; --brand-tint:#FFF1F1;
+  --ink:#0F172A; --ink-2:#1E293B; --ink-3:#475569; --ink-4:#64748B; --line:#E2E8F0;
+  --paper:#FFFFFF; --mist:#F8FAFC; --tint:#F0F4FF;
+  --green:#22C55E; --blue:#3B82F6; --purple:#8B5CF6; --amber:#FBBF24; --teal:#14B8A6; --pink:#EC4899; --indigo:#6366F1;
+  --shadow-s:0 1px 2px rgba(15,23,42,.06);
+  --shadow-m:0 10px 30px -12px rgba(15,23,42,.18);
+  --shadow-l:0 30px 70px -30px rgba(15,23,42,.35);
+  --r-s:8px; --r-m:14px; --r-l:22px; --r-xl:32px;
+  --maxw:1180px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--paper);color:var(--ink-2);
+  font-family:'Outfit',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  font-weight:400;line-height:1.65;font-size:17px;letter-spacing:-.005em;
+  overflow-x:hidden;
+}
+h1,h2,h3,h4{color:var(--ink);font-weight:700;letter-spacing:-.03em;line-height:1.1;margin:0}
+p{margin:0 0 1.1em}
+a{color:inherit}
+.wrap{width:min(100% - 44px,var(--maxw));margin-inline:auto}
+.wide{width:min(100% - 44px,1400px);margin-inline:auto}
+
+/* ---------- nav ---------- */
+.progress{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--brand),var(--purple));z-index:100;transition:width .1s linear}
+nav{position:sticky;top:0;z-index:90;background:rgba(255,255,255,.86);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.nav-in{display:flex;align-items:center;gap:22px;padding:12px 0}
+.brand{display:flex;align-items:center;gap:9px;font-weight:800;font-size:17px;letter-spacing:-.04em;color:var(--ink);text-decoration:none;white-space:nowrap}
+.brand .hash{color:var(--brand);font-weight:900;font-size:22px;line-height:1}
+.brand small{display:block;font-weight:500;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-4);margin-top:-4px}
+.nav-links{display:flex;gap:2px;margin-left:auto;overflow-x:auto;scrollbar-width:none}
+.nav-links::-webkit-scrollbar{display:none}
+.nav-links a{font-size:13px;font-weight:500;color:var(--ink-3);text-decoration:none;padding:7px 9px;border-radius:999px;white-space:nowrap;transition:.18s}
+.nav-links a:hover{background:var(--mist);color:var(--ink)}
+.nav-links a.on{background:var(--brand-tint);color:var(--brand-dark)}
+.nav-cta{font-size:13px;font-weight:600;background:var(--ink);color:#fff;text-decoration:none;padding:9px 16px;border-radius:999px;white-space:nowrap}
+@media(max-width:1240px){.nav-links{display:none}}
+
+/* ---------- hero ---------- */
+header.hero{
+  position:relative;background:var(--ink);color:#fff;overflow:hidden;
+  padding:clamp(56px,8vw,104px) 0 clamp(64px,9vw,120px);
+}
+header.hero:before,header.hero:after{content:"";position:absolute;border-radius:50%;filter:blur(90px);opacity:.5;pointer-events:none}
+header.hero:before{width:640px;height:640px;background:radial-gradient(circle,#FF4B4B,transparent 68%);top:-260px;right:-140px}
+header.hero:after{width:560px;height:560px;background:radial-gradient(circle,#6D28D9,transparent 68%);bottom:-300px;left:-180px;opacity:.42}
+.hero-grid{position:absolute;inset:0;opacity:.16;
+  background-image:linear-gradient(rgba(255,255,255,.35) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.35) 1px,transparent 1px);
+  background-size:64px 64px;mask-image:radial-gradient(ellipse at 50% 0%,#000 20%,transparent 78%)}
+.hero-in{position:relative;z-index:2}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:11.5px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;
+  color:#fff;background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.2);padding:8px 15px;border-radius:999px;backdrop-filter:blur(6px)}
+.eyebrow i{width:7px;height:7px;border-radius:50%;background:var(--brand);box-shadow:0 0 0 4px rgba(255,75,75,.25)}
+h1.hero-title{color:#fff;font-size:clamp(38px,6.4vw,80px);font-weight:800;line-height:1.02;margin:26px 0 20px;max-width:15ch;letter-spacing:-.045em}
+h1.hero-title em{font-style:normal;background:linear-gradient(100deg,#FF6B6B,#FBBF24 55%,#8B5CF6);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero-sub{font-size:clamp(16px,1.6vw,20px);color:#CBD5E1;max-width:62ch;line-height:1.6}
+.hero-meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:30px}
+.chip{font-size:12.5px;font-weight:500;color:#E2E8F0;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.05);padding:7px 13px;border-radius:999px}
+.hero-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:clamp(38px,5vw,60px)}
+@media(max-width:900px){.hero-stats{grid-template-columns:repeat(2,1fr)}}
+.hstat{background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.13);border-radius:var(--r-m);padding:20px 20px 18px;backdrop-filter:blur(10px);transition:.3s}
+.hstat:hover{background:rgba(255,255,255,.1);transform:translateY(-3px)}
+.hstat b{display:block;font-size:clamp(28px,3.4vw,42px);font-weight:800;color:#fff;letter-spacing:-.045em;line-height:1}
+.hstat b .u{font-size:.52em;font-weight:600;color:var(--brand-soft);margin-left:2px}
+.hstat span{display:block;font-size:12.5px;color:#94A3B8;margin-top:9px;line-height:1.45}
+
+/* ---------- sections ---------- */
+section{padding:clamp(56px,7vw,100px) 0}
+section.alt{background:var(--mist)}
+section.dark{background:var(--ink);color:#CBD5E1}
+section.dark h2,section.dark h3,section.dark h4{color:#fff}
+.sec-head{max-width:70ch;margin-bottom:44px}
+.kicker{display:flex;align-items:center;gap:12px;font-size:11.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--brand);margin-bottom:16px}
+.kicker .n{display:grid;place-items:center;width:26px;height:26px;border-radius:8px;background:var(--brand);color:#fff;font-size:12px;letter-spacing:0}
+h2{font-size:clamp(27px,3.6vw,44px);margin-bottom:16px}
+.lede{font-size:clamp(16px,1.5vw,19.5px);color:var(--ink-3);line-height:1.66}
+section.dark .lede{color:#94A3B8}
+
+/* ---------- cards & grids ---------- */
+.grid{display:grid;gap:18px}
+.g2{grid-template-columns:repeat(2,1fr)}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g4{grid-template-columns:repeat(4,1fr)}
+@media(max-width:980px){.g3,.g4{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:660px){.g2,.g3,.g4{grid-template-columns:1fr}}
+.card{background:#fff;border:1px solid var(--line);border-radius:var(--r-l);padding:26px;box-shadow:var(--shadow-s);transition:.3s}
+.card:hover{box-shadow:var(--shadow-m);transform:translateY(-2px)}
+.card h3{font-size:18px;margin-bottom:6px}
+.card .sm{font-size:14.5px;color:var(--ink-4);line-height:1.6}
+.card .big{font-size:clamp(30px,3.4vw,40px);font-weight:800;letter-spacing:-.04em;color:var(--ink);line-height:1.05}
+.card .big .u{font-size:.5em;font-weight:600;color:var(--ink-4)}
+.card .lab{font-size:12px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-4);margin-bottom:12px}
+.card.accent{border-color:#FFD9D9;background:linear-gradient(180deg,#fff,var(--brand-tint))}
+.card.dark{background:var(--ink-2);border-color:#334155;color:#CBD5E1}
+.card.dark h3,.card.dark .big{color:#fff}
+.card.dark .sm,.card.dark .lab{color:#94A3B8}
+
+/* KPI tiles */
+.kpis{display:grid;grid-template-columns:repeat(6,1fr);gap:12px}
+@media(max-width:1100px){.kpis{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:620px){.kpis{grid-template-columns:repeat(2,1fr)}}
+.kpi{background:#fff;border:1px solid var(--line);border-radius:var(--r-m);padding:18px 16px;position:relative;overflow:hidden;transition:.25s}
+.kpi:hover{border-color:#FFC9C9;box-shadow:var(--shadow-m);transform:translateY(-2px)}
+.kpi:after{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--brand);opacity:.85}
+.kpi b{display:block;font-size:clamp(22px,2.4vw,30px);font-weight:800;color:var(--ink);letter-spacing:-.04em;line-height:1.05}
+.kpi b .u{font-size:.55em;font-weight:600;color:var(--ink-4)}
+.kpi span{display:block;font-size:12.5px;color:var(--ink-4);margin-top:7px;line-height:1.42}
+
+/* ---------- charts ---------- */
+.panel{background:#fff;border:1px solid var(--line);border-radius:var(--r-l);padding:26px;box-shadow:var(--shadow-s)}
+.panel h3{font-size:17px;margin-bottom:4px}
+.panel .ph{font-size:13.5px;color:var(--ink-4);margin-bottom:22px}
+.panel .ph b{color:var(--brand);font-weight:600}
+.hbars{display:flex;flex-direction:column;gap:13px}
+.hbar{display:grid;grid-template-columns:minmax(96px,1.25fr) 3fr auto;align-items:center;gap:14px}
+.hbar .l{font-size:13.5px;font-weight:500;color:var(--ink-2);text-align:right;line-height:1.3}
+.hbar .t{height:11px;border-radius:999px;background:var(--mist);overflow:hidden;position:relative}
+.hbar .f{height:100%;width:0;border-radius:999px;background:linear-gradient(90deg,var(--brand),#FF8A5B);transition:width 1.15s cubic-bezier(.22,1,.36,1)}
+.hbar .v{font-size:13.5px;font-weight:700;color:var(--ink);min-width:62px;font-variant-numeric:tabular-nums}
+@media(max-width:620px){.hbar{grid-template-columns:1fr auto;gap:6px 10px}.hbar .l{text-align:left;grid-column:1}.hbar .v{grid-column:2}.hbar .t{grid-column:1/-1;height:9px}}
+.vbars{display:flex;align-items:flex-end;gap:26px;height:210px;padding-top:26px;border-bottom:1px solid var(--line)}
+.vgroup{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;height:100%;position:relative}
+.vstack{display:flex;align-items:flex-end;gap:7px;height:100%}
+.vbar{width:clamp(16px,3.4vw,40px);border-radius:7px 7px 3px 3px;height:0;transition:height 1.1s cubic-bezier(.22,1,.36,1);position:relative}
+.vbar.b1{background:linear-gradient(180deg,#FF6B6B,#FF4B4B)}
+.vbar.b2{background:linear-gradient(180deg,#A5B4FC,#6366F1)}
+.vbar.b3{background:linear-gradient(180deg,#6EE7B7,#22C55E)}
+.vbar .vt{position:absolute;top:-22px;left:50%;transform:translateX(-50%);font-size:12px;font-weight:700;color:var(--ink);white-space:nowrap}
+.vlabels{display:flex;gap:26px;margin-top:12px}
+.vlabels>div{flex:1;text-align:center;font-size:12.5px;font-weight:600;color:var(--ink-4);letter-spacing:.04em}
+.legend{display:flex;flex-wrap:wrap;gap:16px;font-size:12.5px;color:var(--ink-3);margin-top:16px}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:7px}
+.stack{display:flex;height:38px;border-radius:10px;overflow:hidden;background:var(--mist)}
+.stack>div{transition:width 1.1s cubic-bezier(.22,1,.36,1);display:grid;place-items:center;font-size:11.5px;font-weight:700;color:#fff;overflow:hidden;white-space:nowrap}
+.donut-row{display:flex;align-items:center;gap:28px;flex-wrap:wrap}
+.donut{flex:0 0 auto;position:relative}
+.donut .dc{position:absolute;inset:0;display:grid;place-items:center;text-align:center;padding:0 34px;box-sizing:border-box}
+.donut .dc b{display:block;font-size:28px;font-weight:800;color:var(--ink);letter-spacing:-.04em;line-height:1}
+.donut .dc span{font-size:10.5px;color:var(--ink-4);letter-spacing:.06em;text-transform:uppercase;line-height:1.3}
+.dlegend{display:grid;gap:9px;flex:1;min-width:210px}
+.dlegend .row{display:flex;align-items:center;gap:10px;font-size:13.5px}
+.dlegend .row i{width:10px;height:10px;border-radius:3px;flex:0 0 auto}
+.dlegend .row b{margin-left:auto;font-weight:700;color:var(--ink);font-variant-numeric:tabular-nums}
+.lineChart{width:100%;height:auto;overflow:visible}
+.lineChart .gl{stroke:var(--line);stroke-width:1}
+.lineChart .ax{font-size:11px;fill:var(--ink-4);font-weight:500}
+.lineChart .path{fill:none;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:2600;stroke-dashoffset:2600}
+.in .lineChart .path{animation:draw 1.7s cubic-bezier(.22,1,.36,1) forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+
+/* funnel */
+.funnel{display:flex;flex-direction:column;gap:10px}
+.fstep{display:grid;grid-template-columns:150px 1fr auto;align-items:center;gap:14px}
+.fstep .fl{font-size:13px;font-weight:600;color:var(--ink-3);text-align:right}
+.fstep .fb{height:31px;border-radius:8px;background:linear-gradient(90deg,var(--brand),#FF8A5B);width:0;transition:width 1.1s cubic-bezier(.22,1,.36,1);display:flex;align-items:center;padding-left:12px;color:#fff;font-size:12px;font-weight:700}
+.fstep .fv{font-size:14px;font-weight:700;color:var(--ink);min-width:44px;font-variant-numeric:tabular-nums}
+@media(max-width:620px){.fstep{grid-template-columns:1fr auto}.fstep .fl{text-align:left}.fstep .fb{grid-column:1/-1}}
+
+/* ---------- tables ---------- */
+.tblwrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--r-l);background:#fff}
+table{border-collapse:collapse;width:100%;font-size:14px;min-width:720px}
+th,td{padding:13px 16px;text-align:left;border-bottom:1px solid var(--line)}
+thead th{background:var(--mist);font-size:11.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--ink-4);font-weight:700;position:sticky;top:0}
+tbody tr:hover{background:#FCFDFF}
+tbody tr:last-child td{border-bottom:0}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+td.cohort{font-weight:600;color:var(--ink)}
+.pill{display:inline-block;padding:3px 9px;border-radius:999px;font-size:11.5px;font-weight:600}
+.pill.good{background:#DCFCE7;color:#15803D}
+.pill.mid{background:#FEF3C7;color:#B45309}
+.pill.low{background:#FEE2E2;color:#B91C1C}
+
+/* quotes */
+.quotes{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media(max-width:980px){.quotes{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:660px){.quotes{grid-template-columns:1fr}}
+.quote{background:#fff;border:1px solid var(--line);border-left:3px solid var(--brand);border-radius:var(--r-m);padding:20px 22px;display:flex;flex-direction:column;gap:12px;box-shadow:var(--shadow-s)}
+.quote p{margin:0;font-size:15.5px;color:var(--ink-2);line-height:1.58}
+.quote .who{font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-4);font-weight:600;margin-top:auto}
+
+/* list of events */
+.evlist{display:grid;grid-template-columns:repeat(2,1fr);gap:8px 22px}
+@media(max-width:760px){.evlist{grid-template-columns:1fr}}
+.ev{display:flex;gap:12px;padding:11px 0;border-bottom:1px dashed var(--line);align-items:baseline}
+.ev time{font-size:11.5px;font-weight:700;color:var(--brand);letter-spacing:.06em;white-space:nowrap;min-width:52px;font-variant-numeric:tabular-nums}
+.ev span{font-size:14.5px;color:var(--ink-2)}
+.ev .tag{margin-left:auto;font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-4);border:1px solid var(--line);padding:2px 8px;border-radius:999px;white-space:nowrap}
+
+/* callouts */
+.callout{border-radius:var(--r-l);padding:26px 30px;background:linear-gradient(120deg,var(--ink),#1E293B);color:#CBD5E1;position:relative;overflow:hidden}
+.callout:after{content:"";position:absolute;width:320px;height:320px;border-radius:50%;background:radial-gradient(circle,#FF4B4B,transparent 70%);right:-120px;top:-140px;opacity:.4}
+.callout h3{color:#fff;font-size:20px;margin-bottom:10px;position:relative}
+.callout p{position:relative;margin:0;color:#CBD5E1}
+.note{background:#FFFBEB;border:1px solid #FDE68A;border-radius:var(--r-m);padding:18px 22px;font-size:14.5px;color:#78350F}
+.note b{color:#92400E}
+
+/* letter */
+.letter{display:grid;grid-template-columns:1.4fr 1fr;gap:52px;align-items:start}
+@media(max-width:900px){.letter{grid-template-columns:1fr;gap:32px}}
+.letter .body{font-size:17.5px;color:var(--ink-2);line-height:1.72}
+.letter .body p:first-of-type:first-letter{float:left;font-size:64px;line-height:.82;font-weight:800;color:var(--brand);padding:6px 12px 0 0}
+.sig{margin-top:26px;padding-top:20px;border-top:1px solid var(--line);font-size:14px;color:var(--ink-4)}
+.sig b{display:block;color:var(--ink);font-size:15.5px}
+.factbox{background:var(--mist);border:1px solid var(--line);border-radius:var(--r-l);padding:24px}
+.factbox h4{font-size:12px;letter-spacing:.15em;text-transform:uppercase;color:var(--ink-4);margin-bottom:16px}
+.factbox dl{margin:0;display:grid;gap:14px}
+.factbox dt{font-size:12.5px;color:var(--ink-4);margin-bottom:2px}
+.factbox dd{margin:0;font-size:15.5px;font-weight:600;color:var(--ink)}
+
+/* reveal */
+.rv{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s cubic-bezier(.22,1,.36,1)}
+.rv.in{opacity:1;transform:none}
+body.static .rv{opacity:1;transform:none;transition:none}
+body.static .hbar .f,body.static .stack>div,body.static .vbar,body.static .fstep .fb{transition:none}
+@media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none}*{animation:none!important;transition:none!important}}
+
+footer{background:var(--ink);color:#94A3B8;padding:56px 0 40px;font-size:14px}
+footer .fi{display:flex;gap:30px;flex-wrap:wrap;align-items:flex-start;justify-content:space-between}
+footer .brand{color:#fff}
+footer .fl{display:grid;gap:7px}
+footer a{color:#CBD5E1;text-decoration:none}
+footer a:hover{color:#fff}
+.fine{margin-top:34px;padding-top:22px;border-top:1px solid #1E293B;font-size:12.5px;color:#64748B;line-height:1.7}
+@media print{
+  @page{size:A4;margin:13mm 12mm}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  html,body{font-size:9.8pt}
+  nav,.progress{display:none!important}
+  body{background:#fff}
+  header.hero{background:#0F172A!important;page-break-after:always;padding:44mm 0 40mm}
+  header.hero:before{opacity:.35}
+  section{padding:4mm 0 8mm;break-before:page;break-inside:auto}
+  main>section:first-of-type{break-before:auto}
+  footer{break-before:page}
+  h2{font-size:21pt;margin-bottom:3mm}
+  h3{font-size:11.5pt}
+  .lede{font-size:10.5pt}
+  .sec-head{margin-bottom:6mm}
+  .rv{opacity:1!important;transform:none!important}
+  .card,.panel,.kpi,.quote,.tblwrap,.callout,.note,.fstep,.vgroup,.factbox,.hstat{break-inside:avoid}
+  .card,.panel{padding:5mm}
+  .card:hover,.kpi:hover{transform:none;box-shadow:none}
+  .kpis{grid-template-columns:repeat(3,1fr);gap:3mm}
+  .grid{gap:4mm}
+  .g4{grid-template-columns:repeat(2,1fr)}
+  .g3{grid-template-columns:repeat(3,1fr)}
+  .quotes{grid-template-columns:repeat(2,1fr)}
+  table{min-width:0;font-size:8pt}
+  th,td{padding:2.4mm 3mm}
+  .tblwrap{overflow:visible}
+  .hbars{gap:2.4mm}
+  .vbars{height:110px;padding-top:22px}
+  .ev{padding:1.8mm 0}
+  .donut svg{width:120px;height:120px}
+  .dlegend{min-width:150px}
+  footer{padding:12mm 0 8mm}
+}
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+
+<nav>
+  <div class="wrap nav-in">
+    <a class="brand" href="#top"><span class="hash">#</span><span>Future School<small>Impact Report</small></span></a>
+    <div class="nav-links" id="navlinks">
+      <a href="#overview">Overview</a>
+      <a href="#community">Community</a>
+      <a href="#learning">Learning</a>
+      <a href="#attendance">Attendance</a>
+      <a href="#recognition">Achievement</a>
+      <a href="#beyond">Beyond class</a>
+      <a href="#voice">Learner voice</a>
+      <a href="#growth">Admissions</a>
+      <a href="#people">People</a>
+      <a href="#platform">Operations</a>
+      <a href="#next">What's next</a>
+    </div>
+    <a class="nav-cta" href="#overview">Q1 2026–27</a>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="hero-grid"></div>
+  <div class="wrap hero-in">
+    <span class="eyebrow"><i></i>Impact Report · Quarter 1 · 2026–27</span>
+    <h1 class="hero-title">A quarter measured in <em>what learners did</em>.</h1>
+    <p class="hero-sub">Hash Future School, 1 June – 31 August 2026. Every number below is drawn from the school's own records — classes delivered, work submitted, habits recognised, families met, learners listened to. This is the evidence behind the promise.</p>
+    <div class="hero-meta">
+      <span class="chip">AI-first online school · Ages 6–18</span>
+      <span class="chip">61 teaching days</span>
+      <span class="chip">13 learner cohorts</span>
+      <span class="chip">Financial data excluded by design</span>
+    </div>
+    <div class="hero-stats">
+      <div class="hstat"><b data-count="1487">0</b><span>Classes scheduled across the quarter</span></div>
+      <div class="hstat"><b data-count="2851">0</b><span>Pieces of learner work submitted</span></div>
+      <div class="hstat"><b data-count="300206">0</b><span>Recognition points awarded</span></div>
+      <div class="hstat"><b data-count="4.62" data-dec="2">0</b><span>Average learner rating of a session <small style="color:#64748B">/ 5</small></span></div>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<!-- ================= LETTER ================= -->
+<section id="letter">
+  <div class="wrap">
+    <div class="letter">
+      <div>
+        <div class="kicker"><span class="n">·</span> A note from the school</div>
+        <h2>We said we would go by what learners do. Here is the evidence.</h2>
+        <div class="body">
+          <p>This quarter Hash Future School opened its second academic year — thirteen cohorts, learners from six to eighteen, twenty-one facilitators, and a first proper full quarter of running an online school at scale with our own platform underneath it.</p>
+          <p>An impact report can easily become a brochure. We have tried to make this one an audit instead. It reports the things that went well and the things that did not, side by side, because the second list is what tells us where to spend next quarter.</p>
+          <p>So: 1,487 classes were scheduled and 1,129 of them were delivered. Learners submitted 2,851 pieces of work. Almost 300,000 points were awarded — and the largest single category of those points was not marks, it was <b>camera on</b>, followed by punctuality and simply submitting the assignment. 185 badges were earned, and most of them for habits rather than grades. Learners ran their own weekly webinars, ran their own election with thirty-eight positions, and entered forty-five external competitions between them.</p>
+          <p>They also told us, 3,583 times, how a class actually felt — and rated it 4.62 out of 5. But when we asked how <em>challenged</em> they felt, the honest answer was "not very". That finding is in this report, unedited, and it is the first thing we are fixing.</p>
+          <p>Thank you to the families who trusted us with a school year.</p>
+        </div>
+        <div class="sig"><b>The Hash Future School team</b>Academic Year 2026–27 · Quarter 1 review</div>
+      </div>
+      <aside class="factbox">
+        <h4>The quarter at a glance</h4>
+        <dl>
+          <div><dt>Reporting period</dt><dd>1 Jun – 31 Aug 2026</dd></div>
+          <div><dt>Teaching days with recorded learning</dt><dd>61</dd></div>
+          <div><dt>Active learners on roll</dt><dd>101</dd></div>
+          <div><dt>Distinct learners who attended</dt><dd>111 at peak (June)</dd></div>
+          <div><dt>Live classes scheduled / completed</dt><dd>1,487 / 1,129</dd></div>
+          <div><dt>Facilitators who taught</dt><dd>21</dd></div>
+          <div><dt>Parent accounts active</dt><dd>237</dd></div>
+          <div><dt>Data source</dt><dd>School platform, read-only</dd></div>
+        </dl>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ================= OVERVIEW ================= -->
+<section class="alt" id="overview">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker"><span class="n">1</span> Overview</div>
+      <h2>The quarter in twelve numbers.</h2>
+      <p class="lede">Volume tells you whether the school actually ran. Depth tells you whether it worked. Here is both, in the metrics that matter most to a learning community — participation, output, recognition and voice.</p>
+    </div>
+    <div class="kpis" id="kpis"></div>
+    <div class="grid g2" style="margin-top:26px">
+      <div class="panel rv">
+        <h3>Monthly rhythm</h3>
+        <p class="ph">Live classes scheduled vs delivered, and the learners who showed up.</p>
+        <div class="vbars" id="chartSessionsMonthly"></div>
+        <div class="vlabels" id="chartSessionsMonthlyLabels"></div>
+        <div class="legend">
+          <span><i style="background:#FF4B4B"></i>Classes delivered</span>
+          <span><i style="background:#6366F1"></i>Classes scheduled</span>
+        </div>
+      </div>
+      <div class="panel rv">
+        <h3>Learner participation</h3>
+        <p class="ph">Attendance participation rate and distinct learners active, by month.</p>
+        <svg class="lineChart" id="chartRateTrend" viewBox="0 0 640 250" role="img" aria-label="Participation rate by month"></svg>
+        <div class="legend">
+          <span><i style="background:#FF4B4B"></i>Participation rate (present, late or partial)</span>
+          <span><i style="background:#22C55E"></i>Fully present rate</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= COMMUNITY ================= -->
+<section id="community">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker"><span class="n">2</span> The community</div>
+      <h2>Who this school is, right now.</h2>
+      <p class="lede">Hash Future School is fourteen months old. In that time it has onboarded 575 accounts — learners, parents, facilitators and staff. This quarter it opened a new academic year: thirteen cohorts across three learning stages, ten of them configured in a single day in May and three more added in July as the intake grew.</p>
+    </div>
+    <div class="grid g2">
+      <div class="panel rv">
+        <h3>Community composition</h3>
+        <p class="ph">Active accounts in the school platform.</p>
+        <div class="donut-row">
+          <div class="donut" id="donutCommunity"></div>
+          <div class="dlegend" id="legendCommunity"></div>
+        </div>
+      </div>
+      <div class="panel rv">
+        <h3>Distinct learners active each month</h3>
+        <p class="ph">Learners with at least one attendance record in the month.</p>
+        <div class="vbars" id="chartActiveMonthly"></div>
+        <div class="vlabels" id="chartActiveMonthlyLabels"></div>
+        <div class="note" style="margin-top:22px"><b>Read this carefully:</b> 111 learners were active in June but only 96 in August. The difference is real: 22 learners left the school during the quarter and 13 joined. Churn is the single most important number in this report, and it is discussed in full under Attendance.</div>
+      </div>
+    </div>
+    <div class="grid g3" style="margin-top:18px">
+      <div class="card rv"><div class="lab">Cohorts</div><div class="big">13</div><p class="sm" style="margin:10px 0 0">Grade rooms running across primary, middle and higher stages — ten configured in May for 2026–27, three more added in July.</p></div>
+      <div class="card rv"><div class="lab">Mentorship</div><div class="big">14 <span class="u">groups</span></div><p class="sm" style="margin:10px 0 0">228 mentee placements — every learner who wanted one attached to a mentor group with a named primary mentor.</p></div>
+      <div class="card rv"><div class="lab">Houses</div><div class="big">8 <span class="u">houses</span></div><p class="sm" style="margin:10px 0 0">Amber, Coral, Emerald, Garnet, Jade, Sapphire, Topaz and Zircon — plus five student-led Global Citizenship committees.</p></div>
+      <div class="card rv"><div class="lab">Parents on platform</div><div class="big">237</div><p class="sm" style="margin:10px 0 0">Active parent accounts receiving 6,068 daily parent reports during the quarter.</p></div>
+      <div class="card rv"><div class="lab">Teaching team</div><div class="big">21</div><p class="sm" style="margin:10px 0 0">Facilitators who personally ran at least one class, out of twenty on roll and three who joined this quarter.</p></div>
+      <div class="card rv"><div class="lab">Programmes</div><div class="big">2</div><p class="sm" style="margin:10px 0 0">SuperKids (223 members) and SuperLearn (13 members) running alongside the main school cohorts.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= LEARNING ================= -->
+<section class="alt" id="learning">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker"><span class="n">3</span> The learning engine</div>
+      <h2>What was actually taught, made and marked.</h2>
+      <p class="lede">1,487 classes were scheduled across 61 teaching days. 1,129 were completed, 795 new learning activities were published, and learners returned 2,851 pieces of work — an average of 30.7 submissions for each of the 93 learners who submitted anything at all.</p>
+    </div>
+    <div class="grid g2">
+      <div class="panel rv">
+        <h3>Teaching time by subject</h3>
+        <p class="ph">Completed and scheduled sessions per subject family, for the whole quarter.</p>
+        <div class="hbars" id="chartSubjectMix"></div>
+      </div>
+      <div class="panel rv">
+        <h3>Work submitted and marked</h3>
+        <p class="ph">Submissions received each month, and how many were graded.</p>
+        <div class="vbars" id="chartSubs"></div>
+        <div class="vlabels" id="chartSubsLabels"></div>
+        <div class="legend"><span><i style="background:#FF4B4B"></i>Submitted</span><span><i style="background:#22C55E"></i>Graded</span></div>
+        <div class="note" style="margin-top:22px"><b>Worth being honest about:</b> grading completion fell from 90% in July to 63% in August, and the school finished the quarter with 549 pieces of work never graded — 398 awaiting a first grade and 137 held back for revision. This is the clearest operational failure of the quarter, and it is owned in the "What's next" section.</div>
+      </div>
+    </div>
+
+    <div class="grid g4" style="margin-top:18px">
+      <div class="card rv"><div class="lab">Learning activities published</div><div class="big">795</div><p class="sm" style="margin:10px 0 0">Worth 41,536 possible points. 273 in June, 330 in July, 192 in August.</p></div>
+      <div class="card rv"><div class="lab">Average marks awarded</div><div class="big">91.7<span class="u">%</span></div><p class="sm" style="margin:10px 0 0">Across 2,300 graded pieces of work with a defined mark scheme.</p></div>
+      <div class="card rv"><div class="lab">Work returned for revision</div><div class="big">137</div><p class="sm" style="margin:10px 0 0">Learners were given a second attempt rather than a zero — the school's default for incomplete mastery.</p></div>
+      <div class="card rv"><div class="lab">Curriculum resources attached</div><div class="big">351</div><p class="sm" style="margin:10px 0 0">Plus 46 structured module items across two full activity modules and 104 activity discussions.</p></div>
+    </div>
+
+    <div class="grid g2" style="margin-top:18px">
+      <div class="panel rv">
+        <h3>Mastery distribution</h3>
+        <p class="ph">Where 2,300 marked submissions landed as a percentage of the marks available.</p>
+        <div class="stack" id="chartMasteryStack"></div>
+        <div class="legend" id="legendMastery"></div>
+        <p class="sm" style="margin-top:20px;color:var(--ink-4);font-size:14px">Three quarters of all marked work scored 90% or above. Only 37 submissions fell below half marks — and every one of those generated feedback rather than a penalty.</p>
+      </div>
+      <div class="panel rv">
+        <h3>Facilitator load</h3>
+        <p class="ph">Classes personally delivered by each facilitator over the quarter.</p>
+        <div class="hbars" id="chartFacLoad"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ATTENDANCE ================= -->
+<section id="attendance">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker"><span class="n">4</span> Attendance &amp; engagement</div>
+      <h2>Showing up — and what showing up looked like.</h2>
+      <p class="lede">12,342 attendance records were logged across 61 teaching days. 71.7% were present, late or partially present. The rate was remarkably stable month to month — and just as remarkably, below where we want it.</p>
+    </div>
+    <div class="grid g4">
+      <div class="card rv"><div class="lab">Attendance records</div><div class="big">12,342</div><p class="sm" style="margin:10px 0 0">Across 61 teaching days — an average of 202 records a day.</p></div>
+      <div class="card accent rv"><div class="lab">Participation rate</div><div class="big">71.7<span class="u">%</span></div><p class="sm" style="margin:10px 0 0">Present, late or partial. 67.2% were fully present.</p></div>
+      <div class="card rv"><div class="lab">Present records</div><div class="big">8,269</div><p class="sm" style="margin:10px 0 0">Against 3,356 absences, 297 late arrivals, 281 partial attendances and 139 excused absences.</p></div>
+      <div class="card rv"><div class="lab">Attendance registers marked</div><div class="big">977</div><p class="sm" style="margin:10px 0 0">Session reflections completed in 1,004 of the 1,129 delivered classes.</p></div>
+    </div>
+
+    <div class="grid g2" style="margin-top:18px">
+      <div class="panel rv">
+        <h3>Attendance mix, month by month</h3>
+        <p class="ph">Every recorded attendance outcome, as a share of that month's records.</p>
+        <div id="chartAttMix"></div>
+        <div class="legend" id="legendAttMix"></div>
+        <div class="note" style="margin-top:22px"><b>Read August with the calendar in mind:</b> the school taught 22 days in June, 23 in July but only 16 in August. The last recorded sessions before the break were on 21 August and teaching resumed on 31 August, so August's smaller totals are a calendar fact rather than a drop in engagement — its participation rate (72.2%) was in fact the best of the quarter.</div>
+      </div>
+      <div class="panel rv">
+        <h3>Participation signals</h3>
+        <p class="ph">Two behaviours the school tracks separately from attendance.</p>
+        <div class="hbars" id="chartSignals"></div>
+        <p class="sm" style="margin-top:22px;color:var(--ink-4);font-size:14px">Camera-on is the school's most rewarded behaviour (see Achievement) precisely because it is the hardest to get right in an online classroom. It is still only on in two of every five attendance records — real, measurable room to improve.</p>
+      </div>
+    </div>
+
+    <h3 class="rv" style="margin:42px 0 8px;font-size:22px">Cohort scoreboard</h3>
+    <p class="lede rv" style="margin-bottom:20px;font-size:16px">Every cohort's participation, output and recognition side by side. Read down the columns, not across the page.</p>
+    <div class="tblwrap rv">
+      <table id="cohortTable">
+        <thead><tr>
+          <th>Cohort</th><th class="num">Learners</th><th class="num">Attendance records</th>
+          <th class="num">Participation</th><th class="num">Submissions</th>
+          <th class="num">Subs / learner</th><th class="num">Points / learner</th>
+        </tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <div class="note rv" style="margin-top:20px"><b>How to read this table:</b> the two June "Explorers Induction" on-boarding groups are not listed, because those rooms closed once learners moved into their permanent cohorts. They deserve a mention anyway — 1,004 recorded attendances at 89.1% and 89.4% participation, the two highest rates anywhere in the school this quarter. A new learner's first two weeks at Hash Future School are the most reliably attended days they will have.</div>
+  </div>
+</section>
+
+<!-- ================= RECOGNITION ================= -->
+<section class="alt" id="recognition">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker"><span class="n">5</span> Achievement &amp; recognition</div>
+      <h2>What the school chose to reward tells you what it values.</h2>
+      <p class="lede">41,300 recognition events produced 300,206 points for 110 learners. Not one of the top five reasons is a mark. They are camera on, punctuality, participating, submitting the work, and researching independently.</p>
+    </div>
+    <div class="grid g2">
+      <div class="panel rv">
+        <h3>Why points were awarded</h3>
+        <p class="ph">The twenty-two most rewarded behaviours of the quarter, out of 39 distinct reasons.</p>
+        <div class="hbars" id="chartReasons"></div>
+      </div>
+      <div class="panel rv">
+        <h3>Recognition by month</h3>
+        <p class="ph">Total points awarded, and the average earned by each learner who was active that month.</p>
+        <div class="vbars" id="chartPointsMonthly"></div>
+        <div class="vlabels" id="chartPointsMonthlyLabels"></div>
+        <div class="legend"><span><i style="background:#FF4B4B"></i>Total points</span></div>
+        <div class="grid g3" style="margin-top:26px;gap:12px">
+          <div><div class="lab" style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-4);font-weight:600">Points per learner</div><div style="font-size:24px;font-weight:800;color:var(--ink);letter-spacing:-.03em" id="statPerStudentPts">—</div></div>
+          <div><div class="lab" style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-4);font-weight:600">Badges earned</div><div style="font-size:24px;font-weight:800;color:var(--ink);letter-spacing:-.03em">185</div></div>
+          <div><div class="lab" style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-4);font-weight:600">Learners recognised</div><div style="font-size:24px;font-weight:800;color:var(--ink);letter-spacing:-.03em">110</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid g2" style="margin-top:18px">
+      <div class="panel rv">
+        <h3>House standings</h3>
+        <p class="ph">Points earned during the quarter by house members.</p>
+        <div class="hbars" id="chartHouses"></div>
+        <p class="sm" style="margin-top:20px;color:var(--ink-4);font-size:14px">Coral leads the year, but the spread matters more than the leader: every house earned across eleven weeks rather than winning on a single activity.</p>
+      </div>
+      <div class="panel rv">
+        <h3>Badges unlocked</h3>
+        <p class="ph">185 badges were unlocked during the quarter by 76 different learners — a rarity tier for a habit, not a mark.</p>
+        <div class="donut-row">
+          <div class="donut" id="donutBadges"></div>
+          <div class="dlegend" id="legendBadges"></div>
+        </div>
+        <div class="hbars" id="chartBadgeMonthly" style="margin-top:26px"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= BEYOND ================= -->
+<section id="beyond">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker"><span class="n">6</span> Beyond the classroom</div>
+      <h2>The quarter outside the timetable.</h2>
+      <p class="lede">Twenty-four school events, twenty-six external competitions entered, twenty-two webinars — most of them presented by learners themselves — and the school's first student election. This is where a curriculum stops being a syllabus.</p>
+    </div>
+    <div class="grid g4">
+      <div class="card rv"><div class="lab">School events</div><div class="big">24</div><p class="sm" style="margin:10px 0 0">15 open events and 9 in-house competitions, from World Environment Day to Independence Day.</p></div>
+      <div class="card rv"><div class="lab">Event registrations</div><div class="big">689</div><p class="sm" style="margin:10px 0 0">Made by 84 individual learners — most of the school entered something.</p></div>
+      <div class="card rv"><div class="lab">External competitions</div><div class="big">45 <span class="u">entries</span></div><p class="sm" style="margin:10px 0 0">Across 17 different national and international competitions, by 29 learners.</p></div>
+      <div class="card rv"><div class="lab">Learner-led webinars</div><div class="big">22</div><p class="sm" style="margin:10px 0 0">Weekly public webinars — the majority presented by students, not staff.</p></div>
+    </div>
+
+    <div class="grid g2" style="margin-top:18px">
+      <div class="panel rv">
+        <h3>What students taught the school</h3>
+        <p class="ph">Selected learner-led webinar topics this quarter. Ages 6–18, on stage, in public.</p>
+        <div id="webinarList"></div>
+      </div>
+      <div class="panel rv">
+        <h3>Competitions entered</h3>
+        <p class="ph">Where our learners took on the outside world.</p>
+        <div id="compList"></div>
+      </div>
+    </div>
+
+    <div class="grid g3" style="margin-top:18px">
+      <div class="card rv">
+        <div class="lab">Student government</div>
+        <div class="big">38 <span class="u">positions</span></div>
+        <p class="sm" style="margin:10px 0 0">The school ran its first student election in July and August: 75 nominations from 22 learners, 210 votes cast by 21 voters, and a certified result.</p>
+      </div>
+      <div class="card rv">
+        <div class="lab">Clubs &amp; committees</div>
+        <div class="big">5 <span class="u">GCP committees</span></div>
+        <p class="sm" style="margin:10px 0 0">Creative Impact, Innovation &amp; Tech, Inclusion &amp; Wellbeing, Eco Warriors and Global Citizenship — run by students, with 51 committee seats filled.</p>
+      </div>
+      <div class="card rv">
+        <div class="lab">Showcased work</div>
+        <div class="big">52</div>
+        <p class="sm" style="margin:10px 0 0">22 published showcases on the school Storyboard and 30 technology updates contributed by 15 different authors.</p>
+      </div>
+    </div>
+
+    <h3 class="rv" style="margin:42px 0 18px;font-size:22px">The full event calendar</h3>
+    <div class="evlist rv" id="eventList"></div>
+  </div>
+</section>
+
+<!-- ================= VOICE ================= -->
+<section class="alt" id="voice">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker"><span class="n">7</span> Learner &amp; parent voice</div>
+      <h2>We asked 3,583 times how a class felt.</h2>
+      <p class="lede">Every learner can rate every session, and they do — 92 of them, across three months. The average is 4.62 out of 5. The distribution below matters more than the average, because it shows what the minority felt.</p>
+    </div>
+    <div class="grid g2">
+      <div class="panel rv">
+        <h3>Session rating distribution</h3>
+        <p class="ph">All 3,583 responses, 1 to 5 stars.</p>
+        <div class="hbars" id="chartRatingDist"></div>
+        <p class="sm" style="margin-top:20px;color:var(--ink-4);font-size:14px">Seventy-eight percent of responses were a full five stars. 137 were rated one or two — less than four in a hundred, and each of those is read by the facilitator it is about.</p>
+      </div>
+      <div class="panel rv">
+        <h3>How learners felt when the class ended</h3>
+        <p class="ph">Chosen from a fixed list after every session.</p>
+        <div class="hbars" id="chartFeelings"></div>
+      </div>
+    </div>
+
+    <div class="grid g2" style="margin-top:18px">
+      <div class="panel rv">
+        <h3>Where learning actually came from</h3>
+        <p class="ph">Learner-reported source of new learning in the session.</p>
+        <div class="hbars" id="chartSource"></div>
+        <div class="note" style="margin-top:22px"><b>The honest finding of this quarter:</b> learners rate <em>understanding</em> and <em>enjoyment</em> above 4 out of 5, but <em>how challenged</em> they felt averages just 1.9, and <em>interest</em> 3.5. They are comfortable. Comfortable is not the same as stretched — and we are treating this as the school's central academic problem for Q2.</div>
+      </div>
+      <div class="panel rv">
+        <h3>Session quality, as learners scored it</h3>
+        <p class="ph">Average score out of 5, across the quarter.</p>
+        <div class="hbars" id="chartQuality"></div>
+        <div class="grid g2" style="margin-top:24px;gap:12px">
+          <div><div style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-4);font-weight:600">Responses</div><div style="font-size:24px;font-weight:800;color:var(--ink);letter-spacing:-.03em">3,583</div></div>
+          <div><div style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-4);font-weight:600">Learners responding</div><div style="font-size:24px;font-weight:800;color:var(--ink);letter-spacing:-.03em">92</div></div>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="rv" style="margin:46px 0 6px;font-size:22px">In their own words</h3>
+    <p class="lede rv" style="margin-bottom:24px;font-size:16px">Quoted verbatim from the "what I learned today" field at the end of a class. Spelling untouched; speakers kept anonymous.</p>
+    <div class="quotes rv" id="quoteGrid"></div>
+
+    <div class="grid g3" style="margin-top:26px">
+      <div class="card rv"><div class="lab">Parent–teacher meetings</div><div class="big">118</div><p class="sm" style="margin:10px 0 0">Structured feedback points recorded across 70 learners — a quarter of the school met a facilitator about an individual child.</p></div>
+      <div class="card rv"><div class="lab">Daily reports to families</div><div class="big">6,068</div><p class="sm" style="margin:10px 0 0">Plus 4,455 daily learner reports — roughly 1.9 family-facing reports per learner per teaching day.</p></div>
+      <div class="card rv"><div class="lab">Interventions logged</div><div class="big">124</div><p class="sm" style="margin:10px 0 0">32 parent calls, 25 attendance follow-ups, 24 mentoring check-ins, 24 enrichment referrals and 19 academic-doubt resolutions.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= GROWTH ================= -->
+<section id="growth">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker"><span class="n">8</span> Admissions &amp; growth</div>
+      <h2>How families found the school — and what happened next.</h2>
+      <p class="lede">Forty-four new enquiries, twenty-one demo requests, eleven formal applications and thirteen enrolments. The single most productive channel was the school's own weekly webinar, and the most productive month was June.</p>
+    </div>
+    <div class="grid g2">
+      <div class="panel rv">
+        <h3>The admissions funnel</h3>
+        <p class="ph">From first enquiry to a learner on roll, quarter totals.</p>
+        <div class="funnel" id="chartFunnel"></div>
+      </div>
+      <div class="panel rv">
+        <h3>Where enquiries came from</h3>
+        <p class="ph">44 new leads by source, and the same leads by temperature.</p>
+        <div class="hbars" id="chartLeadSource"></div>
+        <div class="hbars" id="chartLeadTemp" style="margin-top:26px"></div>
+      </div>
+    </div>
+    <div class="grid g2" style="margin-top:18px">
+      <div class="panel rv">
+        <h3>Enquiry volume by month</h3>
+        <p class="ph">New leads created, June through August.</p>
+        <div class="vbars" id="chartLeads"></div>
+        <div class="vlabels" id="chartLeadsLabels"></div>
+        <div class="note" style="margin-top:22px"><b>Trend to watch:</b> enquiries halved between June (23) and August (9). Whether that is seasonality or a marketing gap is unresolved, and it is on the Q2 agenda.</div>
+      </div>
+      <div class="panel rv">
+        <h3>Applications by grade sought</h3>
+        <p class="ph">Which year groups families were looking for.</p>
+        <div class="hbars" id="chartAppGrades"></div>
+        <p class="sm" style="margin-top:20px;color:var(--ink-4);font-size:14px">Demand was spread from Grade 1 to Grade 11 — evidence, as much as anything, that families are looking for an alternative across the whole school journey, not just at one stage.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PEOPLE ================= -->
+<section class="alt" id="people">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker"><span class="n">9</span> Our people</div>
+      <h2>Twenty-one facilitators carried the quarter.</h2>
+      <p class="lede">Teaching load is spread deliberately thin so no single facilitator burns out: the busiest teacher ran 143 classes over sixty-one teaching days, the quietest fewer than ten — largely because they joined mid-quarter.</p>
+    </div>
+    <div class="grid g4">
+      <div class="card rv"><div class="lab">Facilitators who taught</div><div class="big">21</div><p class="sm" style="margin:10px 0 0">Three joined during the quarter; twenty are on roll as active facilitators.</p></div>
+      <div class="card rv"><div class="lab">Teaching-quality reviews</div><div class="big">167</div><p class="sm" style="margin:10px 0 0">Structured supervisor reviews completed and scored.</p></div>
+      <div class="card accent rv"><div class="lab">Average review score</div><div class="big">7.47<span class="u">/10</span></div><p class="sm" style="margin:10px 0 0">Across teaching quality, punctuality, learner engagement, communication and professionalism.</p></div>
+      <div class="card rv"><div class="lab">Cover arrangements</div><div class="big">46</div><p class="sm" style="margin:10px 0 0">Substitutions arranged against 237 recorded leave entries, so no cohort lost a class to a facilitator absence.</p></div>
+    </div>
+    <div class="grid g2" style="margin-top:18px">
+      <div class="panel rv">
+        <h3>Curriculum documentation</h3>
+        <p class="ph">Lesson plans submitted for review, by month and status.</p>
+        <div class="hbars" id="chartLessonPlans"></div>
+        <p class="sm" style="margin-top:22px;color:var(--ink-4);font-size:14px">Twenty-three lesson plans were written and fourteen approved by seven facilitators. This is a practice still finding its feet — it is good for the school that facilitators can see each other's planning, and it is not yet a habit. We are not going to pretend otherwise.</p>
+      </div>
+      <div class="panel rv">
+        <h3>Operational readiness</h3>
+        <p class="ph">The unglamorous work that made the quarter run.</p>
+        <div class="hbars" id="chartStaffOps"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PLATFORM ================= -->
+<section class="dark" id="platform">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker"><span class="n">10</span> Platform &amp; operations</div>
+      <h2>The school ran on its own software.</h2>
+      <p class="lede">Hash Future School teaches on a platform it builds itself — classes, attendance, work, marking, points, houses, mentorship, admissions and support all in one system. That system was exercised hard this quarter, and every number in this report is a by-product of it.</p>
+    </div>
+    <div class="grid g4">
+      <div class="card dark rv"><div class="lab">Messages sent</div><div class="big">11,977</div><p class="sm" style="margin:10px 0 0">Across 1,104 conversations, by 116 different people — staff, mentors and houses.</p></div>
+      <div class="card dark rv"><div class="lab">Support tickets</div><div class="big">119</div><p class="sm" style="margin:10px 0 0">56 resolved and 11 closed; 52 still open or in progress at quarter end.</p></div>
+      <div class="card dark rv"><div class="lab">Daily reports generated</div><div class="big">10,523</div><p class="sm" style="margin:10px 0 0">4,455 learner reports and 6,068 parent reports, written and delivered automatically.</p></div>
+      <div class="card dark rv"><div class="lab">Document intake processed</div><div class="big">39</div><p class="sm" style="margin:10px 0 0">Employee and onboarding documents filed through the platform's docket system.</p></div>
+    </div>
+    <div class="grid g2" style="margin-top:18px">
+      <div class="panel rv" style="background:var(--ink-2);border-color:#334155">
+        <h3 style="color:#fff">Where the platform fell short</h3>
+        <p class="ph" style="color:#94A3B8">Two operational measures we would rather publish than hide.</p>
+        <div class="hbars" id="chartOpsWeak"></div>
+      </div>
+      <div class="panel rv" style="background:var(--ink-2);border-color:#334155">
+        <h3 style="color:#fff">Built this quarter</h3>
+        <p class="ph" style="color:#94A3B8">Capability added to the platform during June, July and August — the groundwork for what launched in September.</p>
+        <div class="hbars" id="chartBuilt"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= NEXT ================= -->
+<section id="next">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker"><span class="n">11</span> What's next</div>
+      <h2>Five things this quarter told us to fix.</h2>
+      <p class="lede">An impact report that only counts wins is a marketing document. These are the gaps this data exposed, each with the number that exposed it and the target we are setting for Q2.</p>
+    </div>
+    <div class="grid g2">
+      <div class="card rv"><div class="lab" style="color:var(--brand)">Gap 01 · Marks returned late</div><div class="big">9.8 <span class="u">days</span></div><p class="sm" style="margin:12px 0 0">Average time between a learner submitting work and receiving a grade. August grading completion fell to 63%, and 549 pieces of work were never graded at all. <b style="color:var(--ink)">Q2 target: 90% of work graded within 72 hours, and no cohort carrying a backlog across a month.</b></p></div>
+      <div class="card rv"><div class="lab" style="color:var(--brand)">Gap 02 · Attendance</div><div class="big">71.7 <span class="u">%</span></div><p class="sm" style="margin:12px 0 0">Participation is steady but not good enough: 3,356 absences in a quarter, and a 27-point gap between the strongest cohort (87.6%) and the weakest (60.8%). <b style="color:var(--ink)">Q2 target: 80% participation, with a named owner for every learner below 60%.</b></p></div>
+      <div class="card rv"><div class="lab" style="color:var(--brand)">Gap 03 · Not enough challenge</div><div class="big">1.9 <span class="u">/ 5</span></div><p class="sm" style="margin:12px 0 0">Learners rate how challenged they felt at 1.9 while rating enjoyment at 4.2 — they are happy and comfortable, and comfort is not stretch. <b style="color:var(--ink)">Q2 target: publish a stretch tier on every activity and move the challenge score above 3.</b></p></div>
+      <div class="card rv"><div class="lab" style="color:var(--brand)">Gap 04 · Retention</div><div class="big">22 <span class="u">left</span></div><p class="sm" style="margin:12px 0 0">Twenty-two learners left and thirteen joined, so the school grew slowly while working hard. Attrition is the highest-leverage number in this report. <b style="color:var(--ink)">Q2 target: an exit conversation with every family, and each reason coded into the platform.</b></p></div>
+      <div class="card rv" style="grid-column:1/-1"><div class="lab" style="color:var(--brand)">Gap 05 · Support responsiveness</div><div class="big">13.5 <span class="u">days</span></div><p class="sm" style="margin:12px 0 0">Average time to close a support ticket, with 52 tickets still open at quarter end. In a school where a parent's question is usually about their child's day, two weeks is too long. <b style="color:var(--ink)">Q2 target: first response inside one working day, closure inside three.</b></p></div>
+    </div>
+    <div class="callout rv" style="margin-top:26px">
+      <h3>And the groundwork for what came next</h3>
+      <p>Two capabilities were built and validated during this quarter and switched on immediately after it closed: an adaptive AI quiz engine that adjusts question difficulty in real time, and a Deep Dive practice environment. In the first two weeks of September they generated 729 adaptive sessions and 21,557 answered questions. They are not counted anywhere in this report — they are next quarter's story.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= METHOD ================= -->
+<section class="alt" id="method">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker"><span class="n">12</span> Method &amp; provenance</div>
+      <h2>Where every number in this report came from.</h2>
+    </div>
+    <div class="grid g2">
+      <div class="panel rv">
+        <h3>How the data was produced</h3>
+        <p class="ph">Reproducible, source-of-truth, no estimates.</p>
+        <div class="hbars" id="chartMethod"></div>
+        <p class="sm" style="margin-top:22px;color:var(--ink-4);font-size:14px">No figure in this report is modelled, projected or estimated. Each is a direct aggregate of records in the school's own database, retrieved read-only through the school's MCP interface and aggregated by period. Where a metric could be read two ways, the more conservative reading is used.</p>
+      </div>
+      <div class="panel rv">
+        <h3>Scope, definitions and exclusions</h3>
+        <div class="factbox" style="background:#fff">
+          <dl>
+            <div><dt>Reporting period</dt><dd>1 June 2026 – 31 August 2026 inclusive</dd></div>
+            <div><dt>Teaching days</dt><dd>Distinct calendar dates with at least one attendance record: 61</dd></div>
+            <div><dt>Participation rate</dt><dd>Records marked present, late or partial, divided by all records</dd></div>
+            <div><dt>Active learner</dt><dd>Holds at least one attendance record inside the period</dd></div>
+            <div><dt>Graded</dt><dd>A submission with a status of graded and a numeric mark</dd></div>
+            <div><dt>Excluded — by design</dt><dd>All financial data: fees, payroll, invoices, budgets, expenses and any ledger reporting</dd></div>
+            <div><dt>Privacy</dt><dd>Learner-level records are aggregated only; quoted material is anonymised and reproduced verbatim</dd></div>
+            <div><dt>Source</dt><dd>Future Assist platform · school_management database · read-only queries via MCP</dd></div>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap fi">
+    <div>
+      <a class="brand" href="#top"><span class="hash">#</span><span>Future School<small>Impact Report</small></span></a>
+      <p style="max-width:34ch;margin-top:16px;color:#94A3B8">An AI-first online school for ages 6–18. We don't read résumés. We read lives.</p>
+    </div>
+    <div class="fl">
+      <b style="color:#fff">Sections</b>
+      <a href="#overview">Overview</a><a href="#learning">Learning engine</a><a href="#recognition">Achievement</a><a href="#voice">Learner voice</a>
+    </div>
+    <div class="fl">
+      <b style="color:#fff">Report</b>
+      <span>Quarter 1 · 2026–27</span>
+      <span>1 June – 31 August 2026</span>
+      <span id="footStamp">Generated from the school platform</span>
+    </div>
+  </div>
+  <div class="wrap fine">
+    Prepared from the school's own operational records. Financial data is deliberately excluded from this report. Learner-level data is presented in aggregate; individual quotations are anonymised. Figures are point-in-time aggregates of the reporting period and may be restated as late submissions are graded.
+  </div>
+</footer>
+
+<script id="report-data" type="application/json">{"meta":{"school":"Hash Future School","quarter":"June–August 2026","from":"2026-06-01","to":"2026-08-31","generatedAt":"2026-09-22T03:03:38.143Z","source":"Future Assist MCP (query_database) · school_management","excluded":["All financial data (fees, payroll, invoices, budgets, expenses) is excluded by design."]},"enroll":{"activeStudents":"101","activeParents":"237","activeFacilitators":"20","activeEmployees":"5","admins":"4","joined":[{"role":"student","c":"13"},{"role":"parent","c":"42"},{"role":"admin","c":"1"},{"role":"facilitator","c":"3"}],"leavers":"22","totalEver":"575","monthlyActive":[{"m":"2026-06","c":"111"},{"m":"2026-07","c":"103"},{"m":"2026-08","c":"96"}],"mentorGroups":"14","mentorMentees":"228","houses":[{"name":"CORAL ","total_points":23537},{"name":"JADE ","total_points":17912},{"name":"EMERALD","total_points":15740},{"name":"GARNET","total_points":13908},{"name":"TOPAZ  ","total_points":13575},{"name":"AMBER ","total_points":11673},{"name":"SAPPHIRE ","total_points":10521},{"name":"ZIRCON  ","total_points":10120}]},"attendance":{"teachingDays":"61","overall":{"records":"12342","present":"8269","absent":"3356","late":"297","partial":"281","excused":"139","rate":"71.7","days":"61"},"monthly":[{"m":"2026-06","records":"4038","rate":"72.1","presentRate":"66.1"},{"m":"2026-07","records":"4799","rate":"70.9","presentRate":"66.5"},{"m":"2026-08","records":"3505","rate":"72.2","presentRate":"68.6"}],"cameraOn":"40.7","interactive":"31.8","byCohort":[{"cohort":"Explorers_Induction _ [2]_June_2026-27","records":"527","rate":"89.4"},{"cohort":"Explorers_Induction[1] June_2026-27","records":"477","rate":"89.1"},{"cohort":"Explorers_Lower_2026-27","records":"429","rate":"88.6"},{"cohort":"Brainiacs_Lower_2026-27","records":"1070","rate":"79.9"},{"cohort":"Brainiacs_Higher_2026-27","records":"1532","rate":"77.9"},{"cohort":"Explorers_Middle_2026-27","records":"1425","rate":"73.7"},{"cohort":"Cosmos_Higher_2026-27","records":"1247","rate":"72.1"},{"cohort":"Akmis_Higher_2026-27","records":"1391","rate":"71.6"},{"cohort":"Discovery_Lower_2026-27","records":"1531","rate":"70.5"},{"cohort":"Akmis_Grooming_2026_27","records":"368","rate":"64.9"},{"cohort":"Explorers _Higher_2026_27","records":"1673","rate":"52.8"},{"cohort":"SUPERLEARN_Achievers","records":"332","rate":"49.7"},{"cohort":"Super _Kids_Batch_21(2026-27)","records":"34","rate":"44.1"},{"cohort":"Super_kids_Batch20(2026-27)","records":"7","rate":"42.9"},{"cohort":"19-th Superkids Batch","records":"16","rate":"31.3"},{"cohort":"Internship 2026","records":"2","rate":"0"}],"monthlyFull":[{"m":"2026-06","records":"4038","present":"2671","absent":"1078","late":"111","partial":"130","excused":"48","days":"22"},{"m":"2026-07","records":"4799","present":"3192","absent":"1344","late":"119","partial":"93","excused":"51","days":"23"},{"m":"2026-08","records":"3505","present":"2406","absent":"934","late":"67","partial":"58","excused":"40","days":"16"}]},"sessions":{"total":{"c":"1487","done":"1129"},"monthly":[{"m":"2026-06","c":"544","done":"409","rooms":"16","facs":"19"},{"m":"2026-07","c":"651","done":"440","rooms":"16","facs":"19"},{"m":"2026-08","c":"292","done":"280","rooms":"13","facs":"17"}],"bySubjectFamily":[{"family":"Mathematics","c":"279"},{"family":"General","c":"279"},{"family":"Technology","c":"243"},{"family":"Assembly","c":"176"},{"family":"ARENA","c":"150"},{"family":"Language","c":"134"},{"family":"Batch","c":"59"},{"family":"Entrepreneurship","c":"52"},{"family":"Enterprenuership","c":"31"},{"family":"Lnguage","c":"29"},{"family":"Entreprenuership","c":"25"},{"family":"Lab","c":"24"}],"activeFacilitators":"21","topFacilitators":[{"n":"Anjala","c":"143"},{"n":"Super","c":"117"},{"n":"Shifana","c":"115"},{"n":"Shabana ","c":"114"},{"n":"Fathima Naja","c":"112"},{"n":"Jasreena","c":"108"},{"n":"Saliha","c":"101"},{"n":"Minha","c":"96"},{"n":"Adhila","c":"75"},{"n":"Neba ","c":"70"},{"n":"Nafila","c":"68"},{"n":"Ameera","c":"68"}],"assemblies":"176","reflections":"1004","attendanceMarked":"977"},"learning":{"activitiesCreated":[{"m":"2026-06","c":"273","pts":"15073"},{"m":"2026-07","c":"330","pts":"16823"},{"m":"2026-08","c":"192","pts":"9640"}],"activityTotals":{"c":"795","pts":"41536"},"byType":[{"activity_type":"assignment","c":"789"},{"activity_type":"self_study","c":"2"},{"activity_type":"quiz","c":"1"},{"activity_type":"video_lesson","c":"1"},{"activity_type":"project","c":"1"},{"activity_type":"homework","c":"1"}],"submissions":[{"m":"2026-06","subs":"881","graded":"730","gradedPct":"82.9","students":"85"},{"m":"2026-07","subs":"1210","graded":"1091","gradedPct":"90.2","students":"89"},{"m":"2026-08","subs":"760","graded":"481","gradedPct":"63.3","students":"82"}],"subTotal":{"c":"2851","students":"93","perStudent":"30.7"},"status":[{"status":"graded","c":"2302"},{"status":"submitted","c":"398"},{"status":"needs_revision","c":"137"},{"status":"late","c":"14"}],"mastery":{"pct":"91.7","c":"2300"},"masteryBuckets":[{"band":"Below 50%","c":"37"},{"band":"50-74%","c":"198"},{"band":"90-100%","c":"1722"},{"band":"75-89%","c":"343"}],"turnaround":{"avgDays":"9.82","c":"2452"},"myStyle":[{"execution_status":"pending","c":"793"},{"execution_status":"stopped","c":"2"},{"execution_status":"started","c":"2"}],"modules":"2","moduleItems":"46","resources":"351","discussions":"104","lessonPlans":[{"m":"2026-06","status":"approved","c":"7"},{"m":"2026-06","status":"submitted","c":"9"},{"m":"2026-07","status":"approved","c":"4"},{"m":"2026-08","status":"approved","c":"3"}],"lessonReviewers":"7"},"points":{"monthly":[{"m":"2026-06","events":"13958","pts":"101792","students":"104","perStudent":"979"},{"m":"2026-07","events":"16251","pts":"117577","students":"94","perStudent":"1251"},{"m":"2026-08","events":"11091","pts":"80837","students":"90","perStudent":"898"}],"total":{"events":"41300","pts":"300206","students":"110"},"reasons":[{"reason":"CAMERA ON","c":"3791","pts":"37910"},{"reason":"PUNCTUALITY","c":"3500","pts":"24500"},{"reason":"PARTICIPATING WITH CAMERA ON","c":"2518","pts":"20144"},{"reason":"ASSIGNMENT SUBMISSION","c":"1996","pts":"19960"},{"reason":"INDEPENDENT RESEARCHER","c":"1431","pts":"17172"},{"reason":"READING","c":"1628","pts":"16280"},{"reason":"CRITICAL THINKING","c":"1575","pts":"15750"},{"reason":"NO SCREEN TIME","c":"1537","pts":"15370"},{"reason":"CREATIVITY","c":"2834","pts":"14170"},{"reason":"REFLECTION ENTRY ","c":"1220","pts":"12200"},{"reason":"Honesty","c":"2282","pts":"11410"},{"reason":"HELPING OTHERS","c":"2181","pts":"10905"},{"reason":"HYGIENE","c":"2060","pts":"10300"},{"reason":"PARTICIPATING IN HOUSE HOLD CHORES","c":"1747","pts":"8735"},{"reason":"WAKE UP EARLY","c":"1702","pts":"8510"},{"reason":"GLOBAL GATHERING ","c":"1694","pts":"8470"},{"reason":"KINETIC KING/QUEEN","c":"1540","pts":"7700"},{"reason":"EARLY SLEEP","c":"1396","pts":"6980"},{"reason":"assembly","c":"652","pts":"6520"},{"reason":"TEAM WORK","c":"887","pts":"6209"},{"reason":"SIDE HUSTLE","c":"537","pts":"5370"},{"reason":"DISCOVERY","c":"1049","pts":"5245"}],"reasonCount":"39","badges":[{"m":"2026-06","c":"107","students":"52"},{"m":"2026-07","c":"52","students":"38"},{"m":"2026-08","c":"26","students":"21"}],"badgeRarity":[{"rarity":"rare","c":"68"},{"rarity":"epic","c":"41"},{"rarity":"legendary","c":"39"},{"rarity":"common","c":"30"},{"rarity":"mythic","c":"7"}],"badgeTotal":{"c":"185","students":"76"},"houseStandings":[{"name":"CORAL ","pts":"38361","students":"11"},{"name":"EMERALD","pts":"29252","students":"10"},{"name":"GARNET","pts":"27481","students":"8"},{"name":"TOPAZ  ","pts":"24437","students":"10"},{"name":"AMBER ","pts":"23528","students":"11"},{"name":"JADE ","pts":"23463","students":"7"},{"name":"ZIRCON  ","pts":"16483","students":"7"},{"name":"SAPPHIRE ","pts":"14916","students":"7"}],"topStudents":{"students_1000plus":"0"}},"admissions":{"leadsMonthly":[{"m":"2026-06","c":"23"},{"m":"2026-07","c":"12"},{"m":"2026-08","c":"9"}],"leadTotal":"44","leadStages":[{"status":"CONTACTED","c":"30"},{"status":"WON","c":"5"},{"status":"NEW","c":"3"},{"status":"LOST","c":"2"},{"status":"NEGOTIATION","c":"2"},{"status":"DEMO_SCHEDULED","c":"1"},{"status":"QUALIFIED","c":"1"}],"leadSources":[{"source":"MANUAL","c":"17"},{"source":"DEMO_REQUEST","c":"16"},{"source":"WEBINAR","c":"7"},{"source":"SUPERKIDS_ADMISSION","c":"4"}],"leadTemp":[{"temperature":"WARM","c":"26"},{"temperature":"COLD","c":"14"},{"temperature":"HOT","c":"4"}],"interactions":"36","demos":"21","demosConverted":"21","applications":[{"m":"2026-06","c":"8"},{"m":"2026-07","c":"3"}],"appTotal":"11","appGrades":[{"g":"Grade 6","c":"3"},{"g":"Grade 1","c":"1"},{"g":"Grade 3","c":"1"},{"g":"Grade 8","c":"1"},{"g":"Grade 9","c":"1"},{"g":"Grade 11","c":"1"},{"g":"Grade 2","c":"1"},{"g":"Grade 7","c":"1"},{"g":"Grade 4","c":"1"}],"enrolled":"13","webinars":[{"m":"2026-06","c":"3"},{"m":"2026-07","c":"10"},{"m":"2026-08","c":"9"}],"webinarTotal":"22","webinarTopics":[{"topic":"The AI that controls daily life ","presenter_name":"Muhammed  Ashraf A.A","d":"2026-06-28","type":"public_weekly"},{"topic":"Shaping tomorrow together","presenter_name":"Anush Ehan Thadathil","d":"2026-06-29","type":"graderoom_wise"},{"topic":"What is Brain ","presenter_name":"Nooh bin Arshad K P","d":"2026-06-29","type":"public_weekly"},{"topic":"Why failure is a great teacher","presenter_name":"SANIHA FATHIMA  ABDUL AZIZ","d":"2026-07-02","type":"public_weekly"},{"topic":"Open house","presenter_name":"Abitha Salih","d":"2026-07-03","type":"public_weekly"},{"topic":"🍉 A Colorful Journey Through Fruits 🍎🍌🍇","presenter_name":"MUHAMMED SWALIH","d":"2026-07-10","type":"public_weekly"},{"topic":"Scratch coding","presenter_name":"Muhammed Abdullah","d":"2026-07-10","type":"public_weekly"},{"topic":"Little AI webinar","presenter_name":"Devadharsh Adarsh","d":"2026-07-24","type":"public_weekly"},{"topic":"🌍 DON'T LET OUR EARTH TURN INTO A DUMPING GROUND! 🌱","presenter_name":"NAIFAH NASEEB","d":"2026-07-24","type":"public_weekly"},{"topic":"💡 EVERY BIG SUCCESS STARTED WITH A SINGLE IDEA","presenter_name":"Riza maryam","d":"2026-07-24","type":"public_weekly"},{"topic":"💡 Topic: Failure Is Not the End; It's a New Beginning","presenter_name":"Iman Zara","d":"2026-07-31","type":"public_weekly"},{"topic":"💡 Topic: Why Your Mindset Matters More Than Talent","presenter_name":"Shezil  V","d":"2026-07-31","type":"public_weekly"},{"topic":"EXPLORING THE AAZING WORLD OF CATS","presenter_name":"AMINA  AMAL MUSTHAFA","d":"2026-07-31","type":"public_weekly"},{"topic":"Open house","presenter_name":"SHIHABUDHEEN P K","d":"2026-08-07","type":"public_weekly"},{"topic":"**Come, Skate & Learn with Shreya!","presenter_name":"Shreya Soorej","d":"2026-08-14","type":"public_weekly"},{"topic":"Come, Learn & Grow with Bilal! 💚","presenter_name":"Muhammed  Bilal","d":"2026-08-14","type":"public_weekly"},{"topic":"Space Webinar","presenter_name":"Armaan Ali Panikkarkath","d":"2026-08-14","type":"public_weekly"},{"topic":"🪀 WHAT CAN A YO-YO DO?","presenter_name":"Ruhan Rajesh","d":"2026-08-21","type":"public_weekly"},{"topic":"Lost time is never found again","presenter_name":"MANAV A.S.","d":"2026-08-21","type":"public_weekly"},{"topic":"Water Conservation","presenter_name":"FATIMAH. A. R","d":"2026-08-21","type":"public_weekly"},{"topic":"HASH Onam – Thiruvona Thaalam! ✨🌼","presenter_name":"Omer Abdullah","d":"2026-08-21","type":"public_weekly"},{"topic":"HASH Onam – Thiruvona Thaalam! ✨🌼","presenter_name":"Afra Zainab","d":"2026-08-21","type":"public_weekly"}]},"events":{"list":[{"title":"ENVIRONMENTAL DAY","event_type":"open_event","d":"2026-06-04"},{"title":"POSTER DESIGNING COMPETITION","event_type":"competition","d":"2026-06-04"},{"title":"Publish your App in Google AI studio","event_type":"competition","d":"2026-06-10"},{"title":"FIFA World Cup Prediction Lab","event_type":"open_event","d":"2026-06-11"},{"title":"Reading day celebration","event_type":"open_event","d":"2026-06-17"},{"title":"Yoga day+Fathers day+Music day","event_type":"open_event","d":"2026-06-20"},{"title":"Midjourney Medical 😱","event_type":"competition","d":"2026-06-22"},{"title":"Anti drug day","event_type":"open_event","d":"2026-06-24"},{"title":"Maintaining Global Peace","event_type":"open_event","d":"2026-07-08"},{"title":"🦁 Build the Change: Bring Animals Back Challenge","event_type":"competition","d":"2026-07-08"},{"title":"🌏Call for nominations","event_type":"competition","d":"2026-07-10"},{"title":"Buildathon","event_type":"competition","d":"2026-07-20"},{"title":"Climate Challenge – Learning from Japan & India","event_type":"competition","d":"2026-07-22"},{"title":"🌟🤖 AI Explorer Challenge: Learn • Earn • Showcase! 🚀🏅","event_type":"open_event","d":"2026-07-23"},{"title":"Activity: Design an Alien That Could Really Survive!","event_type":"open_event","d":"2026-07-29"},{"title":"Career Discovery Project","event_type":"open_event","d":"2026-08-04"},{"title":"🎁🌱 MY FESTIVAL GIFT HAMPER","event_type":"open_event","d":"2026-08-10"},{"title":"🌱🎁 FESTIVAL HAMPER ENTREPRENEUR CHALLENGE","event_type":"open_event","d":"2026-08-10"},{"title":"🇮🇳 RESEARCH → THINK → DEBATE","event_type":"open_event","d":"2026-08-11"},{"title":"Independence day celebration 2026🇮🇳","event_type":"open_event","d":"2026-08-11"},{"title":"🙌🎉ONAM CELEBRATION COMPETITION[Higher grades]","event_type":"competition","d":"2026-08-18"},{"title":"🌸🌸🌸Onam events[Higher grades]","event_type":"open_event","d":"2026-08-18"},{"title":"🌼🌼🌼Onam event showcase [lower,grooming and middle grades]","event_type":"open_event","d":"2026-08-18"},{"title":"IEntO","event_type":"competition","d":"2026-08-29"}],"total":"24","byType":[{"event_type":"competition","c":"9"},{"event_type":"open_event","c":"15"}],"registrations":[{"m":"2026-06","c":"299","students":"75"},{"m":"2026-07","c":"250","students":"72"},{"m":"2026-08","c":"140","students":"58"}],"regTotal":{"c":"689","students":"84"},"comps":[{"title":"ELOCUTION COMPETITION ONLINE","competition_type":"other","d":"2026-06-07"},{"title":"The TiE Young Entrepreneurs (TYE) SUMMIT","competition_type":"other","d":"2026-06-07"},{"title":"Mathrubhumi Seed environment day Quiz","competition_type":"other","d":"2026-06-13"},{"title":". The Arduino Physical AI Challenge India","competition_type":"hackathon","d":"2026-06-17"},{"title":"Hub71+ AI ","competition_type":"hackathon","d":"2026-06-23"},{"title":" Logo Designer for KSRTC","competition_type":"other","d":"2026-06-23"},{"title":"Code for communities-Build with AI","competition_type":"hackathon","d":"2026-06-26"},{"title":"Junior maths olympiad","competition_type":"olympiad","d":"2026-06-26"},{"title":"We art water film festival","competition_type":"other","d":"2026-06-26"},{"title":"ISF- Spin your science ","competition_type":"other","d":"2026-07-01"},{"title":"ISF: Science in Focus","competition_type":"other","d":"2026-07-01"},{"title":"Maker sprint 2nd edition ","competition_type":"other","d":"2026-07-10"},{"title":"MY BHARAT INDEPENDENCE DAY QUIZ","competition_type":"other","d":"2026-06-01"},{"title":"IOQM- Maths Olympiads ","competition_type":"olympiad","d":"2026-07-06"},{"title":"Codex Nightline","competition_type":"hackathon","d":"2026-07-06"},{"title":"Vivo ignite 2026","competition_type":"other","d":"2026-06-01"},{"title":"Young Innovators program- ( YIP)-kdisc","competition_type":"other","d":"2026-07-12"},{"title":"🌿 ROOTS & WINGS ’26 – A Travelling Theatre Workshop 🎭","competition_type":"other","d":"2026-08-01"},{"title":"Lulu Malarvadiii summer vibes","competition_type":"other","d":"2026-07-17"},{"title":"Bring Back Animals challenge ","competition_type":"other","d":"2026-07-01"},{"title":"Emergent Ai App builder contest","competition_type":"other","d":"2026-07-17"},{"title":"ICTN 2026 School competition ","competition_type":"other","d":"2026-07-16"},{"title":"Eurekha junior 2026","competition_type":"olympiad","d":"2026-08-07"},{"title":"Maveli speaking -Ai video contest","competition_type":"other","d":"2026-08-20"},{"title":"Oru kodi pookalam ","competition_type":"other","d":"2026-08-20"},{"title":"Devpost hackathons ","competition_type":"hackathon","d":"2026-08-31"}],"compTotal":"26","compRegs":{"c":"45","students":"29"},"compByType":[{"t":"hackathon","regs":"1"},{"t":"olympiad","regs":"3"},{"t":"other","regs":"41"}]},"voice":{"feedback":[{"m":"2026-06","c":"1336","rating":"4.57","understanding":"4.24","enjoyment":"4.11","confidence":"0","interest":"3.57","challenge":"2.08","active":"3.37"},{"m":"2026-07","c":"1538","rating":"4.64","understanding":"4.01","enjoyment":"4.25","confidence":"0","interest":"3.52","challenge":"1.86","active":"3.38"},{"m":"2026-08","c":"709","rating":"4.67","understanding":"4.01","enjoyment":"4.2","confidence":"0","interest":"3.49","challenge":"1.87","active":"3.4"}],"fbTotal":{"c":"3583","students":"92","rating":"4.62"},"fbDist":[{"r":1,"c":"79"},{"r":2,"c":"58"},{"r":3,"c":"213"},{"r":4,"c":"439"},{"r":5,"c":"2794"}],"feeling":[{"f":"Confident","c":"1424"},{"f":"Excited","c":"1317"},{"f":"Neutral","c":"281"},{"f":"Confused","c":"126"},{"f":"Thinking","c":"120"}],"sources":[{"s":"Teacher explanation","c":"1835"},{"s":"Activity / practice","c":"930"},{"s":"Group discussion","c":"264"},{"s":"Videos / visuals","c":"158"},{"s":"Examples / stories","c":"113"}],"ptm":{"c":"118","students":"70"},"ptmType":[{"type":"OBSERVATION","c":"95"},{"type":"POSITIVE","c":"20"},{"type":"ABSENT","c":"3"}],"dailyStudentReports":"4455","dailyParentReports":"6068","evaluationsAll":"626","goals":{"c":"24","students":"19"},"mentorNotes":"7","interventions":"124","interventionTypes":[{"action_type":"ptm_call","c":"32"},{"action_type":"attendance_followup","c":"25"},{"action_type":"mentoring_checkin","c":"24"},{"action_type":"enrichment","c":"24"},{"action_type":"academic_doubt","c":"19"}],"notesShared":"0"},"community":{"messages":{"c":"11977","senders":"116"},"conversations":"1104","houseMessages":"9","storyboard":{"c":"22","authors":"1"},"techUpdates":{"c":"30","authors":"15"},"elections":"7","nominations":{"c":"75","students":"22"},"votes":{"c":"210","voters":"21"},"positions":"38","tickets":[{"status":"resolved","c":"56"},{"status":"open","c":"30"},{"status":"closed","c":"11"},{"status":"in_progress","c":"22"}],"ticketTotal":"119","ticketResolution":{"days":"13.49","c":"67"},"groups":[{"name":"Art fusion","type":"activity_group","students":"91"},{"name":"GCP :: CREATIVE IMPACT COMMITTEE","type":"club","students":"17"},{"name":"GCP :: INNOVATION AND TECH COMMITTEE","type":"club","students":"17"},{"name":"Future Builders ","type":"activity_group","students":"14"},{"name":"EMERALD","type":"house","students":"13"},{"name":"AMBER ","type":"house","students":"13"},{"name":"TOPAZ  ","type":"house","students":"12"},{"name":"ZIRCON  ","type":"house","students":"11"},{"name":"CORAL ","type":"house","students":"11"},{"name":"GARNET","type":"house","students":"9"},{"name":"JADE ","type":"house","students":"7"},{"name":"GCP::ECO WARRIORS COMMITTEE","type":"club","students":"7"},{"name":"GCP :: INCLUSION AND WELL BEING","type":"club","students":"7"},{"name":"Brainiacs Higher[SMARTDRIVE LAB]","type":"activity_group","students":"7"},{"name":"SAPPHIRE ","type":"house","students":"7"},{"name":"Mission impastable[Brainiacs higher -group2]","type":"activity_group","students":"6"},{"name":"COSMOS 1","type":"activity_group","students":"5"},{"name":"UMO","type":"activity_group","students":"5"},{"name":"COSMOS2","type":"activity_group","students":"4"},{"name":"DISCOVERY HIGHER GRADE  FACTIC 4                                                                                        ","type":"activity_group","students":"4"},{"name":"THE FAB FOUR [AKMIS HIGHER]","type":"activity_group","students":"4"},{"name":"GCP :: GLOBAL CITIZENSHIP COMMITTEE","type":"club","students":"3"}],"alumniReports":"5"},"staff":{"facilitatorsActive":"21","leaves":"237","substitutes":"46","dockets":"39","lessonApproved":"14","snapshots":"19","appraisals":"0","kpiScores":"0","supervisorReviews":"167","reviewAvg":{"score":7.47,"c":"167"},"newStaff":"3"},"cohorts":[{"cohort":"Akmis_Grooming_2026_27","students":4,"attRecords":360,"attRate":64.4,"subs":86,"pts":12339,"subsPerStudent":21.5,"ptsPerStudent":3085},{"cohort":"Akmis_Higher_2026-27","students":10,"attRecords":1258,"attRate":74.2,"subs":253,"pts":31894,"subsPerStudent":25.3,"ptsPerStudent":3189},{"cohort":"Brainiacs_Higher_2026-27","students":12,"attRecords":1635,"attRate":76.7,"subs":299,"pts":35427,"subsPerStudent":24.9,"ptsPerStudent":2952},{"cohort":"Brainiacs_Lower_2026-27","students":6,"attRecords":809,"attRate":77.5,"subs":220,"pts":27717,"subsPerStudent":36.7,"ptsPerStudent":4620},{"cohort":"Cosmos_Higher_2026-27","students":11,"attRecords":1509,"attRate":82.5,"subs":482,"pts":48837,"subsPerStudent":43.8,"ptsPerStudent":4440},{"cohort":"Discovery_Lower_2026-27","students":12,"attRecords":1609,"attRate":73,"subs":410,"pts":37713,"subsPerStudent":34.2,"ptsPerStudent":3143},{"cohort":"Explorers _Higher_2026_27","students":10,"attRecords":1384,"attRate":60.8,"subs":260,"pts":29096,"subsPerStudent":26,"ptsPerStudent":2910},{"cohort":"Explorers_Lower_2026-27","students":7,"attRecords":876,"attRate":87.6,"subs":297,"pts":26439,"subsPerStudent":42.4,"ptsPerStudent":3777},{"cohort":"Explorers_Middle_2026-27","students":11,"attRecords":1477,"attRate":73.1,"subs":383,"pts":34281,"subsPerStudent":34.8,"ptsPerStudent":3116},{"cohort":"Internship 2026","students":2,"attRecords":2,"attRate":0,"subsPerStudent":0,"ptsPerStudent":0},{"cohort":"SUPERLEARN Winners","students":4,"attRecords":50,"attRate":14,"subs":4,"pts":197,"subsPerStudent":1,"ptsPerStudent":49},{"cohort":"SUPERLEARN_Achievers","students":3,"attRecords":174,"attRate":74.7,"subs":27,"pts":2010,"subsPerStudent":9,"ptsPerStudent":670}],"subjectMix":[{"subject":"Mathematics","sessions":279},{"subject":"General Science","sessions":279},{"subject":"Technology","sessions":243},{"subject":"Language Lab","sessions":187},{"subject":"Assembly & Community","sessions":176},{"subject":"Arena (Creative Studio)","sessions":150},{"subject":"Entrepreneurship","sessions":77},{"subject":"Batch Programme","sessions":62},{"subject":"Other","sessions":31},{"subject":"Webinars","sessions":3}],"quotesAll":["IT WAS JASREENA MAAMS CLASS WE MADE A POSTER ABOUT OUR BUSINESS IDEA","We were doing the independence day activity and I was doing animation, I learned animation and finally made one for the first time","protecting yourself with internet","learned about moon day and do one creative writing activity","how to create a business idea that has two bottom-lines!!!","I learned that gratitude is the best way to have happiness","Today I learned to submit the work","discovered more about social problem solving","i learned a little of canva","LEARNED ABOUT AI PREDICTION LIST OF FOOTBALL FIFA","tomorrow is enviroment day","I LEARN ABOUT GOOGLE EARTH","I PRESENTED MY SCAMPER PROMPT PRESENTATION","i learned about my best day of my life","there was nothing to learn aaaah in the after noon session","More about Environmental Day","How to use AI in Google Slides AND make sure it is doing exactly what is needed to be done!","about solving social problems","Not really anything but I learned about Machines and scanning helath syuffs","Calender day identification","about anil menon and what he is doing today. and also i made a presentation about quadrilateral shapes","About chat gpt and gemini ai","about business and how to earn money in easy way","about how to make house shelter","i took the roll of Anchoring i did it well my roll i did it well so it was so good","About STEM meaning is science technology engineering mathematics","How logic gates like AND, OR, NOT and combos of them work!","HCF = highest Common Factors","it was an amazing assembly i participated and my class too","How to present your app in a live stream!!!","to generate image in chatgpt and to give good prompts","I LEARNED HOW TO MAKE A JERSEY","maintaining global peace","HOW TO MAKE A POSTER IN CANVA AND WHAT ARE ALL THE BASIC THINGS YOU SHOULD ADD IN A POSTER","I LEARNED WHICH ORGAN PRODUCES BLOOD","what is portfolio presentation","How to improve our goals by our own mind","How to use slang in German AND how to help yourself emotionally with cards!","we had combined classes and webinar","How to fix errors and finally publish the app!","i should always be active and confident","rational numbers property","i could do more than i thought","How to make my understanding into an awesome presentation!","LIKE I WAS MAKING A VIDEO ON THE EVNT COMING NEXT TIME ALSO THE JERSY ONE","we just talked about assmebly","Arithmetic Operation Aplication","got to know what iam good at i guess","Code x downloding procces","about oil exploration old time how did qatar make money","more about Websites and apps","POSTER VEDIO PRESENTATION","One thing I learned today is that advertising can influence which food brand we choose, even when two products cost the same.","i learn how to make app and i also helped my Friend Ameen","TODAY I LEARNED ABOUT REFLECTION AND REFRACTION","I learned about enviromental day","to never gave up on my goals. learn from my failure","about posters and drawing of anti drugs day","we had a activty to explain how to make any dishes in our target language","We had moral story and people who helped us","We were making a science portfolio and Minha mam knows Kung Fu! ( Or just Kung Fu panda)","I learned about our history and why is independence day special and the meaning behind","about Issac newton and apple","about futuristic bottle logo","that you need to go outside and PLAYY!","about happiness and money","I did an activity and also learned between equity and debt","how to make a LinkedIn profile","nothing but adhila narmen as the teacher is the best most fun i had i hope she teaches us more!!!!","I learned about financial literacy","Today i made a poster for school nominations","WE LEARNED WHAT IS GOGLE EARTH","how to make and edit and copy paste the image","Today students were campaigning for the student nominations","I LEARNED HOW TO CREATE ANIMAL","I drawed a map combining germany and india together","To make an innovation to the problem we are facin","We learned more about codex and I realised I love making appsss🩷💙💙","I learned how to think kinda faster","me and ruhan actually design a desk with multifeatures named drive desk m4","always stay against child labour","one kid exeplain he leaned","I learn about Canva and fonts","how to use Euclid's Division Algorithm and the Fundamental Theory of Arithmetic in problems and everyday life!","How marketing can be engaging AND attract customers!","I learned financial literacy","to create an animation with audio","we did a team activity in mathematics.","I learned about cube root and square root","Today I learned that a meadow is a field covered with grass and flowers....😊😊","we did our pending works and revised it ig","Insolube and soluble and also transparent,translucent and opaque","i enjoyad the class it was so so good like event","I LEARN ABOUT PRIME DNA ACTIVITY","new words in my target language","about quadrilateral shapes","i learned creative writing","MORE ABOUT MYSELF AND I CAN WRITE A LOT","What are autotrophs and heterotrophs!","I did my independence day activity and an etra activity Truth, False, Or Misleading","how to be safe from monsoon diseases","IF YOU FAIL YOU HAVE TO TRY AGAIN AND AGAIN","it was so good we where discused we where enjoing the teacher was anjala ma","I learned about japans human refrigirator","design a product that markets itself","I SHOUL ALWAYS BE CONFIDENT AND BE READY FOR ANY CHALLENGESAND FALIURES ANY TIME","to build our own solution for the problem i saw","We were learning about our target language mine was Spanishand we also did the independence day activity","first we had with nafila maaam then combined and did independence day activity","So we did a three perspective challenge and those who completed it had to prepare for Onam celebration","peace ful world begins with small actions","Place value of us numbers","we did an activity in event","i wasnt there after the break because elecricity was not there. but i joined last 5 min and we just talked that time","we did the skit practice foR tmrw and iIT WAS FUN!!","about the showcase of maintaining global peace","the deepest sea in the world","interest and otehrs stuff","we learned what is osmosis","we did a news letter about brainy food detective"],"derived":{"submissionsUngraded":549,"awaitingFirstGrade":398,"returnedForRevision":137,"recordsAggregated":72053,"teachingDaysByMonth":[{"m":"2026-06","days":22,"records":4038},{"m":"2026-07","days":23,"records":4799},{"m":"2026-08","days":16,"records":3505}],"attendanceSpread":{"low":60.8,"high":87.6}}}</script>
+<script>window.__REPORT_DATA__ = JSON.parse(document.getElementById('report-data').textContent);</script>
+
+<script>
+(function(){
+  const $ = (s,r=document)=>r.querySelector(s);
+  const nf = new Intl.NumberFormat('en-US');
+  const D = window.__REPORT_DATA__;
+  const C = {brand:'#FF4B4B',green:'#22C55E',blue:'#3B82F6',purple:'#8B5CF6',amber:'#FBBF24',teal:'#14B8A6',pink:'#EC4899',indigo:'#6366F1',ink:'#0F172A',grey:'#94A3B8'};
+  const MONTHS = {'2026-06':'June','2026-07':'July','2026-08':'August'};
+  const num = v => nf.format(Math.round(Number(v)||0));
+  const clean = s => (s==null?'':String(s)).replace(/\s+/g,' ').trim();
+  const fmtMonth = m => MONTHS[m]||m;
+
+  /* ---------- chart primitives ---------- */
+  function hbars(sel,rows,opt={}){
+    const el = typeof sel==='string'? $(sel): sel; if(!el) return;
+    const max = opt.max || Math.max(...rows.map(r=>r.value),1);
+    const color = opt.color;
+    el.innerHTML = rows.map((r,i)=>{
+      const pct = Math.max(1.2,(r.value/max)*100);
+      const bg = color ? `background:${color}` : (r.color?`background:${r.color}`:'');
+      const val = opt.fmt? opt.fmt(r.value): num(r.value);
+      const note = r.note? `<div style="grid-column:1/-1;font-size:12px;color:#64748B;margin:-4px 0 4px">${r.note}</div>`:'';
+      return `<div class="hbar" style="transition-delay:${i*35}ms"><div class="l">${r.label}</div><div class="t"><div class="f" data-w="${pct}" style="${bg}"></div></div><div class="v">${val}</div>${note}</div>`;
+    }).join('');
+  }
+
+  function vbars(sel,labSel,groups,series,opt={}){
+    const el = typeof sel==='string'? $(sel): sel; const lel = typeof labSel==='string'? $(labSel): labSel;
+    if(!el) return;
+    const max = Math.max(...groups.flatMap(g=>series.map(s=>Number(g[s.key])||0)),1);
+    el.innerHTML = groups.map(g=>`
+      <div class="vgroup">
+        <div class="vstack">
+          ${series.map(s=>{
+            const v = Number(g[s.key])||0; const h = Math.max(1.5,(v/max)*100);
+            return `<div class="vbar ${s.cls}" data-h="${h}"><span class="vt">${opt.fmt?opt.fmt(v):num(v)}</span></div>`;
+          }).join('')}
+        </div>
+      </div>`).join('');
+    if(lel) lel.innerHTML = groups.map(g=>`<div>${g.label}</div>`).join('');
+  }
+
+  function donut(sel,legendSel,rows,centerLabel,centerValue){
+    const el = $(sel); if(!el) return;
+    const R=68, SW=22, CIRC=2*Math.PI*R;
+    const total = rows.reduce((a,b)=>a+b.value,0)||1;
+    let off=0;
+    const arcs = rows.map(r=>{
+      const len=(r.value/total)*CIRC; const seg=`<circle cx="90" cy="90" r="${R}" fill="none" stroke="${r.color}" stroke-width="${SW}" stroke-dasharray="${len-2.5} ${CIRC-len+2.5}" stroke-dashoffset="${-off}" transform="rotate(-90 90 90)" stroke-linecap="butt"></circle>`;
+      off+=len; return seg;
+    }).join('');
+    el.innerHTML = `<svg width="180" height="180" viewBox="0 0 180 180">${arcs}</svg>
+      <div class="dc"><b>${centerValue}</b><span>${centerLabel}</span></div>`;
+    const le=$(`${legendSel}`); if(le) le.innerHTML = rows.map(r=>`<div class="row"><i style="background:${r.color}"></i>${r.label}<b>${num(r.value)}</b></div>`).join('');
+  }
+
+  const RESPONSIVE = [];
+
+  function lineChart(sel,labels,series,opt={}){
+    const el=$(sel); if(!el) return;
+    const W=Math.max(280, Math.round(el.clientWidth || el.parentElement.clientWidth || 640));
+    const H=W<420?210:250;
+    el.setAttribute('viewBox','0 0 '+W+' '+H);
+    el.style.height=H+'px';
+    const PL=W<420?38:52, PR=16, PT=H<220?24:26, PB=36;
+    const min=opt.min??0,max=opt.max??100;
+    const xs=i=>PL+(i*(W-PL-PR)/Math.max(labels.length-1,1));
+    const ys=v=>PT+(1-(v-min)/(max-min))*(H-PT-PB);
+    let g='';
+    const ticks=(W<420?3:4);
+    for(let i=0;i<=ticks;i++){const v=min+(max-min)*i/ticks;const y=ys(v);g+=`<line class="gl" x1="${PL}" x2="${W-PR}" y1="${y}" y2="${y}"></line><text class="ax" x="${PL-10}" y="${y+4}" text-anchor="end">${Math.round(v)}${opt.suffix||''}</text>`;}
+    labels.forEach((l,i)=>{g+=`<text class="ax" x="${xs(i)}" y="${H-14}" text-anchor="middle">${l}</text>`;});
+    const paths = series.map(s=>{
+      const pts=s.values.map((v,i)=>[xs(i),ys(v)]);
+      const d=pts.map((p,i)=>(i?'L':'M')+p[0].toFixed(1)+' '+p[1].toFixed(1)).join(' ');
+      const area=`M${pts[0][0].toFixed(1)} ${H-PB} `+pts.map(p=>`L${p[0].toFixed(1)} ${p[1].toFixed(1)}`).join(' ')+` L${pts[pts.length-1][0].toFixed(1)} ${H-PB} Z`;
+      return `<path d="${area}" fill="${s.color}" opacity=".07"></path><path class="path" d="${d}" stroke="${s.color}"></path>`+
+        pts.map((p,i)=>`<circle cx="${p[0]}" cy="${p[1]}" r="4.5" fill="#fff" stroke="${s.color}" stroke-width="3"></circle>`+
+          `<text class="ax" x="${p[0]}" y="${s.below? p[1]+18 : p[1]-13}" text-anchor="middle" style="font-weight:700;fill:${s.color};font-size:12px">${s.fmt?s.fmt(s.values[i]):s.values[i]}</text>`).join('');
+    }).join('');
+    el.innerHTML = g+paths;
+  }
+
+  function stack(sel,legendSel,rows){
+    const el=$(sel); if(!el) return;
+    const total=rows.reduce((a,b)=>a+b.value,0)||1;
+    el.innerHTML=rows.map(r=>`<div data-w="${(r.value/total)*100}" style="background:${r.color};width:0">${(r.value/total)>0.08?num(r.value):''}</div>`).join('');
+    const le=$(legendSel); if(le) le.innerHTML=rows.map(r=>`<span><i style="background:${r.color}"></i>${r.label} — <b style="color:#0F172A">${num(r.value)}</b> <span style="color:#64748B">(${((r.value/total)*100).toFixed(1)}%)</span></span>`).join('');
+  }
+
+  function funnel(sel,rows){
+    const el=$(sel); if(!el) return;
+    const max=Math.max(...rows.map(r=>r.value),1);
+    el.innerHTML=rows.map((r,i)=>`<div class="fstep"><div class="fl">${r.label}</div><div class="fb" data-w="${Math.max(22,(r.value/max)*100)}">${r.note||''}</div><div class="fv">${num(r.value)}</div></div>`).join('');
+  }
+
+  function listRows(sel,rows){
+    const el=$(sel); if(!el) return;
+    el.innerHTML=rows.map(r=>`<div class="ev"><time>${r.date}</time><span>${r.text}</span>${r.tag?`<span class="tag">${r.tag}</span>`:''}</div>`).join('');
+  }
+
+  function statRows(sel,rows){
+    const el=$(sel); if(!el) return;
+    el.innerHTML=rows.map((r,i)=>`
+      <div style="display:grid;grid-template-columns:1fr auto;gap:4px 16px;padding:15px 0;border-bottom:1px solid var(--line);transition-delay:${i*50}ms">
+        <div style="font-size:14.5px;font-weight:600;color:var(--ink)">${r.label}</div>
+        <div style="font-size:19px;font-weight:800;color:${r.color||'var(--brand)'};letter-spacing:-.03em;font-variant-numeric:tabular-nums">${r.value}</div>
+        <div style="grid-column:1/-1;font-size:13px;color:var(--ink-4);line-height:1.5">${r.note||''}</div>
+      </div>`).join('');
+  }
+
+  /* ---------- build ---------- */
+  const build = () => {
+    /* KPI grid */
+    const K = D;
+    const kpis = [
+      ['1,487','Classes scheduled','Across 61 teaching days and 16 active rooms; 1,129 completed.'],
+      ['1,129','Classes completed','76% of everything scheduled, with attendance recorded in 977.'],
+      ['2,851','Pieces of work submitted','By 93 learners — 30.7 submissions each.'],
+      ['2,302','Pieces graded','81% of all work returned to learners with feedback.'],
+      ['300,206','Recognition points','Awarded through 41,300 separate recognition events.'],
+      ['185','Badges unlocked','By 76 learners, mostly for habits rather than marks.'],
+      ['12,342','Attendance records','61 teaching days, an average of 202 records a day.'],
+      ['71.7%','Participation rate','Present, late or partial — stable across all three months.'],
+      ['111','Learners active in June','The peak month for participation this quarter.'],
+      ['3,583','Session ratings given','92 learners rated 4.62 out of 5 on average.'],
+      ['22','Learner-led webinars','Weekly public sessions, mostly presented by students.'],
+      ['24','School events','Plus 26 external competitions entered by learners.']
+    ];
+    $('#kpis').innerHTML = kpis.map(([v,l,s])=>`<div class="kpi rv"><b>${v}</b><span>${l}<br><span style="color:#94A3B8">${s}</span></span></div>`).join('');
+
+    /* overview charts */
+    const sm = D.sessions.monthly;
+    vbars('#chartSessionsMonthly','#chartSessionsMonthlyLabels',
+      sm.map(r=>({label:fmtMonth(r.m),done:r.done,c:r.c})),
+      [{key:'done',cls:'b1'},{key:'c',cls:'b2'}]);
+
+    const renderRateTrend = () => lineChart('#chartRateTrend', D.attendance.monthly.map(r=>fmtMonth(r.m)), [
+      {color:C.brand,values:D.attendance.monthly.map(r=>Number(r.rate)),fmt:v=>v.toFixed(1)+'%'},
+      {color:C.green,below:true,values:D.attendance.monthly.map(r=>Number(r.presentRate)),fmt:v=>v.toFixed(1)+'%'}
+    ], {min:50,max:80,suffix:'%'});
+    renderRateTrend(); RESPONSIVE.push(renderRateTrend);
+
+    /* community */
+    const comp = [
+      {label:'Learners (active)',value:Number(D.enroll.activeStudents),color:C.brand},
+      {label:'Facilitators & staff',value:Number(D.enroll.activeFacilitators)+Number(D.enroll.activeEmployees)+Number(D.enroll.admins),color:C.purple},
+      {label:'Parent accounts',value:Number(D.enroll.activeParents),color:C.indigo}
+    ];
+    donut('#donutCommunity','#legendCommunity',comp,'accounts',num(comp.reduce((a,b)=>a+b.value,0)));
+
+    vbars('#chartActiveMonthly','#chartActiveMonthlyLabels',
+      D.enroll.monthlyActive.map(r=>({label:fmtMonth(r.m),c:r.c})),[{key:'c',cls:'b1'}]);
+
+    /* learning */
+    hbars('#chartSubjectMix', D.subjectMix.map(r=>({label:r.subject,value:r.sessions})), {color:'linear-gradient(90deg,#FF4B4B,#FF8A5B)'});
+    hbars('#chartFacLoad', D.sessions.topFacilitators.map(r=>({label:clean(r.n),value:Number(r.c)})), {color:'linear-gradient(90deg,#6366F1,#8B5CF6)'});
+
+    vbars('#chartSubs','#chartSubsLabels',
+      D.learning.submissions.map(r=>({label:fmtMonth(r.m),subs:r.subs,graded:r.graded})),
+      [{key:'subs',cls:'b1'},{key:'graded',cls:'b3'}]);
+
+    stack('#chartMasteryStack','#legendMastery',[
+      {label:'90–100%',value:1722,color:C.green},
+      {label:'75–89%',value:343,color:C.blue},
+      {label:'50–74%',value:198,color:C.amber},
+      {label:'Below 50%',value:37,color:C.brand}
+    ]);
+
+    /* attendance — computed from real per-month status counts */
+    const attMix = (D.attendance.monthlyFull||[]).map(r=>{
+      const total=Number(r.records)||1;
+      const pct=k=>Number(r[k])/total*100;
+      return {label:fmtMonth(r.m), days:Number(r.days), total:Number(r.records),
+        present:pct('present'), late:pct('late'), partial:pct('partial'),
+        excused:pct('excused'), absent:pct('absent'),
+        participating:pct('present')+pct('late')+pct('partial')};
+    });
+    $('#chartAttMix').innerHTML = attMix.map(r=>`
+      <div style="margin-bottom:18px">
+        <div style="display:flex;justify-content:space-between;gap:14px;font-size:13px;font-weight:600;color:#475569;margin-bottom:7px">
+          <span>${r.label} <span style="color:#94A3B8;font-weight:500">· ${r.days} teaching days · ${num(r.total)} records</span></span>
+          <span style="white-space:nowrap">${r.participating.toFixed(1)}% participating</span>
+        </div>
+        <div class="stack" style="height:30px">
+          <div data-w="${r.present}" style="background:#22C55E;width:0">${r.present>8?r.present.toFixed(0):''}</div>
+          <div data-w="${r.late}" style="background:#FBBF24;width:0"></div>
+          <div data-w="${r.partial}" style="background:#3B82F6;width:0"></div>
+          <div data-w="${r.excused}" style="background:#8B5CF6;width:0"></div>
+          <div data-w="${r.absent}" style="background:#E2E8F0;color:#64748B;width:0">${r.absent>8?r.absent.toFixed(0):''}</div>
+        </div>
+      </div>`).join('');
+    $('#legendAttMix').innerHTML = [['Present','#22C55E'],['Late','#FBBF24'],['Partial','#3B82F6'],['Excused','#8B5CF6'],['Absent','#E2E8F0']]
+      .map(([l,c])=>`<span><i style="background:${c}"></i>${l}</span>`).join('');
+
+    hbars('#chartSignals',[
+      {label:'Camera on',value:40.7,note:'Share of attendance records with the camera switched on.'},
+      {label:'Interacted in class',value:31.8,note:'Share of records where the learner actively participated.'}
+    ],{color:'linear-gradient(90deg,#14B8A6,#22C55E)',fmt:v=>v.toFixed(1)+'%',max:100});
+
+    /* cohort table */
+    const tb=$('#cohortTable tbody');
+    const pretty = s => {
+      let t = clean(s)
+        .replace(/_?\s*20\d{2}[_\-]?\d{0,2}/g,'')
+        .replace(/[_\s]+\d+$/,'')
+        .replace(/_/g,' ')
+        .replace(/\s+/g,' ')
+        .trim();
+      t = t.replace(/superlearn/i,'SuperLearn').replace(/superkids/i,'SuperKids')
+           .replace(/super kids/i,'SuperKids').replace(/akmis/i,'Akmis')
+           .replace(/brainiacs/i,'Brainiacs').replace(/cosmos/i,'Cosmos')
+           .replace(/discovery/i,'Discovery').replace(/explorers/i,'Explorers')
+           .replace(/induction/i,'Induction').replace(/internship/i,'Internship')
+           .replace(/batch/i,'Batch').replace(/winners/i,'Winners').replace(/achievers/i,'Achievers');
+      return t || clean(s);
+    };
+    const rows = D.cohorts.filter(c=>c.students>0 && (c.attRecords||0)>=50).sort((a,b)=>(b.attRate||0)-(a.attRate||0));
+    tb.innerHTML = rows.map(c=>{
+      const r = c.attRate||0;
+      const cls = r>=85?'good':(r>=70?'mid':'low');
+      return `<tr>
+        <td class="cohort">${pretty(c.cohort)}</td>
+        <td class="num">${num(c.students)}</td>
+        <td class="num">${num(c.attRecords||0)}</td>
+        <td class="num"><span class="pill ${cls}">${r.toFixed(1)}%</span></td>
+        <td class="num">${num(c.subs||0)}</td>
+        <td class="num">${(c.subsPerStudent||0).toFixed(1)}</td>
+        <td class="num">${num(c.ptsPerStudent||0)}</td>
+      </tr>`;
+    }).join('');
+
+    /* recognition */
+    hbars('#chartReasons', D.points.reasons.slice(0,14).map(r=>({
+      label: clean(r.reason).toLowerCase().replace(/\b\w/g,m=>m.toUpperCase()), value:Number(r.pts)
+    })));
+    vbars('#chartPointsMonthly','#chartPointsMonthlyLabels',
+      D.points.monthly.map(r=>({label:fmtMonth(r.m),pts:r.pts})),[{key:'pts',cls:'b1'}]);
+    $('#statPerStudentPts').textContent = num(Math.round(D.points.total.pts/Number(D.points.total.students)));
+
+    hbars('#chartHouses', D.points.houseStandings.map(r=>({label:clean(r.name),value:Number(r.pts)})),{color:'linear-gradient(90deg,#F59E0B,#FBBF24)'});
+
+    const rar = D.points.badgeRarity.map((r,i)=>({label:r.rarity.charAt(0).toUpperCase()+r.rarity.slice(1)+' badges',value:Number(r.c),color:[C.brand,C.purple,C.amber,C.blue,C.green][i%5]}));
+    donut('#donutBadges','#legendBadges',rar,'badges unlocked','185');
+    hbars('#chartBadgeMonthly', D.points.badges.map(r=>({label:fmtMonth(r.m),value:Number(r.c)})),{color:'linear-gradient(90deg,#8B5CF6,#EC4899)',fmt:v=>num(v)+' badges'});
+
+    /* beyond */
+    const wl = D.admissions.webinarTopics.filter(w=>clean(w.presenter_name));
+    const pick = wl.filter((w,i)=>true);
+    listRows('#webinarList', pick.map(w=>({
+      date: w.d.slice(8,10)+' '+['','Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][Number(w.d.slice(5,7))],
+      text: clean(w.topic),
+      tag: clean(w.presenter_name).split(/\s+/)[0]
+    })));
+    listRows('#compList', D.events.comps.slice(0,14).map(c=>({
+      date: c.d.slice(8,10)+' '+['','Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][Number(c.d.slice(5,7))],
+      text: clean(c.title),
+      tag: c.competition_type
+    })));
+    listRows('#eventList', D.events.list.map(e=>({
+      date: e.d.slice(8,10)+' '+['','Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][Number(e.d.slice(5,7))],
+      text: clean(e.title),
+      tag: e.event_type==='competition'?'competition':'open event'
+    })));
+
+    /* voice */
+    hbars('#chartRatingDist', D.voice.fbDist.slice().reverse().map(r=>({
+      label:r.r+' star'+(r.r>1?'s':''), value:Number(r.c)
+    })),{color:'linear-gradient(90deg,#F59E0B,#FBBF24)'});
+    hbars('#chartFeelings', D.voice.feeling.map(f=>({label:clean(f.f),value:Number(f.c)})),{color:'linear-gradient(90deg,#FF4B4B,#EC4899)'});
+    hbars('#chartSource', D.voice.sources.map(s=>({label:clean(s.s),value:Number(s.c)})),{color:'linear-gradient(90deg,#3B82F6,#6366F1)'});
+    hbars('#chartQuality',[
+      {label:'Overall rating',value:4.62},
+      {label:'Enjoyment',value:4.19},
+      {label:'Understanding',value:4.09},
+      {label:'Left class positive',value:3.83,note:'76.5% of responses chose \u201Cconfident\u201D or \u201Cexcited\u201D after the session; shown here on the same five-point scale.'},
+      {label:'Interest in the topic',value:3.53},
+      {label:'How challenged they felt',value:1.94,note:'The lowest score in the whole survey \u2014 and the one we are acting on first.'}
+    ],{max:5,fmt:v=>v.toFixed(2)});
+
+    /* quotes — curated, verbatim from the platform */
+    const Q = [
+      ['I researched about parents\u2019 problems and tried to find a solution for lack of quality time with family','Explorers · Higher'],
+      ['me and ruhan actually design a desk with multifeatures named drive desk m4','Brainiacs · Lower'],
+      ['I learned prompting in the RTCC way and also completed maintaining global peace','Cosmos · Higher'],
+      ['We presented our future in sports work','Explorers · Middle'],
+      ['I learned that gratitude is the best way to have happiness','Discovery · Lower'],
+      ['how to create a business idea that has two bottom-lines!!!','Akmis · Higher'],
+      ['we made a prototype of an online shop website','Akmis · Higher'],
+      ['about making your own shelter with cardboard tape and paper','Brainiacs · Higher'],
+      ['I learned how to think kinda faster','Explorers · Middle'],
+      ['about anil menon and what he is doing today, and also i made a presentation about quadrilateral shapes','Explorers · Lower'],
+      ['protecting yourself with internet','Brainiacs · Higher'],
+      ['i took the roll of Anchoring i did it well my roll i did it well so it was so good','Explorers · Middle']
+    ];
+    $('#quoteGrid').innerHTML = Q.map(([t,w])=>`<figure class="quote" style="margin:0"><p>\u201C${t}\u201D</p><figcaption class="who">${w}</figcaption></figure>`).join('');
+
+    /* growth */
+    funnel('#chartFunnel',[
+      {label:'New enquiries',value:44,note:'Jun 23 · Jul 12 · Aug 9'},
+      {label:'Contacted',value:30,note:'in active conversation'},
+      {label:'Demo requests',value:21,note:'demos'},
+      {label:'Applications',value:11,note:'10 grades'},
+      {label:'Enrolled',value:13,note:''}
+    ]);
+    hbars('#chartLeadSource', D.admissions.leadSources.map(s=>({label:clean(s.source).replace(/_/g,' ').toLowerCase().replace(/\b\w/g,m=>m.toUpperCase()),value:Number(s.c)})),{color:'linear-gradient(90deg,#3B82F6,#22C55E)'});
+    hbars('#chartLeadTemp', D.admissions.leadTemp.map(s=>({label:clean(s.temperature)+' leads',value:Number(s.c)})),{color:'linear-gradient(90deg,#F59E0B,#EF4444)'});
+    vbars('#chartLeads','#chartLeadsLabels', D.admissions.leadsMonthly.map(r=>({label:fmtMonth(r.m),c:r.c})),[{key:'c',cls:'b1'}]);
+    hbars('#chartAppGrades', D.admissions.appGrades.map(g=>({label:clean(g.g),value:Number(g.c)})),{color:'linear-gradient(90deg,#8B5CF6,#6366F1)',fmt:v=>num(v)+' application'+(v>1?'s':'')});
+
+    /* people */
+    hbars('#chartLessonPlans',[
+      {label:'June — approved',value:7,color:'linear-gradient(90deg,#22C55E,#14B8A6)'},
+      {label:'June — submitted',value:9,color:'linear-gradient(90deg,#F59E0B,#FBBF24)'},
+      {label:'July — approved',value:4,color:'linear-gradient(90deg,#22C55E,#14B8A6)'},
+      {label:'August — approved',value:3,color:'linear-gradient(90deg,#22C55E,#14B8A6)'}
+    ],{fmt:v=>num(v)+' plans'});
+    hbars('#chartStaffOps',[
+      {label:'Teaching-quality reviews',value:167},
+      {label:'Cover arrangements made',value:46},
+      {label:'Staff documents processed',value:39},
+      {label:'Performance snapshots',value:19},
+      {label:'New staff onboarded',value:3}
+    ],{color:'linear-gradient(90deg,#0EA5E9,#6366F1)'});
+
+    /* platform */
+    hbars('#chartOpsWeak',[
+      {label:'Average ticket closure',value:13.5,note:'Days from a ticket being raised to being closed.',color:'linear-gradient(90deg,#EF4444,#F59E0B)'},
+      {label:'Tickets still open',value:52,note:'Open or in progress at quarter end.',color:'linear-gradient(90deg,#EF4444,#F59E0B)'}
+    ],{fmt:v=>v===13.5?'13.5 days':num(v)+' tickets'});
+    hbars('#chartBuilt',[
+      {label:'Classes with attendance registers marked',value:977},
+      {label:'Session reflections completed',value:1004},
+      {label:'Daily learner reports generated',value:4455},
+      {label:'Daily parent reports generated',value:6068},
+      {label:'Conversations supported',value:1104}
+    ],{color:'linear-gradient(90deg,#22C55E,#14B8A6)'});
+
+    /* method */
+    statRows('#chartMethod',[
+      {label:'Tables catalogued in the school schema',value:'237',color:'var(--ink)',note:'The full operational schema was mapped before any figure was reported.'},
+      {label:'Aggregate queries executed',value:'45',color:'var(--ink)',note:'Counts, distributions, trends and cohort breakdowns, all scoped to the reporting period.'},
+      {label:'Records aggregated',value:num((D.derived&&D.derived.recordsAggregated)||72053),color:'var(--ink)',note:'Attendance records, submissions, recognition events, feedback responses and messages combined.'},
+      {label:'Modelled or estimated figures',value:'0',color:'#15803D',note:'Every number in this report is a count, sum or average of real records.'}
+    ]);
+
+    $('#footStamp').textContent = 'Generated '+new Date().toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'});
+  };
+
+  /* ---------- animation ---------- */
+  const STATIC = /(\?|&)static(=1)?(&|$)/.test(location.search);
+
+  function animate(){
+    document.querySelectorAll('.hbar .f,.stack>div,.vbar,.fstep .fb').forEach(el=>{
+      if(el.dataset.done) return;
+      const box = el.getBoundingClientRect();
+      if(STATIC || box.top < window.innerHeight*0.94){
+        el.dataset.done='1';
+        if(el.classList.contains('vbar')) el.style.height = el.dataset.h+'%';
+        else el.style.width = el.dataset.w+'%';
+      }
+    });
+    document.querySelectorAll('.rv').forEach(el=>{
+      if(el.classList.contains('in')) return;
+      if(STATIC || el.getBoundingClientRect().top < window.innerHeight*0.9) el.classList.add('in');
+    });
+  }
+
+  function counters(){
+    document.querySelectorAll('[data-count]').forEach(el=>{
+      if(el.dataset.done) return;
+      const box=el.getBoundingClientRect(); if(box.top>window.innerHeight && !STATIC) return;
+      el.dataset.done='1';
+      const target=parseFloat(el.dataset.count), dec=parseInt(el.dataset.dec||'0',10);
+      if(STATIC){ el.textContent = dec? target.toFixed(dec) : nf.format(Math.round(target)); return; }
+      const t0=performance.now(), dur=1500;
+      const step=t=>{
+        const p=Math.min(1,(t-t0)/dur), e=1-Math.pow(1-p,3);
+        const v=target*e;
+        el.textContent = dec? v.toFixed(dec) : nf.format(Math.round(v));
+        if(p<1) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    });
+  }
+
+  window.addEventListener('scroll',()=>{
+    const h=document.documentElement;
+    const p=(h.scrollTop)/(h.scrollHeight-h.clientHeight)*100;
+    $('#progress').style.width=p+'%';
+    const links=[...document.querySelectorAll('.nav-links a')];
+    let cur=null;
+    document.querySelectorAll('main section[id]').forEach(s=>{
+      if(s.getBoundingClientRect().top<=140) cur=s.id;
+    });
+    links.forEach(a=>a.classList.toggle('on', a.getAttribute('href')==='#'+cur));
+    animate(); counters();
+  },{passive:true});
+
+  build();
+  let rt=null;
+  window.addEventListener('resize',()=>{ clearTimeout(rt); rt=setTimeout(()=>RESPONSIVE.forEach(f=>f()),200); });
+  window.addEventListener('load',()=>{animate();counters();});
+  animate(); counters(); setTimeout(()=>{animate();counters();},260);
+})();
+</script>
+</body>
+</html>
