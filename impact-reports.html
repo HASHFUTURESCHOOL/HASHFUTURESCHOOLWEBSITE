@@ -48,6 +48,7 @@ a{color:inherit}
 nav{position:sticky;top:0;z-index:90;background:rgba(255,255,255,.86);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
 .nav-in{display:flex;align-items:center;gap:22px;padding:12px 0}
 .brand{display:flex;align-items:center;gap:9px;font-weight:800;font-size:17px;letter-spacing:-.04em;color:var(--ink);text-decoration:none;white-space:nowrap}
+.brand-logo{display:block;width:auto;height:30px}
 .brand .hash{color:var(--brand);font-weight:900;font-size:22px;line-height:1}
 .brand small{display:block;font-weight:500;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-4);margin-top:-4px}
 .nav-links{display:flex;gap:2px;margin-left:auto;overflow-x:auto;scrollbar-width:none}
@@ -284,7 +285,7 @@ footer a:hover{color:#fff}
 
 <nav>
   <div class="wrap nav-in">
-    <a class="brand" href="#top"><span class="hash">#</span><span>Future School<small>Impact Report</small></span></a>
+    <a class="brand" href="#top" aria-label="Hash Future School"><img src="images/logo.png" alt="Hash Future School" class="brand-logo" width="96" height="30"></a>
     <div class="nav-links" id="navlinks">
       <a href="#overview">Overview</a>
       <a href="#community">Community</a>
@@ -831,7 +832,7 @@ footer a:hover{color:#fff}
 <footer>
   <div class="wrap fi">
     <div>
-      <a class="brand" href="#top"><span class="hash">#</span><span>Future School<small>Impact Report</small></span></a>
+      <a class="brand" href="#top" aria-label="Hash Future School"><img src="images/logo-light.png" alt="Hash Future School" class="brand-logo" width="96" height="30"></a>
       <p style="max-width:34ch;margin-top:16px;color:#94A3B8">An AI-first online school for ages 6–18. We don't read résumés. We read lives.</p>
     </div>
     <div class="fl">

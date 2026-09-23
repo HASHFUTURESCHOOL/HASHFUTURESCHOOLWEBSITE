@@ -23,6 +23,16 @@
             "source": "/impactreports",
             "destination": "/impact-reports",
             "permanent": true
+        },
+        {
+            "source": "/projects",
+            "destination": "/student-projects",
+            "permanent": false
+        },
+        {
+            "source": "/updates",
+            "destination": "/school-updates",
+            "permanent": false
         }
     ]
 }

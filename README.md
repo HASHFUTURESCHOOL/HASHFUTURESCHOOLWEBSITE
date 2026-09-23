@@ -59,6 +59,10 @@ editable site copy without touching code.
 - **Auth:** Custom JWT (HS256) in an HttpOnly cookie; single admin user from env vars.
 - **Admin UI:** [`admin.html`](admin.html) — login + dashboard for Posts, Subscribers, Site Content.
 - **Public blog:** [`blog.html`](blog.html) (list) + [`blog-post.html`](blog-post.html?slug=...) (article).
+- **Student Project Showcase:** [`student-projects.html`](student-projects.html) (served at `/student-projects`),
+  powered by the approved projects in **Future Assist** through `GET /api/showcase`.
+- **School Updates:** [`school-updates.html`](school-updates.html) (served at `/school-updates`),
+  the storyboard feed from **Future Assist** through `GET /api/updates`.
 - **Newsletter:** `/api/subscribe` stores subscribers, and a **weekly cron** sends
   the newsletter to active subscribers (content editable in the Admin CMS).
 
@@ -291,3 +295,95 @@ CMS and Future Assist render each link separately.
 On non-Vercel hosts (plain PHP/static), `/api/join` does not exist. The page then
 falls back to [`join-proxy.php`](join-proxy.php), which forwards the application
 to Future Assist directly so nothing is lost. On Vercel the proxy is unused.
+
+### 8. Student Project Showcase — the `/student-projects` page
+
+[`student-projects.html`](student-projects.html) is a public gallery of the
+student projects that have been **approved inside Future Assist**. Nothing is
+hard-coded: the page fetches `GET /api/showcase`, which reads the Future Assist
+projects API (`/api/projects`), keeps only `status: "APPROVED"`, non-archived
+projects, rewrites the upload paths to absolute URLs, sorts newest-first, and
+edge-caches the result for five minutes
+(`s-maxage=300, stale-while-revalidate=600`) so visitors never hit Future Assist
+directly and the page stays fast.
+
+The Future Assist API sends no CORS headers, so the browser cannot call it
+directly — `api/showcase.js` is that server-side hop. It also means the showcase
+only ever exposes what Future Assist already marks as publicly approved; pending
+or rejected submissions never leave that system.
+
+Point it somewhere else (a staging Future Assist, or a local instance) with
+`FUTURE_ASSIST_PROJECTS_URL`; by default it derives the URL from
+`FUTURE_ASSIST_JOIN_URL` when present and otherwise uses
+`https://futureassist.hashfuture.school/api/projects`.
+
+The page itself has a search box, newest/oldest/A–Z sorting, a detail dialog with
+screenshots for projects that uploaded extra images, and clear loading, empty and
+"feed unavailable" states. `/projects` redirects to `/student-projects` (see
+`vercel.json`), and the page is linked from the main navigation, `sitemap.xml`
+and `llms.txt`.
+
+### 9. School Updates — the `/school-updates` page
+
+[`school-updates.html`](school-updates.html) mirrors the Future Assist
+**storyboard** (https://futureassist.hashfuture.school/storyboard) as a public
+feed. `GET /api/updates` reads the storyboard API, drops archived posts,
+normalises each entry (title, body, optional image and link, author name and
+photo, like/comment counts), rewrites relative upload paths to absolute URLs,
+and edge-caches the response for five minutes. The page renders the newest
+updates first with friendly dates ("3 hours ago", then real dates after a
+week), a search box, and a **Load older updates** button that follows the
+storyboard's own cursor so the whole archive is reachable.
+
+**This page needs one change on the Future Assist side before it can show
+anything.** Unlike the project showcase, the storyboard API is behind the login
+wall (`/api/storyboard` returns 401 to the public), so the proxy has nothing to
+read. Until that is lifted the page renders a "not available to the public yet"
+state. Two ways to open it up:
+
+1. **Whole feed** — add the storyboard GET route to the public allowlist in
+   `future-assist-v2/src/middleware.ts`, next to the existing
+   `isPublicProjectApiRoute` rule:
+
+   ```ts
+   const isPublicStoryboardApiRoute =
+     pathname === "/api/storyboard" && req.method === "GET";
+   ```
+
+   and include it in the early `return nextResponse()` condition. Every
+   non-archived storyboard post then becomes publicly readable.
+2. **Curated subset (recommended)** — add a `publishToWebsite` flag to
+   `StoryboardPost`, expose a dedicated public read route (for example
+   `GET /api/public/storyboard`) that only returns flagged posts, and add a
+   toggle to the storyboard's edit menu so staff choose per post what goes on
+   the website.
+
+Either way the website itself needs no further change: point
+`FUTURE_ASSIST_UPDATES_URL` at the chosen endpoint, or set
+`FUTURE_ASSIST_UPDATES_TOKEN` if the route is guarded by a bearer key instead.
+`/updates` redirects to `/school-updates` (see `vercel.json`).
+
+### 10. Brand assets — the school logo
+
+The logo is supplied as a **JPEG on a white background**, which has no alpha
+channel. [`scripts/build-logo.py`](scripts/build-logo.py) turns it into the
+transparent set the site actually uses: it treats distance from white as
+coverage, un-multiplies the colour so the artwork still composites correctly,
+drops the tagline from the compact lockup (keeping the mark's tail, which runs
+lower than the wordmark), and derives a white lockup for dark surfaces.
+
+Source of truth is [`images/brand/logo-source.jpeg`](images/brand/logo-source.jpeg);
+re-run `python3 scripts/build-logo.py` after replacing it.
+
+| Asset | Used on |
+| --- | --- |
+| `images/logo.png` | Header of every page with the standard navbar |
+| `images/logo-light.png` | Dark surfaces: footer brand, `/join` nav and footer, Impact Report footer |
+| `images/logo-full.png` | Full lockup including the tagline, for large placements |
+| `images/logo-mark.png` | 512px square mark — PWA icon (see `manifest.json`) |
+| `favicon.png` | 192px square mark — browser tab |
+
+`super-kids.html` floats its header over the hero and turns it solid on scroll,
+so it ships both lockups and swaps them on the existing `.scrolled` state. The
+event pages (`future-talks.html`, `future-talks-apply.html`, `ijec.html`) keep
+their own event branding, with Hash Future School credited as a subtitle.

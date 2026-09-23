@@ -7,6 +7,13 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '..');
 const PORT = Number(process.env.PORT || 3000);
 
+// Mirrors the `redirects` block in vercel.json so local dev behaves like production.
+const REDIRECTS = {
+  '/impactreports': { to: '/impact-reports', permanent: true },
+  '/projects': { to: '/student-projects', permanent: false },
+  '/updates': { to: '/school-updates', permanent: false },
+};
+
 const MIME = {
   '.html': 'text/html; charset=utf-8',
   '.css': 'text/css; charset=utf-8',
@@ -92,6 +99,16 @@ async function handleApi(req, res, url) {
     }
     case 'posts': {
       modulePath = path.join(ROOT, 'api/posts/index.js');
+      query = buildQuery(url);
+      break;
+    }
+    case 'showcase': {
+      modulePath = path.join(ROOT, 'api/showcase.js');
+      query = buildQuery(url);
+      break;
+    }
+    case 'updates': {
+      modulePath = path.join(ROOT, 'api/updates.js');
       query = buildQuery(url);
       break;
     }
@@ -190,6 +207,14 @@ async function handleProxy(req, res, url) {
 function serveStatic(req, res, url) {
   let pathname = decodeURIComponent(url.pathname);
   if (pathname === '/' || pathname === '') pathname = '/index.html';
+
+  const redirect = REDIRECTS[pathname.replace(/\/+$/, '') || '/'];
+  if (redirect) {
+    res.statusCode = redirect.permanent ? 308 : 307;
+    res.setHeader('Location', redirect.to);
+    res.end();
+    return;
+  }
 
   // Mirror Vercel cleanUrls: /about -> /about.html
   let filePath = path.join(ROOT, pathname);

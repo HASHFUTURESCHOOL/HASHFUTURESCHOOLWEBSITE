@@ -226,6 +226,17 @@
             font-weight: 900;
             font-size: 1.3rem;
         }
+
+        /* The header floats over the hero and turns solid on scroll, so both
+           lockups ship and swap on the existing .scrolled state. */
+        .sk-logo-img {
+            display: block;
+            width: auto;
+            height: 28px;
+        }
+        .sk-logo .logo-on-light { display: none; }
+        .sk-header.scrolled .sk-logo .logo-on-dark { display: none; }
+        .sk-header.scrolled .sk-logo .logo-on-light { display: block; }
         .sk-header-right {
             display: flex;
             align-items: center;
@@ -1063,7 +1074,8 @@
     <header class="sk-header" id="skHeader">
         <div class="sk-header-inner">
             <a href="https://www.hashfuture.school" class="sk-logo" title="Go to Hash Future School">
-                <span class="sk-logo-hash">#</span>Future School
+                <img src="images/logo-light.png" alt="Future School" class="sk-logo-img logo-on-dark" width="90" height="28">
+                <img src="images/logo.png" alt="Future School" class="sk-logo-img logo-on-light" width="90" height="28">
             </a>
             <div class="sk-header-right">
                 <a href="https://www.hashfuture.school" class="sk-header-link">Visit Main Website →</a>

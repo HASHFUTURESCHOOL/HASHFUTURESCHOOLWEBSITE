@@ -214,6 +214,19 @@ ul {
     gap: 2px;
 }
 
+/* School logo, generated with a transparent background from the brand artwork.
+   logo.png is the dark lockup for light surfaces, logo-light.png the white
+   lockup used on the dark footer. */
+.logo-img {
+    display: block;
+    width: auto;
+    height: 38px;
+}
+
+.footer-brand .logo-img {
+    height: 52px;
+}
+
 .logo-hash {
     color: var(--primary);
     font-weight: 800;
@@ -222,7 +235,7 @@ ul {
 .nav-links {
     display: flex;
     align-items: center;
-    gap: 32px;
+    gap: 24px;
 }
 
 .nav-links a {
@@ -230,6 +243,7 @@ ul {
     font-weight: 500;
     color: var(--text-medium);
     position: relative;
+    white-space: nowrap;
 }
 
 .nav-links a::after {
@@ -2230,6 +2244,36 @@ ul {
 /* ============================================
    Responsive Design
    ============================================ */
+/* The desktop nav carries up to nine items on the homepage. Tighten the
+   spacing before it runs out of room, then hand over to the mobile menu on
+   screens where the full row no longer fits with breathing space. */
+@media (max-width: 1400px) {
+    .nav-links {
+        gap: 20px;
+    }
+}
+
+@media (max-width: 1320px) {
+    .nav-links {
+        gap: 12px;
+    }
+
+    .nav-links a {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 1240px) {
+    .nav-links,
+    .nav-cta {
+        display: none;
+    }
+
+    .mobile-menu-btn {
+        display: flex;
+    }
+}
+
 @media (max-width: 1200px) {
     .facilitators-grid {
         grid-template-columns: repeat(3, 1fr);

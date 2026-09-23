@@ -193,6 +193,13 @@ ul {
     font-size: 1.3rem;
 }
 
+/* White lockup: the join nav and footer both sit on near-black backgrounds. */
+.jn-logo-img {
+    display: block;
+    width: auto;
+    height: 32px;
+}
+
 .jn-logo small {
     font-size: 0.68rem;
     font-weight: 700;
