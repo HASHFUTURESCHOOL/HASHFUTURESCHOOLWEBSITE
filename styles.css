@@ -2969,3 +2969,198 @@ ul {
     color: var(--primary);
     border: 1px solid rgba(255, 75, 75, 0.2);
 }
+
+/* ==========================================================================
+   Learning-doodle kit
+   Decorative texture for the long home page: floating doodles around the hero,
+   a drawn underline, a word ribbon, chapter marks on the section badges and one
+   illustration band in the largest empty stretch. Everything is additive —
+   inline SVG plus a few keyframes — and it all stops moving for anyone whose
+   system asks for reduced motion.
+   ========================================================================== */
+
+/* ---------- Floating doodles around the hero ---------- */
+.learn-doodles {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.learn-doodles svg {
+    position: absolute;
+    height: auto;
+    color: var(--primary);
+    opacity: 0.3;
+}
+
+.learn-doodles .ld-1 { top: 66px; left: 6%; width: 46px; animation: ld-bob 7s ease-in-out infinite; }
+.learn-doodles .ld-2 { top: 200px; right: 8%; width: 42px; color: var(--accent-yellow); opacity: 0.55; animation: ld-bob 9s ease-in-out infinite reverse; }
+.learn-doodles .ld-3 { bottom: 46px; left: 14%; width: 44px; color: var(--accent-blue); opacity: 0.28; animation: ld-bob 8s ease-in-out infinite; }
+.learn-doodles .ld-4 { bottom: 78px; right: 15%; width: 42px; opacity: 0.3; animation: ld-bob 6.5s ease-in-out infinite reverse; }
+
+@keyframes ld-bob {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-12px) rotate(5deg); }
+}
+
+/* ---------- Hand-drawn underline under the hero keyword ---------- */
+.ink-underline { position: relative; display: inline-block; }
+
+.ink-underline svg {
+    position: absolute;
+    left: -1%;
+    bottom: -0.12em;
+    width: 102%;
+    height: 0.34em;
+    overflow: visible;
+}
+
+.ink-underline path {
+    fill: none;
+    stroke: var(--primary);
+    stroke-width: 7;
+    stroke-linecap: round;
+    stroke-dasharray: 320;
+    stroke-dashoffset: 320;
+    animation: ld-draw 1.5s 0.45s ease forwards;
+}
+
+@keyframes ld-draw { to { stroke-dashoffset: 0; } }
+
+/* ---------- Word ribbon between the hero and the page ---------- */
+.learn-ribbon {
+    padding: 13px 0;
+    overflow: hidden;
+    border-top: 1px solid rgba(15, 23, 42, 0.07);
+    border-bottom: 1px solid rgba(15, 23, 42, 0.07);
+    background: linear-gradient(90deg, #FFF5F5, #FFFBEB 45%, #F2F7FF);
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+    mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+}
+
+.learn-ribbon-track {
+    display: flex;
+    gap: 32px;
+    width: max-content;
+    animation: ld-slide 26s linear infinite;
+}
+
+.learn-ribbon-track span {
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 1.6px;
+    text-transform: uppercase;
+    color: var(--text-medium);
+    white-space: nowrap;
+}
+
+.learn-ribbon-track span::after { content: " ✦"; color: var(--primary); }
+
+@keyframes ld-slide { to { transform: translateX(-50%); } }
+
+/* ---------- Chapter mark: each section badge, flanked by dashed rules ---------- */
+.section-header .section-badge { position: relative; }
+
+.section-header .section-badge::before,
+.section-header .section-badge::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    width: min(130px, 11vw);
+    border-top: 2px dashed rgba(255, 75, 75, 0.3);
+}
+
+.section-header .section-badge::before { right: calc(100% + 14px); }
+.section-header .section-badge::after { left: calc(100% + 14px); }
+
+/* ---------- Illustration band ---------- */
+.learn-band {
+    padding: 64px 0;
+    background: var(--bg-light);
+    border-top: 1px solid rgba(15, 23, 42, 0.06);
+    border-bottom: 1px solid rgba(15, 23, 42, 0.06);
+}
+
+.learn-band-inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+    gap: 44px;
+    align-items: center;
+}
+
+.learn-band-art {
+    padding: 10px;
+    background: var(--bg-white);
+    border: 1px solid rgba(15, 23, 42, 0.07);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-md);
+}
+
+.learn-band-art svg { display: block; width: 100%; height: auto; }
+.learn-band h2 { margin-bottom: 12px; }
+.learn-band ul { list-style: none; margin: 18px 0 0; padding: 0; display: grid; gap: 10px; }
+.learn-band li { display: flex; gap: 10px; align-items: flex-start; color: var(--text-medium); }
+.learn-band li svg { flex-shrink: 0; margin-top: 5px; color: var(--primary); }
+
+/* ---------- The spare cell in the team row, used as an invitation ---------- */
+.facilitator-card.join-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    text-decoration: none;
+    border: 2px dashed rgba(255, 75, 75, 0.45);
+    background: linear-gradient(180deg, #FFF7F7, var(--bg-white));
+}
+
+.facilitator-card.join-card:hover { border-color: var(--primary); }
+
+.facilitator-card.join-card .join-plus {
+    display: grid;
+    place-items: center;
+    width: 62px;
+    height: 62px;
+    margin-bottom: 10px;
+    border-radius: 50%;
+    background: var(--primary-gradient);
+    color: #fff;
+    font-size: 1.9rem;
+    font-weight: 300;
+    line-height: 1;
+    box-shadow: var(--shadow-primary);
+}
+
+.facilitator-card.join-card strong { font-size: 1.05rem; color: var(--text-dark); }
+.facilitator-card.join-card p { font-size: 0.85rem; color: var(--text-light); max-width: 20ch; }
+.facilitator-card.join-card .join-link { margin-top: 8px; font-weight: 700; font-size: 0.88rem; color: var(--primary); }
+
+/* ---------- Narrow screens ---------- */
+@media (max-width: 992px) {
+    .learn-band-inner { grid-template-columns: minmax(0, 1fr); gap: 28px; }
+    .learn-doodles .ld-3,
+    .learn-doodles .ld-4 { display: none; }
+}
+
+@media (max-width: 640px) {
+    /* The keyword wraps onto its own line on phones, so the drawn underline
+       would sit under the wrong words. */
+    .ink-underline svg { display: none; }
+    .learn-doodles .ld-2 { display: none; }
+    /* On a narrow screen a badge plus a rule either side pokes past the
+       viewport, which widens the layout. The badge alone reads fine. */
+    .section-header .section-badge::before,
+    .section-header .section-badge::after { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    /* Listed per class on purpose: `.learn-doodles .ld-1` is more specific than
+       `.learn-doodles svg`, so a type selector here would lose. */
+    .learn-doodles .ld-1,
+    .learn-doodles .ld-2,
+    .learn-doodles .ld-3,
+    .learn-doodles .ld-4,
+    .learn-ribbon-track { animation: none; }
+    .ink-underline path { animation: none; stroke-dashoffset: 0; }
+}
