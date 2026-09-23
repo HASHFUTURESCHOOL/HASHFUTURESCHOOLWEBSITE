@@ -237,6 +237,25 @@
         .sk-logo .logo-on-light { display: none; }
         .sk-header.scrolled .sk-logo .logo-on-dark { display: none; }
         .sk-header.scrolled .sk-logo .logo-on-light { display: block; }
+
+        .sk-brand {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 2px;
+        }
+        /* "Visit Main Website" is hidden on small screens, so the header keeps an
+           explicit Home link underneath the logo. */
+        .sk-home-link {
+            font-size: 0.68rem;
+            font-weight: 700;
+            letter-spacing: 1.4px;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.6);
+            transition: var(--transition-fast);
+        }
+        .sk-header.scrolled .sk-home-link { color: var(--text-light); }
+        .sk-home-link:hover { color: var(--primary); }
         .sk-header-right {
             display: flex;
             align-items: center;
@@ -1073,10 +1092,13 @@
     <!-- ====== FLOATING HEADER ====== -->
     <header class="sk-header" id="skHeader">
         <div class="sk-header-inner">
-            <a href="https://www.hashfuture.school" class="sk-logo" title="Go to Hash Future School">
-                <img src="images/logo-light.png" alt="Future School" class="sk-logo-img logo-on-dark" width="90" height="28">
-                <img src="images/logo.png" alt="Future School" class="sk-logo-img logo-on-light" width="90" height="28">
-            </a>
+            <div class="sk-brand">
+                <a href="index.html" class="sk-logo" title="Go to Hash Future School">
+                    <img src="images/logo-light.png" alt="Future School" class="sk-logo-img logo-on-dark" width="90" height="28">
+                    <img src="images/logo.png" alt="Future School" class="sk-logo-img logo-on-light" width="90" height="28">
+                </a>
+                <a href="index.html" class="sk-home-link">← Home</a>
+            </div>
             <div class="sk-header-right">
                 <a href="https://www.hashfuture.school" class="sk-header-link">Visit Main Website →</a>
                 <a href="https://wa.me/919497120591?text=Hi!%20I%20want%20to%20enroll%20my%20child%20in%20the%20Super%20Kids%20Program."

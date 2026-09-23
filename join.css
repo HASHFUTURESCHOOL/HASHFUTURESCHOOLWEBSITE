@@ -188,6 +188,29 @@ ul {
     letter-spacing: -0.2px;
 }
 
+.jn-brand {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 3px;
+}
+
+/* This page has no link back to the main site in its nav, so the header carries
+   an explicit Home link underneath the logo. */
+.jn-home-link {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 1.4px;
+    line-height: 1.2;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.55);
+    transition: color 0.2s ease;
+}
+
+.jn-home-link:hover {
+    color: #fff;
+}
+
 .jn-logo-hash {
     color: var(--jn-primary);
     font-size: 1.3rem;
@@ -265,7 +288,9 @@ ul {
 
 .jn-mobile-menu {
     position: fixed;
-    inset: 64px 16px auto 16px;
+    /* Sits directly under the nav, whose height grew when the Home link was
+       added beneath the logo (81px at rest). */
+    inset: 81px 16px auto 16px;
     z-index: 55;
     display: none;
     flex-direction: column;
