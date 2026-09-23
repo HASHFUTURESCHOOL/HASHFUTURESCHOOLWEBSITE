@@ -332,6 +332,9 @@ ul {
     font-size: 0.95rem;
     border-radius: var(--radius-full);
     transition: var(--transition-normal);
+    /* The homepage renders this as a <button> and every other page as an <a>.
+       Pinning the line-height keeps both exactly the same height. */
+    line-height: normal;
 }
 
 .nav-cta:hover {

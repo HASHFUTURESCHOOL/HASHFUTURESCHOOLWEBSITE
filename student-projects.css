@@ -20,22 +20,6 @@
     border: 0;
 }
 
-/* ---------- nav highlight ---------- */
-.nav-links a.sp-nav-highlight {
-    color: var(--primary);
-    font-weight: 600;
-}
-
-.nav-links a.sp-nav-highlight::after {
-    width: 100%;
-    background: var(--primary);
-}
-
-.mobile-menu a.sp-nav-highlight {
-    color: var(--primary);
-    font-weight: 600;
-}
-
 /* ---------- buttons ---------- */
 .sp-btn {
     display: inline-flex;

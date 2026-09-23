@@ -8,22 +8,6 @@
     display: none !important;
 }
 
-/* ---------- nav highlight ---------- */
-.nav-links a.su-nav-highlight {
-    color: var(--primary);
-    font-weight: 600;
-}
-
-.nav-links a.su-nav-highlight::after {
-    width: 100%;
-    background: var(--primary);
-}
-
-.mobile-menu a.su-nav-highlight {
-    color: var(--primary);
-    font-weight: 600;
-}
-
 /* ---------- buttons ---------- */
 .su-btn {
     display: inline-flex;
