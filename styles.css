@@ -3164,3 +3164,46 @@ ul {
     .learn-ribbon-track { animation: none; }
     .ink-underline path { animation: none; stroke-dashoffset: 0; }
 }
+
+/* ---------- Two facilitator cards per row on phones ----------
+   The grid is a flex row of fixed 200px cards, so two of them plus the gap
+   (424px) never fit a phone. The older responsive rules for this grid only set
+   grid-template-columns, which a flex container ignores — which is why phones
+   got one card per row, sixteen rows deep. Letting the cards go fluid halves
+   the length of that section. */
+@media (max-width: 480px) {
+    .facilitators-grid { gap: 12px; }
+
+    .facilitator-card {
+        width: calc((100% - 12px) / 2);
+        padding: 16px 10px 14px;
+    }
+
+    .facilitator-image {
+        width: 84px;
+        height: 84px;
+        margin-bottom: 12px;
+    }
+
+    .facilitator-card h4 { font-size: 0.92rem; }
+    .facilitator-card p { font-size: 0.8rem; }
+    .facilitator-profile-card::after { margin-top: 8px; font-size: 0.72rem; }
+
+    .facilitator-card.join-card .join-plus {
+        width: 48px;
+        height: 48px;
+        margin-bottom: 8px;
+        font-size: 1.5rem;
+    }
+
+    .facilitator-card.join-card strong { font-size: 0.95rem; }
+    .facilitator-card.join-card p { font-size: 0.78rem; }
+    .facilitator-card.join-card .join-link { font-size: 0.8rem; }
+}
+
+/* Narrowest phones: give names room to sit on one line. */
+@media (max-width: 360px) {
+    .facilitator-card { padding: 14px 8px 12px; }
+    .facilitator-image { width: 72px; height: 72px; }
+    .facilitator-card h4 { font-size: 0.86rem; }
+}
