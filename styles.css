@@ -1544,6 +1544,21 @@ ul {
     object-fit: cover;
 }
 
+/* Stand-in for a facilitator card whose photo has not been supplied yet, so
+   the circle never renders as a broken-image icon. */
+.facilitator-initials {
+    display: grid;
+    place-items: center;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: rgba(255, 75, 75, 0.1);
+    color: var(--primary);
+    font-weight: 700;
+    font-size: 1.6rem;
+    letter-spacing: 0.5px;
+}
+
 .facilitator-card h4 {
     font-size: 1rem;
     font-weight: 600;
