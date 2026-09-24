@@ -222,6 +222,12 @@ function serveStatic(req, res, url) {
     const htmlCandidate = filePath + '.html';
     if (fs.existsSync(htmlCandidate) && fs.statSync(htmlCandidate).isFile()) {
       filePath = htmlCandidate;
+    } else {
+      // Mirror Vercel directory indexes: /global -> /global/index.html
+      const indexCandidate = path.join(filePath, 'index.html');
+      if (fs.existsSync(indexCandidate) && fs.statSync(indexCandidate).isFile()) {
+        filePath = indexCandidate;
+      }
     }
   }
 

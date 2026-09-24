@@ -81,17 +81,24 @@ function initFAQ() {
 
     faqItems.forEach(item => {
         const question = item.querySelector('.faq-question');
+        if (!question) return;
+
+        // Reflect the collapsible state for screen readers, including on load.
+        question.setAttribute('aria-expanded', item.classList.contains('active') ? 'true' : 'false');
 
         question.addEventListener('click', () => {
             // Close all other items
             faqItems.forEach(otherItem => {
                 if (otherItem !== item && otherItem.classList.contains('active')) {
                     otherItem.classList.remove('active');
+                    const otherQuestion = otherItem.querySelector('.faq-question');
+                    if (otherQuestion) otherQuestion.setAttribute('aria-expanded', 'false');
                 }
             });
 
             // Toggle current item
             item.classList.toggle('active');
+            question.setAttribute('aria-expanded', item.classList.contains('active') ? 'true' : 'false');
         });
     });
 }

@@ -8,6 +8,29 @@
 ## Key Pages
 - Home: https://www.hashfuture.school/
 - About: https://www.hashfuture.school/about.html
+- Global Programmes hub (problem-led support for global, NRI and expat families): https://www.hashfuture.school/global
+- Online School by City hub (all cities and regions, with time-zone and board routes): https://www.hashfuture.school/online-school-cities
+- Online School in Bengaluru (Bangalore) - live cohorts on IST, NIOS/IGCSE/GED guidance: https://www.hashfuture.school/online-school-bengaluru
+- Online School in Mumbai - small cohorts, no commute, NIOS and IGCSE routes: https://www.hashfuture.school/online-school-mumbai
+- Online School in New Delhi and NCR (Gurugram, Noida) - live sessions in school hours: https://www.hashfuture.school/online-school-new-delhi
+- Online School in Hyderabad - AI, coding and entrepreneurship with mastery-based pacing: https://www.hashfuture.school/online-school-hyderabad
+- Online School in Kolkata - NIOS and IGCSE pathways for families leaving high-pressure schooling: https://www.hashfuture.school/online-school-kolkata
+- Online School in Dubai - Indian curriculum for expat families, Gulf-friendly timings: https://www.hashfuture.school/online-school-dubai
+- Online School in Abu Dhabi - live cohorts, NIOS/IGCSE/GED pathways: https://www.hashfuture.school/online-school-abu-dhabi
+- Online School in the UAE - Dubai, Sharjah, Ajman, Ras Al Khaimah and the Northern Emirates: https://www.hashfuture.school/online-school-uae
+- Online School in Qatar (Doha) - Indian curriculum continuity for expat families: https://www.hashfuture.school/online-school-qatar
+- Online School in Oman (Muscat) - live cohorts and board pathways for Indian families: https://www.hashfuture.school/online-school-oman
+- Online School in Saudi Arabia (Riyadh, Jeddah, Eastern Province) - Sunday-to-Thursday aware timetable: https://www.hashfuture.school/online-school-saudi-arabia
+- Online School in Kuwait - Indian curriculum continuity and NIOS guidance for families returning to India: https://www.hashfuture.school/online-school-kuwait
+- Screen addiction to AI creation (turning gaming and scrolling into building apps and projects): https://www.hashfuture.school/global/screen-time-to-creator
+- Academic burnout and school refusal (mastery-based pacing, small cohorts, self-directed learning): https://www.hashfuture.school/global/academic-burnout
+- Bullying and social isolation (safe global learning pods, houses, 1:8 mentorship): https://www.hashfuture.school/global/social-isolation-safe-community
+- Accredited future-ready pathways (IGCSE / NIOS / GED alongside AI and entrepreneurship): https://www.hashfuture.school/global/future-ready-accredited-pathways
+- Online School in Kerala (Kochi-based AI-first online school, NIOS/IGCSE/GED guidance, local to Ernakulam): https://www.hashfuture.school/online-school-kerala.html
+- NIOS Online School (how the NIOS open board route works, subject planning, assignments, practicals, exam centres): https://www.hashfuture.school/nios-online-school.html
+- IGCSE Private Candidate (how Indian families take Cambridge IGCSE without a Cambridge-registered school): https://www.hashfuture.school/igcse-private-candidate.html
+- AI-First Learning (project-based, self-directed methodology; what a week looks like; how progress is measured): https://www.hashfuture.school/ai-first-learning.html
+- Online School vs Regular School (honest comparison including NIOS vs CBSE, social life, cost and validity): https://www.hashfuture.school/online-school-vs-regular-school.html
 - Super Kids (student spotlights): https://www.hashfuture.school/super-kids.html
 - Future Talks (youth entrepreneurship summit): https://www.hashfuture.school/future-talks.html
 - Future Talks - Apply to Speak: https://www.hashfuture.school/future-talks-apply.html
@@ -32,6 +55,19 @@
 - Entrepreneurship and financial literacy
 - Communication and confidence building
 - Self-directed, real-world project-based learning
+
+## Board Pathways and Admissions Facts
+- Hash Future School guides and prepares learners for external boards: NIOS, Cambridge IGCSE (private candidate) and GED
+- The school is NOT an NIOS-accredited institution and NOT a Cambridge-registered school; board certificates are issued by the respective boards through official exam centres
+- Learners served: ages 6 to 17, across Lower, Middle and Higher Grades
+- Mentor ratio: 1:8
+- Community model: students learn with a global community of families across cities and countries, and each local cohort meets in person once a month
+- Students collaborate on constructive projects rather than competing for rank, which is why peer bonds are described as unusually deep; families typically pair the programme with local sport, music or clubs so social contact is not only online
+- Online classes are live; families join from across Kerala, other Indian states and abroad
+- Address: Peringala P O, Kochi, Kerala 683565, India
+- Phone / WhatsApp: +91 94971 20591
+- Email: learn@hashfuture.school
+- Free demo sessions: https://www.hashfuture.school/#enroll
 
 ## Contact
 - Email: learn@hashfuture.school
