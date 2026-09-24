@@ -14,6 +14,7 @@
     "check:city": "node scripts/check-city-pages.js",
     "check:claims": "node scripts/check-claims.js",
     "check:navigation": "node scripts/check-navigation.js",
+    "seed:seo-posts": "node --env-file=.env scripts/seed-seo-posts.js",
     "build:pages": "npm run build:global && npm run build:city",
     "check:pages": "npm run check:global && npm run check:city && npm run check:claims && npm run check:navigation"
   },

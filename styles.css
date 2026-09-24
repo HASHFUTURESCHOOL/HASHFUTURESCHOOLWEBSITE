@@ -3820,3 +3820,28 @@ ul.gl-prose {
     background: var(--primary-dark);
     color: var(--text-white);
 }
+
+/* Links inside rendered blog post bodies. The site-wide `a { color: inherit }`
+   rule would otherwise make in-article links indistinguishable from prose,
+   which hurts both readability and internal linking. */
+#post-body a {
+    color: var(--primary);
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-thickness: 1px;
+}
+
+#post-body a:hover {
+    color: var(--primary-dark);
+    text-decoration-thickness: 2px;
+}
+
+#post-body h2,
+#post-body h3 {
+    color: var(--text-dark);
+}
+
+#post-body li {
+    margin-bottom: 0.5em;
+}

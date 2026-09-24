@@ -33,13 +33,20 @@ const files = [
     ...fs.readdirSync(path.join(ROOT, 'global')).filter(name => name.endsWith('.html')).map(name => path.join(ROOT, 'global', name))
 ];
 
+// Editorial content about to be published is held to the same standard as the
+// generated pages.
+const contentDir = path.join(ROOT, 'content', 'posts');
+if (fs.existsSync(contentDir)) {
+    fs.readdirSync(contentDir).filter(name => name.endsWith('.md')).forEach(name => files.push(path.join(contentDir, name)));
+}
+
 const errors = [];
 const notices = [];
 
 for (const file of files) {
     const relative = path.relative(ROOT, file);
     const violations = findClaimViolations(fs.readFileSync(file, 'utf8'));
-    const isGenerated = generated.has(relative);
+    const isGenerated = generated.has(relative) || relative.startsWith('content' + path.sep);
     for (const violation of violations) {
         const line = `${relative} [${violation.id}] "${violation.match}"`;
         if (violation.severity === 'error' && isGenerated) {

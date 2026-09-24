@@ -17,7 +17,11 @@ function renderMarkdown(text) {
       .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
       .replace(/__(.+?)__/g, '<strong>$1</strong>')
       .replace(/\*(.+?)\*/g, '<em>$1</em>')
-      .replace(/(?:^|\s)(https?:\/\/[^\s]+)/g, ' <a href="$1" target="_blank" rel="noopener">$1</a>');
+      // Markdown links, so posts can use descriptive anchor text for internal
+      // linking instead of printing a raw URL. A quoted URL is excluded from the
+      // autolink rule below so it cannot double-wrap an href.
+      .replace(/\[([^\]]+)\]\(([^)\s]+)\)/g, '<a href="$2">$1</a>')
+      .replace(/(?:^|\s)(https?:\/\/[^\s"]+)/g, ' <a href="$1" target="_blank" rel="noopener">$1</a>');
 
   for (const line of lines) {
     const trimmed = line.trim();
