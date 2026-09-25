@@ -406,45 +406,52 @@ IIT Madras enrols School Connect students only through a partner school. That
 leaves out the families we hear from most often outside India: Indian students in
 the UAE, Saudi Arabia, Oman, Qatar, Kuwait and Bahrain who want an IIT Madras
 certificate but study at a different school. [`school-connect-register.html`](school-connect-register.html)
-exists so those families can register with Hash Future School, and this page is
-where the whole flow lives:
+exists so those families can register with Hash Future School.
+
+**Future Assist is the system of record.** The form posts to this site's
+`/api/school-connect`, which validates the answers and forwards them straight to
+Future Assist — the same shape as the student admission form that already lives
+there. Nothing is stored on this site:
 
 ```
 /school-connect-register  (form)
-      │  POST /api/school-connect
+      │  POST /api/school-connect        ← validates, then forwards server-to-server
       ▼
-school_connect_registrations ──📧──► admissions team + student & parents
-      │                                 (reference + full programme registration details)
-      │  POST /api/school-connect          ← mirrored into Future Assist, where the
-      └──────────────► Future Assist's       IIT School Connect desk reads every row
-                       school_connect_registrations
+Future Assist  POST /api/school-connect
       │
-      │  admin CMS → "Approve & email school ID"
+      ├─ school_connect_registrations   (the row lives here, and only here)
+      ├─ 📧 student + parents: reference, how the partner-school enrolment works,
+      │                        the 8-week structure, batch dates, fee position
+      ├─ 🔔 superadmin + admin: urgent in-app notification
       ▼
-approved + school_id assigned ──📧──► student & parents (Hash Future School ID + enrolment steps)
-      │
-      └── POST back to Future Assist so the desk sees APPROVED + the school ID
+/admin/school-connect  (IIT School Connect desk) → review, approve, issue the
+                                 Hash Future School ID, track the pipeline
 ```
 
-**Future Assist is the programme desk.** Registrations are mirrored to
-`FUTURE_ASSIST_SCHOOL_CONNECT_URL` (default
-`https://futureassist.hashfuture.school/api/school-connect`) by
-[`lib/future-assist.js`](lib/future-assist.js), which also pushes status moves
-back on approval. The state of each mirror is stored on the row
-(`future_assist_state`, `future_assist_id`, `future_assist_error`, migration
-[`008`](db/migrations/008_school_connect_future_assist_sync.sql)) and shown in
-the admin CMS, with a **↻ Resync to Future Assist** button for a mirror that
-failed while the platform was unreachable. Approvals only move the Future Assist
-row when `FUTURE_ASSIST_SCHOOL_CONNECT_KEY` matches Future Assist's
-`SCHOOL_CONNECT_SYNC_KEY`, so a public post can never approve a registration.
+The forward lives in [`lib/future-assist.js`](lib/future-assist.js)
+(`FUTURE_ASSIST_SCHOOL_CONNECT_URL`, default
+`https://futureassist.hashfuture.school/api/school-connect`; set it to
+off/disabled/none to switch the intake off). If Future Assist cannot be reached
+the endpoint answers 503 with an honest "your details were not saved, try again
+or WhatsApp us" — it never silently swallows a registration.
+
+**Why not this site's database.** It used to store the row here and mirror it to
+Future Assist, which meant two copies of every registration and one more
+migration to keep in step. Direct intake matches the admissions pattern the team
+already runs: one store, one desk, and the form works even if this site's
+database is unavailable. Migrations [`007`](db/migrations/007_school_connect_registrations.sql)
+and [`008`](db/migrations/008_school_connect_future_assist_sync.sql) are therefore
+no longer part of the flow; the table they create is unused. The admin CMS keeps
+a *🎓 School Connect* tab, but it only points at the Future Assist desk.
 
 **The page.** Hand-written, styled after the Future Assist admissions form
 ([futureassist.hashfuture.school/admissions/students](https://futureassist.hashfuture.school/admissions/students)):
 three steps — student details, present school & parents, background & interests —
 with a review block before submit and a success state that shows the reference
-number. It loads its own stylesheet ([`school-connect-register.css`](school-connect-register.css))
-and no `styles.css`, because it is a standalone form surface rather than a page
-of the marketing site. The script is [`school-connect-register.js`](school-connect-register.js).
+number Future Assist assigned. It loads its own stylesheet
+([`school-connect-register.css`](school-connect-register.css)) and no `styles.css`,
+because it is a standalone form surface rather than a page of the marketing site.
+The script is [`school-connect-register.js`](school-connect-register.js).
 
 **What it collects.** Student name, date of birth, age, gender, nationality,
 student email + phone/WhatsApp; present school, school city/country, class,
@@ -454,65 +461,32 @@ the student is into, the profession or field they are aiming for, prior
 experience, batch preference, how they heard about us, and the two consent
 checkboxes. The honeypot field is `website`.
 
-**What the family receives.** The moment the form is submitted they get their
-registration details by email ([`lib/school-connect-mail.js`](lib/school-connect-mail.js)):
-the reference, the class and school it was filed for, the fields of interest they
-picked, how the partner-school enrolment works (IIT Madras enrols only through a
-partner school, verifies the enrolment, then emails course access), the 8-week
-course structure, the current batch dates from `CURRENT_BATCH` in that file, the
-fee position, and the official IIT Madras pages (student access guide, courses,
-partner list, FAQs). Update `CURRENT_BATCH` once per batch and every email follows.
+**The emails and the desk live in the Future Assist repo.** The confirmation
+family receive comes from `src/lib/school-connect-email.ts` there — `CURRENT_BATCH`
+and the official IIT Madras links sit in that file, so a batch change is one edit
+in one place. The intake, the notifications and the desk are
+`src/app/api/school-connect/route.ts` and
+`src/app/(dashboard)/admin/school-connect/page.tsx`. `SCHOOL_CONNECT_EMAIL=off`
+silences the confirmation.
 
-**Backend.** [`api/school-connect.js`](api/school-connect.js) validates, stores
-the row in `school_connect_registrations` (migration
-[`007`](db/migrations/007_school_connect_registrations.sql)), emails the team and
-the family, and returns the reference (`HFS-SC-2026-0001`). Both emails are
-best-effort — the row is written first, exactly like `/api/join`. Without a
-database it falls back to `.local/school-connect-registrations.json` so the flow
-can be exercised locally. Emails and their wording live in
-[`lib/school-connect-mail.js`](lib/school-connect-mail.js): `confirmationEmail`,
-`teamEmail` and `enrollmentEmail`.
-
-**Approval is the important step.** It happens in the admin CMS
-(*🎓 School Connect* tab → *Approve & email school ID*), which assigns
-`school_id` (same value as the reference), stamps `approved_at` and sends the
-enrolment email carrying that ID. The reviewer can also add a note — batch
-deadline, fee confirmation, course advice — which is appended to the approval
-email; `enrollment_email_state` records `sent`/`failed` so a Mailgun outage is
-visible instead of silent, and *Resend ID email* retries it. Routes:
-`GET /api/admin/school-connect`, `GET|PATCH|DELETE /api/admin/school-connect/:id`.
-
-**Before launch, two things to confirm with the school team:** the name of the
-School Connect coordinator (SPOC) who completes the IIT Madras enrolment, and the
-exact enrolment step the family should take — the approval email currently asks
-them to reply or WhatsApp us after receiving the ID, which needs to match
-whatever IIT Madras' school login expects. Set `SCHOOL_CONNECT_TO` in the
-environment to the admissions inbox that should receive new registrations.
-
-**Running the whole loop locally.** Two servers and two databases, wired
-together by the sync key (Future Assist needs the
-`school_connect_registrations` table — `npm run db:push` — before the mirror can
-land):
+**Running the whole loop locally.**
 
 ```bash
 # 1. Future Assist (its dev server would take port 3000, so move it)
 cd ../Future_Assist/future-assist-v2
-PORT=3100 SCHOOL_CONNECT_SYNC_KEY=local-dev-sync-key SCHOOL_CONNECT_EMAIL=off npm run dev
+PORT=3100 SCHOOL_CONNECT_EMAIL=off npm run dev
 
-# 2. This website
-FUTURE_ASSIST_SCHOOL_CONNECT_URL=http://localhost:3100/api/school-connect \
-FUTURE_ASSIST_SCHOOL_CONNECT_KEY=local-dev-sync-key npm run dev
+# 2. This website — point the forwarder at the local Future Assist
+FUTURE_ASSIST_SCHOOL_CONNECT_URL=http://localhost:3100/api/school-connect npm run dev
 ```
 
-The register page is then at `http://localhost:3000/school-connect-register`, the
-website review tab at `http://localhost:3000/admin` (🎓 School Connect), and the
-programme desk at `http://localhost:3100/admin/school-connect`.
-`SCHOOL_CONNECT_EMAIL=off` stops Future Assist sending its fallback confirmation
-while testing; the website's own emails simply fail without
-`MAILGUN_API_KEY`, which the API reports as `familyNotified: false` instead of
-failing the registration. If the Future Assist dev server starts returning 404s
-for routes that exist (`/api/health`, `/login`), move its `.next` directory aside
-and start it again — that is a stale dev cache, not a code problem.
+The register page is then at `http://localhost:3000/school-connect-register` and
+the desk at `http://localhost:3100/admin/school-connect`. Local Future Assist runs
+against the local MySQL copy, whose `school_connect_registrations` table already
+exists; a fresh clone needs `npm run db:push` before the intake can store
+anything. If the Future Assist dev server starts returning 404s for routes that
+exist (`/api/health`, `/login`), move its `.next` directory aside and start it
+again — that is a stale dev cache, not a code problem.
 
 ### 12. Brand assets — the school logo
 

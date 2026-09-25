@@ -10,11 +10,6 @@ import {
   sendWeeklyNewsletter,
 } from '../../lib/newsletter.js';
 import { emailConfigured, sendEmail } from '../../lib/email.js';
-import { enrollmentEmail, SCHOOL_CONNECT_STATUSES } from '../../lib/school-connect-mail.js';
-import {
-  futureAssistPayload,
-  syncRegistrationToFutureAssist,
-} from '../../lib/future-assist.js';
 
 // One consolidated serverless function for all /api/admin/* routes.
 export const config = { maxDuration: 60 };
@@ -36,7 +31,7 @@ export default async function handler(req, res) {
     if (seg0 === 'applications' && !seg1) return applicationsCollection(req, res, sql);
     if (seg0 === 'applications') return applicationItem(req, res, sql, seg1);
     if (seg0 === 'school-connect' && !seg1) return schoolConnectCollection(req, res, sql);
-    if (seg0 === 'school-connect') return schoolConnectItem(req, res, sql, seg1, admin);
+    if (seg0 === 'school-connect') return schoolConnectItem(req, res);
     if (seg0 === 'content' && !seg1) return contentRoute(req, res, sql);
     if (seg0 === 'generate' && !seg1) return generateRoute(req, res, sql);
     if (seg0 === 'newsletter' && seg1 === 'send') return newsletterSend(req, res, sql);
@@ -320,196 +315,27 @@ async function applicationItem(req, res, sql, idRaw) {
 // Madras School Connect course as a Hash Future School student.
 async function schoolConnectCollection(req, res, sql) {
   if (req.method === 'GET') {
-    try {
-      const rows = await sql`
-        SELECT
-          id, ref, school_id, student_name, student_email, student_phone, age, grade,
-          current_school, school_city, school_country, country, city,
-          parent_name, parent_email, parent_phone,
-          interests, status, reviewer_notes, approved_at,
-          enrollment_email_state, enrollment_email_at,
-          future_assist_state, future_assist_error, future_assist_synced_at,
-          created_at
-        FROM school_connect_registrations
-        ORDER BY created_at DESC
-      `;
-      return ok(res, { registrations: rows });
-    } catch (err) {
-      if (err?.code === '42P01') {
-        return ok(res, { registrations: [], migrationRequired: true });
-      }
-      return serverError(res, err);
-    }
+    // Registrations are not stored on this site: /api/school-connect forwards the
+    // form straight to Future Assist, which keeps the row and runs the desk at
+    // /admin/school-connect. This endpoint therefore reports where the work
+    // moved rather than reading a table that no longer receives rows.
+    return ok(res, {
+      registrations: [],
+      movedTo: process.env.FUTURE_ASSIST_SCHOOL_CONNECT_DESK || 'https://futureassist.hashfuture.school/admin/school-connect',
+    });
   }
 
   return bad(res, 'Method not allowed', 405);
 }
 
-async function schoolConnectItem(req, res, sql, idRaw, admin) {
-  const id = Number(idRaw);
-  if (!Number.isInteger(id) || id <= 0) {
-    return bad(res, 'Invalid registration id');
-  }
-
-  if (req.method === 'GET') {
-    try {
-      const rows = await sql`SELECT * FROM school_connect_registrations WHERE id = ${id} LIMIT 1`;
-      if (!rows.length) return notFound(res, 'Registration not found');
-      return ok(res, { registration: rows[0] });
-    } catch (err) {
-      return serverError(res, err);
-    }
-  }
-
-  if (req.method === 'PATCH') {
-    const body = await readBody(req);
-    const action = String(body.action || '').trim();
-    const status = String(body.status || '').trim();
-
-    if (status && !SCHOOL_CONNECT_STATUSES.includes(status)) {
-      return bad(res, `Status must be one of: ${SCHOOL_CONNECT_STATUSES.join(', ')}`);
-    }
-
-    if (action && !['approve', 'resend', 'sync'].includes(action)) {
-      return bad(res, 'Action must be "approve", "resend" or "sync"');
-    }
-
-    try {
-      const existing = await sql`SELECT * FROM school_connect_registrations WHERE id = ${id} LIMIT 1`;
-      if (!existing.length) return notFound(res, 'Registration not found');
-      const current = existing[0];
-
-      const notes = body.reviewer_notes === undefined ? null : String(body.reviewer_notes || '');
-      const enrollmentNote =
-        body.enrollment_note === undefined ? null : String(body.enrollment_note || '');
-      const reviewedBy = admin?.email ? String(admin.email) : null;
-      const shouldEmail = body.send_email !== false && body.send_email !== 'false';
-      const wantsApproval = action === 'approve' || status === 'approved';
-      const wantsResend = action === 'resend';
-
-      // 1. Write the review decision before sending anything, so a mail outage
-      //    cannot lose the approval.
-      let rows;
-      if (wantsApproval) {
-        const schoolId =
-          current.school_id ||
-          current.ref ||
-          `HFS-SC-${new Date().getFullYear()}-${String(current.id).padStart(4, '0')}`;
-
-        rows = await sql`
-          UPDATE school_connect_registrations
-          SET status = 'approved',
-              school_id = ${schoolId},
-              approved_at = COALESCE(approved_at, now()),
-              reviewed_by = COALESCE(${reviewedBy}, reviewed_by),
-              reviewer_notes = COALESCE(${notes}, reviewer_notes),
-              enrollment_note = COALESCE(${enrollmentNote}, enrollment_note),
-              updated_at = now()
-          WHERE id = ${id}
-          RETURNING *
-        `;
-      } else {
-        rows = await sql`
-          UPDATE school_connect_registrations
-          SET status = COALESCE(${status || null}, status),
-              reviewed_by = COALESCE(${reviewedBy}, reviewed_by),
-              reviewer_notes = COALESCE(${notes}, reviewer_notes),
-              enrollment_note = COALESCE(${enrollmentNote}, enrollment_note),
-              updated_at = now()
-          WHERE id = ${id}
-          RETURNING *
-        `;
-      }
-
-      let registration = rows[0];
-
-      // 2. Send (or resend) the enrolment mail. This is the message that carries
-      //    the Hash Future School student ID.
-      const wantsSyncOnly = action === 'sync';
-
-      if ((wantsApproval || wantsResend) && shouldEmail) {
-        let state = 'sent';
-        const recipients = [
-          registration.student_email,
-          registration.parent_email,
-          registration.parent2_email,
-        ].filter(Boolean);
-
-        try {
-          const mail = enrollmentEmail(registration, { note: registration.enrollment_note });
-          await sendEmail({
-            to: recipients,
-            subject: `✅ Approved — your Hash Future School ID for IIT Madras School Connect (${registration.school_id})`,
-            html: mail.html,
-            text: mail.text,
-            replyTo: process.env.SCHOOL_CONNECT_TO || process.env.ADMIN_EMAIL || 'learn@hashfuture.school',
-          });
-        } catch (err) {
-          console.error('[admin/school-connect] enrolment email failed:', err);
-          state = 'failed';
-        }
-
-        const emailed = await sql`
-          UPDATE school_connect_registrations
-          SET enrollment_email_state = ${state},
-              enrollment_email_at = now(),
-              updated_at = now()
-          WHERE id = ${id}
-          RETURNING *
-        `;
-        registration = emailed[0];
-      }
-
-      // 3. Keep the Future Assist copy in step. The programme desk reads those
-      //    rows, so an approval (which is what issues the Hash Future School ID)
-      //    and every other status move — verified, rejected, archived — has to
-      //    land there too. `sync` re-pushes a row whose first mirror failed
-      //    without touching the status; notes-only edits do not push, so the desk
-      //    is not rewritten for every keystroke.
-      const statusChanged = Boolean(status) && status !== current.status;
-
-      if (wantsApproval || wantsResend || wantsSyncOnly || statusChanged) {
-        const sync = await syncRegistrationToFutureAssist(
-          futureAssistPayload(registration, {
-            emailed: registration.enrollment_email_state === 'sent',
-          })
-        );
-
-        try {
-          const rows2 = await sql`
-            UPDATE school_connect_registrations
-            SET future_assist_id = ${sync.id},
-                future_assist_state = ${sync.state},
-                future_assist_error = ${sync.error},
-                future_assist_synced_at = now(),
-                updated_at = now()
-            WHERE id = ${id}
-            RETURNING *
-          `;
-          if (rows2.length) registration = rows2[0];
-        } catch (err) {
-          console.error('[admin/school-connect] could not record the Future Assist sync state:', err);
-        }
-      }
-
-      return ok(res, { registration, updated: true });
-    } catch (err) {
-      return serverError(res, err);
-    }
-  }
-
-  if (req.method === 'DELETE') {
-    try {
-      const rows = await sql`DELETE FROM school_connect_registrations WHERE id = ${id} RETURNING id`;
-      if (!rows.length) return notFound(res, 'Registration not found');
-      return ok(res, { deleted: true });
-    } catch (err) {
-      return serverError(res, err);
-    }
-  }
-
-  return bad(res, 'Method not allowed', 405);
+// The desk, the approval step and the emails all moved into Future Assist, which
+// keeps the registrations; this endpoint only tells the caller where to look.
+async function schoolConnectItem(req, res) {
+  return ok(res, {
+    movedTo: process.env.FUTURE_ASSIST_SCHOOL_CONNECT_DESK || 'https://futureassist.hashfuture.school/admin/school-connect',
+  });
 }
+
 
 async function contentRoute(req, res, sql) {
   if (req.method === 'GET') {

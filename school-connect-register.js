@@ -320,19 +320,10 @@
 
             $('#scr-ref-value').textContent = json.ref || '—';
 
-            const notes = [];
-            if (json.familyNotified === false) {
-                notes.push(
-                    'Your confirmation email could not be sent automatically — quote the reference above when you contact us and we will resend it.'
-                );
-            } else {
-                notes.push(
-                    'A confirmation email has gone to the student and parent email addresses, with the reference above.'
-                );
-            }
-            notes.push(
-                'Keep the reference handy: WhatsApp it to +91 94971 20591 if you want us to chase anything.'
-            );
+            const notes = [
+                'A confirmation email is on its way to the student and parent email addresses, with the reference above and what happens next.',
+                'Keep the reference handy: WhatsApp it to +91 94971 20591 if you want us to chase anything.',
+            ];
             $('#scr-success-note').textContent = notes.join(' ');
 
             form.hidden = true;

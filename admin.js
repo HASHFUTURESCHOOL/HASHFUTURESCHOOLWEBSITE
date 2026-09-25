@@ -664,12 +664,18 @@ function scStatusBadge(status) {
 
 async function loadSchoolConnect() {
   try {
-    const { registrations, migrationRequired } = await api('/api/admin/school-connect');
+    const { registrations, movedTo } = await api('/api/admin/school-connect');
     state.schoolConnect = registrations || [];
     $('#count-sc').textContent = state.schoolConnect.length;
-    if (migrationRequired) {
-      $('#sc-list').innerHTML =
-        '<div class="empty">The <code>school_connect_registrations</code> table does not exist on this database yet. Run <code>npm run db:migrate</code>.</div>';
+    if (movedTo) {
+      $('#sc-list').innerHTML = `
+        <div class="empty" style="text-align:left;line-height:1.7;">
+          <p style="margin:0 0 10px;"><strong>This desk moved into Future Assist.</strong></p>
+          <p style="margin:0 0 10px;">School Connect registrations from students at other schools are now stored and
+            managed there, next to the student admission desk — the website form forwards each registration straight
+            in, and Future Assist emails the family their reference.</p>
+          <p style="margin:0;"><a class="btn btn-primary" href="${movedTo}" target="_blank" rel="noopener">Open the IIT School Connect desk in Future Assist</a></p>
+        </div>`;
       return;
     }
     renderSchoolConnect();
