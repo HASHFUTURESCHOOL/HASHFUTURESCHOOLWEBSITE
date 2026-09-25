@@ -392,13 +392,17 @@ function initAdmissionModal() {
         });
     });
 
-    // Auto open after 2 minutes (120000ms)
-    setTimeout(() => {
-        // Only open if not already open
-        if (!modal.classList.contains('show')) {
-            openModal();
-        }
-    }, 120000);
+    // Auto open after 2 minutes (120000ms). The shared chrome on the generated
+    // pages sets data-auto-open="false": there the dialog is meant to appear when
+    // a "Schedule a Global Discovery Call" CTA is clicked, not on a timer.
+    if (modal.dataset.autoOpen !== 'false') {
+        setTimeout(() => {
+            // Only open if not already open
+            if (!modal.classList.contains('show')) {
+                openModal();
+            }
+        }, 120000);
+    }
 
     // Close modal function
     const closeModal = () => {
@@ -437,10 +441,14 @@ function initAdmissionModal() {
             messageDiv.className = 'form-message';
             messageDiv.textContent = '';
 
-            // 1. Check ReCAPTCHA
-            const captchaResponse = grecaptcha.getResponse();
-            if (captchaResponse.length === 0) {
-                messageDiv.textContent = 'Please complete the CAPTCHA verification.';
+            // 1. Check ReCAPTCHA. The widget script loads asynchronously, so a fast
+            //    submit can beat it; say so instead of throwing.
+            const captchaReady = typeof grecaptcha !== 'undefined' && typeof grecaptcha.getResponse === 'function';
+            const captchaResponse = captchaReady ? grecaptcha.getResponse() : '';
+            if (!captchaResponse) {
+                messageDiv.textContent = captchaReady
+                    ? 'Please complete the CAPTCHA verification.'
+                    : 'The verification is still loading — please try again in a moment.';
                 messageDiv.classList.add('error');
                 return; // Stop submission
             }

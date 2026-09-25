@@ -44,6 +44,7 @@
         <div class="tabs">
           <button class="tab active" data-view="posts" type="button">📝 Posts <span class="count" id="count-posts">0</span></button>
           <button class="tab" data-view="applications" type="button">🎯 Applications <span class="count" id="count-apps">0</span></button>
+          <button class="tab" data-view="school-connect" type="button">🎓 School Connect <span class="count" id="count-sc">0</span></button>
           <button class="tab" data-view="subscribers" type="button">✉️ Subscribers <span class="count" id="count-subs">0</span></button>
           <button class="tab" data-view="newsletter" type="button">📬 Newsletter</button>
           <button class="tab" data-view="content" type="button">🧩 Site Content</button>
@@ -86,6 +87,30 @@
             </div>
           </div>
           <div id="apps-list"></div>
+        </section>
+
+        <section class="view" id="view-school-connect">
+          <div class="view-header">
+            <div>
+              <h2>IIT Madras School Connect</h2>
+              <p>Students from <strong>other schools</strong> — mostly in the UAE, Saudi Arabia, Oman, Qatar, Kuwait
+                and Bahrain — who registered with us at <strong>/school-connect-register</strong> so they can take an
+                IIT Madras School Connect course as a Hash Future School student. Approving a registration issues the
+                Hash Future School ID and emails the student and parents.</p>
+            </div>
+            <div class="view-actions">
+              <select id="sc-filter" class="filter-select">
+                <option value="">All statuses</option>
+                <option value="new">New</option>
+                <option value="verified">Verified</option>
+                <option value="approved">Approved</option>
+                <option value="rejected">Rejected</option>
+                <option value="archived">Archived</option>
+              </select>
+              <button class="btn btn-ghost" id="sc-refresh-btn" type="button">↻ Refresh</button>
+            </div>
+          </div>
+          <div id="sc-list"></div>
         </section>
 
         <section class="view" id="view-subscribers">
@@ -235,6 +260,50 @@
         <div class="modal-foot-actions">
           <button class="btn btn-ghost" id="app-modal-close-2" type="button">Close</button>
           <button class="btn btn-primary" id="app-save-btn" type="button">Save Review</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="sc-modal" class="modal-backdrop hidden">
+    <div class="modal modal-wide">
+      <div class="modal-head">
+        <h3 id="sc-modal-title">School Connect registration</h3>
+        <button id="sc-modal-close" type="button" aria-label="Close">✕</button>
+      </div>
+      <div class="modal-body" id="sc-modal-body"></div>
+      <div class="modal-foot">
+        <div class="app-review">
+          <div class="field">
+            <label for="sc-status">Status</label>
+            <select id="sc-status">
+              <option value="new">New</option>
+              <option value="verified">Verified</option>
+              <option value="approved">Approved</option>
+              <option value="rejected">Rejected</option>
+              <option value="archived">Archived</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="sc-school-id">Hash Future School ID</label>
+            <input id="sc-school-id" type="text" readonly placeholder="Issued on approval" />
+          </div>
+        </div>
+        <div class="field">
+          <label for="sc-enrollment-note">Note added to the approval email (batch, fee, course advice…)</label>
+          <textarea id="sc-enrollment-note" rows="3"
+            placeholder="e.g. Batch 4 (Oct 2026) closes on 30 Sep. The IIT Madras course fee is collected by the school and remitted in bulk."></textarea>
+        </div>
+        <div class="field">
+          <label for="sc-notes">Internal reviewer notes</label>
+          <textarea id="sc-notes" rows="2"></textarea>
+        </div>
+        <div class="modal-foot-actions">
+          <button class="btn btn-ghost" id="sc-modal-close-2" type="button">Close</button>
+          <button class="btn btn-ghost" id="sc-resend-btn" type="button">↻ Resend ID email</button>
+          <button class="btn btn-ghost" id="sc-sync-btn" type="button">↻ Resync to Future Assist</button>
+          <button class="btn btn-ghost" id="sc-save-btn" type="button">Save Review</button>
+          <button class="btn btn-primary" id="sc-approve-btn" type="button">✅ Approve &amp; email school ID</button>
         </div>
       </div>
     </div>

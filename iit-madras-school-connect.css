@@ -1,0 +1,1158 @@
+/* ============================================
+   IIT Madras School Connect partnership page
+   Page-scoped styles (sc- prefix). Reuses the
+   design tokens from styles.css.
+   ============================================ */
+
+.sc-visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+}
+
+/* ---------- buttons ---------- */
+.sc-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    padding: 14px 28px;
+    border-radius: var(--radius-full);
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.1;
+    text-decoration: none;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: transform var(--transition-fast), box-shadow var(--transition-normal),
+        background var(--transition-normal), border-color var(--transition-normal);
+}
+
+.sc-btn-primary {
+    background: var(--primary-gradient);
+    color: #fff;
+    box-shadow: var(--shadow-primary);
+}
+
+.sc-btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 16px 34px -12px rgba(255, 75, 75, 0.55);
+}
+
+/* Ghost buttons sit on the dark hero and the dark closing CTA band. */
+.sc-btn-ghost {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.45);
+    color: #fff;
+}
+
+.sc-btn-ghost:hover {
+    background: rgba(255, 255, 255, 0.16);
+    border-color: #fff;
+    transform: translateY(-2px);
+}
+
+/* ---------- hero ---------- */
+.sc-hero {
+    position: relative;
+    overflow: hidden;
+    padding: 150px 0 78px;
+    background: linear-gradient(135deg, #061130 0%, #0a2a63 48%, #123a86 100%);
+    color: #fff;
+}
+
+.sc-hero-glow {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(90px);
+    pointer-events: none;
+}
+
+.sc-glow-one {
+    width: 460px;
+    height: 460px;
+    top: -140px;
+    right: -80px;
+    background: rgba(37, 99, 235, 0.55);
+}
+
+.sc-glow-two {
+    width: 360px;
+    height: 360px;
+    bottom: -160px;
+    left: -60px;
+    background: rgba(255, 75, 75, 0.35);
+}
+
+.sc-hero-inner {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.9fr);
+    gap: 52px;
+    align-items: center;
+}
+
+.sc-hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    padding: 7px 16px;
+    border-radius: var(--radius-full);
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    margin-bottom: 22px;
+}
+
+.sc-hero-badge-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #34D399;
+    box-shadow: 0 0 0 4px rgba(52, 211, 153, 0.22);
+}
+
+/* IIT Madras mark inside the hero badge. The badge sits on the dark navy hero,
+   so the seal gets a white disc behind it to keep its own colours readable. */
+.sc-hero-badge-logo {
+    display: block;
+    width: 26px;
+    height: 26px;
+    object-fit: contain;
+    background: #fff;
+    border-radius: 50%;
+    padding: 1px;
+}
+
+.sc-hero-title {
+    font-size: clamp(2rem, 3.6vw, 3rem);
+    font-weight: 800;
+    line-height: 1.16;
+    letter-spacing: -0.01em;
+    color: #fff;
+    margin-bottom: 20px;
+}
+
+.sc-hero-accent {
+    color: #9CC4FF;
+}
+
+.sc-hero-sub {
+    font-size: 1.08rem;
+    line-height: 1.75;
+    color: rgba(255, 255, 255, 0.84);
+    max-width: 640px;
+}
+
+.sc-hero-sub strong {
+    color: #fff;
+}
+
+.sc-hero-facts {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 18px;
+    margin: 32px 0;
+    padding: 22px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.16);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+}
+
+.sc-hero-facts li {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.sc-fact-num {
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: #fff;
+}
+
+.sc-fact-label {
+    font-size: 0.8rem;
+    line-height: 1.4;
+    color: rgba(255, 255, 255, 0.68);
+}
+
+.sc-hero-cta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+}
+
+/* Pointer to the registration route for students at other schools. */
+.sc-hero-alt {
+    margin: 18px 0 0;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.75);
+}
+
+.sc-hero-alt a {
+    color: #9CC4FF;
+    font-weight: 700;
+}
+
+.sc-btn-outline {
+    background: #fff;
+    border: 1px solid rgba(15, 23, 42, 0.18);
+    color: var(--text-dark);
+}
+
+.sc-btn-outline:hover {
+    border-color: #1565D8;
+    color: #1565D8;
+    transform: translateY(-2px);
+}
+
+/* ---------- verification card ---------- */
+.sc-verify-card {
+    background: #fff;
+    border-radius: var(--radius-xl);
+    padding: 28px 26px;
+    box-shadow: 0 30px 60px -20px rgba(2, 6, 23, 0.55);
+    color: var(--text-dark);
+}
+
+.sc-verify-eyebrow {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-light);
+    margin-bottom: 20px;
+}
+
+.sc-lockup {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 10px;
+    padding-bottom: 20px;
+    margin-bottom: 6px;
+    border-bottom: 1px dashed rgba(15, 23, 42, 0.16);
+}
+
+.sc-lockup-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    text-align: center;
+}
+
+.sc-lockup-mark {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 54px;
+    height: 54px;
+    border-radius: 14px;
+    color: #fff;
+    font-weight: 800;
+    font-size: 0.95rem;
+    letter-spacing: 0.02em;
+}
+
+.sc-lockup-mark-hash {
+    background: var(--primary-gradient);
+}
+
+.sc-lockup-mark-iitm {
+    background: linear-gradient(135deg, #0B3B8C 0%, #1565D8 100%);
+}
+
+/* Official IIT Madras mark, in the slot the flat "IITM" tile used to hold. */
+.sc-lockup-logo {
+    display: block;
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+}
+
+.sc-lockup-name {
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: var(--text-dark);
+}
+
+.sc-lockup-role {
+    font-size: 0.72rem;
+    color: var(--text-light);
+}
+
+.sc-lockup-x {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--text-light);
+}
+
+.sc-verify-list {
+    margin: 16px 0 0;
+}
+
+.sc-verify-list div {
+    padding: 11px 0;
+    border-bottom: 1px solid rgba(15, 23, 42, 0.07);
+}
+
+.sc-verify-list div:last-child {
+    border-bottom: 0;
+}
+
+.sc-verify-list dt {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-light);
+}
+
+.sc-verify-list dd {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: var(--text-dark);
+    font-weight: 600;
+}
+
+.sc-verify-list dd a {
+    color: #1565D8;
+    font-weight: 600;
+    word-break: break-word;
+}
+
+.sc-verify-note {
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px dashed rgba(15, 23, 42, 0.16);
+    font-size: 0.78rem;
+    line-height: 1.6;
+    color: var(--text-light);
+}
+
+/* ---------- generic section scaffolding ---------- */
+.sc-section {
+    padding: 88px 0;
+}
+
+.sc-section-alt {
+    background: var(--bg-light);
+}
+
+.sc-section-head {
+    max-width: 820px;
+    margin: 0 auto 48px;
+    text-align: center;
+}
+
+.sc-section-head h2 {
+    font-size: clamp(1.6rem, 2.6vw, 2.2rem);
+    font-weight: 800;
+    line-height: 1.25;
+    color: var(--text-dark);
+    margin: 14px 0 16px;
+}
+
+.sc-section-head .section-badge {
+    display: inline-block;
+}
+
+.sc-lede {
+    font-size: 1.04rem;
+    line-height: 1.75;
+    color: var(--text-medium);
+}
+
+.sc-source-note {
+    margin-top: 26px;
+    font-size: 0.88rem;
+    line-height: 1.7;
+    color: var(--text-light);
+}
+
+.sc-source-note a,
+.sc-related a,
+.sc-cta-note a {
+    color: var(--primary);
+    font-weight: 600;
+}
+
+/* ---------- split intro ---------- */
+.sc-split {
+    display: grid;
+    grid-template-columns: minmax(0, 1.35fr) minmax(300px, 1fr);
+    gap: 44px;
+    align-items: start;
+}
+
+.sc-split-main h3 {
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 14px;
+}
+
+.sc-split-main p {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--text-medium);
+    margin-bottom: 16px;
+}
+
+.sc-callout {
+    background: rgba(21, 101, 216, 0.07);
+    border-left: 4px solid #1565D8;
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+    padding: 18px 20px;
+    color: var(--text-dark) !important;
+}
+
+.sc-highlight-card {
+    background: #fff;
+    border-radius: var(--radius-lg);
+    border-top: 4px solid #0B3B8C;
+    padding: 26px;
+    box-shadow: var(--shadow-lg);
+}
+
+.sc-highlight-card h3 {
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: var(--text-dark);
+    margin-bottom: 14px;
+}
+
+.sc-highlight-list div {
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(15, 23, 42, 0.07);
+}
+
+.sc-highlight-list div:last-child {
+    border-bottom: 0;
+    padding-bottom: 0;
+}
+
+.sc-highlight-list dt {
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #1565D8;
+    margin-bottom: 4px;
+}
+
+.sc-highlight-list dd {
+    font-size: 0.94rem;
+    line-height: 1.6;
+    color: var(--text-medium);
+}
+
+/* ---------- cards ---------- */
+.sc-grid {
+    display: grid;
+    gap: 22px;
+}
+
+.sc-grid-3 {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.sc-grid-2 {
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+}
+
+.sc-card {
+    background: #fff;
+    border-radius: var(--radius-lg);
+    padding: 28px 26px;
+    box-shadow: var(--shadow-md);
+    border: 1px solid rgba(15, 23, 42, 0.05);
+    transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+}
+
+.sc-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-xl);
+}
+
+.sc-card-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 46px;
+    height: 46px;
+    border-radius: var(--radius-md);
+    background: rgba(21, 101, 216, 0.1);
+    font-size: 1.35rem;
+    margin-bottom: 16px;
+}
+
+.sc-card h3 {
+    font-size: 1.08rem;
+    font-weight: 700;
+    line-height: 1.4;
+    color: var(--text-dark);
+    margin-bottom: 10px;
+}
+
+.sc-card p {
+    font-size: 0.94rem;
+    line-height: 1.7;
+    color: var(--text-medium);
+}
+
+.sc-card-plain {
+    box-shadow: none;
+    border: 1px solid rgba(15, 23, 42, 0.1);
+    border-left: 4px solid #1565D8;
+}
+
+/* ---------- students from other schools ---------- */
+.sc-outside {
+    background: linear-gradient(135deg, #F0F4FF 0%, #F8FAFC 100%);
+}
+
+.sc-outside-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.35fr) minmax(300px, 1fr);
+    gap: 44px;
+    align-items: start;
+}
+
+.sc-outside-copy h2 {
+    font-size: clamp(1.6rem, 2.6vw, 2.15rem);
+    font-weight: 800;
+    line-height: 1.25;
+    color: var(--text-dark);
+    margin: 14px 0 16px;
+}
+
+.sc-outside-copy .sc-lede {
+    text-align: left;
+}
+
+.sc-outside-clear {
+    margin-top: 18px;
+    background: #fff;
+    border-left: 4px solid var(--primary);
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+    padding: 16px 20px;
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: var(--text-dark);
+    box-shadow: var(--shadow-sm);
+}
+
+.sc-outside-steps {
+    list-style: none;
+    margin: 26px 0;
+    display: grid;
+    gap: 14px;
+}
+
+.sc-outside-steps li {
+    display: flex;
+    gap: 16px;
+    background: #fff;
+    border: 1px solid rgba(15, 23, 42, 0.08);
+    border-radius: var(--radius-md);
+    padding: 18px 20px;
+}
+
+.sc-outside-num {
+    flex: 0 0 auto;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #0B3B8C 0%, #1565D8 100%);
+    color: #fff;
+    font-weight: 800;
+    font-size: 0.9rem;
+}
+
+.sc-outside-steps h3 {
+    margin: 0 0 4px;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text-dark);
+}
+
+.sc-outside-steps p {
+    margin: 0;
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: var(--text-medium);
+}
+
+.sc-outside-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: 6px;
+}
+
+.sc-outside-card {
+    position: sticky;
+    top: 100px;
+    background: #fff;
+    border-radius: var(--radius-lg);
+    border-top: 4px solid var(--primary);
+    padding: 28px 26px;
+    box-shadow: var(--shadow-lg);
+}
+
+.sc-outside-card h3 {
+    margin: 0 0 16px;
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: var(--text-dark);
+}
+
+.sc-outside-card .sc-list li {
+    font-size: 0.9rem;
+    margin-bottom: 12px;
+}
+
+.sc-outside-note {
+    margin: 18px 0 0;
+    padding-top: 16px;
+    border-top: 1px dashed rgba(15, 23, 42, 0.16);
+    font-size: 0.8rem;
+    line-height: 1.65;
+    color: var(--text-light);
+}
+
+/* ---------- steps ---------- */
+.sc-steps {
+    list-style: none;
+    display: grid;
+    /* Five steps: keep them on one row on desktop, wrap to 4/3/2 as the
+       container narrows. */
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    counter-reset: none;
+}
+
+.sc-step {
+    position: relative;
+    background: #fff;
+    border-radius: var(--radius-lg);
+    border: 1px solid rgba(15, 23, 42, 0.08);
+    padding: 26px 24px;
+}
+
+.sc-step-num {
+    display: inline-block;
+    font-size: 0.85rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    color: #1565D8;
+    background: rgba(21, 101, 216, 0.1);
+    border-radius: var(--radius-sm);
+    padding: 4px 10px;
+    margin-bottom: 14px;
+}
+
+.sc-step h3 {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 8px;
+}
+
+.sc-step p {
+    font-size: 0.92rem;
+    line-height: 1.7;
+    color: var(--text-medium);
+}
+
+/* ---------- course grid ---------- */
+.sc-course-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 18px;
+}
+
+.sc-course {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: #fff;
+    border: 1px solid rgba(15, 23, 42, 0.08);
+    border-radius: var(--radius-md);
+    padding: 22px;
+    transition: border-color var(--transition-normal), box-shadow var(--transition-normal);
+}
+
+.sc-course:hover {
+    border-color: rgba(21, 101, 216, 0.45);
+    box-shadow: var(--shadow-md);
+}
+
+.sc-course h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1.4;
+    color: var(--text-dark);
+    margin-bottom: 8px;
+}
+
+.sc-course p {
+    font-size: 0.9rem;
+    line-height: 1.65;
+    color: var(--text-medium);
+    flex: 1;
+}
+
+.sc-course footer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 18px;
+    padding-top: 14px;
+    border-top: 1px solid rgba(15, 23, 42, 0.07);
+    font-size: 0.78rem;
+    color: var(--text-light);
+}
+
+.sc-chip {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: var(--radius-full);
+    background: rgba(15, 23, 42, 0.06);
+    color: var(--text-medium);
+    font-weight: 700;
+    font-size: 0.72rem;
+    white-space: nowrap;
+}
+
+.sc-chip-new {
+    background: rgba(5, 150, 105, 0.12);
+    color: #047857;
+}
+
+/* ---------- batch table ---------- */
+.sc-table-wrap {
+    overflow-x: auto;
+    background: #fff;
+    border-radius: var(--radius-lg);
+    border: 1px solid rgba(15, 23, 42, 0.08);
+    box-shadow: var(--shadow-sm);
+}
+
+.sc-table {
+    width: 100%;
+    min-width: 720px;
+    border-collapse: collapse;
+    font-size: 0.92rem;
+}
+
+.sc-table thead th {
+    background: #0a2a63;
+    color: #fff;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-align: left;
+    padding: 16px 18px;
+}
+
+.sc-table tbody th,
+.sc-table tbody td {
+    padding: 16px 18px;
+    text-align: left;
+    border-bottom: 1px solid rgba(15, 23, 42, 0.07);
+    color: var(--text-medium);
+    font-weight: 500;
+}
+
+.sc-table tbody th {
+    color: var(--text-dark);
+    font-weight: 700;
+}
+
+.sc-table tbody tr:last-child th,
+.sc-table tbody tr:last-child td {
+    border-bottom: 0;
+}
+
+.sc-row-current {
+    background: rgba(21, 101, 216, 0.06);
+}
+
+.sc-status {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: var(--radius-full);
+    background: rgba(15, 23, 42, 0.06);
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--text-medium);
+    white-space: nowrap;
+}
+
+.sc-status-open {
+    background: rgba(5, 150, 105, 0.14);
+    color: #047857;
+}
+
+.sc-status-progress {
+    background: rgba(217, 119, 6, 0.14);
+    color: #b45309;
+}
+
+/* The table scrolls sideways on phones; say so rather than hiding columns. */
+.sc-table-hint {
+    display: none;
+    margin-top: 12px;
+    font-size: 0.82rem;
+    color: var(--text-light);
+}
+
+/* ---------- deadline band ---------- */
+.sc-deadline {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 28px;
+    margin-top: 26px;
+    padding: 30px 34px;
+    border-radius: var(--radius-lg);
+    background: linear-gradient(135deg, #061130 0%, #0a2a63 100%);
+    color: #fff;
+}
+
+.sc-deadline-kicker {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #9CC4FF;
+    margin-bottom: 8px;
+}
+
+.sc-deadline h3 {
+    font-size: 1.3rem;
+    font-weight: 800;
+    line-height: 1.35;
+    margin-bottom: 8px;
+}
+
+.sc-deadline h3 span {
+    color: #FCA5A5;
+}
+
+.sc-deadline p {
+    font-size: 0.94rem;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* ---------- panels ---------- */
+.sc-panel {
+    background: #fff;
+    border-radius: var(--radius-lg);
+    border: 1px solid rgba(15, 23, 42, 0.08);
+    padding: 30px 28px;
+    box-shadow: var(--shadow-sm);
+}
+
+.sc-panel h3 {
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: var(--text-dark);
+    margin-bottom: 16px;
+}
+
+.sc-list {
+    list-style: none;
+}
+
+.sc-list li {
+    position: relative;
+    padding-left: 26px;
+    margin-bottom: 14px;
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: var(--text-medium);
+}
+
+.sc-list li:last-child {
+    margin-bottom: 0;
+}
+
+.sc-list li::before {
+    content: '';
+    position: absolute;
+    left: 4px;
+    top: 9px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #1565D8;
+}
+
+/* The site-wide `a { color: inherit }` rule would otherwise leave an inline link
+   inside a list looking like plain prose. */
+.sc-list a {
+    color: #1565D8;
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-thickness: 1px;
+}
+
+.sc-list a:hover {
+    color: var(--primary);
+    text-decoration-thickness: 2px;
+}
+
+/* ---------- FAQ ---------- */
+.sc-faq {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.sc-faq details {
+    background: #fff;
+    border: 1px solid rgba(15, 23, 42, 0.08);
+    border-radius: var(--radius-md);
+    padding: 20px 24px;
+    margin-bottom: 12px;
+}
+
+.sc-faq details[open] {
+    border-color: rgba(21, 101, 216, 0.35);
+    box-shadow: var(--shadow-sm);
+}
+
+.sc-faq summary {
+    cursor: pointer;
+    font-size: 1.02rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    align-items: center;
+}
+
+.sc-faq summary::-webkit-details-marker {
+    display: none;
+}
+
+.sc-faq summary::after {
+    content: '+';
+    flex: 0 0 auto;
+    font-size: 1.4rem;
+    line-height: 1;
+    color: #1565D8;
+    font-weight: 600;
+}
+
+.sc-faq details[open] summary::after {
+    content: '\2212';
+}
+
+.sc-faq details p {
+    margin-top: 12px;
+    font-size: 0.95rem;
+    line-height: 1.75;
+    color: var(--text-medium);
+}
+
+/* Several answers end in the registration call to action, and the site-wide
+   `a { color: inherit }` rule would leave those links looking like plain prose.
+   Highlighted so the link reads as something to click. */
+.sc-faq details p a {
+    color: #0B3B8C;
+    font-weight: 700;
+    background: rgba(21, 101, 216, 0.12);
+    border-radius: 4px;
+    padding: 1px 4px;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-thickness: 2px;
+}
+
+.sc-faq details p a:hover {
+    background: #1565D8;
+    color: #fff;
+    text-decoration-color: transparent;
+}
+
+/* ---------- sources ---------- */
+.sc-sources {
+    background: #fff;
+    border-radius: var(--radius-lg);
+    border: 1px solid rgba(15, 23, 42, 0.08);
+    padding: 34px 32px;
+    margin-bottom: 40px;
+}
+
+.sc-sources h2 {
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: var(--text-dark);
+    margin-bottom: 12px;
+}
+
+.sc-sources p {
+    font-size: 0.95rem;
+    line-height: 1.75;
+    color: var(--text-medium);
+}
+
+.sc-source-links {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 12px;
+    margin-top: 20px;
+}
+
+.sc-source-links a {
+    display: inline-block;
+    padding: 8px 16px;
+    border-radius: var(--radius-full);
+    background: rgba(21, 101, 216, 0.08);
+    color: #1565D8;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.sc-source-links a:hover {
+    background: #1565D8;
+    color: #fff;
+}
+
+/* ---------- closing CTA ---------- */
+.sc-cta {
+    text-align: center;
+    padding: 54px 30px;
+    border-radius: var(--radius-xl);
+    background: linear-gradient(135deg, #061130 0%, #123a86 100%);
+    color: #fff;
+}
+
+.sc-cta h2 {
+    font-size: clamp(1.5rem, 2.4vw, 2rem);
+    font-weight: 800;
+    margin-bottom: 14px;
+}
+
+.sc-cta > p {
+    max-width: 620px;
+    margin: 0 auto;
+    font-size: 1rem;
+    line-height: 1.75;
+    color: rgba(255, 255, 255, 0.82);
+}
+
+.sc-cta-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 14px;
+    margin: 28px 0 18px;
+}
+
+.sc-cta-note {
+    font-size: 0.88rem !important;
+    color: rgba(255, 255, 255, 0.7) !important;
+}
+
+.sc-cta-note a {
+    color: #9CC4FF;
+}
+
+/* ---------- responsive ---------- */
+@media (max-width: 1024px) {
+    .sc-hero-inner {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 36px;
+    }
+
+    .sc-split {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 32px;
+    }
+
+    .sc-outside-grid {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 30px;
+    }
+
+    .sc-outside-card {
+        position: static;
+    }
+}
+
+@media (max-width: 768px) {
+    .sc-hero {
+        padding: 130px 0 62px;
+    }
+
+    .sc-section {
+        padding: 64px 0;
+    }
+
+    .sc-hero-facts {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px 12px;
+    }
+
+    .sc-btn {
+        width: 100%;
+    }
+
+    .sc-hero-cta,
+    .sc-cta-actions {
+        flex-direction: column;
+    }
+
+    .sc-deadline {
+        grid-template-columns: minmax(0, 1fr);
+        padding: 26px 22px;
+    }
+
+    .sc-table-hint {
+        display: block;
+    }
+
+    .sc-sources,
+    .sc-cta {
+        padding: 28px 22px;
+    }
+}
+
+@media (max-width: 480px) {
+    .sc-hero-facts {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .sc-lockup {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 16px;
+    }
+
+    .sc-lockup-x {
+        justify-self: center;
+    }
+}

@@ -235,11 +235,11 @@ ul {
 .nav-links {
     display: flex;
     align-items: center;
-    gap: 24px;
+    gap: 16px;
 }
 
 .nav-links a {
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     font-weight: 500;
     color: var(--text-medium);
     position: relative;
@@ -305,6 +305,28 @@ ul {
     transform: translateY(-2px);
 }
 
+/* IIT Madras School Connect partnership — an institutional blue pill so it
+   reads as a credential next to the red school highlights. */
+.nav-links a.iitm-highlight {
+    background: linear-gradient(135deg, #0B3B8C 0%, #1565D8 100%);
+    border: 1px solid rgba(11, 59, 140, 0.35);
+    color: #fff !important;
+    padding: 6px 14px;
+    border-radius: var(--radius-full);
+    font-weight: 700;
+    box-shadow: 0 4px 12px rgba(21, 101, 216, 0.3);
+    transition: var(--transition-normal);
+}
+
+.nav-links a.iitm-highlight::after {
+    display: none;
+}
+
+.nav-links a.iitm-highlight:hover {
+    transform: translateY(-2px) scale(1.04);
+    box-shadow: 0 6px 16px rgba(21, 101, 216, 0.45);
+}
+
 .nav-links a.olympiad-highlight {
     background: linear-gradient(135deg, #6366F1 0%, #8B5CF6 100%);
     color: white !important;
@@ -325,13 +347,16 @@ ul {
 }
 
 .nav-cta {
-    padding: 10px 24px;
+    padding: 9px 18px;
     background: var(--primary);
     color: var(--text-white);
     font-weight: 600;
     font-size: 0.95rem;
     border-radius: var(--radius-full);
     transition: var(--transition-normal);
+    /* Ten desktop items plus this button only just fit inside the 1400px
+       container; letting the label wrap pushed the button past the navbar. */
+    white-space: nowrap;
     /* The homepage renders this as a <button> and every other page as an <a>.
        Pinning the line-height keeps both exactly the same height. */
     line-height: normal;
@@ -2262,26 +2287,21 @@ ul {
 /* ============================================
    Responsive Design
    ============================================ */
-/* The desktop nav carries up to nine items on the homepage. Tighten the
-   spacing before it runs out of room, then hand over to the mobile menu on
-   screens where the full row no longer fits with breathing space. */
-@media (max-width: 1400px) {
-    .nav-links {
-        gap: 20px;
-    }
-}
-
-@media (max-width: 1320px) {
+/* The desktop nav carries up to eleven items once the IIT Madras partnership
+   link is included. The base spacing above is already tightened for that; these
+   drop it further on narrower screens, then hand over to the mobile menu on
+   screens where the full row no longer fits. */
+@media (max-width: 1420px) {
     .nav-links {
         gap: 12px;
     }
 
     .nav-links a {
-        font-size: 0.9rem;
+        font-size: 0.86rem;
     }
 }
 
-@media (max-width: 1240px) {
+@media (max-width: 1300px) {
     .nav-links,
     .nav-cta {
         display: none;
@@ -3844,4 +3864,323 @@ ul.gl-prose {
 
 #post-body li {
     margin-bottom: 0.5em;
+}
+
+/* ============================================
+   Homepage partnership band — IIT Madras School Connect
+   Sits just above the FAQ, so a family that has read the whole page meets the
+   credential before the questions. Deep institutional blue keeps it distinct
+   from the red school sections around it.
+   ============================================ */
+.partner-band {
+    padding: 56px 0;
+    background: linear-gradient(135deg, #061130 0%, #0a2a63 55%, #123a86 100%);
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+}
+
+/* First-screen pointer to the partnership band below the hero. */
+.hero-partner-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    margin-bottom: 18px;
+    padding: 8px 16px;
+    border-radius: var(--radius-full);
+    background: rgba(21, 101, 216, 0.08);
+    border: 1px solid rgba(21, 101, 216, 0.28);
+    color: #0B3B8C;
+    font-size: 0.86rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: var(--transition-normal);
+}
+
+.hero-partner-chip:hover {
+    background: #1565D8;
+    border-color: #1565D8;
+    color: #fff;
+    transform: translateY(-2px);
+}
+
+.hero-partner-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #1565D8;
+    box-shadow: 0 0 0 4px rgba(21, 101, 216, 0.15);
+}
+
+.hero-partner-chip:hover .hero-partner-dot {
+    background: #fff;
+    box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.25);
+}
+
+.partner-band::after {
+    content: '';
+    position: absolute;
+    width: 520px;
+    height: 520px;
+    right: -160px;
+    top: -220px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(37, 99, 235, 0.55) 0%, rgba(37, 99, 235, 0) 70%);
+    pointer-events: none;
+}
+
+.partner-band-inner {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1.25fr) minmax(300px, 0.75fr);
+    gap: 44px;
+    align-items: center;
+}
+
+.partner-band-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 15px;
+    border-radius: var(--radius-full);
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-bottom: 18px;
+}
+
+.partner-band-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #34D399;
+    box-shadow: 0 0 0 4px rgba(52, 211, 153, 0.22);
+}
+
+.partner-band h2 {
+    font-size: clamp(1.5rem, 2.6vw, 2.15rem);
+    font-weight: 800;
+    line-height: 1.25;
+    color: #fff;
+    margin-bottom: 14px;
+}
+
+.partner-band h2 .partner-accent {
+    color: #9CC4FF;
+}
+
+.partner-band-copy p {
+    font-size: 1.02rem;
+    line-height: 1.75;
+    color: rgba(255, 255, 255, 0.85);
+    max-width: 660px;
+}
+
+.partner-band-copy p strong {
+    color: #fff;
+}
+
+.partner-band-points {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 14px;
+    margin: 20px 0 0;
+}
+
+.partner-band-points li {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 15px;
+    border-radius: var(--radius-full);
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.partner-band-card {
+    background: #fff;
+    border-radius: var(--radius-lg);
+    padding: 26px 24px;
+    color: var(--text-dark);
+    box-shadow: 0 26px 50px -22px rgba(2, 6, 23, 0.6);
+}
+
+.partner-band-lockup {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 10px;
+    padding-bottom: 18px;
+    border-bottom: 1px dashed rgba(15, 23, 42, 0.16);
+}
+
+.partner-band-marks {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    text-align: center;
+}
+
+.partner-band-square {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 13px;
+    color: #fff;
+    font-weight: 800;
+    font-size: 0.9rem;
+}
+
+.partner-band-square-hash {
+    background: var(--primary-gradient);
+}
+
+.partner-band-square-iitm {
+    background: linear-gradient(135deg, #0B3B8C 0%, #1565D8 100%);
+}
+
+/* Official IIT Madras mark in the partnership lockup. Sits in the slot the flat
+   "IITM" tile used to occupy, so the lockup keeps its 54px rhythm. */
+.partner-band-logo {
+    display: block;
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+}
+
+.partner-band-marks span:last-child {
+    font-size: 0.85rem;
+    font-weight: 700;
+}
+
+.partner-band-x {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--text-light);
+}
+
+.partner-band-facts {
+    list-style: none;
+    margin: 16px 0 20px;
+}
+
+.partner-band-facts li {
+    display: flex;
+    gap: 10px;
+    font-size: 0.88rem;
+    line-height: 1.6;
+    color: var(--text-medium);
+    padding: 7px 0;
+    border-bottom: 1px solid rgba(15, 23, 42, 0.06);
+}
+
+.partner-band-facts li:last-child {
+    border-bottom: 0;
+}
+
+.partner-band-facts svg {
+    flex: 0 0 auto;
+    margin-top: 3px;
+    color: #1565D8;
+}
+
+.partner-band-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    padding: 13px 24px;
+    border-radius: var(--radius-full);
+    background: linear-gradient(135deg, #0B3B8C 0%, #1565D8 100%);
+    color: #fff;
+    font-weight: 700;
+    font-size: 0.95rem;
+    text-decoration: none;
+    box-shadow: 0 10px 24px -10px rgba(21, 101, 216, 0.7);
+    transition: var(--transition-normal);
+}
+
+.partner-band-cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 16px 30px -12px rgba(21, 101, 216, 0.8);
+}
+
+.partner-band-source {
+    margin-top: 12px;
+    font-size: 0.76rem;
+    line-height: 1.55;
+    color: var(--text-light);
+}
+
+/* Second route into the same programme: students who study elsewhere. Pulled
+   out as a highlighted panel with the question set large, because these are the
+   families the registration is for — they are not Hash Future School students,
+   so on this band they are the audience most likely to act. */
+.partner-band-alt {
+    margin: 18px 0 0;
+    padding: 16px 18px;
+    border-radius: var(--radius-md);
+    background: linear-gradient(135deg, #F0F4FF 0%, #FFF1F1 100%);
+    border: 1px solid rgba(21, 101, 216, 0.25);
+    border-left: 4px solid #1565D8;
+}
+
+.partner-band-alt-question {
+    margin: 0 0 12px;
+    font-size: 1.2rem;
+    font-weight: 800;
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+    color: #0B3B8C;
+}
+
+.partner-band-alt-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    border-radius: var(--radius-full);
+    background: #fff;
+    border: 2px solid #1565D8;
+    color: #0B3B8C;
+    font-size: 0.95rem;
+    font-weight: 800;
+    text-decoration: none;
+    transition: var(--transition-normal);
+}
+
+.partner-band-alt-link:hover {
+    background: #1565D8;
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 24px -12px rgba(21, 101, 216, 0.75);
+}
+
+@media (max-width: 1024px) {
+    .partner-band-inner {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 30px;
+    }
+}
+
+@media (max-width: 600px) {
+    .partner-band {
+        padding: 44px 0;
+    }
+
+    .partner-band-cta {
+        justify-content: center;
+        width: 100%;
+    }
+
+    .partner-band-alt-link {
+        justify-content: center;
+        width: 100%;
+    }
 }

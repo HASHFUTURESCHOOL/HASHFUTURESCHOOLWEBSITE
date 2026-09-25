@@ -14,7 +14,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { GLOBAL_PAGES, GLOBAL_HUB, SITE, buildHead, buildHubHead, pageTitle } from '../lib/seo-schema.js';
-import { topBar, nav, footer } from '../lib/page-chrome.js';
+import { topBar, nav, footer, DEMO_URL } from '../lib/page-chrome.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '..');
@@ -44,6 +44,8 @@ function footerColumns() {
         {
             heading: 'Pathways',
             links: [
+                { href: PREFIX + 'iit-madras-school-connect.html', label: 'IIT Madras School Connect' },
+                { href: PREFIX + 'school-connect-register.html', label: 'School Connect registration' },
                 { href: PREFIX + 'online-school-cities', label: 'Online School by City' },
                 { href: PREFIX + 'online-school-kerala.html', label: 'Online School in Kerala' },
                 { href: PREFIX + 'nios-online-school.html', label: 'NIOS Guidance' },
@@ -96,7 +98,7 @@ function hero(page) {
             </div>
 
             <div class="gl-cta-row">
-                <a href="${PREFIX}index.html#enroll" class="btn-primary btn-large"><span>Schedule a Global Discovery Call</span></a>
+                <a href="${DEMO_URL}" class="btn-primary btn-large open-admission-modal"><span>Schedule a Global Discovery Call</span></a>
                 <a href="#learning-model" class="btn-secondary btn-large">Explore the Learning Model</a>
             </div>
             <p class="gl-hero-meta">Ages 6-17 &middot; Live cohorts across time zones &middot; 1:8 mentor ratio &middot; NIOS / IGCSE / GED board pathways</p>
@@ -289,7 +291,7 @@ function cta() {
                 <h2>Schedule a <span class="highlight">Global Discovery Call</span></h2>
                 <p>Tell us what your child is going through and where you are based. We will map the pathway, the live session times for your time zone, and the board options that fit your family&rsquo;s plans &mdash; honestly, including when we are not the right answer.</p>
                 <div class="cta-buttons">
-                    <a href="${PREFIX}index.html#enroll" class="btn-primary btn-large"><span>Schedule a Global Discovery Call</span></a>
+                    <a href="${DEMO_URL}" class="btn-primary btn-large open-admission-modal"><span>Schedule a Global Discovery Call</span></a>
                     <a href="${SITE.whatsapp}" target="_blank" rel="noopener" class="btn-secondary btn-large">WhatsApp ${SITE.telephoneDisplay}</a>
                 </div>
                 <p class="cta-subtext">Live cohorts across time zones &middot; Ages 6-17 &middot; 1:8 mentor ratio &middot; ${esc(SITE.awardBanner)}</p>
@@ -388,7 +390,7 @@ ${nav(PREFIX)}
             </div>
 
             <div class="gl-cta-row">
-                <a href="${PREFIX}index.html#enroll" class="btn-primary btn-large"><span>Schedule a Global Discovery Call</span></a>
+                <a href="${DEMO_URL}" class="btn-primary btn-large open-admission-modal"><span>Schedule a Global Discovery Call</span></a>
                 <a href="#topics" class="btn-secondary btn-large">Explore the Learning Model</a>
             </div>
             <p class="gl-hero-meta">Ages 6-17 &middot; Live cohorts across time zones &middot; 1:8 mentor ratio &middot; NIOS / IGCSE / GED board pathways</p>
@@ -474,7 +476,7 @@ ${hubProblemCards()}
                 <h2>Schedule a <span class="highlight">Global Discovery Call</span></h2>
                 <p>Tell us what your child is going through and where you are based. We will map the pathway, the live session times for your time zone, and the board options that fit your family&rsquo;s plans &mdash; honestly, including when we are not the right answer.</p>
                 <div class="cta-buttons">
-                    <a href="${PREFIX}index.html#enroll" class="btn-primary btn-large"><span>Schedule a Global Discovery Call</span></a>
+                    <a href="${DEMO_URL}" class="btn-primary btn-large open-admission-modal"><span>Schedule a Global Discovery Call</span></a>
                     <a href="${SITE.whatsapp}" target="_blank" rel="noopener" class="btn-secondary btn-large">WhatsApp ${SITE.telephoneDisplay}</a>
                 </div>
                 <p class="cta-subtext">Live cohorts across time zones &middot; Ages 6-17 &middot; 1:8 mentor ratio</p>

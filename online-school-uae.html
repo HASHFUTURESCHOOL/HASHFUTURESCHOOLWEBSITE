@@ -339,6 +339,7 @@
             <a href="index.html" class="logo"><img src="images/logo.png" alt="Hash Future School logo" class="logo-img" width="122" height="38"></a>
             <div class="nav-links">
                 <a href="index.html">Home</a>
+                <a href="iit-madras-school-connect.html" class="iitm-highlight">IIT Madras</a>
                 <a href="index.html#outcomes">Outcomes</a>
                 <a href="index.html#curriculum">Curriculum</a>
                 <a href="index.html#testimonials">Testimonials</a>
@@ -347,13 +348,14 @@
                 <a href="student-projects.html">Project Showcase</a>
                 <a href="super-kids.html" class="superkids-highlight">SuperKids 🚀</a>
             </div>
-            <a href="index.html#enroll" class="nav-cta">Schedule a Global Discovery Call</a>
+            <a href="https://futureassist.hashfuture.school/demo" class="nav-cta open-admission-modal">Schedule a Global Discovery Call</a>
             <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
         </div>
     </nav>
 
     <div class="mobile-menu" id="mobileMenu">
         <a href="index.html">Home</a>
+        <a href="iit-madras-school-connect.html" class="iitm-highlight" style="display: inline-block; text-align: center;">IIT Madras Partnership</a>
         <a href="index.html#outcomes">Outcomes</a>
         <a href="index.html#curriculum">Curriculum</a>
         <a href="index.html#testimonials">Testimonials</a>
@@ -361,7 +363,7 @@
         <a href="blog.html">Blog</a>
         <a href="student-projects.html">Project Showcase</a>
         <a href="super-kids.html" class="superkids-highlight" style="display: inline-block; text-align: center;">SuperKids 🚀</a>
-        <a href="index.html#enroll" class="mobile-cta">Schedule a Global Discovery Call</a>
+        <a href="https://futureassist.hashfuture.school/demo" class="mobile-cta open-admission-modal">Schedule a Global Discovery Call</a>
     </div>
 
 <main id="main">
@@ -385,7 +387,7 @@
             </div>
 
             <div class="gl-cta-row">
-                <a href="index.html#enroll" class="btn-primary btn-large"><span>Schedule a Global Discovery Call</span></a>
+                <a href="https://futureassist.hashfuture.school/demo" class="btn-primary btn-large open-admission-modal"><span>Schedule a Global Discovery Call</span></a>
                 <a href="#local-context" class="btn-secondary btn-large">Explore the Learning Model</a>
             </div>
             <p class="gl-hero-meta">Ages 6-17 &middot; Live cohorts in your time zone &middot; 1:8 mentor ratio &middot; NIOS / IGCSE / GED board pathways</p>
@@ -632,7 +634,7 @@
                 <h2>Schedule a <span class="highlight">Global Discovery Call</span></h2>
                 <p>Tell us what your child is dealing with and where in the UAE you are based. We will map the pathway, the live session times for your time zone, and the board options that fit your family&rsquo;s plans &mdash; honestly, including when we are not the right answer.</p>
                 <div class="cta-buttons">
-                    <a href="index.html#enroll" class="btn-primary btn-large"><span>Schedule a Global Discovery Call</span></a>
+                    <a href="https://futureassist.hashfuture.school/demo" class="btn-primary btn-large open-admission-modal"><span>Schedule a Global Discovery Call</span></a>
                     <a href="https://wa.me/919497120591" target="_blank" rel="noopener" class="btn-secondary btn-large">WhatsApp +91 94971 20591</a>
                 </div>
                 <p class="cta-subtext">Live cohorts in your time zone &middot; Ages 6-17 &middot; 1:8 mentor ratio &middot; Winner: Best Innovative School Award - World School Summit, Dubai</p>
@@ -685,6 +687,8 @@
                     </div>
                     <div class="footer-column">
                         <h4>Pathways</h4>
+                        <a href="iit-madras-school-connect.html">IIT Madras School Connect</a>
+                        <a href="school-connect-register.html">School Connect registration</a>
                         <a href="nios-online-school.html">NIOS Guidance</a>
                         <a href="igcse-private-candidate.html">IGCSE Pathway</a>
                         <a href="ai-first-learning.html">AI-First Learning</a>
@@ -705,6 +709,56 @@
         </div>
     </footer>
 
+    <!-- Book a Free Demo dialog (opens from the .open-admission-modal CTAs) -->
+    <div id="admissionModal" class="modal" data-auto-open="false">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="modal-form-container">
+                <div class="modal-header">
+                    <h2>Book a Free Demo</h2>
+                    <p>Experience the future of education with a personalized session.</p>
+                </div>
+                <form id="demoBookingForm" class="demo-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="firstName">First Name *</label>
+                            <input type="text" id="firstName" name="firstName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName">Last Name</label>
+                            <input type="text" id="lastName" name="lastName">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address *</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number *</label>
+                        <input type="tel" id="phone" name="phone" required>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="childAge">Child's Age</label>
+                            <input type="number" id="childAge" name="childAge">
+                        </div>
+                        <div class="form-group">
+                            <label for="location">Location</label>
+                            <input type="text" id="location" name="location">
+                        </div>
+                    </div>
+                    <div class="form-group" style="display: flex; justify-content: center; margin-top: 10px;">
+                        <div class="g-recaptcha" data-sitekey="6LfHmFgsAAAAACbX36yDZ_oIUDjvoBZPVJU8kv0p"></div>
+                    </div>
+
+                    <div id="formMessage" class="form-message"></div>
+                    <button type="submit" class="btn-primary btn-full">Book Free Demo</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <script src="script.js"></script>
 </body>
 

@@ -31,6 +31,8 @@
 - IGCSE Private Candidate (how Indian families take Cambridge IGCSE without a Cambridge-registered school): https://www.hashfuture.school/igcse-private-candidate.html
 - AI-First Learning (project-based, self-directed methodology; what a week looks like; how progress is measured): https://www.hashfuture.school/ai-first-learning.html
 - Online School vs Regular School (honest comparison including NIOS vs CBSE, social life, cost and validity): https://www.hashfuture.school/online-school-vs-regular-school.html
+- IIT Madras School Connect partnership (we are a partner school; Class IX-XII learners take 8-week IIT Madras certificate courses): https://www.hashfuture.school/iit-madras-school-connect
+- IIT Madras School Connect registration for students of OTHER schools (UAE, Saudi Arabia, Oman, Qatar, Kuwait, Bahrain and worldwide; we issue a Hash Future School ID on approval): https://www.hashfuture.school/school-connect-register
 - Super Kids (student spotlights): https://www.hashfuture.school/super-kids.html
 - Future Talks (youth entrepreneurship summit): https://www.hashfuture.school/future-talks.html
 - Future Talks - Apply to Speak: https://www.hashfuture.school/future-talks-apply.html
@@ -59,6 +61,15 @@
 ## Board Pathways and Admissions Facts
 - Hash Future School guides and prepares learners for external boards: NIOS, Cambridge IGCSE (private candidate) and GED
 - The school is NOT an NIOS-accredited institution and NOT a Cambridge-registered school; board certificates are issued by the respective boards through official exam centres
+
+## Partnerships
+- Hash Future School is a partner school of the IIT Madras School Connect Program, run by the Centre for Outreach and Digital Education (CODE), IIT Madras
+- The partnership is listed in the official IIT Madras partner directory as "HASHFUTURE SCHOOL, ERNAKULAM", recorded 2026 September (https://code.iitm.ac.in/schoolconnect/partners)
+- Our learners in Class IX, X, XI and XII can enrol in 8-week online certificate courses (about 20 courses) and receive an e-certificate from CODE, IIT Madras on successful completion
+- One course per student per batch run; four batches a year; there is no fee for the school partnership, and IIT Madras charges a nominal course fee per student, per course
+- All course content, dates, fees and certificates are set and issued by IIT Madras, not by Hash Future School
+- Students who study at another school (for example a school in the UAE, Saudi Arabia, Oman, Qatar, Kuwait or Bahrain) can also take these courses: they register with Hash Future School at https://www.hashfuture.school/school-connect-register, stay enrolled at their own school, and on approval receive a Hash Future School student ID that unlocks the IIT Madras enrolment
+- The registration collects the student's and parents' contact details, the present school, class, identification details and the student's interests; approval and the ID are emailed to the student and the parents
 - Learners served: ages 6 to 17, across Lower, Middle and Higher Grades
 - Mentor ratio: 1:8
 - Community model: students learn with a global community of families across cities and countries, and each local cohort meets in person once a month

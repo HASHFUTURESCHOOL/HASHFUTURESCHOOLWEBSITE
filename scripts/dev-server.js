@@ -122,6 +122,11 @@ async function handleApi(req, res, url) {
       query = buildQuery(url);
       break;
     }
+    case 'school-connect': {
+      modulePath = path.join(ROOT, 'api/school-connect.js');
+      query = buildQuery(url);
+      break;
+    }
     case 'unsubscribe': {
       modulePath = path.join(ROOT, 'api/unsubscribe.js');
       query = buildQuery(url);

@@ -5,6 +5,8 @@ const state = {
   posts: [],
   applications: [],
   selectedApplicationId: null,
+  schoolConnect: [],
+  selectedRegistrationId: null,
   subscribers: [],
   content: [],
   newsletter: { content: null, campaigns: [], stats: {}, hasProvider: false },
@@ -74,6 +76,7 @@ async function bootstrap() {
     $('#login-view').classList.add('hidden');
     $('#app-view').classList.remove('hidden');
     await Promise.all([loadPosts(), loadApplications(), loadSubscribers(), loadContent(), loadNewsletter()]);
+    await loadSchoolConnect();
   } catch {
     $('#app-view').classList.add('hidden');
     $('#login-view').classList.remove('hidden');
@@ -638,6 +641,291 @@ $('#apps-refresh-btn').addEventListener('click', async () => {
   } catch (err) {
     flash(err.message, 'error');
   }
+});
+
+// ---------- IIT Madras School Connect ----------
+
+// Registrations from students who study at another school and want to take an
+// IIT Madras School Connect course as a Hash Future School student.
+const SC_STATUS_LABELS = {
+  new: 'New',
+  verified: 'Verified',
+  approved: 'Approved',
+  rejected: 'Rejected',
+  archived: 'Archived',
+};
+
+function scStatusBadge(status) {
+  const cls = SC_STATUS_LABELS[status] ? status : 'new';
+  return `<span class="badge status-${cls === 'in-conversation' ? 'new' : cls}">${escapeHtml(
+    SC_STATUS_LABELS[status] || status || 'New'
+  )}</span>`;
+}
+
+async function loadSchoolConnect() {
+  try {
+    const { registrations, migrationRequired } = await api('/api/admin/school-connect');
+    state.schoolConnect = registrations || [];
+    $('#count-sc').textContent = state.schoolConnect.length;
+    if (migrationRequired) {
+      $('#sc-list').innerHTML =
+        '<div class="empty">The <code>school_connect_registrations</code> table does not exist on this database yet. Run <code>npm run db:migrate</code>.</div>';
+      return;
+    }
+    renderSchoolConnect();
+  } catch (err) {
+    $('#sc-list').innerHTML = `<div class="empty">${escapeHtml(err.message)}</div>`;
+  }
+}
+
+function renderSchoolConnect() {
+  const list = $('#sc-list');
+  const filter = $('#sc-filter').value;
+  const rows = filter ? state.schoolConnect.filter((r) => r.status === filter) : state.schoolConnect;
+
+  if (!rows.length) {
+    list.innerHTML = state.schoolConnect.length
+      ? '<div class="empty">No registrations with this status.</div>'
+      : '<div class="empty">No School Connect registrations yet. They arrive here from /school-connect-register.</div>';
+    return;
+  }
+
+  list.innerHTML = rows
+    .map((r) => {
+      const interests = Array.isArray(r.interests) ? r.interests.slice(0, 4) : [];
+      const emailState =
+        r.enrollment_email_state && r.enrollment_email_state !== 'sent'
+          ? ` · <span style="color:#b45309;">ID email: ${escapeHtml(r.enrollment_email_state)}</span>`
+          : r.enrollment_email_state === 'sent'
+            ? ' · <span style="color:#047857;">ID email sent</span>'
+            : '';
+      const syncState =
+        r.future_assist_state === 'synced'
+          ? ' · <span style="color:#047857;">Future Assist ✓</span>'
+          : r.future_assist_state && r.future_assist_state !== 'pending'
+            ? ` · <span style="color:#b45309;">Future Assist: ${escapeHtml(r.future_assist_state)}</span>`
+            : ' · <span style="color:#b45309;">Future Assist: pending</span>';
+      return `
+        <div class="card app-card">
+          <div class="meta" style="flex:1;">
+            <div class="title">${escapeHtml(r.student_name)} ${scStatusBadge(r.status)}</div>
+            <div class="sub">
+              ${escapeHtml(r.ref || '—')} · ${escapeHtml(r.grade || 'class not given')} · ${escapeHtml(r.current_school || '—')}
+            </div>
+            <div class="sub">
+              ${escapeHtml([r.school_city, r.school_country].filter(Boolean).join(', ') || '—')}
+              · Student: ${escapeHtml(r.student_email || '—')}
+            </div>
+            <div class="sub" style="margin-top:6px;">
+              Parent: ${escapeHtml(r.parent_name || '—')} · ${escapeHtml(r.parent_email || '—')} · ${escapeHtml(r.parent_phone || '—')}${emailState}${syncState}
+            </div>
+            ${interests.length ? `<div class="chip-row">${interests.map((i) => `<span class="chip">${escapeHtml(i)}</span>`).join('')}</div>` : ''}
+            ${r.school_id ? `<div class="sub" style="margin-top:6px;color:#b45309;font-weight:600;">School ID: ${escapeHtml(r.school_id)}</div>` : ''}
+          </div>
+          <div class="sub" style="white-space:nowrap;color:var(--muted);font-size:0.82rem;">${formatDate(r.created_at)}</div>
+          <div class="row-actions">
+            <button class="btn btn-ghost btn-sm" data-sc-open="${r.id}" type="button">Review →</button>
+          </div>
+        </div>`;
+    })
+    .join('');
+
+  $$('#sc-list [data-sc-open]').forEach((btn) =>
+    btn.addEventListener('click', () => openRegistration(Number(btn.dataset.scOpen)))
+  );
+}
+
+async function openRegistration(id) {
+  const { registration } = await api(`/api/admin/school-connect/${id}`);
+  state.selectedRegistrationId = id;
+
+  const interests = Array.isArray(registration.interests) ? registration.interests : [];
+  const block = (label, value) =>
+    value
+      ? `<div class="app-block"><div class="app-label">${escapeHtml(label)}</div><div class="app-value">${escapeHtml(value)}</div></div>`
+      : '';
+  const mailto = (label, address) =>
+    address
+      ? `<div class="app-block"><div class="app-label">${escapeHtml(label)}</div><div class="app-value"><a href="mailto:${escapeHtml(address)}">${escapeHtml(address)}</a></div></div>`
+      : '';
+
+  $('#sc-modal-title').innerHTML = `${escapeHtml(registration.student_name)} <span class="pill">${escapeHtml(
+    registration.ref || ''
+  )}</span>`;
+
+  $('#sc-modal-body').innerHTML = `
+    <div class="app-grid">
+      ${block('Registered', formatDate(registration.created_at))}
+      ${block('Status', SC_STATUS_LABELS[registration.status] || registration.status)}
+      ${block('Class', registration.grade)}
+      ${block('Date of birth / age', [registration.date_of_birth ? String(registration.date_of_birth).slice(0, 10) : null, registration.age].filter(Boolean).join(' · '))}
+      ${block('Nationality', registration.nationality)}
+      ${block('Lives in', [registration.city, registration.country].filter(Boolean).join(', '))}
+      ${mailto('Student email', registration.student_email)}
+      ${block('Student phone / WhatsApp', registration.student_phone)}
+      ${block('ID', [registration.id_type, registration.id_number].filter(Boolean).join(' · '))}
+      ${block('ID issued in', registration.id_country)}
+    </div>
+
+    <h4 class="app-section">Present school</h4>
+    <div class="app-grid">
+      ${block('School', registration.current_school)}
+      ${block('School city / country', [registration.school_city, registration.school_country].filter(Boolean).join(', '))}
+      ${block('Curriculum', registration.curriculum)}
+      ${block('Preferred language', registration.preferred_language)}
+    </div>
+
+    <h4 class="app-section">Parents / guardians</h4>
+    <div class="app-grid">
+      ${block('Parent 1', [registration.parent_name, registration.parent_relation].filter(Boolean).join(' · '))}
+      ${mailto('Parent 1 email', registration.parent_email)}
+      ${block('Parent 1 phone', registration.parent_phone)}
+      ${block('Parent 1 occupation', registration.parent_occupation)}
+      ${registration.parent2_name ? block('Parent 2', [registration.parent2_name, registration.parent2_relation].filter(Boolean).join(' · ')) : ''}
+      ${registration.parent2_email ? mailto('Parent 2 email', registration.parent2_email) : ''}
+      ${registration.parent2_phone ? block('Parent 2 phone', registration.parent2_phone) : ''}
+    </div>
+
+    <h4 class="app-section">Background</h4>
+    ${interests.length ? `<div class="chip-row">${interests.map((i) => `<span class="chip">${escapeHtml(i)}</span>`).join('')}</div>` : ''}
+    ${block('What the student is into', registration.about)}
+    ${block('Profession / field aimed for', registration.goal)}
+    ${block('Prior experience', registration.prior_experience)}
+    ${block('Batch preference', registration.batch_preference)}
+    ${block('Heard about us via', registration.heard_about)}
+
+    <h4 class="app-section">Approval mail</h4>
+    <div class="app-grid">
+      ${block('School ID', registration.school_id)}
+      ${block('Approved at', registration.approved_at ? formatDate(registration.approved_at) : '')}
+      ${block('ID email', registration.enrollment_email_state)}
+      ${block('ID email sent at', registration.enrollment_email_at ? formatDate(registration.enrollment_email_at) : '')}
+      ${block('Reviewed by', registration.reviewed_by)}
+      ${block('Future Assist row', registration.future_assist_id)}
+      ${block(
+        'Future Assist sync',
+        registration.future_assist_state === 'synced'
+          ? `Synced${
+              registration.future_assist_synced_at ? ` · ${formatDate(registration.future_assist_synced_at)}` : ''
+            }`
+          : `${registration.future_assist_state || 'pending'}${
+              registration.future_assist_error ? ` · ${registration.future_assist_error}` : ''
+            }`
+      )}
+    </div>
+    ${block('Consent recorded', registration.consent_registration ? 'Registration consent given' : 'Registration consent missing')}`;
+
+  $('#sc-status').value = registration.status || 'new';
+  $('#sc-school-id').value = registration.school_id || '';
+  $('#sc-enrollment-note').value = registration.enrollment_note || '';
+  $('#sc-notes').value = registration.reviewer_notes || '';
+
+  $('#sc-modal').classList.remove('hidden');
+}
+
+function closeRegistrationModal() {
+  $('#sc-modal').classList.add('hidden');
+  state.selectedRegistrationId = null;
+}
+
+$('#sc-modal-close').addEventListener('click', closeRegistrationModal);
+$('#sc-modal-close-2').addEventListener('click', closeRegistrationModal);
+$('#sc-modal').addEventListener('click', (e) => {
+  if (e.target === $('#sc-modal')) closeRegistrationModal();
+});
+
+async function patchRegistration(body, { confirmText, successText, button } = {}) {
+  const id = state.selectedRegistrationId;
+  if (!id) return;
+  if (confirmText && !window.confirm(confirmText)) return;
+
+  const old = button ? button.textContent : '';
+  if (button) {
+    button.disabled = true;
+    button.textContent = 'Working…';
+  }
+
+  try {
+    const { registration } = await api(`/api/admin/school-connect/${id}`, { method: 'PATCH', body });
+    flash(
+      registration.enrollment_email_state === 'failed'
+        ? 'Saved, but the email could not be sent — check MAILGUN_API_KEY, then use Resend.'
+        : successText || 'Registration updated'
+    );
+    await loadSchoolConnect();
+    if (registration.enrollment_email_state === 'failed') {
+      await openRegistration(id);
+    } else {
+      closeRegistrationModal();
+    }
+  } catch (err) {
+    flash(err.message, 'error');
+  } finally {
+    if (button) {
+      button.disabled = false;
+      button.textContent = old;
+    }
+  }
+}
+
+$('#sc-save-btn').addEventListener('click', () => {
+  patchRegistration(
+    {
+      status: $('#sc-status').value,
+      reviewer_notes: $('#sc-notes').value,
+      enrollment_note: $('#sc-enrollment-note').value,
+      send_email: false,
+    },
+    { successText: 'Registration saved', button: $('#sc-save-btn') }
+  );
+});
+
+$('#sc-approve-btn').addEventListener('click', () => {
+  patchRegistration(
+    {
+      action: 'approve',
+      reviewer_notes: $('#sc-notes').value,
+      enrollment_note: $('#sc-enrollment-note').value,
+    },
+    {
+      confirmText:
+        'Approve this registration and email the Hash Future School ID to the student and parents?',
+      successText: 'Approved — the ID email has been sent',
+      button: $('#sc-approve-btn'),
+    }
+  );
+});
+
+$('#sc-resend-btn').addEventListener('click', () => {
+  patchRegistration(
+    {
+      action: 'resend',
+      enrollment_note: $('#sc-enrollment-note').value,
+      reviewer_notes: $('#sc-notes').value,
+    },
+    { confirmText: 'Resend the ID email to the student and parents?', successText: 'ID email resent', button: $('#sc-resend-btn') }
+  );
+});
+
+// The programme desk lives in Future Assist, so a registration whose first
+// mirror failed (or a Future Assist that was down at the time) can be pushed
+// again without touching the review status.
+$('#sc-sync-btn').addEventListener('click', () => {
+  patchRegistration(
+    {
+      action: 'sync',
+      reviewer_notes: $('#sc-notes').value,
+      enrollment_note: $('#sc-enrollment-note').value,
+      send_email: false,
+    },
+    { successText: 'Pushed to Future Assist', button: $('#sc-sync-btn') }
+  );
+});
+
+$('#sc-filter').addEventListener('change', renderSchoolConnect);
+$('#sc-refresh-btn').addEventListener('click', async () => {
+  await loadSchoolConnect();
+  flash('Registrations refreshed');
 });
 
 // ---------- Site Content ----------

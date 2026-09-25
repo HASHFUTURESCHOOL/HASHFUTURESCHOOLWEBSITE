@@ -205,6 +205,11 @@ input, textarea, select { font-family: inherit; font-size: 0.95rem; }
 .badge.status-hired { background: var(--green-soft); color: var(--green); }
 .badge.status-archived { background: var(--panel-2); color: var(--muted); }
 
+/* IIT Madras School Connect registration workflow. */
+.badge.status-verified { background: #cffafe; color: #0e7490; }
+.badge.status-approved { background: var(--green-soft); color: var(--green); }
+.badge.status-rejected { background: var(--red-soft); color: var(--red); }
+
 .chip-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
 .chip {
   background: var(--panel-2); border: 1px solid var(--line); color: var(--muted);
