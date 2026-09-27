@@ -275,7 +275,7 @@
             body.append('file', file);
             body.append('folder', 'admissions/school-connect');
 
-            const res = await fetch('/api/school-connect-photo', { method: 'POST', body });
+            const res = await fetch('/api/school-connect', { method: 'POST', body });
             const json = await res.json().catch(() => ({}));
             if (!res.ok || !json.url) {
                 throw new Error(json.error || 'We could not upload that photo.');

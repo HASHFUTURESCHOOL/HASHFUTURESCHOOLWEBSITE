@@ -32,6 +32,12 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const MIN_AGE = 12;
 const MAX_AGE = 20;
 
+// The student photo arrives as multipart on this same endpoint, rather than from
+// a second function: this project sits at Vercel's serverless function limit, and
+// one route for one feature is easier to reason about anyway. Matches the cap
+// Future Assist applies to this folder, with headroom for multipart overhead.
+const MAX_PHOTO_BYTES = 6 * 1024 * 1024;
+
 // Shown when Future Assist cannot be reached. Honest about what happened: the
 // family's details were not saved, so they should try again or message us.
 const UNAVAILABLE_MESSAGE =
@@ -68,6 +74,11 @@ function ageFromDob(dob) {
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     return bad(res, 'Method not allowed', 405);
+  }
+
+  const contentType = String(req.headers?.['content-type'] || '');
+  if (contentType.startsWith('multipart/form-data')) {
+    return handlePhotoUpload(req, res, contentType);
   }
 
   const body = await readBody(req);
@@ -206,5 +217,90 @@ export default async function handler(req, res) {
     });
   } catch (err) {
     return serverError(res, err);
+  }
+}
+
+/* ------------------------------------------------------------ student photo */
+
+/**
+ * Forwards the student photo to Future Assist's upload route with the shared
+ * key. Future Assist restricts that key to images under 5 MB in the single
+ * folder `admissions/school-connect`, so the file lands in the same S3 bucket
+ * its admission forms use and nothing else can be written with it.
+ */
+function uploadUrl() {
+  // The intake endpoint is .../api/school-connect; the upload lives beside it.
+  return futureAssistSchoolConnectUrl().replace(/\/school-connect(\?.*)?$/, '/upload');
+}
+
+async function readRawBody(req) {
+  const chunks = [];
+  let size = 0;
+  for await (const chunk of req) {
+    size += chunk.length;
+    if (size > MAX_PHOTO_BYTES) {
+      const err = new Error('too-large');
+      err.code = 'TOO_LARGE';
+      throw err;
+    }
+    chunks.push(chunk);
+  }
+  return Buffer.concat(chunks);
+}
+
+async function handlePhotoUpload(req, res, contentType) {
+  let raw;
+  try {
+    raw = Buffer.isBuffer(req.body) ? req.body : await readRawBody(req);
+  } catch (err) {
+    if (err?.code === 'TOO_LARGE') {
+      return bad(res, 'The photo must be under 5 MB');
+    }
+    return serverError(res, err);
+  }
+
+  if (!raw.length) {
+    return bad(res, 'No file received');
+  }
+
+  const headers = { 'content-type': contentType };
+  const key = (process.env.FUTURE_ASSIST_SCHOOL_CONNECT_KEY || '').trim();
+  if (key) headers['x-hfs-sync-key'] = key;
+
+  try {
+    const upstream = await fetch(uploadUrl(), {
+      method: 'POST',
+      headers,
+      body: raw,
+      signal: AbortSignal.timeout(20000),
+    });
+
+    const data = await upstream.json().catch(() => ({}));
+
+    if (!upstream.ok || !data?.filePath) {
+      console.error(
+        `[school-connect] photo upload failed (${upstream.status}) at ${uploadUrl()}: ${data?.error || 'no path returned'}`
+      );
+      // A 401 from Future Assist means our own key is wrong — our fault, not the
+      // family's — so it surfaces as a bad gateway rather than a bad request.
+      return send(res, upstream.status === 401 ? 502 : upstream.status || 502, {
+        error:
+          data?.error ||
+          'We could not accept that photo. Please try a different image, or WhatsApp it to us on +91 94971 20591.',
+      });
+    }
+
+    return ok(res, {
+      uploaded: true,
+      url: data.filePath,
+      fileName: data.fileName || null,
+      fileSize: data.fileSize || raw.length,
+    });
+  } catch (err) {
+    console.error('[school-connect] could not reach Future Assist for the photo:', err);
+    return send(res, 503, {
+      error:
+        'We could not upload that photo just now. Please try again, or send it to us on WhatsApp at +91 94971 20591.',
+    });
   }
 }

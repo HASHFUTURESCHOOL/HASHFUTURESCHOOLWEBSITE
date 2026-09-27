@@ -464,9 +464,10 @@ checkboxes. The honeypot field is `website`.
 
 **The student photo.** The form uploads it as soon as the family picks the file,
 shows a preview, and carries the returned path into the registration as
-`photo_url`. The upload goes to `/api/school-connect-photo` on this site, which
-forwards it server-to-server to Future Assist's upload route with the shared
-`x-hfs-sync-key`. Future Assist restricts that key to one folder
+`photo_url`. The upload posts to the same `/api/school-connect` endpoint as
+multipart form data (one route for one feature, and this project sits at Vercel's
+serverless function limit), which forwards it server-to-server to Future Assist's
+upload route with the shared `x-hfs-sync-key`. Future Assist restricts that key to one folder
 (`admissions/school-connect`), images only (JPEG/PNG/WebP) and 5 MB, so the photo
 lands in the same bucket its admission forms use and nothing else can be written
 with that key. Without the key Future Assist answers 401 and the form reports

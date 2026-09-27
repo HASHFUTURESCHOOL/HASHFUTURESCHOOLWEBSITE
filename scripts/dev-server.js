@@ -127,11 +127,6 @@ async function handleApi(req, res, url) {
       query = buildQuery(url);
       break;
     }
-    case 'school-connect-photo': {
-      modulePath = path.join(ROOT, 'api/school-connect-photo.js');
-      query = buildQuery(url);
-      break;
-    }
     case 'unsubscribe': {
       modulePath = path.join(ROOT, 'api/unsubscribe.js');
       query = buildQuery(url);
@@ -147,7 +142,7 @@ async function handleApi(req, res, url) {
   }
 
   // Multipart uploads must keep their raw stream, so the body is only parsed for
-  // JSON requests; /api/school-connect-photo reads the stream itself.
+  // JSON requests; the School Connect photo upload reads the stream itself.
   const isMultipart = String(req.headers['content-type'] || '').startsWith('multipart/form-data');
   const body = (req.method === 'POST' || req.method === 'PUT' || req.method === 'PATCH') && !isMultipart
     ? await readJsonBody(req) : undefined;
