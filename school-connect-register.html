@@ -175,6 +175,26 @@
                         <input id="id_country" name="id_country" type="text" placeholder="e.g. United Arab Emirates">
                     </div>
 
+                    <div class="scr-field scr-span-2">
+                        <label for="student_photo">Student photo <span class="scr-optional">(optional, but it
+                                helps the IIT Madras enrolment)</span></label>
+                        <div class="scr-upload" id="scr-photo-drop">
+                            <input type="file" id="student_photo" name="student_photo"
+                                accept="image/jpeg,image/png,image/webp" hidden>
+                            <button type="button" class="scr-upload-btn" id="scr-photo-pick">Choose a photo</button>
+                            <span class="scr-upload-hint">JPEG, PNG or WebP &middot; up to 5 MB &middot; a
+                                passport-style photo on a plain background works best.</span>
+                        </div>
+                        <div class="scr-upload-preview" id="scr-photo-preview" hidden>
+                            <img id="scr-photo-img" alt="The photo you selected">
+                            <div class="scr-upload-meta">
+                                <strong id="scr-photo-name">—</strong>
+                                <button type="button" class="scr-upload-remove" id="scr-photo-remove">Remove</button>
+                            </div>
+                        </div>
+                        <small id="scr-photo-status" role="status"></small>
+                    </div>
+
                     <div class="scr-field">
                         <label for="city">City you live in</label>
                         <input id="city" name="city" type="text" placeholder="e.g. Dubai">

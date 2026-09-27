@@ -318,6 +318,94 @@ main {
     font-size: 0.78rem;
 }
 
+/* Student photo upload: the picker, the preview, and the little status line that
+   reports the upload result. */
+.scr-upload {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+    padding: 16px;
+    border: 1px dashed var(--line);
+    border-radius: var(--radius-md);
+    background: var(--bg);
+}
+
+.scr-upload-btn {
+    padding: 10px 18px;
+    border-radius: var(--radius-full);
+    border: 2px solid #1565D8;
+    background: #fff;
+    color: #0B3B8C;
+    font-weight: 700;
+    font-size: 0.92rem;
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.scr-upload-btn:hover {
+    background: #1565D8;
+    color: #fff;
+}
+
+.scr-upload-hint {
+    font-size: 0.8rem;
+    color: var(--light);
+    flex: 1 1 220px;
+}
+
+.scr-upload-preview {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-top: 12px;
+    padding: 12px 16px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    background: #fff;
+}
+
+.scr-upload-preview img {
+    width: 72px;
+    height: 72px;
+    object-fit: cover;
+    border-radius: 10px;
+    border: 1px solid var(--line);
+}
+
+.scr-upload-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-size: 0.85rem;
+    color: var(--muted);
+    min-width: 0;
+}
+
+.scr-upload-meta strong {
+    overflow-wrap: anywhere;
+}
+
+.scr-upload-remove {
+    align-self: flex-start;
+    border: 0;
+    background: none;
+    padding: 0;
+    color: var(--primary);
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+#scr-photo-status.scr-photo-ok {
+    color: #047857;
+}
+
+#scr-photo-status.scr-photo-error {
+    color: var(--primary-dark);
+}
+
 .scr-field input,
 .scr-field select,
 .scr-field textarea {

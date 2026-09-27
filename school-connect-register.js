@@ -28,6 +28,11 @@
 
     let current = 1;
 
+    // The uploaded photo's public path, kept out of the form payload until the
+    // upload actually succeeded.
+    let photoUrl = '';
+    let photoUploading = false;
+
     /* ------------------------------------------------------------ helpers */
 
     function fieldWrap(input) {
@@ -188,6 +193,7 @@
             id_type: value('#id_type'),
             id_number: value('#id_number'),
             id_country: value('#id_country'),
+            photo_url: photoUrl || null,
             city: value('#city'),
             country: countryValue(),
 
@@ -225,6 +231,80 @@
 
     /* ------------------------------------------------------------- review */
 
+    /* -------------------------------------------------------------- photo */
+
+    const photoInput = $('#student_photo');
+    const photoStatus = $('#scr-photo-status');
+    const photoPreview = $('#scr-photo-preview');
+    const PHOTO_TYPES = ['image/jpeg', 'image/png', 'image/webp'];
+    const PHOTO_MAX_BYTES = 5 * 1024 * 1024;
+
+    function setPhotoStatus(message, state = '') {
+        photoStatus.textContent = message;
+        photoStatus.className = state;
+    }
+
+    function clearPhoto() {
+        photoUrl = '';
+        photoInput.value = '';
+        photoPreview.hidden = true;
+        $('#scr-photo-img').removeAttribute('src');
+        $('#scr-photo-name').textContent = '—';
+    }
+
+    async function uploadPhoto(file) {
+        if (!PHOTO_TYPES.includes(file.type)) {
+            setPhotoStatus('Please choose a JPEG, PNG or WebP photo.', 'scr-photo-error');
+            return;
+        }
+        if (file.size > PHOTO_MAX_BYTES) {
+            setPhotoStatus('That photo is larger than 5 MB — please choose a smaller one.', 'scr-photo-error');
+            return;
+        }
+
+        // Show it straight away; the upload happens behind the preview.
+        photoUrl = '';
+        $('#scr-photo-img').src = URL.createObjectURL(file);
+        $('#scr-photo-name').textContent = `${file.name} · ${Math.max(1, Math.round(file.size / 1024))} KB`;
+        photoPreview.hidden = false;
+        setPhotoStatus('Uploading…');
+        photoUploading = true;
+
+        try {
+            const body = new FormData();
+            body.append('file', file);
+            body.append('folder', 'admissions/school-connect');
+
+            const res = await fetch('/api/school-connect-photo', { method: 'POST', body });
+            const json = await res.json().catch(() => ({}));
+            if (!res.ok || !json.url) {
+                throw new Error(json.error || 'We could not upload that photo.');
+            }
+            photoUrl = json.url;
+            setPhotoStatus('Photo uploaded.', 'scr-photo-ok');
+        } catch (err) {
+            clearPhoto();
+            setPhotoStatus(
+                `${err.message} You can still submit without a photo, or WhatsApp it to +91 94971 20591.`,
+                'scr-photo-error'
+            );
+        } finally {
+            photoUploading = false;
+        }
+    }
+
+    $('#scr-photo-pick').addEventListener('click', () => photoInput.click());
+
+    photoInput.addEventListener('change', () => {
+        const file = photoInput.files && photoInput.files[0];
+        if (file) uploadPhoto(file);
+    });
+
+    $('#scr-photo-remove').addEventListener('click', () => {
+        clearPhoto();
+        setPhotoStatus('Photo removed.');
+    });
+
     function renderReview() {
         const data = collect();
         const rows = [
@@ -234,6 +314,7 @@
             ['City / country', [data.city, data.country].filter(Boolean).join(', ')],
             ['Student email', data.student_email],
             ['Student phone', data.student_phone],
+            ['Student photo', photoUrl ? 'Uploaded' : 'Not uploaded'],
             ['Parent / guardian', [data.parent_name, data.parent_relation].filter(Boolean).join(' · ')],
             ['Parent email', data.parent_email],
             ['Parent phone', data.parent_phone],
@@ -291,6 +372,11 @@
     form.addEventListener('submit', async (event) => {
         event.preventDefault();
         clearError();
+
+        if (photoUploading) {
+            showError('The photo is still uploading — give it a second, then submit again.');
+            return;
+        }
 
         for (const step of [1, 2, 3]) {
             const result = validateStep(step);

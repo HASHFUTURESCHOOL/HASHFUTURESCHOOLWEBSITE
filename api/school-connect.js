@@ -103,6 +103,8 @@ export default async function handler(req, res) {
     id_type: str(body.id_type || body.idType, 60),
     id_number: str(body.id_number || body.idNumber, 80),
     id_country: str(body.id_country || body.idCountry, 80),
+    // The path Future Assist's upload route returned for the student photo.
+    photo_url: str(body.photo_url || body.photoUrl, 500) || null,
 
     parent_name: str(body.parent_name || body.parentName, 160),
     parent_relation: str(body.parent_relation || body.parentRelation, 60),

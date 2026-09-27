@@ -455,11 +455,24 @@ The script is [`school-connect-register.js`](school-connect-register.js).
 
 **What it collects.** Student name, date of birth, age, gender, nationality,
 student email + phone/WhatsApp; present school, school city/country, class,
-curriculum; identification type + number; parent 1 (and optional parent 2) name,
+curriculum; identification type + number; **a student photo** (optional — see
+below); parent 1 (and optional parent 2) name,
 relation, email, phone and profession; city, country and preferred language; what
 the student is into, the profession or field they are aiming for, prior
 experience, batch preference, how they heard about us, and the two consent
 checkboxes. The honeypot field is `website`.
+
+**The student photo.** The form uploads it as soon as the family picks the file,
+shows a preview, and carries the returned path into the registration as
+`photo_url`. The upload goes to `/api/school-connect-photo` on this site, which
+forwards it server-to-server to Future Assist's upload route with the shared
+`x-hfs-sync-key`. Future Assist restricts that key to one folder
+(`admissions/school-connect`), images only (JPEG/PNG/WebP) and 5 MB, so the photo
+lands in the same bucket its admission forms use and nothing else can be written
+with that key. Without the key Future Assist answers 401 and the form reports
+"we could not upload that photo" — the registration can still be submitted
+without one, and the desk shows a "no photo" placeholder. To make the photo
+required, add it to the `rules[1]` list in `school-connect-register.js`.
 
 **The emails and the desk live in the Future Assist repo.** The confirmation
 family receive comes from `src/lib/school-connect-email.ts` there — `CURRENT_BATCH`

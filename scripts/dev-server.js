@@ -127,6 +127,11 @@ async function handleApi(req, res, url) {
       query = buildQuery(url);
       break;
     }
+    case 'school-connect-photo': {
+      modulePath = path.join(ROOT, 'api/school-connect-photo.js');
+      query = buildQuery(url);
+      break;
+    }
     case 'unsubscribe': {
       modulePath = path.join(ROOT, 'api/unsubscribe.js');
       query = buildQuery(url);
@@ -141,16 +146,24 @@ async function handleApi(req, res, url) {
       return false;
   }
 
-  const body = req.method === 'POST' || req.method === 'PUT' || req.method === 'PATCH'
-    ? await readJsonBody(req) : {};
+  // Multipart uploads must keep their raw stream, so the body is only parsed for
+  // JSON requests; /api/school-connect-photo reads the stream itself.
+  const isMultipart = String(req.headers['content-type'] || '').startsWith('multipart/form-data');
+  const body = (req.method === 'POST' || req.method === 'PUT' || req.method === 'PATCH') && !isMultipart
+    ? await readJsonBody(req) : undefined;
 
-  const mockReq = {
-    method: req.method,
-    url: url.pathname + url.search,
-    headers: req.headers,
-    query,
-    body,
-  };
+  // A multipart upload has to keep the live request stream (the handler reads it
+  // chunk by chunk and forwards the bytes), so that route gets the real request
+  // object with the parsed query attached instead of the usual mock.
+  const mockReq = isMultipart
+    ? Object.assign(req, { query })
+    : {
+        method: req.method,
+        url: url.pathname + url.search,
+        headers: req.headers,
+        query,
+        body,
+      };
 
   const state = { statusCode: 200, headers: {}, data: '' };
   const mockRes = {
