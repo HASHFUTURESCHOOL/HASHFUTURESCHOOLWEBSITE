@@ -196,9 +196,11 @@ Set these Vercel environment variables (and in `.env` for local dev):
 
 Everything outbound — the newsletter, and both /join emails — goes through the
 same `sendEmail` in [`lib/email.js`](lib/email.js). When `MAILGUN_API_KEY` is
-missing, sends throw with that variable named rather than failing silently; the
-admin Newsletter tab shows a provider warning, and `/api/join` answers with
-`emailed: false`.
+missing, sends throw with that variable named rather than failing silently, and
+the admin Newsletter tab shows a provider warning. `/api/join` stores the
+application first and then answers `{ received, ref, stored, queued: true }`
+while the two emails and the Future Assist mirror finish in the background, so an
+applicant never waits for a mail server.
 
 The weekly schedule lives in [`vercel.json`](vercel.json) (currently `0 2 * * 1`,
 Monday 02:00 UTC). Every run creates a new campaign and sends only to subscribers
@@ -210,6 +212,9 @@ engine runs from the Admin CMS, so you can trigger it on demand:
 - **Manual API:** `POST /api/admin/newsletter/send` (admin cookie required).
 - **Email unsubscribe links** land on `/api/unsubscribe?email=...`, which shows a
   friendly confirmation page. The in-page form still uses `POST /api/unsubscribe`.
+  Both paths (and `/api/subscribe`) are served by one function,
+  `api/newsletter/[action].js`, behind the rewrites in `vercel.json` — see
+  §13 for why.
 
 If you want a different email provider (Resend, SendGrid, Postmark, SES), edit
 only the send logic in [`lib/email.js`](lib/email.js) — nothing else changes.
@@ -526,3 +531,59 @@ re-run `python3 scripts/build-logo.py` after replacing it.
 so it ships both lockups and swaps them on the existing `.scrolled` state. The
 event pages (`future-talks.html`, `future-talks-apply.html`, `ijec.html`) keep
 their own event branding, with Hash Future School credited as a subtitle.
+
+### 13. Serverless function budget — 12 is the ceiling
+
+Vercel's limit for this project is **12 serverless functions**, one per file under
+`api/`. Exceeding it does not fail the build — the build goes green and the deploy
+dies at "Deploying outputs" with no useful message. That is how the School Connect
+photo endpoint was rejected the first time, so the count matters before adding a
+route.
+
+The project now runs **10**:
+
+| Function | Serves |
+| --- | --- |
+| `api/admin/[...slug].js` | the CMS: posts, subscribers, applications, content, newsletter, generate |
+| `api/auth/[action].js` | login, logout, session |
+| `api/cron/[...slug].js` | the weekly blog + newsletter jobs |
+| `api/health.js` | liveness and a database check |
+| `api/join.js` | team applications |
+| `api/newsletter/[action].js` | subscribe and unsubscribe (merged) |
+| `api/school-connect.js` | the IIT Madras School Connect registration + student photo |
+| `api/showcase.js` | student project showcase (read-through of Future Assist) |
+| `api/site-data/[view].js` | blog posts and site snippets (merged) |
+| `api/updates.js` | school updates (read-through of Future Assist) |
+
+Two merges bought back two slots, and **no public URL changed**: `vercel.json`
+rewrites `/api/subscribe` → `/api/newsletter/subscribe`,
+`/api/unsubscribe` → `/api/newsletter/unsubscribe`, `/api/content` →
+`/api/site-data/content` and `/api/posts` → `/api/site-data/posts` (mirrored in
+`scripts/dev-server.js` so local dev resolves the same paths). That matters most
+for the unsubscribe link, which is already in the footer of every newsletter sent,
+so it can never move.
+
+**What else was optimised, and what it measured.** Three changes, all behaviour
+preserving:
+
+1. **Edge caching for the two read-only endpoints.** `/api/posts` and
+   `/api/content` answered `cache-control: no-store`, so every visitor woke the
+   function and queried Postgres: ~354ms warm, versus ~135ms for the endpoints
+   that already had `s-maxage` (`showcase`, `updates`). They now send
+   `s-maxage=300, stale-while-revalidate=600` (posts) and `s-maxage=60,
+   stale-while-revalidate=300` (site snippets, which are edited in the CMS).
+   `send()` in [`lib/http.js`](lib/http.js) still defaults to `no-store` for
+   everything else.
+2. **`/api/join` answers before the mail.** It used to await the team
+   notification, the applicant confirmation and the Future Assist mirror — three
+   sequential round trips — before responding. Those now run through
+   `runInBackground()` ([`lib/background.js`](lib/background.js), Vercel's
+   `waitUntil`), so the applicant waits only for the insert; the mirror state is
+   still written back onto the row for the CMS.
+3. **The admin function no longer carries the blog generator.** `lib/blog-generator.js`
+   (which pulls in the model client) is imported on demand inside the generate
+   route, so listing posts or opening the CMS does not pay for it on a cold start.
+
+When a new API route is genuinely needed, either free a slot by merging again or
+fold it into an existing function: `api/school-connect.js` already dispatches on
+content type, and `api/site-data/[view].js` on its `view` segment.

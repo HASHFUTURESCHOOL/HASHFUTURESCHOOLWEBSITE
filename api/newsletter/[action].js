@@ -1,9 +1,63 @@
-import { getSql } from '../lib/db.js';
-import { readBody, ok, bad, serverError } from '../lib/http.js';
+/**
+ * Newsletter subscribe and unsubscribe — one function, two actions.
+ *
+ *   POST /api/newsletter/subscribe            ← /api/subscribe
+ *   GET  /api/newsletter/unsubscribe?email=…  ← /api/unsubscribe (the link in the
+ *   POST /api/newsletter/unsubscribe             newsletter footer; POST is the
+ *                                                in-page form)
+ *
+ * Merged because this project sits at Vercel's limit of 12 serverless functions.
+ * `rewrites` in vercel.json keep both old URLs alive — that matters most for the
+ * unsubscribe link, which is already sitting in the footer of every newsletter
+ * already sent, so it can never move.
+ *
+ * Behaviour is unchanged: an unknown email on the GET path still says there is
+ * nothing to unsubscribe, and both paths answer with the same HTML page.
+ */
+
+import { getSql } from '../../lib/db.js';
+import { readBody, ok, bad, notFound, serverError } from '../../lib/http.js';
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export default async function handler(req, res) {
+  const action = Array.isArray(req.query?.action) ? req.query.action[0] : req.query?.action;
+
+  if (action === 'subscribe') return subscribe(req, res);
+  if (action === 'unsubscribe') return unsubscribe(req, res);
+  return notFound(res, 'Unknown newsletter action');
+}
+
+async function subscribe(req, res) {
+  if (req.method !== 'POST') {
+    return bad(res, 'Method not allowed', 405);
+  }
+
+  const body = await readBody(req);
+  const email = String(body.email || '').trim().toLowerCase();
+  const name = String(body.name || '').trim() || null;
+
+  if (!email || !EMAIL_RE.test(email)) {
+    return bad(res, 'A valid email address is required');
+  }
+
+  try {
+    const sql = getSql();
+    await sql`
+      INSERT INTO newsletter_subscribers (email, name)
+      VALUES (${email}, ${name})
+      ON CONFLICT (email) DO UPDATE
+        SET name = COALESCE(EXCLUDED.name, newsletter_subscribers.name),
+            status = 'active',
+            unsubscribed_at = NULL
+    `;
+    return ok(res, { subscribed: true });
+  } catch (err) {
+    return serverError(res, err);
+  }
+}
+
+async function unsubscribe(req, res) {
   if (req.method !== 'POST' && req.method !== 'GET') {
     return bad(res, 'Method not allowed', 405);
   }
@@ -12,7 +66,7 @@ export default async function handler(req, res) {
   // newsletter email footer (a recipient simply clicks it).
   const body = req.method === 'GET' ? {} : await readBody(req);
 
-  const email = String(body.email || req.query.email || '').trim().toLowerCase();
+  const email = String(body.email || req.query?.email || '').trim().toLowerCase();
   if (!email || !EMAIL_RE.test(email)) {
     return bad(res, 'A valid email address is required');
   }

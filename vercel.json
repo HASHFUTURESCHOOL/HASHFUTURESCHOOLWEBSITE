@@ -16,6 +16,22 @@
         {
             "source": "/api/proxy/admissions/demo",
             "destination": "https://futureassist.hashfuture.school/api/admissions/demo"
+        },
+        {
+            "source": "/api/subscribe",
+            "destination": "/api/newsletter/subscribe"
+        },
+        {
+            "source": "/api/unsubscribe",
+            "destination": "/api/newsletter/unsubscribe"
+        },
+        {
+            "source": "/api/content",
+            "destination": "/api/site-data/content"
+        },
+        {
+            "source": "/api/posts",
+            "destination": "/api/site-data/posts"
         }
     ],
     "redirects": [

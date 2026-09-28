@@ -14,6 +14,16 @@ const REDIRECTS = {
   '/updates': { to: '/school-updates', permanent: false },
 };
 
+// Mirrors the `rewrites` block in vercel.json. The public URLs for the blog,
+// site snippets and the newsletter are unchanged; they are served by the two
+// merged functions behind them.
+const REWRITES = {
+  '/api/subscribe': '/api/newsletter/subscribe',
+  '/api/unsubscribe': '/api/newsletter/unsubscribe',
+  '/api/content': '/api/site-data/content',
+  '/api/posts': '/api/site-data/posts',
+};
+
 const MIME = {
   '.html': 'text/html; charset=utf-8',
   '.css': 'text/css; charset=utf-8',
@@ -67,6 +77,11 @@ async function readJsonBody(req) {
 }
 
 async function handleApi(req, res, url) {
+  // Serve the rewritten paths first, so local dev resolves the same URLs Vercel
+  // serves through its rewrites.
+  const rewrite = REWRITES[url.pathname];
+  if (rewrite) url = new URL(rewrite + url.search, url);
+
   const seg = url.pathname.split('/').filter(Boolean);
   if (!seg.length || seg[0] !== 'api') return false;
 
@@ -92,14 +107,10 @@ async function handleApi(req, res, url) {
       query = buildQuery(url, seg.slice(2));
       break;
     }
-    case 'content': {
-      modulePath = path.join(ROOT, 'api/content.js');
+    case 'site-data': {
+      modulePath = path.join(ROOT, 'api/site-data/[view].js');
       query = buildQuery(url);
-      break;
-    }
-    case 'posts': {
-      modulePath = path.join(ROOT, 'api/posts/index.js');
-      query = buildQuery(url);
+      if (seg[2]) query.view = seg[2];
       break;
     }
     case 'showcase': {
@@ -112,9 +123,10 @@ async function handleApi(req, res, url) {
       query = buildQuery(url);
       break;
     }
-    case 'subscribe': {
-      modulePath = path.join(ROOT, 'api/subscribe.js');
+    case 'newsletter': {
+      modulePath = path.join(ROOT, 'api/newsletter/[action].js');
       query = buildQuery(url);
+      if (seg[2]) query.action = seg[2];
       break;
     }
     case 'join': {
@@ -124,11 +136,6 @@ async function handleApi(req, res, url) {
     }
     case 'school-connect': {
       modulePath = path.join(ROOT, 'api/school-connect.js');
-      query = buildQuery(url);
-      break;
-    }
-    case 'unsubscribe': {
-      modulePath = path.join(ROOT, 'api/unsubscribe.js');
       query = buildQuery(url);
       break;
     }

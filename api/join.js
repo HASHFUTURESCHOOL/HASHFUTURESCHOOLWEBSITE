@@ -14,6 +14,7 @@
 import { getSql, databaseUrl } from '../lib/db.js';
 import { readBody, ok, bad, send, serverError } from '../lib/http.js';
 import { sendEmail } from '../lib/email.js';
+import { runInBackground } from '../lib/background.js';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
 
@@ -457,69 +458,74 @@ export default async function handler(req, res) {
 
     const stored = { ...application, id, ref };
 
-    // 1. Tell the review team. Reply-To is the applicant so a reply goes straight
-    //    back to them.
-    const team = teamEmail(stored);
-    const recipients = TEAM_INBOX.split(',').map((s) => s.trim()).filter(Boolean);
-    let emailSent = false;
-    try {
-      if (recipients.length) {
-        await sendEmail({
-          to: recipients,
-          subject: `🎯 New team application — ${stored.full_name} (${ref})`,
-          html: team.html,
-          text: team.text,
-          replyTo: stored.email,
-        });
-        emailSent = true;
-      }
-    } catch (err) {
-      console.error('[join] team notification failed:', err);
-    }
-
-    // 2. Confirm to the applicant. A failure here is invisible to them, so log
-    //    it and move on.
-    try {
-      const ack = applicantEmail(stored);
-      await sendEmail({
-        to: stored.email,
-        subject: `We received your application — ${ref}`,
-        html: ack.html,
-        text: ack.text,
-        replyTo: recipients[0],
-      });
-    } catch (err) {
-      console.error('[join] applicant confirmation failed:', err);
-    }
-
-    // 3. Mirror into Future Assist. Skipped for the local file store so a local
-    //    run never posts into another environment.
-    const sync = !hasDatabase
-      ? { state: 'skipped-local', id: null, error: null }
-      : FA_DISABLED
-        ? { state: 'disabled', id: null, error: null }
-        : await syncToFutureAssist(stored);
-
-    if (sql) {
+    // The application is stored. Everything that follows — the team's heads-up,
+    // the applicant's confirmation and the mirror into Future Assist — is three
+    // network round trips the applicant should not be waiting for, so it runs
+    // after the response is sent (Vercel's waitUntil keeps the function alive for
+    // it; locally it simply continues). The row is already safe, and the sync
+    // state is written back onto it for the admin CMS.
+    runInBackground((async () => {
+      // 1. Tell the review team. Reply-To is the applicant so a reply goes
+      //    straight back to them.
+      const recipients = TEAM_INBOX.split(',').map((s) => s.trim()).filter(Boolean);
       try {
-        await sql`
-          UPDATE team_applications
-          SET future_assist_id = ${sync.id || null},
-              future_assist_state = ${sync.state},
-              future_assist_error = ${sync.error || null}
-          WHERE id = ${id}
-        `;
+        if (recipients.length) {
+          const team = teamEmail(stored);
+          await sendEmail({
+            to: recipients,
+            subject: `🎯 New team application — ${stored.full_name} (${ref})`,
+            html: team.html,
+            text: team.text,
+            replyTo: stored.email,
+          });
+        }
       } catch (err) {
-        console.error('[join] could not record sync state:', err);
+        console.error('[join] team notification failed:', err);
       }
-    }
+
+      // 2. Confirm to the applicant. A failure here is invisible to them, so log
+      //    it and move on.
+      try {
+        const ack = applicantEmail(stored);
+        await sendEmail({
+          to: stored.email,
+          subject: `We received your application — ${ref}`,
+          html: ack.html,
+          text: ack.text,
+          replyTo: recipients[0],
+        });
+      } catch (err) {
+        console.error('[join] applicant confirmation failed:', err);
+      }
+
+      // 3. Mirror into Future Assist. Skipped for the local file store so a
+      //    local run never posts into another environment.
+      const sync = !hasDatabase
+        ? { state: 'skipped-local', id: null, error: null }
+        : FA_DISABLED
+          ? { state: 'disabled', id: null, error: null }
+          : await syncToFutureAssist(stored);
+
+      if (sql) {
+        try {
+          await sql`
+            UPDATE team_applications
+            SET future_assist_id = ${sync.id || null},
+                future_assist_state = ${sync.state},
+                future_assist_error = ${sync.error || null}
+            WHERE id = ${id}
+          `;
+        } catch (err) {
+          console.error('[join] could not record sync state:', err);
+        }
+      }
+    })());
 
     return ok(res, {
       received: true,
       ref,
-      emailed: emailSent,
-      futureAssist: sync.state,
       stored: hasDatabase ? 'database' : 'local-file',
+      queued: true,
     });
   } catch (err) {
     // Undefined table: the migrations have not been run against this database

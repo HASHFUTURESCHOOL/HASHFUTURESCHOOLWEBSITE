@@ -2,7 +2,6 @@ import { getSql } from '../../lib/db.js';
 import { readBody, ok, bad, unauthorized, notFound, serverError } from '../../lib/http.js';
 import { requireAdmin } from '../../lib/auth.js';
 import { slugify } from '../../lib/slug.js';
-import { generateAndSaveDraft } from '../../lib/blog-generator.js';
 import {
   getNewsletterContent,
   updateNewsletterContent,
@@ -387,6 +386,10 @@ async function generateRoute(req, res, sql) {
         ? Number(body.topicIndex)
         : undefined;
 
+    // Imported on demand: the generator pulls in the model client, and every
+    // other admin request (listing posts, reading applications…) would otherwise
+    // pay for it on a cold start.
+    const { generateAndSaveDraft } = await import('../../lib/blog-generator.js');
     const post = await generateAndSaveDraft({ sql, topicIndex });
     return ok(res, {
       generated: true,
