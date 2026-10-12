@@ -96,6 +96,18 @@ for (const page of pages()) {
     const name = path.relative(ROOT, page.file);
 
     if (!/class="nav-links"/.test(original)) {
+        // The event pages (IJEC, Future Talks, Apply to Speak) carry their own
+        // navigation, so there is no grouped menu to write — but if one of them
+        // shows the search button it still needs search.css and search.js.
+        if (/data-hf-search-open/.test(original)) {
+            const withAssets = ensureSearchAssets(original, page.prefix);
+            if (withAssets !== original) {
+                changed += 1;
+                console.log(`  ${name} (search assets only)`);
+                if (!DRY_RUN) fs.writeFileSync(page.file, withAssets, 'utf8');
+                continue;
+            }
+        }
         skipped += 1;
         continue;
     }
