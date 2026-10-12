@@ -1184,12 +1184,33 @@ ul {
 }
 
 /* Responsive */
+@media (max-width: 1200px) {
+    /* Ten nav links need a little less breathing room before the burger takes over. */
+    .ij-nav-links {
+        gap: 16px;
+    }
+
+    .ij-nav-links a {
+        font-size: 0.84rem;
+    }
+}
+
 @media (max-width: 1024px) {
     .ij-hero-grid,
     .ij-vision-grid,
     .ij-contact-grid {
         grid-template-columns: 1fr;
         gap: 48px;
+    }
+
+    /* Ten nav links plus the Register Now button stop fitting before the phone
+       breakpoint, so the burger takes over here and the CTA stays. */
+    .ij-nav-links {
+        display: none;
+    }
+
+    .ij-burger {
+        display: flex;
     }
 
     .ij-hero {
@@ -1253,6 +1274,274 @@ ul {
 
 @media (max-width: 480px) {
     .ij-inc-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ============================================
+   Registration form
+   ============================================ */
+.ij-register {
+    background:
+        radial-gradient(1100px 460px at 12% 0%, rgba(124, 92, 255, 0.14), transparent 60%),
+        radial-gradient(900px 420px at 88% 100%, rgba(34, 211, 238, 0.10), transparent 60%);
+}
+
+.ij-register-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.3fr) minmax(0, 0.7fr);
+    gap: 32px;
+    align-items: start;
+}
+
+.ij-form {
+    background: var(--ij-bg-card);
+    border: 1px solid var(--ij-border);
+    border-radius: var(--ij-radius-lg);
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    backdrop-filter: blur(6px);
+}
+
+.ij-form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+}
+
+.ij-field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.ij-field label {
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--ij-text);
+}
+
+.ij-field .req {
+    color: var(--ij-cyan);
+}
+
+.ij-field input,
+.ij-field select,
+.ij-field textarea {
+    width: 100%;
+    font-family: inherit;
+    font-size: 0.95rem;
+    color: var(--ij-white);
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--ij-border);
+    border-radius: 12px;
+    padding: 13px 15px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.ij-field textarea {
+    resize: vertical;
+    min-height: 84px;
+    line-height: 1.6;
+}
+
+.ij-field select option {
+    background: #0B0F1D;
+    color: var(--ij-text);
+}
+
+.ij-field input::placeholder,
+.ij-field textarea::placeholder {
+    color: var(--ij-dim);
+    opacity: 0.75;
+}
+
+.ij-field input:hover,
+.ij-field select:hover,
+.ij-field textarea:hover {
+    border-color: rgba(255, 255, 255, 0.22);
+}
+
+.ij-field input:focus,
+.ij-field select:focus,
+.ij-field textarea:focus {
+    outline: none;
+    border-color: var(--ij-primary-light);
+    background: rgba(124, 92, 255, 0.08);
+    box-shadow: 0 0 0 4px rgba(124, 92, 255, 0.18);
+}
+
+.ij-form-divider {
+    margin-top: 6px;
+    padding-top: 18px;
+    border-top: 1px dashed var(--ij-border);
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--ij-white);
+}
+
+.ij-form-divider span {
+    font-weight: 500;
+    font-size: 0.84rem;
+    color: var(--ij-dim);
+}
+
+.ij-consent {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--ij-dim);
+}
+
+.ij-consent input {
+    flex: 0 0 auto;
+    width: 18px;
+    height: 18px;
+    margin-top: 3px;
+    accent-color: var(--ij-primary);
+}
+
+/* Only a bot fills this in — kept out of the flow and out of the tab order. */
+.ij-honeypot {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.ij-form-foot {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 16px;
+    margin-top: 4px;
+}
+
+.ij-form-note {
+    font-size: 0.88rem;
+    color: var(--ij-dim);
+    flex: 1 1 220px;
+}
+
+.ij-form-note.is-error {
+    color: #FF8A8A;
+}
+
+.ij-form-note.is-ok {
+    color: var(--ij-cyan);
+}
+
+.ij-register-aside {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.ij-register-card {
+    background: linear-gradient(180deg, rgba(124, 92, 255, 0.12), rgba(34, 211, 238, 0.06));
+    border: 1px solid var(--ij-border);
+    border-radius: var(--ij-radius-lg);
+    padding: 28px;
+}
+
+.ij-register-card h3 {
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: var(--ij-white);
+    margin-bottom: 14px;
+}
+
+.ij-register-card .tick-lg {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.ij-register-card .dim {
+    margin-top: 14px;
+    font-size: 0.88rem;
+    color: var(--ij-dim);
+}
+
+.ij-register-card a {
+    color: var(--ij-cyan);
+}
+
+.ij-register-card a:hover {
+    color: var(--ij-primary-light);
+}
+
+.ij-register-steps {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.ij-register-steps li {
+    display: grid;
+    grid-template-columns: 28px 1fr;
+    gap: 12px;
+    align-items: start;
+    font-size: 0.92rem;
+    color: var(--ij-dim);
+}
+
+.ij-register-steps li span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--ij-gradient);
+    color: #fff;
+    font-size: 0.82rem;
+    font-weight: 700;
+}
+
+.ij-register-meta {
+    margin: 22px 0 6px;
+}
+
+.ij-register-meta div {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+    padding-top: 12px;
+    border-top: 1px solid var(--ij-border);
+    font-size: 0.9rem;
+}
+
+.ij-register-meta strong {
+    color: var(--ij-white);
+    font-weight: 700;
+}
+
+.ij-register-meta span {
+    color: var(--ij-dim);
+    text-align: right;
+}
+
+@media (max-width: 1024px) {
+    .ij-register-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 640px) {
+    .ij-form {
+        padding: 22px;
+    }
+
+    .ij-form-row {
         grid-template-columns: 1fr;
     }
 }

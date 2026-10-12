@@ -13,12 +13,12 @@
     <meta name="author" content="Hash Future School">
     <meta name="robots" content="index,follow">
     <meta name="theme-color" content="#7C5CFF">
-    <link rel="canonical" href="https://www.hashfuture.school/ijec.html">
+    <link rel="canonical" href="https://www.hashfuture.school/ijec">
     <link rel="icon" type="image/png" href="favicon.png">
 
     <!-- Open Graph -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://www.hashfuture.school/ijec.html">
+    <meta property="og:url" content="https://www.hashfuture.school/ijec">
     <meta property="og:title" content="International Junior Entrepreneurship Challenge 2026">
     <meta property="og:description"
         content="Young founders. Real ventures. One global stage. The international challenge for entrepreneurs aged 7–17, presented by Hash Future School.">
@@ -26,6 +26,7 @@
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://www.hashfuture.school/ijec">
     <meta name="twitter:title" content="International Junior Entrepreneurship Challenge 2026">
     <meta name="twitter:description"
         content="A global challenge where founders aged 7–17 ideate, build and launch real ventures.">
@@ -69,7 +70,7 @@
       },
       "offers": {
         "@type": "Offer",
-        "url": "https://www.hashfuture.school/ijec.html",
+        "url": "https://www.hashfuture.school/ijec",
         "price": "0",
         "priceCurrency": "INR",
         "availability": "https://schema.org/PreOrder"
@@ -95,12 +96,11 @@
                 <a href="#timeline">Timeline</a>
                 <a href="#incentives">Incentives</a>
                 <a href="#rules">Rules</a>
+                <a href="#register">Register</a>
                 <a href="#faq">FAQ</a>
                 <a href="#contact">Contact</a>
             </div>
-            <a class="ij-btn ij-btn-primary ij-btn-sm ij-nav-cta"
-                href="https://wa.me/919497120591?text=Hi!%20I%20want%20to%20register%20my%20team%20for%20the%20International%20Junior%20Entrepreneurship%20Challenge%202026."
-                target="_blank" rel="noopener noreferrer">Register Now</a>
+            <a class="ij-btn ij-btn-primary ij-btn-sm ij-nav-cta" href="#register">Register Now</a>
             <button class="ij-burger" id="ijBurger" aria-label="Toggle menu" aria-expanded="false">
                 <span></span><span></span><span></span>
             </button>
@@ -116,11 +116,10 @@
         <a href="#timeline">Timeline</a>
         <a href="#incentives">Incentives</a>
         <a href="#rules">Rules</a>
+        <a href="#register">Register</a>
         <a href="#faq">FAQ</a>
         <a href="#contact">Contact</a>
-        <a class="ij-btn ij-btn-primary"
-            href="https://wa.me/919497120591?text=Hi!%20I%20want%20to%20register%20my%20team%20for%20the%20International%20Junior%20Entrepreneurship%20Challenge%202026."
-            target="_blank" rel="noopener noreferrer">Register Now</a>
+        <a class="ij-btn ij-btn-primary" href="#register">Register Now</a>
     </div>
 
     <!-- Hero -->
@@ -143,9 +142,7 @@
                     <span class="ij-meta-chip">🏁 Finale: 19 Dec 2026 · Kochi</span>
                 </div>
                 <div class="ij-hero-ctas">
-                    <a class="ij-btn ij-btn-primary"
-                        href="https://wa.me/919497120591?text=Hi!%20I%20want%20to%20register%20my%20team%20for%20the%20International%20Junior%20Entrepreneurship%20Challenge%202026."
-                        target="_blank" rel="noopener noreferrer">
+                    <a class="ij-btn ij-btn-primary" href="#register">
                         Register My Team
                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -413,6 +410,190 @@
         </div>
     </section>
 
+    <!-- Registration -->
+    <section class="ij-section ij-register" id="register">
+        <div class="ij-container">
+            <div class="ij-section-head ij-reveal">
+                <span class="ij-eyebrow">Registration</span>
+                <h2>Register your <span class="grad">team</span></h2>
+                <p>Free to enter and open worldwide. Teams of 1–5 founders aged 7–17, with one adult mentor.
+                    Registrations close on <strong>15 October 2026</strong>.</p>
+            </div>
+            <div class="ij-register-grid">
+                <form class="ij-form ij-reveal" id="ijecForm" novalidate>
+                    <div class="ij-form-row">
+                        <div class="ij-field">
+                            <label for="ijTeamName">Team name <span class="req">*</span></label>
+                            <input type="text" id="ijTeamName" name="team_name" maxlength="160"
+                                placeholder="e.g. Bright Minds" required>
+                        </div>
+                        <div class="ij-field">
+                            <label for="ijTeamSize">Team size</label>
+                            <select id="ijTeamSize" name="team_size">
+                                <option value="1">1 founder (solo)</option>
+                                <option value="2" selected>2 founders</option>
+                                <option value="3">3 founders</option>
+                                <option value="4">4 founders</option>
+                                <option value="5">5 founders</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="ij-form-row">
+                        <div class="ij-field">
+                            <label for="ijLeadName">Lead founder's full name <span class="req">*</span></label>
+                            <input type="text" id="ijLeadName" name="lead_name" maxlength="160" required>
+                        </div>
+                        <div class="ij-field">
+                            <label for="ijLeadAge">Lead founder's age <span class="req">*</span></label>
+                            <input type="number" id="ijLeadAge" name="lead_age" min="7" max="17" inputmode="numeric"
+                                placeholder="7 – 17" required>
+                        </div>
+                    </div>
+
+                    <div class="ij-form-row">
+                        <div class="ij-field">
+                            <label for="ijLeadEmail">Lead founder's email</label>
+                            <input type="email" id="ijLeadEmail" name="lead_email" maxlength="200"
+                                placeholder="So we can reach the team directly">
+                        </div>
+                        <div class="ij-field">
+                            <label for="ijSchool">School</label>
+                            <input type="text" id="ijSchool" name="school_name" maxlength="200"
+                                placeholder="School name (optional)">
+                        </div>
+                    </div>
+
+                    <div class="ij-form-row">
+                        <div class="ij-field">
+                            <label for="ijCity">City</label>
+                            <input type="text" id="ijCity" name="city" maxlength="120">
+                        </div>
+                        <div class="ij-field">
+                            <label for="ijCountry">Country</label>
+                            <input type="text" id="ijCountry" name="country" maxlength="80">
+                        </div>
+                    </div>
+
+                    <div class="ij-field">
+                        <label for="ijMembers">Other founders on the team</label>
+                        <textarea id="ijMembers" name="members" rows="2" maxlength="2000"
+                            placeholder="One per line — e.g. Aisha, 12"></textarea>
+                    </div>
+
+                    <div class="ij-form-row">
+                        <div class="ij-field">
+                            <label for="ijCategory">Award you're aiming for</label>
+                            <select id="ijCategory" name="category">
+                                <option value="">Not sure yet</option>
+                                <option>Overall Grand Prize</option>
+                                <option>Best Social Impact Venture</option>
+                                <option>Best Technology Venture</option>
+                                <option>Best Green Venture</option>
+                                <option>Best Junior Founder (ages 7–10)</option>
+                            </select>
+                        </div>
+                        <div class="ij-field">
+                            <label for="ijHeard">How did you hear about IJEC?</label>
+                            <select id="ijHeard" name="heard_about">
+                                <option value="">Select one</option>
+                                <option>Hash Future School</option>
+                                <option>My school</option>
+                                <option>Instagram</option>
+                                <option>LinkedIn</option>
+                                <option>YouTube</option>
+                                <option>WhatsApp group</option>
+                                <option>Future Talks</option>
+                                <option>Friend or family</option>
+                                <option>Other</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="ij-form-divider">Adult mentor <span>(required — a parent, guardian or teacher)</span>
+                    </div>
+
+                    <div class="ij-form-row">
+                        <div class="ij-field">
+                            <label for="ijMentorName">Mentor's name <span class="req">*</span></label>
+                            <input type="text" id="ijMentorName" name="mentor_name" maxlength="160" required>
+                        </div>
+                        <div class="ij-field">
+                            <label for="ijMentorRelation">Relationship to the team</label>
+                            <select id="ijMentorRelation" name="mentor_relation">
+                                <option>Parent / Guardian</option>
+                                <option>Teacher</option>
+                                <option>Relative</option>
+                                <option>Other</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="ij-form-row">
+                        <div class="ij-field">
+                            <label for="ijMentorEmail">Mentor's email <span class="req">*</span></label>
+                            <input type="email" id="ijMentorEmail" name="mentor_email" maxlength="200" required>
+                        </div>
+                        <div class="ij-field">
+                            <label for="ijMentorPhone">Mentor's phone / WhatsApp <span class="req">*</span></label>
+                            <input type="tel" id="ijMentorPhone" name="mentor_phone" maxlength="40"
+                                placeholder="With country code" required>
+                        </div>
+                    </div>
+
+                    <div class="ij-field">
+                        <label for="ijIdea">Your venture idea <span class="req">*</span></label>
+                        <textarea id="ijIdea" name="idea" rows="4" maxlength="4000"
+                            placeholder="What problem will you solve, and what will you build? A sentence or two is enough — ideas can change as you go."
+                            required></textarea>
+                    </div>
+
+                    <label class="ij-consent">
+                        <input type="checkbox" id="ijConsent" name="consent" required>
+                        <span>We accept the challenge rules, and the parent or guardian of every founder on this team
+                            consents to the team taking part in IJEC 2026.</span>
+                    </label>
+
+                    <input type="text" name="website" tabindex="-1" autocomplete="off" class="ij-honeypot"
+                        aria-hidden="true">
+
+                    <div class="ij-form-foot">
+                        <button class="ij-btn ij-btn-primary" type="submit" id="ijecSubmit">Submit registration</button>
+                        <p class="ij-form-note" id="ijecStatus" role="status" aria-live="polite"></p>
+                    </div>
+                </form>
+
+                <aside class="ij-register-aside ij-reveal ij-reveal-d1">
+                    <div class="ij-register-card" id="ijecSuccess" hidden>
+                        <div class="tick-lg">🎉</div>
+                        <h3>You're registered!</h3>
+                        <p>Your team reference is <strong id="ijecRef">—</strong>. A confirmation email is on its way to
+                            the lead founder and your mentor with the timeline, templates and what happens next.</p>
+                        <p class="dim">Keep an eye on your spam folder. Questions? WhatsApp us on +91 94971 20591.</p>
+                    </div>
+                    <div class="ij-register-card" id="ijecAsideDefault">
+                        <h3>What happens next</h3>
+                        <ul class="ij-register-steps">
+                            <li><span>1</span> Submit this form — it takes about two minutes.</li>
+                            <li><span>2</span> Your mentor and lead founder get a confirmation email with your team
+                                reference.</li>
+                            <li><span>3</span> The Nov 2026 bootcamp and mentor pairing details follow by email.</li>
+                        </ul>
+                        <div class="ij-register-meta">
+                            <div><strong>Free to enter</strong><span>No registration fee</span></div>
+                            <div><strong>15 Oct 2026</strong><span>Registrations close</span></div>
+                            <div><strong>19 Dec 2026</strong><span>Grand finale · Kochi</span></div>
+                        </div>
+                        <p class="dim">Prefer to talk first? <a
+                                href="https://wa.me/919497120591?text=Hi!%20I%20want%20to%20register%20my%20team%20for%20the%20International%20Junior%20Entrepreneurship%20Challenge%202026."
+                                target="_blank" rel="noopener noreferrer">WhatsApp us</a> or email
+                            <a href="mailto:learn@hashfuture.school">learn@hashfuture.school</a>.</p>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </section>
+
     <!-- FAQ -->
     <section class="ij-section ij-faq" id="faq">
         <div class="ij-container">
@@ -492,9 +673,10 @@
                         <span class="chev">+</span>
                     </button>
                     <div class="ij-faq-a">
-                        <div class="ij-faq-a-inner">Tap "Register My Team" to reach us on WhatsApp, or write to
-                            learn@hashfuture.school. We'll send the registration form, timeline and mentor-matching
-                            details within 48 hours.</div>
+                        <div class="ij-faq-a-inner">Fill in the <a href="#register">team registration form</a> above —
+                            it takes about two minutes. You'll get a confirmation email with your team reference and
+                            the next steps straight away. Prefer to talk first? WhatsApp us on +91 94971 20591 or write
+                            to learn@hashfuture.school.</div>
                     </div>
                 </div>
             </div>
@@ -562,9 +744,7 @@
             <h2>The world is waiting for your child's <span class="grad">first venture</span>.</h2>
             <p>Registration is free and open worldwide. Teams are limited — secure your spot today.</p>
             <div class="ij-hero-ctas">
-                <a class="ij-btn ij-btn-primary"
-                    href="https://wa.me/919497120591?text=Hi!%20I%20want%20to%20register%20my%20team%20for%20the%20International%20Junior%20Entrepreneurship%20Challenge%202026."
-                    target="_blank" rel="noopener noreferrer">Register My Team</a>
+                <a class="ij-btn ij-btn-primary" href="#register">Register My Team</a>
                 <a class="ij-btn ij-btn-ghost" href="future-talks.html">Explore Future Talks</a>
             </div>
         </div>
@@ -631,6 +811,7 @@
                     <a href="#timeline">Timeline</a>
                     <a href="#incentives">Incentives</a>
                     <a href="#rules">Rules</a>
+                    <a href="#register">Register</a>
                 </div>
                 <div class="ij-footer-col">
                     <h4>Events</h4>
@@ -728,6 +909,60 @@
             });
         }, { threshold: 0.6 });
         counters.forEach(el => cio.observe(el));
+
+        // Team registration — posts to /api/ijec-register, which validates and
+        // forwards the entry to Future Assist (the system of record). Future
+        // Assist stores it, emails the team and raises it on the programme desk.
+        const ijecForm = document.getElementById('ijecForm');
+        const ijecStatus = document.getElementById('ijecStatus');
+        const ijecSubmit = document.getElementById('ijecSubmit');
+        const ijecSuccess = document.getElementById('ijecSuccess');
+        const ijecAsideDefault = document.getElementById('ijecAsideDefault');
+        const ijecRef = document.getElementById('ijecRef');
+
+        if (ijecForm) {
+            const setNote = (message, ok) => {
+                ijecStatus.textContent = message || '';
+                ijecStatus.classList.toggle('is-error', Boolean(message) && !ok);
+                ijecStatus.classList.toggle('is-ok', Boolean(message) && Boolean(ok));
+            };
+
+            ijecForm.addEventListener('submit', async event => {
+                event.preventDefault();
+                if (!ijecForm.reportValidity()) return;
+
+                const data = Object.fromEntries(new FormData(ijecForm).entries());
+                data.consent = data.consent === 'on';
+                data.source = 'ijec-page';
+
+                ijecSubmit.disabled = true;
+                setNote('Sending your registration…', true);
+
+                try {
+                    const res = await fetch('/api/ijec-register', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(data),
+                    });
+                    const result = await res.json().catch(() => ({}));
+
+                    if (!res.ok) {
+                        setNote(result.error || 'We could not save your team just now. Please try again.', false);
+                        return;
+                    }
+
+                    ijecRef.textContent = result.ref || 'registered';
+                    ijecForm.hidden = true;
+                    ijecAsideDefault.hidden = true;
+                    ijecSuccess.hidden = false;
+                    ijecSuccess.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                } catch (err) {
+                    setNote('We could not reach our registration system. Please check your connection and try again.', false);
+                } finally {
+                    ijecSubmit.disabled = false;
+                }
+            });
+        }
     </script>
 </body>
 

@@ -214,7 +214,7 @@ engine runs from the Admin CMS, so you can trigger it on demand:
   friendly confirmation page. The in-page form still uses `POST /api/unsubscribe`.
   Both paths (and `/api/subscribe`) are served by one function,
   `api/newsletter/[action].js`, behind the rewrites in `vercel.json` — see
-  §13 for why.
+  §14 for why.
 
 If you want a different email provider (Resend, SendGrid, Postmark, SES), edit
 only the send logic in [`lib/email.js`](lib/email.js) — nothing else changes.
@@ -507,7 +507,63 @@ anything. If the Future Assist dev server starts returning 404s for routes that
 exist (`/api/health`, `/login`), move its `.next` directory aside and start it
 again — that is a stale dev cache, not a code problem.
 
-### 12. Brand assets — the school logo
+### 12. IJEC 2026 team registration — the `#register` form on `/ijec`
+
+The International Junior Entrepreneurship Challenge (IJEC) page carries its own
+registration form at [#register](ijec.html). Like School Connect, the entry is
+not stored on this site: the form posts to `/api/ijec-register`, which validates
+it and forwards it straight to Future Assist, the system of record.
+
+```
+/ijec  #register  (form)
+      │  POST /api/ijec-register         ← validates, then forwards server-to-server
+      ▼
+Future Assist  POST /api/ijec-register
+      │
+      ├─ ijec_registrations            (the row lives here, and only here)
+      ├─ 📧 lead founder + mentor: team reference, the timeline, the rules and
+      │                            what happens next
+      ├─ 🔔 superadmin + admin: urgent in-app notification
+      ▼
+/admin/ijec  (IJEC registrations desk) → review, approve, reject, archive
+```
+
+The forward lives in [`lib/future-assist.js`](lib/future-assist.js)
+(`FUTURE_ASSIST_IJEC_URL`, default
+`https://futureassist.hashfuture.school/api/ijec-register`, falling back to the
+sibling of `FUTURE_ASSIST_JOIN_URL` / `FUTURE_ASSIST_SCHOOL_CONNECT_URL`; set it
+to off/disabled/none to switch the intake off). `FUTURE_ASSIST_IJEC_KEY` sends
+`x-hfs-sync-key`, falling back to `FUTURE_ASSIST_SCHOOL_CONNECT_KEY`. If Future
+Assist cannot be reached the endpoint answers 503 with an honest "we could not
+save your team, try again or WhatsApp us" — an entry is never silently dropped.
+
+**What it collects.** Team name and size (1–5), the award they are aiming for,
+the lead founder's name, age (7–17) and email, city, country, school, other
+founders, the adult mentor's name, relationship, email and phone/WhatsApp, the
+venture idea, how they heard about IJEC and the parent/guardian consent
+checkbox. The honeypot field is `website`. The rules the page publishes are
+enforced on both sides, so an invalid entry is caught before it reaches the mail.
+
+**The page.** The form is section `#register` inside [`ijec.html`](ijec.html),
+styled by [`ijec.css`](ijec.css). Every "Register Now" / "Register My Team"
+button — nav, mobile menu, hero and the closing CTA band — is an in-page link to
+it, and WhatsApp stays as the secondary route for families who want to talk
+first. On success the form is replaced by the team reference Future Assist
+assigned.
+
+**The emails and the desk live in the Future Assist repo.** The confirmation
+comes from `src/lib/ijec-email.ts` there — the deadline and finale dates sit in
+that file, so a date change is one edit in one place. The intake, the
+notifications and the desk are `src/app/api/ijec-register/route.ts` and
+`src/app/(dashboard)/admin/ijec/page.tsx`. `IJEC_EMAIL=off` silences the
+confirmation.
+
+**Running it locally.** Same shape as School Connect: point
+`FUTURE_ASSIST_IJEC_URL` at the local Future Assist
+(`http://localhost:3100/api/ijec-register`) and set `IJEC_EMAIL=off` there to
+skip sends.
+
+### 13. Brand assets — the school logo
 
 The logo is supplied as a **JPEG on a white background**, which has no alpha
 channel. [`scripts/build-logo.py`](scripts/build-logo.py) turns it into the
@@ -532,7 +588,7 @@ so it ships both lockups and swaps them on the existing `.scrolled` state. The
 event pages (`future-talks.html`, `future-talks-apply.html`, `ijec.html`) keep
 their own event branding, with Hash Future School credited as a subtitle.
 
-### 13. Serverless function budget — 12 is the ceiling
+### 14. Serverless function budget — 12 is the ceiling
 
 Vercel's limit for this project is **12 serverless functions**, one per file under
 `api/`. Exceeding it does not fail the build — the build goes green and the deploy
@@ -540,7 +596,7 @@ dies at "Deploying outputs" with no useful message. That is how the School Conne
 photo endpoint was rejected the first time, so the count matters before adding a
 route.
 
-The project now runs **10**:
+The project now runs **11**:
 
 | Function | Serves |
 | --- | --- |
@@ -548,6 +604,7 @@ The project now runs **10**:
 | `api/auth/[action].js` | login, logout, session |
 | `api/cron/[...slug].js` | the weekly blog + newsletter jobs |
 | `api/health.js` | liveness and a database check |
+| `api/ijec-register.js` | IJEC 2026 team registrations |
 | `api/join.js` | team applications |
 | `api/newsletter/[action].js` | subscribe and unsubscribe (merged) |
 | `api/school-connect.js` | the IIT Madras School Connect registration + student photo |
@@ -584,6 +641,7 @@ preserving:
    (which pulls in the model client) is imported on demand inside the generate
    route, so listing posts or opening the CMS does not pay for it on a cold start.
 
-When a new API route is genuinely needed, either free a slot by merging again or
-fold it into an existing function: `api/school-connect.js` already dispatches on
-content type, and `api/site-data/[view].js` on its `view` segment.
+`api/ijec-register.js` used the eleventh slot, so **one is left**. When a new API
+route is genuinely needed, either fold it into an existing function —
+`api/school-connect.js` already dispatches on content type, and `api/site-data/[view].js`
+on its `view` segment — or free a slot by merging another pair.

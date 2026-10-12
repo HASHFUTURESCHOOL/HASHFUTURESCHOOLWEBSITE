@@ -4184,3 +4184,162 @@ ul.gl-prose {
         width: 100%;
     }
 }
+
+/* ============================================
+   Homepage IJEC band — International Junior Entrepreneurship Challenge
+   A direct route into IJEC 2026 from the homepage. It sits directly above the
+   IIT Madras partnership band and uses the challenge's own purple, so the two
+   credential bands read as separate things rather than one wall of badges.
+   ============================================ */
+.ijec-band {
+    padding: 46px 0;
+    background: linear-gradient(135deg, #F5F3FF 0%, #FFFFFF 65%);
+    border-top: 1px solid rgba(124, 92, 255, 0.18);
+    border-bottom: 1px solid rgba(124, 92, 255, 0.18);
+}
+
+.ijec-band-inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1.5fr) minmax(240px, 1fr);
+    gap: 34px;
+    align-items: center;
+}
+
+.ijec-band-badge {
+    display: inline-block;
+    padding: 6px 15px;
+    border-radius: var(--radius-full);
+    background: rgba(124, 92, 255, 0.12);
+    border: 1px solid rgba(124, 92, 255, 0.28);
+    color: #5B21B6;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+}
+
+.ijec-band h2 {
+    margin: 14px 0 12px;
+    font-size: clamp(1.5rem, 2.5vw, 2.05rem);
+    font-weight: 800;
+    line-height: 1.25;
+    color: var(--text-dark);
+}
+
+.ijec-band .ijec-accent {
+    color: #6D28D9;
+}
+
+.ijec-band-copy p {
+    margin: 0;
+    max-width: 660px;
+    font-size: 1.02rem;
+    line-height: 1.75;
+    color: var(--text-medium);
+}
+
+.ijec-band-facts {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 18px 0 0;
+    padding: 0;
+}
+
+.ijec-band-facts li {
+    padding: 7px 15px;
+    border-radius: var(--radius-full);
+    background: #fff;
+    border: 1px solid rgba(124, 92, 255, 0.22);
+    color: var(--text-medium);
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.ijec-band-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.ijec-band-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    padding: 15px 30px;
+    border-radius: var(--radius-full);
+    background: linear-gradient(135deg, #7C5CFF 0%, #6D28D9 100%);
+    color: #fff;
+    font-weight: 800;
+    font-size: 1rem;
+    text-decoration: none;
+    box-shadow: 0 12px 26px -12px rgba(109, 40, 217, 0.75);
+    transition: var(--transition-normal);
+}
+
+.ijec-band-cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 18px 34px -14px rgba(109, 40, 217, 0.85);
+}
+
+.ijec-band-link {
+    color: #6D28D9;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+@media (max-width: 900px) {
+    .ijec-band-inner {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 24px;
+    }
+
+    .ijec-band-actions {
+        align-items: stretch;
+    }
+
+    .ijec-band-cta {
+        width: 100%;
+    }
+}
+
+/* IJEC chip in the hero, beside the IIT Madras one and in the challenge's
+   purple. Two chips ensure the competition is visible in the first screen on a
+   phone, where the IJEC band itself sits far down the page. */
+.hero-ijec-chip {
+    background: rgba(124, 92, 255, 0.1);
+    border-color: rgba(124, 92, 255, 0.3);
+    color: #5B21B6;
+}
+
+.hero-ijec-chip:hover {
+    background: #6D28D9;
+    border-color: #6D28D9;
+    color: #fff;
+}
+
+.hero-ijec-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #7C5CFF;
+    box-shadow: 0 0 0 4px rgba(124, 92, 255, 0.16);
+}
+
+.hero-ijec-chip:hover .hero-ijec-dot {
+    background: #fff;
+    box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.25);
+}
+
+/* The mobile menu entry for IJEC, matching the IIT Madras treatment. */
+.mobile-menu a.ijec-highlight {
+    background: rgba(124, 92, 255, 0.1);
+    border: 1px solid rgba(124, 92, 255, 0.3);
+    color: #5B21B6 !important;
+    border-radius: var(--radius-full);
+    font-weight: 700;
+}

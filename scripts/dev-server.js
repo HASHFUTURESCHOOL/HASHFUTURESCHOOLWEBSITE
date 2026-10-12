@@ -139,6 +139,11 @@ async function handleApi(req, res, url) {
       query = buildQuery(url);
       break;
     }
+    case 'ijec-register': {
+      modulePath = path.join(ROOT, 'api/ijec-register.js');
+      query = buildQuery(url);
+      break;
+    }
     case 'health': {
       modulePath = path.join(ROOT, 'api/health.js');
       query = buildQuery(url);
