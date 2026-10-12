@@ -2287,10 +2287,10 @@ ul {
 /* ============================================
    Responsive Design
    ============================================ */
-/* The desktop nav carries up to eleven items once the IIT Madras partnership
-   link is included. The base spacing above is already tightened for that; these
-   drop it further on narrower screens, then hand over to the mobile menu on
-   screens where the full row no longer fits. */
+/* The menu now shows six things — the two flagship programmes, four groups and
+   search — instead of eleven flat links, so the full row fits much further down
+   than it used to. These tighten the spacing on the way, then hand over to the
+   mobile menu only where the row genuinely stops fitting. */
 @media (max-width: 1420px) {
     .nav-links {
         gap: 12px;
@@ -2301,7 +2301,22 @@ ul {
     }
 }
 
-@media (max-width: 1300px) {
+@media (max-width: 1200px) {
+    .nav-links {
+        gap: 9px;
+    }
+
+    .nav-links a,
+    .nav-group-btn {
+        font-size: 0.82rem;
+    }
+
+    .nav-search span {
+        display: none;
+    }
+}
+
+@media (max-width: 1080px) {
     .nav-links,
     .nav-cta {
         display: none;
@@ -4342,4 +4357,214 @@ ul.gl-prose {
     color: #5B21B6 !important;
     border-radius: var(--radius-full);
     font-weight: 700;
+}
+
+/* ============================================
+   Grouped navigation
+   Ten flat links read as a wall, so the menu is now two flagship programmes
+   (kept visible on purpose) plus four groups. The group links are always in
+   the markup — the panel is only revealed by hover, focus or a click.
+   ============================================ */
+.nav-group {
+    position: relative;
+}
+
+.nav-group-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 0;
+    border: 0;
+    background: none;
+    font-family: inherit;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text-medium);
+    cursor: pointer;
+    white-space: nowrap;
+    transition: var(--transition-normal);
+}
+
+.nav-group-btn:hover,
+.nav-group.open .nav-group-btn,
+.nav-group:focus-within .nav-group-btn {
+    color: var(--text-dark);
+}
+
+.nav-caret {
+    transition: transform 0.2s ease;
+    opacity: 0.7;
+}
+
+.nav-group.open .nav-group-btn .nav-caret,
+.nav-group:hover .nav-group-btn .nav-caret,
+.nav-group:focus-within .nav-group-btn .nav-caret {
+    transform: rotate(180deg);
+}
+
+.nav-menu {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    z-index: 1001;
+    margin-top: 14px;
+    min-width: 236px;
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    background: var(--bg-white);
+    border: 1px solid rgba(2, 6, 23, 0.08);
+    border-radius: 16px;
+    box-shadow: 0 22px 45px -20px rgba(2, 6, 23, 0.45);
+    opacity: 0;
+    visibility: hidden;
+    transform: translate(-50%, 6px);
+    transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s;
+}
+
+/* Keeps the pointer inside the group while it travels from the button to the
+   panel, so the menu does not flicker shut on the way down. */
+.nav-menu::before {
+    content: '';
+    position: absolute;
+    top: -14px;
+    left: 0;
+    right: 0;
+    height: 14px;
+}
+
+.nav-group:hover .nav-menu,
+.nav-group:focus-within .nav-menu,
+.nav-group.open .nav-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, 0);
+}
+
+.nav-menu a {
+    display: block;
+    padding: 10px 14px;
+    border-radius: 10px;
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: var(--text-dark);
+    white-space: nowrap;
+    transition: background 0.16s ease, color 0.16s ease;
+}
+
+.nav-menu a::after {
+    display: none;
+}
+
+.nav-menu a:hover {
+    background: rgba(255, 75, 75, 0.08);
+    color: var(--primary);
+}
+
+.nav-menu a.superkids-highlight,
+.nav-menu a.join-highlight,
+.nav-menu a.iitm-highlight,
+.nav-menu a.ijec-highlight {
+    padding: 10px 14px;
+    border-radius: 10px;
+    /* Inside the menu every item reads the same: the pills are a headline
+       treatment for the top level, not for a list of five programmes. */
+    background: none;
+    border: 0;
+    color: var(--text-dark) !important;
+    box-shadow: none;
+    transform: none;
+}
+
+.nav-menu a.superkids-highlight:hover,
+.nav-menu a.join-highlight:hover,
+.nav-menu a.iitm-highlight:hover,
+.nav-menu a.ijec-highlight:hover {
+    background: rgba(255, 75, 75, 0.08);
+    color: var(--primary) !important;
+    transform: none;
+}
+
+.nav-search {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 7px 14px;
+    border: 1px solid rgba(2, 6, 23, 0.12);
+    border-radius: var(--radius-full);
+    background: rgba(2, 6, 23, 0.03);
+    font-family: inherit;
+    font-size: 0.86rem;
+    font-weight: 600;
+    color: var(--text-medium);
+    cursor: pointer;
+    white-space: nowrap;
+    transition: var(--transition-normal);
+}
+
+.nav-search:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+    background: rgba(255, 75, 75, 0.07);
+}
+
+/* Mobile menu: the same groups as tap-to-open sections. */
+.mobile-search {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    margin: 4px 0 8px;
+    padding: 13px 18px;
+    border: 1px solid rgba(2, 6, 23, 0.12);
+    border-radius: var(--radius-md);
+    background: rgba(2, 6, 23, 0.03);
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-dark);
+    cursor: pointer;
+}
+
+.mobile-group {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.mobile-group summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 14px 0;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--text-dark);
+    cursor: pointer;
+    list-style: none;
+}
+
+.mobile-group summary::-webkit-details-marker {
+    display: none;
+}
+
+.mobile-group[open] summary .nav-caret {
+    transform: rotate(180deg);
+}
+
+.mobile-group a {
+    display: block;
+    padding: 11px 0 11px 16px;
+    font-size: 0.98rem;
+    font-weight: 500;
+    color: var(--text-medium);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+.mobile-group a:last-child {
+    border-bottom: 0;
+}
+
+.mobile-menu .mobile-search span {
+    display: inline;
 }

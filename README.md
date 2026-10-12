@@ -645,3 +645,53 @@ preserving:
 route is genuinely needed, either fold it into an existing function —
 `api/school-connect.js` already dispatches on content type, and `api/site-data/[view].js`
 on its `view` segment — or free a slot by merging another pair.
+
+### 15. The grouped menu and the site search
+
+**The menu is grouped, not flattened.** Ten links in a row read as a wall, so
+the navigation is now two flagship programmes (IIT Madras School Connect and
+IJEC 2026, both kept as pills) plus four groups — Programmes, School,
+Admissions, About — a search button and the booking CTA. The group links are
+real `<a>` elements in the markup, so crawlers and no-JavaScript visitors still
+see the whole menu; JavaScript only adds the hover/click behaviour
+([`search.js`](search.js)). The mobile menu mirrors the same four groups as
+`<details>` sections. Below 1080px the row hands over to the burger — it used to
+hand over at 1300px, when there were eleven flat links.
+
+The markup has one home — `navLinksHtml()` and `mobileMenuHtml()` in
+[`lib/page-chrome.js`](lib/page-chrome.js), the module the city and global page
+builders already use — and
+
+```bash
+npm run nav:apply      # scripts/apply-nav.js
+```
+
+writes it into every page that carries the shared navbar (idempotent; it only
+replaces the `.nav-links` block, the `.mobile-menu` block, and the search
+`<link>`/`<script>` tags). Regenerating the city or global pages produces the
+same markup, so the two never drift.
+
+**The search is real search, and it is site-wide.** `search-index.json` is the
+text of all 40 pages — title, description, slug keywords, headings and the
+readable sections (navigation, footers, the booking dialog and the skip link are
+stripped) — built by
+
+```bash
+npm run build:search-index      # scripts/build-search-index.js
+```
+
+which the local dev server also runs on start, so the file in git matches the
+pages that were tested. [`search.js`](search.js) fetches that one file when the
+panel opens and matches in the browser: title and slug hits weigh most, then
+headings, then description, then the body, with a bonus for a page that matches
+every word asked. Blog posts (the one part of the site that lives in the
+database) are folded in from `GET /api/site-data/posts` at the same moment. Open
+it with the nav button, `/`, or ⌘K/Ctrl-K.
+
+**"Ask AI" is the model half, and it is optional.** The panel sends the question
+plus the best-matching passages to `POST /api/site-data/search`, which lives
+inside the existing `api/site-data/[view].js` function — no new serverless slot —
+and answers *only* from those passages through DeepSeek (`lib/deepseek.js`,
+`DEEPSEEK_API_KEY`), citing the pages it used and never inventing fees, dates or
+contacts. If the key is missing, the model fails or the rate limit trips, the
+panel simply keeps showing the keyword results.

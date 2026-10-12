@@ -2,6 +2,7 @@ import http from 'node:http';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
+import { execFileSync } from 'node:child_process';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '..');
@@ -300,6 +301,15 @@ const server = http.createServer(async (req, res) => {
 });
 
 server.listen(PORT, () => {
+  // The search panel reads search-index.json. Refreshing it on start means local
+  // copy edits show up in search immediately, and the file that ships is the
+  // file that was tested. The script is a no-op when nothing changed.
+  try {
+    execFileSync(process.execPath, [path.join(ROOT, 'scripts/build-search-index.js')], { stdio: 'inherit' });
+  } catch (err) {
+    console.warn('  Could not refresh search-index.json:', err.message);
+  }
+
   console.log(`\n  Hash Future School dev server`);
   console.log(`  ----------------------------------------------------`);
   console.log(`  Site:   http://localhost:${PORT}/`);

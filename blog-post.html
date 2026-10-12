@@ -9,6 +9,7 @@
   <link rel="canonical" href="https://www.hashfuture.school/blog-post.html" />
   <link rel="icon" type="image/png" href="favicon.png" />
   <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="search.css">
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
 </head>
 <body>
@@ -60,33 +61,42 @@
     <div class="mobile-menu" id="mobileMenu">
         <a href="index.html">Home</a>
         <a href="iit-madras-school-connect.html" class="iitm-highlight" style="display: inline-block; text-align: center;">IIT Madras Partnership</a>
-        <a href="index.html#outcomes">Outcomes</a>
-    <a href="index.html#curriculum">Curriculum</a>
-    <a href="index.html#testimonials">Testimonials</a>
-    <a href="index.html#faq">FAQ</a>
-    <a href="blog.html">Blog</a>
-    <a href="student-projects.html">Project Showcase</a>
-    <a href="school-updates.html">School Updates</a>
-    <a href="join.html" style="display: inline-block; text-align: center;">Join Our Team ✦</a>
-    <a href="super-kids.html" class="superkids-highlight" style="display: inline-block; text-align: center;">SuperKids 🚀</a>
-    <a href="index.html#enroll" class="mobile-cta">Book a Free Demo</a>
-  </div>
-
-  <article style="padding: 140px 0 60px; background: var(--bg-light);">
-    <div class="container" style="max-width: 760px;">
-      <a href="blog.html" style="color: var(--primary); font-weight: 600; text-decoration: none;">← All posts</a>
-      <div id="post-hero" style="margin-top: 18px;">
-        <span id="post-category" class="section-badge"></span>
-        <h1 id="post-title" style="font-size: 2.6rem; margin: 16px 0 8px; line-height: 1.15;"></h1>
-        <p id="post-meta" style="color: var(--text-medium); font-size: 0.95rem; margin: 0;"></p>
-        <img id="post-cover" alt="" style="width: 100%; height: 360px; object-fit: cover; border-radius: 18px; margin-top: 28px; display: none;" />
-      </div>
-      <div id="post-body" style="margin-top: 32px; font-size: 1.08rem; line-height: 1.8; color: #1e293b;"></div>
-      <div id="post-missing" style="text-align: center; padding: 60px 0; display: none;">
-        <h2>Post not found</h2>
-        <p style="color: var(--text-medium);">The article you're looking for doesn't exist or isn't published yet.</p>
-        <a href="blog.html" style="color: var(--primary); font-weight: 600;">Back to all posts</a>
-      </div>
+        <a href="ijec.html" class="ijec-highlight" style="display: inline-block; text-align: center;">IJEC 2026 🏆</a>
+        <button type="button" class="mobile-search" data-hf-search-open>
+            <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="8" /><path d="m21 21-4.3-4.3" /></svg>
+            <span>Search the site</span>
+        </button>
+        <details class="mobile-group">
+            <summary>Programmes <svg class="nav-caret" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6" /></svg></summary>
+                <a href="super-kids.html" class="superkids-highlight">SuperKids Workshop</a>
+                <a href="entrepreneurship-olympiad.html">Entrepreneurship Olympiad</a>
+                <a href="ai-first-learning.html">AI-First Learning</a>
+                <a href="nios-online-school.html">NIOS Online School</a>
+                <a href="igcse-private-candidate.html">IGCSE Private Candidate</a>
+        </details>
+        <details class="mobile-group">
+            <summary>School <svg class="nav-caret" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6" /></svg></summary>
+                <a href="index.html#outcomes">Outcomes</a>
+                <a href="index.html#curriculum">Curriculum</a>
+                <a href="index.html#testimonials">Testimonials</a>
+                <a href="student-projects.html">Project Showcase</a>
+                <a href="school-updates.html">School Updates</a>
+                <a href="impact-reports.html">Impact Reports</a>
+        </details>
+        <details class="mobile-group">
+            <summary>Admissions <svg class="nav-caret" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6" /></svg></summary>
+                <a href="https://futureassist.hashfuture.school/demo" class="open-admission-modal">Book a Free Demo</a>
+                <a href="online-school-cities.html">Online School by City</a>
+                <a href="online-school-vs-regular-school.html">Online vs Regular School</a>
+                <a href="index.html#faq">FAQ</a>
+        </details>
+        <details class="mobile-group">
+            <summary>About <svg class="nav-caret" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6" /></svg></summary>
+                <a href="about.html">About Us</a>
+                <a href="blog.html">Blog</a>
+                <a href="join.html" class="join-highlight">Join Our Team</a>
+        </details>
+        <a href="https://futureassist.hashfuture.school/demo" class="mobile-cta open-admission-modal">Book a Free Demo</a>
     </div>
   </article>
 
@@ -125,5 +135,7 @@
       }
     })();
   </script>
+    <script src="search.js" defer></script>
+
 </body>
 </html>

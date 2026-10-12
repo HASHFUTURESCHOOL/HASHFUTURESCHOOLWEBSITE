@@ -59,6 +59,15 @@
                 <a href="future-talks.html#tickets">Tickets</a>
                 <a href="future-talks.html#faq">FAQ</a>
             </div>
+            <button type="button" class="hf-search-btn" data-hf-search-open aria-label="Search the site">
+                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"
+                    aria-hidden="true" focusable="false">
+                    <circle cx="11" cy="11" r="8" />
+                    <path d="m21 21-4.3-4.3" />
+                </svg>
+                <span>Search</span>
+            </button>
             <a class="ft-btn ft-btn-primary ft-btn-sm ft-nav-cta"
                 href="https://wa.me/919497120591?text=Hi!%20I%20want%20to%20register%20for%20Future%20Talks%202026."
                 target="_blank" rel="noopener noreferrer">Register Now</a>
@@ -70,6 +79,15 @@
 
     <!-- Mobile Menu -->
     <div class="ft-mobile-menu" id="ftMobileMenu">
+        <button type="button" class="hf-search-btn hf-search-btn--block" data-hf-search-open>
+            <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"
+                aria-hidden="true" focusable="false">
+                <circle cx="11" cy="11" r="8" />
+                <path d="m21 21-4.3-4.3" />
+            </svg>
+            <span>Search the site</span>
+        </button>
         <a href="index.html">Home</a>
         <a href="future-talks.html#about">About</a>
         <a href="future-talks.html#experience">Experience</a>
@@ -627,6 +645,7 @@
             this.closest('.ft-check-group').classList.remove('error');
         });
     </script>
+    <script src="search.js" defer></script>
 </body>
 
 </html>

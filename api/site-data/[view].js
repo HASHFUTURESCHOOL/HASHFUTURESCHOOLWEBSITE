@@ -3,6 +3,7 @@
  *
  *   GET /api/site-data/content  ← /api/content   (editable homepage snippets)
  *   GET /api/posts              ← /api/site-data/posts (blog list and single posts)
+ *   POST /api/site-data/search  ← the site search's "Ask AI" answer
  *
  * Both used to be separate files. This project sits at Vercel's limit of 12
  * serverless functions, so they were merged; `rewrites` in vercel.json keep the
@@ -14,7 +15,8 @@
  */
 
 import { getSql } from '../../lib/db.js';
-import { ok, bad, notFound, serverError } from '../../lib/http.js';
+import { ok, bad, notFound, send, serverError } from '../../lib/http.js';
+import { chatCompletion } from '../../lib/deepseek.js';
 
 // Blog content changes deliberately and rarely; site snippets are edited in the
 // CMS, so they get a shorter window. `stale-while-revalidate` means a visitor
@@ -25,11 +27,18 @@ const CACHE = {
 };
 
 export default async function handler(req, res) {
+  const view = Array.isArray(req.query?.view) ? req.query.view[0] : req.query?.view;
+
+  // Search answers a question, so it takes a POST body; everything else here is
+  // read-only and takes a GET.
+  if (view === 'search') {
+    if (req.method !== 'POST') return bad(res, 'Method not allowed', 405);
+    return search(req, res);
+  }
+
   if (req.method !== 'GET') {
     return bad(res, 'Method not allowed', 405);
   }
-
-  const view = Array.isArray(req.query?.view) ? req.query.view[0] : req.query?.view;
 
   if (view === 'posts') return posts(req, res);
   if (view === 'content') return content(req, res);
@@ -87,5 +96,125 @@ async function content(req, res) {
     return ok(res, { content: snippets }, { cacheControl: CACHE.content });
   } catch (err) {
     return serverError(res, err);
+  }
+}
+
+/* --------------------------------------------------------------- site search */
+
+/**
+ * The "Ask AI" half of the site search.
+ *
+ * The panel does the retrieval: it matches the question against
+ * search-index.json in the browser and sends the best passages here. That keeps
+ * this function small — no index to bundle, no vector store — and means search
+ * still works when the model does not.
+ *
+ * The model is told to answer only from those passages, so it cannot invent a
+ * fee, a date or a policy that the site does not state.
+ */
+
+const MAX_QUESTION = 300;
+const MAX_SOURCES = 5;
+const MAX_SOURCE_CHARS = 900;
+
+// Best effort on a serverless platform (each instance keeps its own count), but
+// enough to stop a loop from burning the model budget.
+const RATE_LIMIT = { windowMs: 60_000, max: 12 };
+const hits = new Map();
+
+function rateLimited(ip) {
+  const now = Date.now();
+  const recent = (hits.get(ip) || []).filter(at => now - at < RATE_LIMIT.windowMs);
+  recent.push(now);
+  hits.set(ip, recent);
+  if (hits.size > 500) {
+    for (const [key, value] of hits) {
+      if (!value.some(at => now - at < RATE_LIMIT.windowMs)) hits.delete(key);
+    }
+  }
+  return recent.length > RATE_LIMIT.max;
+}
+
+const clean = (value, max) => String(value == null ? '' : value).replace(/\s+/g, ' ').trim().slice(0, max);
+
+function safeUrl(value) {
+  const url = clean(value, 300);
+  if (!url) return '';
+  // Only this site's own pages: a model answer must never send a family off-site.
+  if (/^https?:\/\//i.test(url)) return /^https?:\/\/(www\.)?hashfuture\.school\//i.test(url) ? url : '';
+  return url.startsWith('/') && !url.startsWith('//') ? url : '';
+}
+
+async function search(req, res) {
+  const body = req.body && typeof req.body === 'object' ? req.body : {};
+  const question = clean(body.q, MAX_QUESTION);
+  const sources = (Array.isArray(body.sources) ? body.sources : [])
+    .slice(0, MAX_SOURCES)
+    .map(source => ({
+      title: clean(source?.title, 160),
+      url: safeUrl(source?.url),
+      text: clean(source?.text, MAX_SOURCE_CHARS),
+    }))
+    .filter(source => source.title && source.url && source.text);
+
+  if (question.length < 3) return bad(res, 'Ask a question first');
+  if (!sources.length) return bad(res, 'No matching pages to answer from');
+
+  const ip = String(req.headers?.['x-forwarded-for'] || '').split(',')[0].trim()
+    || req.socket?.remoteAddress || 'unknown';
+  if (rateLimited(ip)) {
+    return send(res, 429, {
+      error: 'That is a lot of questions at once — please wait a moment and try again.',
+    });
+  }
+
+  if (!process.env.DEEPSEEK_API_KEY) {
+    return send(res, 503, {
+      error: 'The assistant is not switched on right now.',
+    });
+  }
+
+  const passages = sources
+    .map((source, index) => `[${index + 1}] ${source.title} (${source.url})\n${source.text}`)
+    .join('\n\n');
+
+  try {
+    const answer = await chatCompletion({
+      temperature: 0.2,
+      max_tokens: 420,
+      messages: [
+        {
+          role: 'system',
+          content: [
+            'You are the assistant inside the Hash Future School website (hashfuture.school), a school in Kochi, Kerala that teaches families worldwide online.',
+            'Answer the visitor\'s question using ONLY the numbered passages given to you. They are the site\'s own words.',
+            'If the passages do not answer the question, say plainly that the site does not cover it yet, point at the closest passage, and suggest WhatsApp +91 94971 20591 or learn@hashfuture.school.',
+            'Never invent fees, dates, deadlines, policies, addresses or contact details.',
+            'Write 2 to 5 short sentences, or up to three short bullet points. Warm, plain English, no filler, no headings.',
+            'Cite the passages you used with their numbers in square brackets, like [1].',
+          ].join(' '),
+        },
+        { role: 'user', content: `Question: ${question}\n\nPassages:\n${passages}` },
+      ],
+    });
+
+    // Only cite what the answer actually used, and never more than we were given.
+    const cited = [...new Set((answer.match(/\[(\d)\]/g) || [])
+      .map(marker => Number(marker.replace(/\D/g, '')) - 1)
+      .filter(index => index >= 0 && index < sources.length))]
+      .map(index => sources[index]);
+
+    return send(res, 200, {
+      answer: clean(answer, 1400).replace(/\s*(\[\d\])/g, ' $1'),
+      sources: (cited.length ? cited : sources.slice(0, 3)).map(source => ({
+        title: source.title,
+        url: source.url,
+      })),
+    });
+  } catch (err) {
+    console.error('[site-search] assistant failed:', err);
+    return send(res, 503, {
+      error: 'The assistant is unavailable right now.',
+    });
   }
 }
