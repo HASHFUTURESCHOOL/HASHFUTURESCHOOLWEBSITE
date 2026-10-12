@@ -29,7 +29,7 @@ const ROOT = path.resolve(__dirname, '..');
 const SKIP = new Set(['admin.html', 'blog-post.html']);
 
 const MAX_SECTION_CHARS = 520;
-const MAX_SECTIONS = 18;
+const MAX_SECTIONS = 24;
 
 const decode = value => String(value)
     .replace(/&nbsp;/g, ' ')
@@ -121,9 +121,13 @@ function sectionsFrom(body) {
     let current = { heading: '', text: '' };
 
     const push = () => {
-        const value = current.text.trim();
-        if (value.length > 60) {
+        // A long run of text with no heading in it — a batch table, a fee list —
+        // becomes several sections rather than being cut off at the cap, so the
+        // last row of the table is as searchable as the first.
+        let value = current.text.trim();
+        while (value.length > 60) {
             pieces.push({ heading: current.heading, text: value.slice(0, MAX_SECTION_CHARS) });
+            value = value.slice(MAX_SECTION_CHARS).trim();
         }
         current = { heading: current.heading, text: '' };
     };
