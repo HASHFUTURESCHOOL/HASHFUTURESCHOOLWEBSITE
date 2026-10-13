@@ -690,8 +690,15 @@ it with the nav button, `/`, or ⌘K/Ctrl-K.
 
 **"Ask AI" is the model half, and it is optional.** The panel sends the question
 plus the best-matching passages to `POST /api/site-data/search`, which lives
-inside the existing `api/site-data/[view].js` function — no new serverless slot —
-and answers *only* from those passages through DeepSeek (`lib/deepseek.js`,
-`DEEPSEEK_API_KEY`), citing the pages it used and never inventing fees, dates or
-contacts. If the key is missing, the model fails or the rate limit trips, the
-panel simply keeps showing the keyword results.
+inside the existing `api/site-data/[view].js` function — no new serverless slot.
+Whichever deployment answers, the rule is the same: the model sees only those
+passages, cites the pages it used, and never invents fees, dates or contacts.
+
+This deployment answers locally when it has a model key (`DEEPSEEK_API_KEY` via
+`lib/deepseek.js`). When it does not — which is the case in production today — it
+forwards the question and the passages to Future Assist's
+`POST /api/site-search`, which holds one; the visitor sees the same answer in the
+same panel. `FUTURE_ASSIST_SITE_SEARCH_URL` overrides the endpoint (set it to
+off/disabled/none to switch the assistant off), and adding the key here makes the
+hop disappear with no other change. Keyword search is the index — it needs no
+model and keeps working when the assistant is down or rate limited.
