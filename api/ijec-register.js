@@ -145,6 +145,10 @@ export default async function handler(req, res) {
       status: result.status || 'NEW',
       stored: 'future-assist',
       futureAssistId: result.id,
+      // The page redirects here the moment the entry exists, so the payment link
+      // Future Assist created for this team travels back with the reference.
+      fee: result.fee,
+      paymentUrl: result.paymentUrl,
     });
   } catch (err) {
     return serverError(res, err);

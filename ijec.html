@@ -591,6 +591,26 @@
                 </form>
 
                 <aside class="ij-register-aside ij-reveal ij-reveal-d1">
+                    <div class="ij-register-card" id="ijecPaid" hidden>
+                        <div class="tick-lg">✅</div>
+                        <h3>Registration complete</h3>
+                        <p>We have received your <strong>USD 10</strong> team registration fee, so
+                            <strong id="ijecPaidRef">your team</strong> is on the IJEC 2026 entry list. A confirmation
+                            email is on its way to the lead founder and your mentor.</p>
+                        <p class="dim">Nothing else is needed from you. The Dec 2026 bootcamp and mentor pairing details
+                            follow by email. Questions? WhatsApp us on +91 94971 20591.</p>
+                    </div>
+                    <div class="ij-register-card" id="ijecPaymentPending" hidden>
+                        <div class="tick-lg">💳</div>
+                        <h3>One step left — the entry fee</h3>
+                        <p>Your team reference is <strong id="ijecPendingRef">—</strong>. Pay the USD 10 team
+                            registration fee to complete the registration — quote the reference so we can match the
+                            payment.</p>
+                        <a class="ij-btn ij-btn-primary ij-btn-sm" href="https://rzp.io/rzp/Aau15ig" target="_blank"
+                            rel="noopener noreferrer">Pay the USD 10 registration fee</a>
+                        <p class="dim">Already paid? Refresh this page in a minute, or WhatsApp us on +91 94971
+                            20591.</p>
+                    </div>
                     <div class="ij-register-card" id="ijecSuccess" hidden>
                         <div class="tick-lg">🎉</div>
                         <h3>You're registered!</h3>
@@ -959,6 +979,10 @@
         const ijecSuccess = document.getElementById('ijecSuccess');
         const ijecAsideDefault = document.getElementById('ijecAsideDefault');
         const ijecRef = document.getElementById('ijecRef');
+        const ijecPaid = document.getElementById('ijecPaid');
+        const ijecPaidRef = document.getElementById('ijecPaidRef');
+        const ijecPaymentPending = document.getElementById('ijecPaymentPending');
+        const ijecPendingRef = document.getElementById('ijecPendingRef');
 
         if (ijecForm) {
             const setNote = (message, ok) => {
@@ -980,6 +1004,42 @@
                 }
                 return 'We could not reach our registration system. Please check your connection and try again, or WhatsApp us on +91 94971 20591.';
             };
+
+            // Razorpay sends the family back to this page with the result of the
+            // payment. Landing here with ?paid=1 is what "registration complete"
+            // means: the entry exists and Future Assist has verified the payment
+            // signature, so nobody has to take anyone's word for it.
+            const returned = new URLSearchParams(window.location.search);
+            const paymentState = returned.get('paid');
+            const returnedRef = returned.get('ref');
+
+            if (paymentState || returnedRef) {
+                const onlyShow = card => {
+                    ijecForm.hidden = true;
+                    if (ijecAsideDefault) ijecAsideDefault.hidden = true;
+                    if (ijecSuccess) ijecSuccess.hidden = true;
+                    if (card) {
+                        card.hidden = false;
+                        card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }
+                };
+
+                if (paymentState === '1') {
+                    if (ijecPaidRef) {
+                        ijecPaidRef.textContent = returnedRef ? `team ${returnedRef}` : 'your team';
+                    }
+                    onlyShow(ijecPaid);
+                } else if (paymentState === 'pending') {
+                    if (ijecPendingRef) ijecPendingRef.textContent = returnedRef || '—';
+                    onlyShow(ijecPaymentPending);
+                } else if (['unverified', 'unknown', 'error'].includes(paymentState)) {
+                    onlyShow(null);
+                    setNote('We could not confirm that payment. If money left your account, message us on WhatsApp +91 94971 20591 with your reference and we will put it right.', false);
+                }
+
+                // Keep the URL clean so a refresh does not replay the state.
+                window.history.replaceState({}, '', `${window.location.pathname}#register`);
+            }
 
             ijecForm.addEventListener('submit', async event => {
                 event.preventDefault();
@@ -1006,6 +1066,25 @@
                     }
 
                     ijecRef.textContent = result.ref || 'registered';
+
+                    // The form leads straight to the payment page: the entry exists
+                    // the moment it is submitted, and the fee completes it. The
+                    // reference is set first so it is on screen for the moment
+                    // before the browser leaves.
+                    if (result.paymentUrl) {
+                        ijecForm.hidden = true;
+                        setNote(`Team ${result.ref || ''} created — taking you to the secure payment page…`, true);
+                        ijecAsideDefault.hidden = true;
+                        ijecSuccess.hidden = false;
+                        ijecSuccess.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        window.setTimeout(() => {
+                            window.location.href = result.paymentUrl;
+                        }, 900);
+                        return;
+                    }
+
+                    // No payment link (Razorpay unreachable): show the fee card with
+                    // the plain payment page so the registration still completes.
                     ijecForm.hidden = true;
                     ijecAsideDefault.hidden = true;
                     ijecSuccess.hidden = false;
