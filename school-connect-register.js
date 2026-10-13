@@ -35,6 +35,21 @@
 
     /* ------------------------------------------------------------ helpers */
 
+    /**
+     * A dropped connection throws a bare "Failed to fetch", which tells a family
+     * nothing. Name the situation instead: the page is open from a file on disk,
+     * the local dev server is not running, or the network really is down.
+     */
+    function unreachableMessage() {
+        if (location.protocol === 'file:') {
+            return 'This page is open straight from a file, so it has no registration system to send to. Open hashfuture.school/school-connect-register instead, or WhatsApp us on +91 94971 20591.';
+        }
+        if (location.hostname === 'localhost' || location.hostname === '127.0.0.1') {
+            return 'The local dev server is not running, so the form had nothing to send to. Start it with "npm run dev" and try again.';
+        }
+        return 'We could not reach our registration system. Check your connection and try again, or WhatsApp us on +91 94971 20591.';
+    }
+
     function fieldWrap(input) {
         return input?.closest('.scr-field') || null;
     }
@@ -418,7 +433,9 @@
             success.hidden = false;
             window.scrollTo({ top: 0, behavior: 'smooth' });
         } catch (err) {
-            showError(err.message || 'Something went wrong. Please try again, or WhatsApp us on +91 94971 20591.');
+            // A dropped connection throws a bare "Failed to fetch"; only a reply from
+            // the server carries a message worth showing.
+            showError(err instanceof TypeError ? unreachableMessage() : (err.message || 'Something went wrong. Please try again, or WhatsApp us on +91 94971 20591.'));
         } finally {
             submitBtn.disabled = false;
             submitBtn.textContent = label;

@@ -564,9 +564,10 @@
 
                     <div class="ij-field">
                         <label for="ijIdea">Your venture idea <span class="req">*</span></label>
-                        <textarea id="ijIdea" name="idea" rows="4" maxlength="4000"
+                        <textarea id="ijIdea" name="idea" rows="4" maxlength="4000" minlength="20"
                             placeholder="What problem will you solve, and what will you build? A sentence or two is enough — ideas can change as you go."
                             required></textarea>
+                        <small class="ij-field-hint">A sentence or two, please — “tic tac” leaves us guessing.</small>
                     </div>
 
                     <label class="ij-consent">
@@ -948,6 +949,20 @@
                 ijecStatus.classList.toggle('is-ok', Boolean(message) && Boolean(ok));
             };
 
+            // A failed fetch throws a bare "Failed to fetch", which tells a family
+            // nothing. Say which of the three situations it is instead: the page is
+            // open from a file on disk, the local dev server is not running, or the
+            // network really is down.
+            const unreachableMessage = () => {
+                if (location.protocol === 'file:') {
+                    return 'This page is open straight from a file, so it has no registration system to send to. Open hashfuture.school/ijec instead, or WhatsApp us on +91 94971 20591.';
+                }
+                if (location.hostname === 'localhost' || location.hostname === '127.0.0.1') {
+                    return 'The local dev server is not running, so the form had nothing to send to. Start it with "npm run dev" and try again.';
+                }
+                return 'We could not reach our registration system. Please check your connection and try again, or WhatsApp us on +91 94971 20591.';
+            };
+
             ijecForm.addEventListener('submit', async event => {
                 event.preventDefault();
                 if (!ijecForm.reportValidity()) return;
@@ -978,7 +993,7 @@
                     ijecSuccess.hidden = false;
                     ijecSuccess.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 } catch (err) {
-                    setNote('We could not reach our registration system. Please check your connection and try again.', false);
+                    setNote(unreachableMessage(), false);
                 } finally {
                     ijecSubmit.disabled = false;
                 }

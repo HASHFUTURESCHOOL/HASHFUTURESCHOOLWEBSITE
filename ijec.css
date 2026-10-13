@@ -1327,6 +1327,12 @@ ul {
     color: var(--ij-cyan);
 }
 
+.ij-field .ij-field-hint {
+    font-size: 0.8rem;
+    color: var(--ij-dim);
+    opacity: 0.85;
+}
+
 .ij-field input,
 .ij-field select,
 .ij-field textarea {
