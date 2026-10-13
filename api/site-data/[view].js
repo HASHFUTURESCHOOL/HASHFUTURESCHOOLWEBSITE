@@ -17,6 +17,7 @@
 import { getSql } from '../../lib/db.js';
 import { ok, bad, notFound, send, serverError } from '../../lib/http.js';
 import { chatCompletion } from '../../lib/deepseek.js';
+import { geminiConfigured, generateAnswer } from '../../lib/gemini.js';
 import {
   futureAssistSiteSearchUrl,
   futureAssistSiteSearchDisabled,
@@ -172,63 +173,78 @@ async function search(req, res) {
     });
   }
 
-  // This deployment answers locally when it has a model key. When it does not —
-  // which is the case in production today — the question goes to Future Assist,
-  // which holds one, so the assistant is not dark while the key is outstanding.
-  if (!process.env.DEEPSEEK_API_KEY) {
-    if (futureAssistSiteSearchDisabled()) {
-      return send(res, 503, { error: 'The assistant is switched off right now.' });
-    }
-    const forwarded = await answerViaFutureAssist(question, sources);
-    if (forwarded) return send(res, 200, forwarded);
-    return send(res, 503, {
-      error: 'The assistant is unavailable right now.',
-    });
-  }
-
   const passages = sources
     .map((source, index) => `[${index + 1}] ${source.title} (${source.url})\n${source.text}`)
     .join('\n\n');
 
-  try {
-    const answer = await chatCompletion({
-      temperature: 0.2,
-      max_tokens: 420,
-      messages: [
-        {
-          role: 'system',
-          content: [
-            'You are the assistant inside the Hash Future School website (hashfuture.school), a school in Kochi, Kerala that teaches families worldwide online.',
-            'Answer the visitor\'s question using ONLY the numbered passages given to you. They are the site\'s own words.',
-            'If the passages do not answer the question, say plainly that the site does not cover it yet, point at the closest passage, and suggest WhatsApp +91 94971 20591 or learn@hashfuture.school.',
-            'Never invent fees, dates, deadlines, policies, addresses or contact details.',
-            'Write 2 to 5 short sentences, or up to three short bullet points. Warm, plain English, no filler, no headings.',
-            'Cite the passages you used with their numbers in square brackets, like [1].',
-          ].join(' '),
-        },
-        { role: 'user', content: `Question: ${question}\n\nPassages:\n${passages}` },
-      ],
-    });
+  const question_ = `Question: ${question}\n\nPassages:\n${passages}`;
 
-    // Only cite what the answer actually used, and never more than we were given.
-    const cited = [...new Set((answer.match(/\[(\d)\]/g) || [])
-      .map(marker => Number(marker.replace(/\D/g, '')) - 1)
-      .filter(index => index >= 0 && index < sources.length))]
-      .map(index => sources[index]);
-
-    return send(res, 200, {
-      answer: clean(answer, 1400).replace(/\s*(\[\d\])/g, ' $1'),
-      sources: (cited.length ? cited : sources.slice(0, 3)).map(source => ({
-        title: source.title,
-        url: source.url,
-      })),
-    });
-  } catch (err) {
-    console.error('[site-search] assistant failed:', err);
-    return send(res, 503, {
-      error: 'The assistant is unavailable right now.',
-    });
+  // Which provider answers, in order: Gemini on this deployment, then DeepSeek on
+  // this deployment, then Future Assist, which holds both keys. A provider that
+  // fails — no key, a rate limit, a timeout — hands over to the next, so the
+  // visitor gets an answer from whichever one is healthy.
+  if (geminiConfigured()) {
+    try {
+      const answer = await generateAnswer({ system: SYSTEM_PROMPT, prompt: question_ });
+      return send(res, 200, shapeAnswer(answer, sources, 'gemini'));
+    } catch (err) {
+      console.error('[site-search] Gemini could not answer:', err?.message || err);
+    }
   }
+
+  if (process.env.DEEPSEEK_API_KEY) {
+    try {
+      const answer = await chatCompletion({
+        temperature: 0.2,
+        max_tokens: 420,
+        messages: [
+          { role: 'system', content: SYSTEM_PROMPT },
+          { role: 'user', content: question_ },
+        ],
+      });
+      return send(res, 200, shapeAnswer(answer, sources, 'deepseek'));
+    } catch (err) {
+      console.error('[site-search] DeepSeek could not answer:', err?.message || err);
+    }
+  }
+
+  if (futureAssistSiteSearchDisabled()) {
+    return send(res, 503, { error: 'The assistant is switched off right now.' });
+  }
+  const forwarded = await answerViaFutureAssist(question, sources);
+  if (forwarded) return send(res, 200, forwarded);
+  return send(res, 503, { error: 'The assistant is unavailable right now.' });
+}
+
+/** The prompt every provider gets. The rule that matters: the site's words only. */
+const SYSTEM_PROMPT = [
+  'You are the assistant inside the Hash Future School website (hashfuture.school), a school in Kochi, Kerala that teaches families worldwide online.',
+  'Answer the visitor\'s question using ONLY the numbered passages given to you. They are the site\'s own words.',
+  'If the passages do not answer the question, say plainly that the site does not cover it yet, point at the closest passage, and suggest WhatsApp +91 94971 20591 or learn@hashfuture.school.',
+  'Never invent fees, dates, deadlines, policies, addresses or contact details.',
+  'Write 2 to 5 short sentences, or up to three short bullet points. Warm, plain English, no filler, no headings.',
+  'Cite the passages you used with their numbers in square brackets, like [1].',
+].join(' ');
+
+/**
+ * The answer, trimmed to what the panel shows, with the pages the model actually
+ * cited. `provider` is for us, not the visitor: the panel ignores what it does not
+ * know, and it makes a live check say which path answered.
+ */
+function shapeAnswer(answer, sources, provider) {
+  const cited = [...new Set((String(answer).match(/\[(\d)\]/g) || [])
+    .map(marker => Number(marker.replace(/\D/g, '')) - 1)
+    .filter(index => index >= 0 && index < sources.length))]
+    .map(index => sources[index]);
+
+  return {
+    answer: clean(answer, 1400).replace(/\s*(\[\d\])/g, ' $1'),
+    sources: (cited.length ? cited : sources.slice(0, 3)).map(source => ({
+      title: source.title,
+      url: source.url,
+    })),
+    provider,
+  };
 }
 
 /**
@@ -257,7 +273,11 @@ async function answerViaFutureAssist(question, sources) {
       console.error(`[site-search] Future Assist answered ${response.status}: ${data?.error || 'no answer'}`);
       return null;
     }
-    return { answer: data.answer, sources: Array.isArray(data.sources) ? data.sources : [] };
+    return {
+      answer: data.answer,
+      sources: Array.isArray(data.sources) ? data.sources : [],
+      provider: 'future-assist',
+    };
   } catch (err) {
     console.error(`[site-search] could not reach Future Assist (${url}):`, err?.message || err);
     return null;

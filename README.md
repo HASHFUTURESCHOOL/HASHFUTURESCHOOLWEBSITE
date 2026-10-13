@@ -694,11 +694,19 @@ inside the existing `api/site-data/[view].js` function — no new serverless slo
 Whichever deployment answers, the rule is the same: the model sees only those
 passages, cites the pages it used, and never invents fees, dates or contacts.
 
-This deployment answers locally when it has a model key (`DEEPSEEK_API_KEY` via
-`lib/deepseek.js`). When it does not — which is the case in production today — it
-forwards the question and the passages to Future Assist's
-`POST /api/site-search`, which holds one; the visitor sees the same answer in the
-same panel. `FUTURE_ASSIST_SITE_SEARCH_URL` overrides the endpoint (set it to
-off/disabled/none to switch the assistant off), and adding the key here makes the
-hop disappear with no other change. Keyword search is the index — it needs no
-model and keeps working when the assistant is down or rate limited.
+The answer comes from the first provider that is configured and healthy, in this
+order:
+
+1. **Gemini** on this deployment — `GEMINI_API_KEY` via [`lib/gemini.js`](lib/gemini.js),
+   model `gemini-3.1-flash-lite` unless `GEMINI_MODEL` says otherwise. A free-tier
+   key only covers a handful of requests a day, so a 429 is expected rather than
+   exceptional and simply hands over to the next provider.
+2. **DeepSeek** on this deployment — `DEEPSEEK_API_KEY` via [`lib/deepseek.js`](lib/deepseek.js).
+3. **Future Assist** — `POST /api/site-search` there, which holds both keys, so the
+   assistant still answers when this deployment has neither. Point
+   `FUTURE_ASSIST_SITE_SEARCH_URL` elsewhere to change it, or set it to
+   off/disabled/none to switch this last hop off.
+
+The JSON reply names the provider that answered (`provider`), which is how a live
+check can tell which path ran. Keyword search is the index — it needs no model and
+keeps working when every provider is down or rate limited.
