@@ -17,6 +17,10 @@
 import { getSql } from '../../lib/db.js';
 import { ok, bad, notFound, send, serverError } from '../../lib/http.js';
 import { chatCompletion } from '../../lib/deepseek.js';
+import {
+  futureAssistSiteSearchUrl,
+  futureAssistSiteSearchDisabled,
+} from '../../lib/future-assist.js';
 
 // Blog content changes deliberately and rarely; site snippets are edited in the
 // CMS, so they get a shorter window. `stale-while-revalidate` means a visitor
@@ -168,9 +172,17 @@ async function search(req, res) {
     });
   }
 
+  // This deployment answers locally when it has a model key. When it does not —
+  // which is the case in production today — the question goes to Future Assist,
+  // which holds one, so the assistant is not dark while the key is outstanding.
   if (!process.env.DEEPSEEK_API_KEY) {
+    if (futureAssistSiteSearchDisabled()) {
+      return send(res, 503, { error: 'The assistant is switched off right now.' });
+    }
+    const forwarded = await answerViaFutureAssist(question, sources);
+    if (forwarded) return send(res, 200, forwarded);
     return send(res, 503, {
-      error: 'The assistant is not switched on right now.',
+      error: 'The assistant is unavailable right now.',
     });
   }
 
@@ -216,5 +228,38 @@ async function search(req, res) {
     return send(res, 503, {
       error: 'The assistant is unavailable right now.',
     });
+  }
+}
+
+/**
+ * The same question, asked of Future Assist — the deployment that holds the model
+ * key. Returns null when it cannot answer, so the panel falls back to the pages
+ * it already found rather than showing an error it cannot explain.
+ */
+async function answerViaFutureAssist(question, sources) {
+  const url = futureAssistSiteSearchUrl();
+  const headers = { 'Content-Type': 'application/json' };
+  const key = (process.env.FUTURE_ASSIST_SITE_SEARCH_KEY
+    || process.env.FUTURE_ASSIST_SCHOOL_CONNECT_KEY
+    || '').trim();
+  if (key) headers['x-hfs-sync-key'] = key;
+
+  try {
+    const response = await fetch(url, {
+      method: 'POST',
+      headers,
+      body: JSON.stringify({ q: question, sources }),
+      // An interactive answer: the visitor is watching the panel.
+      signal: AbortSignal.timeout(18000),
+    });
+    const data = await response.json().catch(() => ({}));
+    if (!response.ok || !data?.answer) {
+      console.error(`[site-search] Future Assist answered ${response.status}: ${data?.error || 'no answer'}`);
+      return null;
+    }
+    return { answer: data.answer, sources: Array.isArray(data.sources) ? data.sources : [] };
+  } catch (err) {
+    console.error(`[site-search] could not reach Future Assist (${url}):`, err?.message || err);
+    return null;
   }
 }

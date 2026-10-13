@@ -72,8 +72,16 @@ function replaceBlock(html, matcher, replacement) {
 function ensureSearchAssets(html, prefix) {
     let next = html;
 
+    // The version query is the same convention the other stylesheets use: a
+    // browser that cached an earlier copy picks the new one up on the next visit.
+    next = next
+        .replace(/(<link rel="stylesheet" href="[^"]*?)search\.css(\?[^"]*)?"\s*\/?>/g,
+            (match, before) => `${before}search.css?v=1">`)
+        .replace(/(<script src="[^"]*?)search\.js(\?[^"]*)?" defer>/g,
+            (match, before) => `${before}search.js?v=1" defer>`);
+
     if (!next.includes('search.css')) {
-        const link = `    <link rel="stylesheet" href="${prefix}search.css">`;
+        const link = `    <link rel="stylesheet" href="${prefix}search.css?v=1">`;
         // Sit next to the main stylesheet where there is one, so the two load
         // together; otherwise just join the end of the head.
         next = /<link[^>]*href="[^"]*styles\.css[^"]*"[^>]*>/.test(next)
@@ -82,7 +90,7 @@ function ensureSearchAssets(html, prefix) {
     }
 
     if (!next.includes('search.js')) {
-        next = next.replace(/(\n\s*<\/body>)/, `\n    <script src="${prefix}search.js" defer></script>$1`);
+        next = next.replace(/(\n\s*<\/body>)/, `\n    <script src="${prefix}search.js?v=1" defer></script>$1`);
     }
 
     return next;
