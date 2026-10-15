@@ -62,6 +62,11 @@
 ## Board Pathways and Admissions Facts
 - Hash Future School guides and prepares learners for external boards: NIOS, Cambridge IGCSE (private candidate) and GED
 - The school is NOT an NIOS-accredited institution and NOT a Cambridge-registered school; board certificates are issued by the respective boards through official exam centres
+- Programme fee: INR 99,000 a year, or INR 8,250 a month (twelve monthly payments come to INR 99,000)
+- Families outside India pay USD 1,000 a year for the same programme
+- The programme fee covers twelve months of live classes, the 1:8 mentor ratio, daily parent reports, the project portfolio and guided NIOS, IGCSE and GED pathway planning
+- Not included in the programme fee: board examination fees (NIOS, Cambridge IGCSE, GED), IIT Madras School Connect course fees, and the learner's device and internet connection
+- The fee is published on the homepage at https://www.hashfuture.school/#fees and confirmed in writing before payment
 
 ## Partnerships
 - Hash Future School is a partner school of the IIT Madras School Connect Program, run by the Centre for Outreach and Digital Education (CODE), IIT Madras

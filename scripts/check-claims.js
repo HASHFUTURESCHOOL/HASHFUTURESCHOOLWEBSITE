@@ -1,6 +1,7 @@
 // ============================================
 // Scans every HTML page for claim language that breaks our promises:
-// accreditation claims, guarantees, outcome promises, hardcoded fees and
+// accreditation claims, guarantees, outcome promises, prices other than the
+// published programme fee (see PUBLISHED_FEE_AMOUNTS in lib/claims-guard.js) and
 // unsourceable statistics.
 //
 //   npm run check:claims
@@ -68,4 +69,4 @@ if (errors.length) {
     process.exit(1);
 }
 
-console.log(`\ncheck:claims passed - ${files.length} pages scanned, no accreditation, guarantee or fee claims on generated pages.`);
+console.log(`\ncheck:claims passed - ${files.length} pages scanned, no accreditation or guarantee claims, and no price other than the published fee, on generated pages.`);

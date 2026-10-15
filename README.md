@@ -388,9 +388,10 @@ If the page ever needs re-verifying, that endpoint is the fastest source.
 
 **Two rules this page must keep:**
 
-1. **No fees on the page.** `npm run check:claims` fails on hardcoded currency
-   figures, and IIT Madras sets the course fee anyway — the page says a nominal
-   fee applies and sends the family to admissions for the current amount.
+1. **No IIT Madras course fee on the page.** IIT Madras sets the course fee, so
+   the page says a nominal fee applies and sends the family to admissions for the
+   current amount. `npm run check:claims` allows only the school's own published
+   programme fee figures (§16), so an IIT Madras amount would still fail.
 2. **No IIT Madras logo.** The official FAQ states schools may not use the IITM
    logo; approved CODE artwork is shared on request. The page therefore uses a
    text lockup (HFS × IITM School Connect) built from HTML/CSS, and the page
@@ -692,7 +693,8 @@ it with the nav button, `/`, or ⌘K/Ctrl-K.
 plus the best-matching passages to `POST /api/site-data/search`, which lives
 inside the existing `api/site-data/[view].js` function — no new serverless slot.
 Whichever deployment answers, the rule is the same: the model sees only those
-passages, cites the pages it used, and never invents fees, dates or contacts.
+passages, cites the pages it used, and never invents dates, fees or contacts —
+the only fee figures it can find are the published ones (§16).
 
 The answer comes from the first provider that is configured and healthy, in this
 order:
@@ -710,3 +712,62 @@ order:
 The JSON reply names the provider that answered (`provider`), which is how a live
 check can tell which path ran. Keyword search is the index — it needs no model and
 keeps working when every provider is down or rate limited.
+
+### 16. The published fee, and the hero counters
+
+**The programme fee is now public.** Families were emailing the school to ask
+what it costs, so the fee is on the homepage in four places, all fed from the
+same sentence:
+
+- the `#fees` section on [`index.html`](index.html) — annual ₹99,000 (USD 1,000
+  for families outside India) and monthly ₹8,250, with what the fee covers and
+  what it does not (board exam fees, IIT Madras course fees, device and internet);
+- the hero chip above the hero buttons, which anchors to that section;
+- the "Book a Free Demo" dialog (index.html and
+  [`lib/page-chrome.js`](lib/page-chrome.js), so generated pages show it too) and
+  the "Fees" item in the Admissions menu group;
+- [`llms.txt`](llms.txt), under Board Pathways and Admissions Facts, and a fee
+  question in the homepage FAQ (visible copy *and* the FAQPage JSON-LD).
+
+The pages that used to say "the admissions team shares the fee for your child's
+grade" — the Dubai FAQ in [`lib/city-schema.js`](lib/city-schema.js),
+[`nios-online-school.html`](nios-online-school.html),
+[`igcse-private-candidate.html`](igcse-private-candidate.html) and
+[`online-school-kerala.html`](online-school-kerala.html) — now state the fee
+instead, so nothing on the site asks a family to enquire for a number that is
+already published.
+
+**One allowlist keeps prices honest.** `check:claims` used to fail on *any*
+currency figure; it now fails on any figure that is not one of the published
+ones. That list is `PUBLISHED_FEE_AMOUNTS` in
+[`lib/claims-guard.js`](lib/claims-guard.js) — `99000`, `8250` and `1000`. A
+stray price, an old fee or an invented one still fails the build; the tickets on
+Future Talks and the workshop prices on Super Kids remain advisories because
+those pages are hand-written. **When the fee changes, edit the `#fees` section,
+`llms.txt` and that set together** — a page that quotes last year's number will
+otherwise keep passing.
+
+**The hero counters carry real numbers in the HTML.** `100+ Active Learners` and
+`20+ Expert Facilitators` — the 101 learners on roll and 21 facilitators in the
+[impact report](impact-reports.html) (June–August 2026), which is the page that
+proves them. The number sits in the markup and `initCounterAnimation()` in
+[`script.js`](script.js) only counts it up on screen, so crawlers, AI answers
+and social previews read the real figure instead of the `0` the animation starts
+from.
+
+### 17. The X link points at the live account, not the tidy one
+
+The school's X account is **@hashfutureed** — that is the handle X serves, with
+the profile name "#FUTURE School". `x.com/hashfutureschool` returns
+*User Profile Not Found*, even though YouTube, Instagram and LinkedIn all use
+`hashfutureschool` (checked 15 Oct 2026). The footer links and the `sameAs`
+entries therefore point at `https://x.com/hashfutureed`, which is the account
+that exists.
+
+If the X account is renamed to `@hashfutureschool` (the handle is unclaimed, so
+it can be), change the four footer links — [`index.html`](index.html),
+[`future-talks.html`](future-talks.html),
+[`future-talks-apply.html`](future-talks-apply.html), [`ijec.html`](ijec.html) —
+plus `SITE.sameAs` in [`lib/seo-schema.js`](lib/seo-schema.js), then run
+`npm run build:pages`. Do not point the site at a handle that 404s in the
+meantime: a broken social link reads worse than a mismatched one.
