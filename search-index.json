@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-10-15T02:16:53.879Z",
+ "generatedAt": "2026-10-16T14:59:20.883Z",
  "generator": "scripts/build-search-index.js",
  "pages": [
   {
@@ -2848,28 +2848,121 @@
    "keywords": [
     "privacy"
    ],
-   "title": "Privacy Policy - Hash Future School",
-   "description": "Privacy policy for Hash Future School.",
+   "title": "Privacy Policy | Hash Future School",
+   "description": "How Hash Future School collects, uses, shares, stores and protects personal data - including children's data, payment records, cookies and advertising - and the rights you have over your information.",
    "headings": [
-    "1. Introduction",
-    "2. Data We Collect",
-    "3. How We Use Your Data"
+    "1. Who we are, and what this policy covers",
+    "2. Summary at a glance",
+    "3.1 Information you give us",
+    "3.2 Information about children, and sensitive information",
+    "3.3 Information we collect automatically",
+    "3.4 Information we receive from others",
+    "4. Cookies and similar technologies",
+    "How to control cookies",
+    "5. Advertising, measurement and social platforms",
+    "6. Why we use your data, and the basis we rely on",
+    "Consent comes from the parent or guardian",
+    "Student work and the project showcase"
    ],
    "sections": [
     {
-     "heading": "1. Introduction",
-     "text": "Welcome to Hash Future School. We respect your privacy and are committed to protecting your personal data."
+     "heading": "1. Who we are, and what this policy covers",
+     "text": "Hash Future School (\"Hash Future School\", \"we\", \"us\", \"our\") is an online school for learners aged 6 to 17, operating from Peringala P O, Kochi, Kerala 683565, India. We are the organisation responsible for the personal data described in this policy. Under India's Digital Personal Data Protection Act, 2023 (the \"DPDP Act\") we act as the Data Fiduciary for that data, and the people whose data we hold are the Data Principals . This policy covers: this website, www.hashfuture.school , and every page and form on it; fu"
     },
     {
-     "heading": "2. Data We Collect",
-     "text": "We may collect personal identification information (Name, email address, phone number, etc.) when you enroll or contact us."
+     "heading": "1. Who we are, and what this policy covers",
+     "text": "tureassist.hashfuture.school , our learning platform, where student records, attendance, progress reports and project showcases live; our enquiries, demo bookings, admissions, event registrations (such as the International Junior Entrepreneurship Challenge), partner-programme registrations (such as IIT Madras School Connect), newsletter and team-application forms; email, WhatsApp, phone and in-person communications with our team. Some organisations we work with are responsible for your data in their own right, not "
     },
     {
-     "heading": "3. How We Use Your Data",
-     "text": "We use your data to provide our educational services, communicate with you, and improve our offerings."
+     "heading": "2. Summary at a glance",
+     "text": "This table is a summary to help you find your way around. The sections that follow are the authoritative detail. Topic In short Detail What we collect Contact details, information about your child's education, registration and identity information for partner programmes, payment confirmations, and technical data from your browser. Section 3 Why we collect it To answer enquiries, run admissions, teach, take payments, keep families informed, meet our legal duties and keep the site secure. Section 6 Who we share it wi"
+    },
+    {
+     "heading": "2. Summary at a glance",
+     "text": "th Service providers who host the site, send email, take payments and run the learning platform, plus partner institutions and authorities where required. Section 10 Selling data We never sell personal data, and we never rent or sell contact lists. Section 10 Children A parent or guardian consents before we hold a child's data. We collect the minimum, and we never use a child's data for advertising. Section 7 Payments Card, UPI and bank details go straight to our regulated payment provider. We never see or store yo"
+    },
+    {
+     "heading": "2. Summary at a glance",
+     "text": "Section 8 Cookies Essential cookies keep forms and staff logins secure. Embedded players and any campaign measurement only run where we have enabled them. Section 4 Your choices Access, correct, delete, withdraw consent, unsubscribe, or complain - to us and to your data protection authority. Section 14 Two commitments worth stating plainly. We do not sell your personal data to anyone. And we do not use a child's personal data for advertising, for building advertising profiles, or for tracking their behaviour across"
+    },
+    {
+     "heading": "3.1 Information you give us",
+     "text": "Enquiries and demo bookings - the parent or guardian's first and last name, email address, phone number, the child's age, your location, and anything you write in a message to us. Admissions and enrolment - the student's name, date of birth or age, gender, nationality, current grade and curriculum, present school, city and country, time zone, preferred language, interests and background notes; the parent or guardian's name, relationship, email, phone number and occupation; and, where a partner programme requires it"
+    },
+    {
+     "heading": "3.1 Information you give us",
+     "text": ", the identity document type, number and issuing country, and a photograph. Team applications - your name, age, email, phone number, location, education, evidence of your work, written answers to our questions, and a link to a 3 to 5 minute video that you host yourself (for example on YouTube). Event registrations - for the International Junior Entrepreneurship Challenge, your team name and category, the team lead's name, email and phone number, city, country and school, the names of your team members, your mentor'"
+    },
+    {
+     "heading": "3.2 Information about children, and sensitive information",
+     "text": "Because we teach learners aged 6 to 17, most of the data we hold is children's data. We treat this as a significant responsibility, not a category. Children's data includes the student's name, date of birth or age, contact details where given, guardian details, enrolment and progress records, and, for partner programmes, identity document details and a photograph. Identity document numbers are requested only where a partner programme genuinely requires them, such as registering a candidate for the IIT Madras School"
+    },
+    {
+     "heading": "3.2 Information about children, and sensitive information",
+     "text": "Connect assessment. We tell you why at the point we ask. Where a partner allows an alternative, we will use it on request. Learning and health needs - if you tell us about a learning difficulty, diagnosis or health need, we treat it as sensitive personal data. We use it only to support your child's learning and to keep them safe, and we share it within the school only with the staff who need it. What we do not ask for - we do not collect biometric data or financial account details from students, and we do not ask f"
+    },
+    {
+     "heading": "3.3 Information we collect automatically",
+     "text": "When you visit our pages, our hosting provider and our security tools record routine technical information: your IP address and the approximate location derived from it; your device type, operating system, browser and screen size; the page you came from, the pages you view on our site, and the time you view them; form-security signals used by Google reCAPTCHA to tell humans and automated scripts apart; error and security logs, including failed login attempts on our staff area. We use this information to run and sec"
+    },
+    {
+     "heading": "3.4 Information we receive from others",
+     "text": "Payment providers confirm whether a payment or refund succeeded, and give us the transaction reference. Partner institutions tell us the status of applications you make through us, such as a School Connect registration. Our learning platform (futureassist.hashfuture.school) provides attendance, mentoring notes, progress reports and approved project showcase entries. Other people - for example, a team member who adds you to an event team, or a parent who names a second guardian on a registration form. Publicly avail"
+    },
+    {
+     "heading": "4. Cookies and similar technologies",
+     "text": "Cookies are small files a website stores in your browser. We also use similar technologies such as browser local storage, which lets our site remember a small setting on your own device without sending it anywhere. We only set non-essential cookies after you agree to them, and you can change your mind at any time - see \"How to control cookies\" below. Category What it does Can you refuse it? Strictly necessary Keeps forms working and protects them from spam and abuse (including Google reCAPTCHA), and keeps a signed "
+    },
+    {
+     "heading": "4. Cookies and similar technologies",
+     "text": "session for the staff area. Without these, forms and logins cannot work. No - these are required for the site to function. Your preferences Remembers small choices on your own device using your browser's local storage - for example, it keeps a draft of a long application form while you are filling it in, so that a refresh or an accidental tap does not lose your work. Yes - by clearing your browser storage. Embedded content Lets a third-party player run when you choose to play a video. We embed YouTube videos throug"
+    },
+    {
+     "heading": "How to control cookies",
+     "text": "You can block or delete cookies and clear local storage at any time in your browser's settings (usually under Privacy or Site Data). Blocking everything may stop forms and the staff area from working. You can also use: Google Ads Settings to control personalised advertising from Google; Meta ad preferences to control advertising based on your activity on Meta's platforms; optout.aboutads.info or optout.networkadvertising.org for participating interest-based advertising companies; youronlinechoices.eu if you are in "
+    },
+    {
+     "heading": "5. Advertising, measurement and social platforms",
+     "text": "We promote the school to families who may be looking for an online school, using advertising platforms such as Google and Meta. Here is exactly what that involves. Where we run a campaign, the platform may set or read cookies, pixels or similar identifiers on our pages and on its own services in order to measure conversions - for example, whether a page visit led to an enquiry form being submitted - and to decide who sees our ads. That processing is governed by the platform's own privacy notice: Google and Meta . W"
+    },
+    {
+     "heading": "5. Advertising, measurement and social platforms",
+     "text": "e receive campaign reports in aggregate, such as how many people saw an ad or clicked it. We do not receive a visitor's name, email address or phone number from those reports. We do not sell personal data , and we do not pass personal data to advertising platforms for their own purposes. We never use children's data for advertising. We do not target, retarget or build audiences from a child's data, we do not ask advertising platforms to target people under 18, and we do not use a child's data to build advertising p"
+    },
+    {
+     "heading": "6. Why we use your data, and the basis we rely on",
+     "text": "We use personal data only for the purposes below. Where we rely on consent, you can withdraw it at any time; where we rely on a contract, the processing is necessary to provide what you have asked for; where we rely on a legal obligation, the law requires it. What we use it for What we use Why we may lawfully do so Answering enquiries and arranging demo sessions Name, email, phone, location, child's age, your message Your consent, and steps taken at your request before entering a contract with us Assessing applicat"
+    },
+    {
+     "heading": "6. Why we use your data, and the basis we rely on",
+     "text": "ions and enrolling a student Registration, family, academic and (where required) identity data Consent given by the parent or guardian, and steps towards our contract with the family Teaching, mentoring, progress reporting and running the learning platform Student records, attendance, project work, guardian contact details Performance of our contract with the family Registering a candidate with a partner programme or examination body The registration data that the partner requires, including identity data and a pho"
+    },
+    {
+     "heading": "6. Why we use your data, and the basis we rely on",
+     "text": "Parental consent, and the requirements of the partner programme you have asked us to apply to Taking payment, issuing invoices and processing refunds Transaction and invoice records, payer contact details Our contract with you, and our legal obligations in tax and accounting law Sending the newsletter and event invitations Email address, optionally your name Your consent, which you can withdraw at any time Recruiting staff, mentors and facilitators Application, CV, written answers, video link Your consent, and step"
+    },
+    {
+     "heading": "6. Why we use your data, and the basis we rely on",
+     "text": "s towards a contract of employment or engagement Keeping the site, forms and accounts secure, and preventing abuse IP address, device and interaction signals, security and error logs Our legitimate interest in protecting our systems and users, and our legal obligations in relation to information security Understanding which pages help families, and measuring our own advertising Aggregated visit and campaign metrics Your consent where required, otherwise our legitimate interest in running the school effectively Wher"
+    },
+    {
+     "heading": "Consent comes from the parent or guardian",
+     "text": "We ask a parent or legal guardian for consent before we collect or use a child's personal data. Every registration records the guardian's name, relationship and contact details, and we treat that guardian as the consenting party. Where we need to confirm that consent is genuine, we may verify it by contacting the guardian on the email address or phone number already on file, or by asking for a written confirmation. A payment made by a guardian, or a form completed and submitted by a guardian, is treated as evidence"
+    },
+    {
+     "heading": "Consent comes from the parent or guardian",
+     "text": "of that guardian's consent. Under India's DPDP Act we treat everyone under 18 as a child, and we ask for verifiable parental consent for all of them. In the United States we apply the same rule to children under 13 under the Children's Online Privacy Protection Act, and in the European Union and the United Kingdom we apply the local age of digital consent, which is 16 or lower depending on the country. We collect only what the programme actually needs, and we do not make participation in an activity conditional on "
+    },
+    {
+     "heading": "Student work and the project showcase",
+     "text": "Some student work is published on our showcase pages, because presenting finished work to real people is part of how we teach. Before anything is published, a mentor reviews it, and we publish it under the display name agreed with the family, with the grade or age only where that was agreed. We do not publish a child's contact details, address, school or full name, and we do not publish a child's photograph without written consent from the parent or guardian. A parent or guardian can ask us to remove a published pr"
+    },
+    {
+     "heading": "Parents' rights and withdrawal of consent",
+     "text": "A parent or guardian can exercise every right in Section 14 on their child's behalf, and a student who is old enough to understand can ask us themselves. Withdrawing consent for the data the school depends on to teach means we can no longer provide the programme. We will tell you that clearly before you decide, so the choice is an informed one. If you believe a child has given us personal data without your consent, contact us and we will delete it. If a child contacts us directly and cannot be identified as an enro"
     }
    ],
-   "text": "1. Introduction: Welcome to Hash Future School. We respect your privacy and are committed to protecting your personal data. 2. Data We Collect: We may collect personal identification information (Name, email address, phone number, etc.) when you enroll or contact us. 3. How We Use Your Data: We use your data to provide our educational services, communicate with you, and improve our offerings."
+   "text": "1. Who we are, and what this policy covers: Hash Future School (\"Hash Future School\", \"we\", \"us\", \"our\") is an online school for learners aged 6 to 17, operating from Peringala P O, Kochi, Kerala 683565, India. We are the organisation responsible for the personal data described in this policy. Under India's Digital Personal Data Protection Act, 2023 (the \"DPDP Act\") we act as the Data Fiduciary for that data, and the people whose data we hold are the Data Principals . This policy covers: this website, www.hashfuture.school , and every page and form on it; fu 1. Who we are, and what this policy covers: tureassist.hashfuture.school , our learning platform, where student records, attendance, progress reports and project showcases live; our enquiries, demo bookings, admissions, event registrations (such as the International Junior Entrepreneurship Challenge), partner-programme registrations (such as IIT Madras School Connect), newsletter and team-application forms; email, WhatsApp, phone and in-person communications with our team. Some organisations we work with are responsible for your data in their own right, not  2. Summary at a glance: This table is a summary to help you find your way around. The sections that follow are the authoritative detail. Topic In short Detail What we collect Contact details, information about your child's education, registration and identity information for partner programmes, payment confirmations, and technical data from your browser. Section 3 Why we collect it To answer enquiries, run admissions, teach, take payments, keep families informed, meet our legal duties and keep the site secure. Section 6 Who we share it wi 2. Summary at a glance: th Service providers who host the site, send email, take payments and run the learning platform, plus partner institutions and authorities where required. Section 10 Selling data We never sell personal data, and we never rent or sell contact lists. Section 10 Children A parent or guardian consents before we hold a child's data. We collect the minimum, and we never use a child's data for advertising. Section 7 Payments Card, UPI and bank details go straight to our regulated payment provider. We never see or store yo 2. Summary at a glance: Section 8 Cookies Essential cookies keep forms and staff logins secure. Embedded players and any campaign measurement only run where we have enabled them. S"
   },
   {
    "url": "/refund-policy",
@@ -2877,23 +2970,121 @@
     "refund",
     "policy"
    ],
-   "title": "Refund Policy - Hash Future School",
-   "description": "Refund policy and trial details for Hash Future School programs.",
+   "title": "Refund and Cancellation Policy | Hash Future School",
+   "description": "Our trial period, how to cancel, what you get back - for the school programme, workshops and event registrations - plus how long a refund takes and how to ask for one.",
    "headings": [
-    "Trial Period",
-    "Refund Requests"
+    "Refund and Cancellation Policy",
+    "1. What this policy covers",
+    "2. Summary at a glance",
+    "4. The trial period",
+    "Monthly plan",
+    "Annual plan",
+    "Where a student stops attending",
+    "6. If we cancel or cannot deliver",
+    "7. Workshops and intensives",
+    "8. Events and competitions",
+    "9. Fees paid to boards and partners",
+    "10. How to request a refund"
    ],
    "sections": [
     {
-     "heading": "Trial Period",
-     "text": "We offer a trial period for new students. If you are not satisfied within the trial period, you can discontinue at no cost."
+     "heading": "Refund and Cancellation Policy",
+     "text": "Nobody enrols expecting to leave. This policy exists so that if you do want to stop, you already know the answer: the trial period, what is refundable afterwards, how quickly money comes back, and who to ask. It applies to the school programme, our workshops and our event registrations. Last updated: 16 October 2026 Read with: our Terms of Service Questions: learn@hashfuture.school"
     },
     {
-     "heading": "Refund Requests",
-     "text": "For refund requests beyond the trial period, please contact our support team at enrollment@hashfuture.school to discuss your specific situation."
+     "heading": "1. What this policy covers",
+     "text": "This policy explains when a fee is refundable, how much comes back, and how you ask for it. It covers: the school programme - the annual plan and the monthly plan; workshops and intensives - for example, the SuperKids workshop; event and competition registrations - for example, the International Junior Entrepreneurship Challenge. It does not cover fees you pay directly to a board or a partner institution , such as board examination fees or IIT Madras School Connect course fees, or things you buy from someone else, "
+    },
+    {
+     "heading": "2. Summary at a glance",
+     "text": "What you paid for If you want to stop What comes back A free demo Nothing to cancel Nothing was charged School programme - inside the trial period Tell us within 14 days of the first live class The programme fee paid, in full School programme - monthly plan, after the trial Tell us before your next billing date No further charges; the month already paid runs to its end School programme - annual plan, after the trial Tell us in writing at any time ₹8,250 for each complete unused month A workshop or intensive Tell us"
+    },
+    {
+     "heading": "2. Summary at a glance",
+     "text": "before the batch starts The workshop fee, in full An event or competition entry Tell us before the entry deadline The entry fee, in full Anything, if we cancel it We have cancelled it The undelivered part, in full The short version. Inside the trial period you can walk away and get your money back, in full, for any reason at all - or for no reason. After that, we refund the part of the programme you have not used. If we cancel or cannot deliver something, you get that part back in full, whichever plan you are on."
+    },
+    {
+     "heading": "4. The trial period",
+     "text": "New students get a 14-day trial period , counted from the student's first live class. It exists so a family can see how the school actually works before committing money to it, and it applies whether you chose the annual or the monthly plan. Inside the trial period you may withdraw for any reason - or with no reason at all - by telling us in writing. We refund the programme fee you have paid in full , with no administration charge and no deduction for classes attended during the trial. If you are on the monthly pla"
+    },
+    {
+     "heading": "4. The trial period",
+     "text": "n and have paid one month, that month is refunded in full. The only amount we cannot refund is a charge that your own bank or the payment provider has levied on you, because that is not money we hold. We would rather understand what went wrong than process a refund quietly. If you tell us you are leaving, we will ask whether a different cohort, mentor or pace would have worked - but the refund does not depend on your answer, and we will process it either way."
+    },
+    {
+     "heading": "Monthly plan",
+     "text": "Tell us before your next billing date and we will stop billing. You will not be charged again. The month you have already paid for is not refunded, because teaching continues to the end of that month and your child keeps access to it. You are welcome to use the rest of the month. There is no cancellation charge and no notice period beyond telling us before the next billing date."
+    },
+    {
+     "heading": "Annual plan",
+     "text": "You may withdraw at any time by telling us in writing. We refund ₹8,250 for each complete unused month remaining in the year. That is the annual fee divided into twelve - the same figure as the monthly plan - so an annual family is never worse off for having paid up front. A part-month is not refunded, since the month is already under way. Fees for any additional services already delivered - for example, a workshop already run - are not part of this calculation."
+    },
+    {
+     "heading": "Where a student stops attending",
+     "text": "A refund is based on the date you tell us you are withdrawing, not on the last date the student attended. If a student simply stops turning up, fees continue to fall due until you tell us in writing that you are withdrawing. Please tell us, so that we can stop billing you and release the place to another family."
+    },
+    {
+     "heading": "6. If we cancel or cannot deliver",
+     "text": "Sometimes the decision is ours, not yours. If we cancel a programme, a batch or an event, you receive a full refund of the fees paid for the part we did not deliver - or, if you prefer, a credit towards another programme. The choice is yours, and we will offer it in writing. If we remove a student from the programme under section 17 of our Terms of Service for a reason other than your family's breach, we refund the fees for the undelivered part. If a student misses sessions because of illness, travel or a family de"
+    },
+    {
+     "heading": "7. Workshops and intensives",
+     "text": "Before the batch starts: tell us before the published start date and we refund the workshop fee in full. After the batch starts: because a workshop is a short, fixed-seat intensive with a reserved place, fees are not refundable once it has begun. You may withdraw, but the remaining days are not refunded. If we cancel the batch , or move it to a date you cannot attend, you get a full refund or a place in the next batch, at your choice. Missed days within a workshop are not refunded individually."
+    },
+    {
+     "heading": "8. Events and competitions",
+     "text": "Before the entry deadline: tell us before the deadline published on the event page and we refund the entry fee in full. After the entry deadline: because teams are seeded, mentors allocated and materials prepared from the entry list, entry fees are not refundable after the deadline. If we cancel the event , or the format changes so that your team can no longer take part, you get a full refund of the entry fee. If your team withdraws after the deadline but before the event, we will not refund the fee, though we will"
+    },
+    {
+     "heading": "9. Fees paid to boards and partners",
+     "text": "Some money never passes through us, so we cannot refund it: board examination and registration fees paid to NIOS, Cambridge or GED, and any fees their exam centres charge; IIT Madras School Connect course fees, charged per course by IIT Madras; textbooks, software, devices or other materials you buy from a supplier. Those organisations set their own refund rules, and their rules apply. If you ask us, we will help you put a case to the right organisation and give you the receipts and references you need. The decisio"
+    },
+    {
+     "heading": "10. How to request a refund",
+     "text": "Email learn@hashfuture.school with the subject \"Refund request\", or message us on WhatsApp at +91 94971 20591 . Include the parent or guardian's name, the student's name, the email or phone number the enrolment is under, the invoice number or payment reference, the date of payment, and what the request is for. We acknowledge your request within two working days and tell you who is handling it. We give you a decision within seven working days of receiving the request, setting out what we will refund and why. We star"
+    },
+    {
+     "heading": "10. How to request a refund",
+     "text": "t the refund within ten working days of the decision. You do not need to fill in a form or give a reason. If a request needs longer than seven working days - for example, because we must check a payment with our provider - we will tell you why and give you a date."
+    },
+    {
+     "heading": "11. How long a refund takes",
+     "text": "Where it goes: refunds are made to the original payment method - the same card, account, UPI ID or payment route you paid from. We cannot send a refund to a different card or a different person. When it reaches you: we start the refund within ten working days of our decision. Your bank or payment provider then needs time to post it, which is typically five to ten working days in India, and can be up to one billing cycle for an international card. International payments: we refund in the currency you paid in. If the"
+    },
+    {
+     "heading": "11. How long a refund takes",
+     "text": "exchange rate has moved, or your bank charges a fee for receiving the refund, the amount you see in your own currency may differ slightly from the amount you paid. We do not keep the difference. What you receive: you get the amount we agree, and we email you a refund confirmation with the transaction reference so you can trace it."
+    },
+    {
+     "heading": "12. What is not refundable",
+     "text": "Fees already paid to a board, a partner institution or another supplier ( section 9 ). Months of the school programme or days of a workshop that have already been delivered. Sessions a student missed, where the session was delivered. Travel, accommodation and personal expenses. Charges levied on you by your own bank, card issuer or payment provider - for example a foreign transaction fee or a receiving fee. That money is not held by us, so we cannot return it. Any request made more than twelve months after the paym"
+    },
+    {
+     "heading": "13. Chargebacks and payment disputes",
+     "text": "If you think a payment is wrong, please tell us first. We will look at it with our payment provider and usually sort it out far faster than a bank dispute takes. A refund we have already processed cannot also be raised as a chargeback. If it is, the bank normally reverses the duplicate, and it can freeze the amount while it investigates. Where a chargeback is raised, we give the payment provider the enrolment records, the invoices and the correspondence we hold, as any school would. If a chargeback is raised for a "
+    },
+    {
+     "heading": "14. Your statutory rights",
+     "text": "This policy sits alongside your legal rights, and does not replace, reduce or limit them. In particular: In India, your rights under the Consumer Protection Act, 2019 and the rules on e-commerce and direct selling apply, including your right to a refund where a service is not provided with reasonable care or is not delivered as described. If you are in the European Union or the United Kingdom , you have rights under distance-selling and consumer protection law, which may include a right to cancel a distance contrac"
+    },
+    {
+     "heading": "14. Your statutory rights",
+     "text": "t within a statutory period. Our trial period and refund terms are designed to be at least as generous as those rights, and we do not ask you to give them up. In any country, where the law gives you a stronger right than this policy, the law wins, and we will honour it."
+    },
+    {
+     "heading": "15. If you are not satisfied",
+     "text": "If a refund decision does not seem right, or we have missed the timelines in section 11 , tell our Grievance Officer. We will look at the whole record again and reply within 30 days . Grievance Officer, Hash Future School Email: learn@hashfuture.school (subject: \"Grievance\") Phone and WhatsApp: +91 94971 20591 Post: Hash Future School, Peringala P O, Kochi, Kerala 683565, India If you are still not satisfied, you may approach the consumer protection authority or the court where you live."
+    },
+    {
+     "heading": "16. Changes to this policy",
+     "text": "We review this policy at least once a year. The version on this page is the current one, with the \"last updated\" date shown at the top. A change to the policy applies to what you buy after the change - it does not change the terms you already paid under. Version What changed 16 October 2026 Rewritten in full: a defined 14-day trial, pro-rata refunds after the trial, workshop and event cancellation windows, how refunds are paid and how long they take, what we cannot refund, and the escalation route. 18 January 2026 "
+    },
+    {
+     "heading": "17. Contact us",
+     "text": "Hash Future School Peringala P O, Kochi, Kerala 683565, India Email: learn@hashfuture.school Phone and WhatsApp: +91 94971 20591 Refund requests: subject line \"Refund request\". Grievances: subject line \"Grievance\". Terms of Service Privacy Policy"
     }
    ],
-   "text": "Trial Period: We offer a trial period for new students. If you are not satisfied within the trial period, you can discontinue at no cost. Refund Requests: For refund requests beyond the trial period, please contact our support team at enrollment@hashfuture.school to discuss your specific situation."
+   "text": "Refund and Cancellation Policy: Nobody enrols expecting to leave. This policy exists so that if you do want to stop, you already know the answer: the trial period, what is refundable afterwards, how quickly money comes back, and who to ask. It applies to the school programme, our workshops and our event registrations. Last updated: 16 October 2026 Read with: our Terms of Service Questions: learn@hashfuture.school 1. What this policy covers: This policy explains when a fee is refundable, how much comes back, and how you ask for it. It covers: the school programme - the annual plan and the monthly plan; workshops and intensives - for example, the SuperKids workshop; event and competition registrations - for example, the International Junior Entrepreneurship Challenge. It does not cover fees you pay directly to a board or a partner institution , such as board examination fees or IIT Madras School Connect course fees, or things you buy from someone else,  2. Summary at a glance: What you paid for If you want to stop What comes back A free demo Nothing to cancel Nothing was charged School programme - inside the trial period Tell us within 14 days of the first live class The programme fee paid, in full School programme - monthly plan, after the trial Tell us before your next billing date No further charges; the month already paid runs to its end School programme - annual plan, after the trial Tell us in writing at any time ₹8,250 for each complete unused month A workshop or intensive Tell us 2. Summary at a glance: before the batch starts The workshop fee, in full An event or competition entry Tell us before the entry deadline The entry fee, in full Anything, if we cancel it We have cancelled it The undelivered part, in full The short version. Inside the trial period you can walk away and get your money back, in full, for any reason at all - or for no reason. After that, we refund the part of the programme you have not used. If we cancel or cannot deliver something, you get that part back in full, whichever plan you are on. 4. The trial period: New students get a 14-day trial period , counted from the student's first live class. It exists so a family can see how the school actually works before committing money to it, and it applies whether you chose the annual or the monthly plan. Inside the trial period you may withdraw for any reason - or with no reason at all "
   },
   {
    "url": "/school-connect-register",
@@ -3097,23 +3288,121 @@
    "keywords": [
     "terms"
    ],
-   "title": "Terms and Conditions - Hash Future School",
-   "description": "Terms and conditions for using Hash Future School.",
+   "title": "Terms of Service | Hash Future School",
+   "description": "The terms that govern enrolment and the use of Hash Future School: what the programme includes, fees and billing, family responsibilities, intellectual property, conduct, liability, and how disputes are handled.",
    "headings": [
-    "1. Introduction",
-    "2. Intellectual Property Rights"
+    "3. Who may enrol",
+    "4. What the programme includes",
+    "5. What is not included",
+    "6. Boards, certificates and what we can say",
+    "7. Fees, billing and changes",
+    "8. Cancellation and refunds",
+    "9. What we ask of your family",
+    "10. Your child's work and portfolio",
+    "11. Our materials and brand",
+    "12. Recording and privacy in class",
+    "13. Conduct and acceptable use",
+    "14. Events and competitions"
    ],
    "sections": [
     {
-     "heading": "1. Introduction",
-     "text": "These terms and conditions outline the rules and regulations for the use of Hash Future School's Website."
+     "heading": "3. Who may enrol",
+     "text": "The adult who enrols a student - a parent or legal guardian - must be at least 18 years old and legally able to enter this agreement. The agreement is with that adult, not with the child. The student must be between 6 and 17 years old to join the school programme. Some workshops, and our events, have their own age bands, which we publish on the relevant page. You must give us accurate, complete and current information, and tell us promptly if it changes. We may ask for reasonable evidence of a student's age or iden"
     },
     {
-     "heading": "2. Intellectual Property Rights",
-     "text": "Other than the content you own, under these Terms, Hash Future School and/or its licensors own all the intellectual property rights and materials contained in this Website."
+     "heading": "4. What the programme includes",
+     "text": "For the annual or monthly school programme, the fee covers: twelve months of live online classes, five days a week, in a small cohort; a 1:8 mentor ratio, in cohorts of 10 to 15 learners; daily parent reports and a verified project portfolio; guided pathway planning towards NIOS, Cambridge IGCSE or GED, according to the route your family chooses; a monthly in-person meet-up with the local cohort, where one runs in your area; access to our learning platform, where records, reports and project work live. Workshops, i"
+    },
+    {
+     "heading": "5. What is not included",
+     "text": "These are not part of the programme fee, and are the family's responsibility: Board examination fees. NIOS, Cambridge IGCSE and GED set and collect their own fees, directly from families. IIT Madras School Connect course fees , which are set and charged per course by IIT Madras, not by us. A laptop or tablet and an internet connection good enough for live video classes. Travel, accommodation and any personal expenses - for example, travel to an in-person finale or meet-up. Third-party textbooks, materials or softwa"
+    },
+    {
+     "heading": "6. Boards, certificates and what we can say",
+     "text": "This section matters, so we state it plainly. We guide and prepare learners for external board examinations. We are not an accredited board, not a NIOS study centre and not a Cambridge-registered school. The certificate or credential is issued by the board, through its official centres, after the board's own examination and its own assessment. Registration, eligibility, examination scheduling and results are decided by the board, not by us. Board rules, syllabuses and examination arrangements change from time to ti"
+    },
+    {
+     "heading": "7. Fees, billing and changes",
+     "text": "Our published programme fee is ₹99,000 a year , or USD 1,000 a year for families paying from outside India, and ₹8,250 a month on the monthly plan. Twelve monthly payments come to ₹99,000. The published fee is what we charge, and we confirm the exact figure in writing before you pay anything. Payment. Fees are paid through the secure payment page or link we send you, operated by our payment provider. We never ask for card details by email, chat or over the phone, and we never accept payment into a personal account."
+    },
+    {
+     "heading": "7. Fees, billing and changes",
+     "text": "Billing cycle. On the monthly plan, each month is billed in advance for the month ahead. On the annual plan, the year is billed as agreed in your fee confirmation. Taxes. Any tax that applies to your purchase is shown on your invoice and included in the amount you pay, unless your confirmation says otherwise. Currency and international payments. Families outside India pay the USD amount through an international payment link. The amount your bank debits may differ with its own exchange rate and charges, which are ou"
+    },
+    {
+     "heading": "7. Fees, billing and changes",
+     "text": "Fee reviews. We review the fee once a year. We will tell you about a fee change before it applies to you, and it will not apply to a period you have already paid for. Late or missed payment. If a payment is not made, we will contact you. If it stays unpaid, we may pause access to live classes and the platform until the account is cleared, and we may end the enrolment under section 17. Scholarships and discounts. Where we grant one, we will confirm its conditions in writing, including whether it continues if attenda"
+    },
+    {
+     "heading": "8. Cancellation and refunds",
+     "text": "You may withdraw from a programme by telling us in writing at learn@hashfuture.school or on WhatsApp. The trial period, the refunds available for the school programme, workshops and event registrations, and how long a refund takes are all set out in our Refund Policy , which forms part of these terms. Fees paid directly to third parties - board examination fees, and IIT Madras School Connect course fees - are not ours to refund. We will help you ask the right organisation, but the decision is theirs."
+    },
+    {
+     "heading": "9. What we ask of your family",
+     "text": "A workable learning environment. A quiet space, a working device, a stable connection, and an adult nearby for younger learners. Attendance and engagement. Live sessions work when the student turns up ready to take part. We will tell you if attendance or participation becomes a problem, and we will work with you on it before it affects the student's place. Supervision of device use. Families supervise their child's use of AI tools and the internet outside our sessions. We teach responsible use; we cannot monitor a "
+    },
+    {
+     "heading": "10. Your child's work and portfolio",
+     "text": "Your child owns their own work. Projects, artwork, code, writing and ideas a student creates remain the student's (or your family's). We do not claim ownership of them. We may publish approved work. With the parent or guardian's consent, we may feature a student's project on our showcase pages or in our marketing, under the display name and details agreed with you. We never publish a child's contact details, and we never publish a child's photograph without written consent. You can take it down. You may withdraw th"
+    },
+    {
+     "heading": "11. Our materials and brand",
+     "text": "Our curriculum, lesson materials, assessments, platform, reports, templates, recordings, logos and brand belong to Hash Future School or our licensors. Your family gets a personal, non-transferable licence to use them for your own child's learning while you are enrolled. That licence does not allow you to copy, record, publish, resell, sublicense or hand our materials to another family or to a competing school, or to use our name or logo without our written permission. If you would like to use something publicly - "
+    },
+    {
+     "heading": "12. Recording and privacy in class",
+     "text": "We do not record live classes as a matter of course. If we need to record a particular session - for example, for a student who has to miss it, or for mentor training - we will tell you beforehand and ask the parent or guardian for consent, and any recording is kept only for that purpose. Please do not record or photograph other children. Sessions include other students. Recording, photographing, screenshotting or sharing a session with anyone outside it is not permitted, and would breach our Privacy Policy and the"
+    },
+    {
+     "heading": "13. Conduct and acceptable use",
+     "text": "Our sessions are a shared space for children. We expect students, parents, mentors and guests to treat each other with respect. Not acceptable: bullying, harassment, discrimination, threats, abusive language, sharing sexual or violent content, or anything that makes another learner feel unsafe; plagiarism or presenting another person's work as your own; using our platform for spam, advertising or unlawful activity. Private contact. Mentors, staff and other families must not contact a student privately outside our o"
+    },
+    {
+     "heading": "13. Conduct and acceptable use",
+     "text": "wn school channels. If you receive such contact, please report it to us immediately. Safety first. We may remove a participant from a session, and we may suspend or end an enrolment, where we believe someone's safety or the learning environment requires it. Where a concern involves a child, we will involve the parent or guardian and, where the law or safeguarding good practice requires it, the appropriate authority. Consequences. Less serious issues are handled with a conversation and a clear expectation. Repeated "
+    },
+    {
+     "heading": "14. Events and competitions",
+     "text": "Programmes such as the International Junior Entrepreneurship Challenge, Future Talks and our workshops have their own rules, eligibility criteria and deadlines, published on their own pages. By entering, you accept those rules as well as these terms. Entry and registration are complete only when the published fee has been paid, where a fee applies. Judging, scoring and awards are decided by us and our judges, and decisions on eligibility and awards are final. You are responsible for the accuracy of your entry, for "
+    },
+    {
+     "heading": "14. Events and competitions",
+     "text": "having the right to submit the material you enter, and for the conduct of your team and mentor. With your consent, we may publish entries, names, schools and photographs of participants in connection with the event. For any participant under 18, that consent comes from the parent or guardian, and it can be withdrawn by writing to us. Travel to an in-person finale is optional and self-funded, unless we grant a travel scholarship in writing. Event fees and refunds are covered by the Refund Policy ."
+    },
+    {
+     "heading": "15. Technology and availability",
+     "text": "Classes are delivered over the internet, using third-party conferencing, video and platform services. Their availability, and your internet connection, are outside our control. We work to keep the service available, but we do not promise that it will be uninterrupted or error-free. There will be scheduled maintenance, and there will occasionally be failures. Where we are responsible for a cancelled or missed live session, we will offer a replacement session, a recorded alternative or a credit. Please tell us prompt"
+    },
+    {
+     "heading": "16. Timetable, mentors and cohorts",
+     "text": "We may adjust timetables, class groupings, mentor allocations and the order of topics during a programme. Where a cohort is smaller than we planned, we may combine two small cohorts so that the learning experience works, and we will tell you if that affects your child's schedule. We will not materially reduce the programme you have paid for without telling you. If we make a substantial change that significantly affects your child - for example, a large reduction in live teaching hours - you may withdraw from that p"
+    },
+    {
+     "heading": "17. Suspension and ending enrolment",
+     "text": "You may end an enrolment at any time by telling us in writing. Fees already due, and the refund position, are governed by the Refund Policy . We may pause or end an enrolment if: fees remain unpaid after we have contacted you about them; there is a serious or repeated breach of these terms, including the conduct rules in section 13; we believe that continuing would put a student, a mentor or another family at risk; we are required to do so by law, by a board, or by a partner institution; or we are no longer able to"
+    },
+    {
+     "heading": "18. Outcomes we do and do not promise",
+     "text": "Our promise is about the quality of the teaching, the honesty of our reporting and the work your child does. It is not a promise about results. We do not promise any particular mark, grade, rank, admission, scholarship, placement, income or other outcome, for any programme, pathway or student. We do not promise that a board will accept a registration, grant an exemption, hold a centre near you, or schedule an examination when you would prefer it. Those decisions belong to the board. What we do promise is this: we t"
+    },
+    {
+     "heading": "19. Our responsibility to you",
+     "text": "We are responsible for providing the programme with reasonable care and skill, and for complying with the law that applies to us. Except where the law does not allow a limit, our total liability to your family under this agreement is limited to the fees you have paid us in the twelve months before the event giving rise to the claim. A refund under our Refund Policy is counted towards that limit. We are not liable for indirect or consequential losses - for example, lost earnings, the cost of alternative schooling or"
+    },
+    {
+     "heading": "19. Our responsibility to you",
+     "text": "loss of opportunity - where those are not a direct and foreseeable result of our failure. Nothing in these terms limits or excludes liability that cannot lawfully be limited: our liability for fraud or wilful misconduct, for death or personal injury caused by our negligence, or your rights under consumer protection law, including the Consumer Protection Act, 2019 in India. You are responsible for the conduct of your family on our platform, and for any fees or materials your child buys from a third party using the a"
+    },
+    {
+     "heading": "20. Changes to these terms",
+     "text": "We update these terms from time to time, usually to reflect a change in our programmes, our providers or the law. The version published on this page is the current one, with the \"last updated\" date shown at the top. Where a change materially affects your family, we will tell you by email before it takes effect. A change never applies retrospectively to a period you have already paid for. If you do not accept a material change, you may withdraw before it takes effect, and the Refund Policy will apply. Version What c"
+    },
+    {
+     "heading": "21. Governing law and disputes",
+     "text": "These terms are governed by the laws of India, and the courts at Kochi, Kerala have jurisdiction over any dispute arising from them. Before going to court, please write to us at learn@hashfuture.school with the subject \"Grievance\". We will acknowledge your message and try to resolve it directly, and we will tell you who is handling it. Nothing in this section removes a right you have under the law of the country where you live, including your right to approach a consumer protection authority or a court there."
     }
    ],
-   "text": "1. Introduction: These terms and conditions outline the rules and regulations for the use of Hash Future School's Website. 2. Intellectual Property Rights: Other than the content you own, under these Terms, Hash Future School and/or its licensors own all the intellectual property rights and materials contained in this Website."
+   "text": "3. Who may enrol: The adult who enrols a student - a parent or legal guardian - must be at least 18 years old and legally able to enter this agreement. The agreement is with that adult, not with the child. The student must be between 6 and 17 years old to join the school programme. Some workshops, and our events, have their own age bands, which we publish on the relevant page. You must give us accurate, complete and current information, and tell us promptly if it changes. We may ask for reasonable evidence of a student's age or iden 4. What the programme includes: For the annual or monthly school programme, the fee covers: twelve months of live online classes, five days a week, in a small cohort; a 1:8 mentor ratio, in cohorts of 10 to 15 learners; daily parent reports and a verified project portfolio; guided pathway planning towards NIOS, Cambridge IGCSE or GED, according to the route your family chooses; a monthly in-person meet-up with the local cohort, where one runs in your area; access to our learning platform, where records, reports and project work live. Workshops, i 5. What is not included: These are not part of the programme fee, and are the family's responsibility: Board examination fees. NIOS, Cambridge IGCSE and GED set and collect their own fees, directly from families. IIT Madras School Connect course fees , which are set and charged per course by IIT Madras, not by us. A laptop or tablet and an internet connection good enough for live video classes. Travel, accommodation and any personal expenses - for example, travel to an in-person finale or meet-up. Third-party textbooks, materials or softwa 6. Boards, certificates and what we can say: This section matters, so we state it plainly. We guide and prepare learners for external board examinations. We are not an accredited board, not a NIOS study centre and not a Cambridge-registered school. The certificate or credential is issued by the board, through its official centres, after the board's own examination and its own assessment. Registration, eligibility, examination scheduling and results are decided by the board, not by us. Board rules, syllabuses and examination arrangements change from time to ti 7. Fees, billing and changes: Our published programme fee is ₹99,000 a year , or USD 1,000 a year for families paying from outside India, and ₹8,250 a month on the monthly plan. Twelve monthly pay"
   },
   {
    "url": "/global/academic-burnout",
