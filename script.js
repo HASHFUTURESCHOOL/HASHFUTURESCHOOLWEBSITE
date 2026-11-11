@@ -2,6 +2,20 @@
 // Hash Future School - Interactive JavaScript
 // ============================================
 
+// Google Analytics 4. Set the measurement ID (G-XXXXXXXXXX) to turn tracking on.
+// While empty, nothing is loaded and CTA clicks are only logged to the console.
+const HF_GA4_ID = '';
+if (HF_GA4_ID) {
+    const gaScript = document.createElement('script');
+    gaScript.async = true;
+    gaScript.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(HF_GA4_ID);
+    document.head.appendChild(gaScript);
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function () { window.dataLayer.push(arguments); };
+    window.gtag('js', new Date());
+    window.gtag('config', HF_GA4_ID);
+}
+
 document.addEventListener('DOMContentLoaded', function () {
     // Initialize all components safely so one failure doesn't block others
     const initializers = [

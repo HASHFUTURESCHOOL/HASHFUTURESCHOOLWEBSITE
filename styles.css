@@ -6,10 +6,10 @@
 /* CSS Variables / Design Tokens */
 :root {
     /* Primary Colors */
-    --primary: #FF4B4B;
-    --primary-dark: #e03e3e;
+    --primary: #CC2B2B;
+    --primary-dark: #A81F1F;
     --primary-light: #FF8585;
-    --primary-gradient: linear-gradient(135deg, #FF4B4B 0%, #FF8585 100%);
+    --primary-gradient: linear-gradient(135deg, #CC2B2B 0%, #FF8585 100%);
 
     /* Background Colors */
     --bg-white: #FFFFFF;
@@ -33,7 +33,7 @@
     --youtube-red: #FF0000;
     --linkedin-blue: #0A66C2;
     --twitter-blue: #1DA1F2;
-    --whatsapp-green: #25D366;
+    --whatsapp-green: #15803D;
 
     /* Shadows */
     --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
@@ -266,7 +266,7 @@ ul {
 }
 
 .nav-links a.superkids-highlight {
-    background: linear-gradient(135deg, #FF4B4B 0%, #FF2A55 100%);
+    background: linear-gradient(135deg, #CC2B2B 0%, #FF2A55 100%);
     color: white !important;
     padding: 6px 14px;
     border-radius: var(--radius-full);
@@ -795,7 +795,7 @@ ul {
     display: inline-block;
     padding: 6px 16px;
     background: rgba(255, 75, 75, 0.1);
-    color: var(--primary);
+    color: #B52424;
     font-size: 0.85rem;
     font-weight: 600;
     border-radius: var(--radius-full);
@@ -1341,7 +1341,7 @@ ul {
 
 .testimonial-author p {
     font-size: 0.85rem;
-    color: var(--text-light);
+    color: #475569;
 }
 
 .social-badge {
@@ -1711,9 +1711,21 @@ ul {
     margin-bottom: 24px;
 }
 
+/* Facilitator name as a real button: keeps the card look, gains keyboard access. */
+.facilitator-name-btn {
+    background: none;
+    border: 0;
+    padding: 0;
+    font: inherit;
+    color: inherit;
+    text-align: inherit;
+    cursor: pointer;
+}
+
 .fame-link {
     display: inline-flex;
     align-items: center;
+    min-height: 24px;
     gap: 8px;
     color: var(--primary);
     font-weight: 600;
@@ -1850,7 +1862,7 @@ ul {
 .award-read-more {
     border: 0;
     background: transparent;
-    color: var(--primary);
+    color: #B52424;
     font-size: 0.95rem;
     font-weight: 700;
     cursor: pointer;
@@ -2189,7 +2201,7 @@ ul {
 }
 
 .footer-bottom p {
-    color: rgba(255, 255, 255, 0.4);
+    color: rgba(255, 255, 255, 0.72);
     font-size: 0.9rem;
 }
 
@@ -4490,23 +4502,23 @@ ul.gl-prose {
     display: inline-flex;
     align-items: center;
     gap: 7px;
-    padding: 7px 14px;
-    border: 1px solid rgba(2, 6, 23, 0.12);
+    padding: 7px 8px;
+    border: 1px solid transparent;
     border-radius: var(--radius-full);
-    background: rgba(2, 6, 23, 0.03);
+    background: transparent;
     font-family: inherit;
     font-size: 0.86rem;
-    font-weight: 600;
-    color: var(--text-medium);
+    font-weight: 500;
+    color: var(--text-light);
     cursor: pointer;
     white-space: nowrap;
     transition: var(--transition-normal);
 }
 
 .nav-search:hover {
-    border-color: var(--primary);
+    border-color: transparent;
     color: var(--primary);
-    background: rgba(255, 75, 75, 0.07);
+    background: transparent;
 }
 
 /* Mobile menu: the same groups as tap-to-open sections. */
